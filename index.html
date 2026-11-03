@@ -1,17 +1,17 @@
 <!doctype html>
-<html lang="es"><head><meta charset="utf-8"><title>Mi Día</title>
+<html lang="es"><head><meta charset="utf-8"><title>Pulso</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0f6b4b">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Mi Día">
+<meta name="apple-mobile-web-app-title" content="Pulso">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" href="icon-192.png">
 <style>
-:root{--bg:#f4f4ef;--card:#fff;--tx:#1b1d1c;--mu:#6f726f;--ac:#0f6b4b;--ac2:#e8f3ee;--ok:#2fa36b;--bd:#e3e3dc;--warn:#d9822b;--hi:#d24b4b;--inp:#f4f4ef}
-@media (prefers-color-scheme:dark){:root{--bg:#101211;--card:#181b1a;--tx:#ecefed;--mu:#97a09b;--ac:#3fc08c;--ac2:#1b2b25;--ok:#4cc38a;--bd:#2a2f2d;--warn:#e8a050;--hi:#f07070;--inp:#101211}}
+:root{--bg:#f4f4ef;--card:#fff;--tx:#1b1d1c;--mu:#6f726f;--ac:#0f6b4b;--ac2:#e8f3ee;--ok:#2fa36b;--bl:#3b82f6;--bd:#e3e3dc;--warn:#d9822b;--hi:#d24b4b;--inp:#f4f4ef}
+@media (prefers-color-scheme:dark){:root{--bg:#101211;--card:#181b1a;--tx:#ecefed;--mu:#97a09b;--ac:#3fc08c;--ac2:#1b2b25;--ok:#4cc38a;--bl:#6ea8ff;--bd:#2a2f2d;--warn:#e8a050;--hi:#f07070;--inp:#101211}}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 [hidden]{display:none!important}
 html{-webkit-text-size-adjust:100%}
@@ -91,17 +91,59 @@ details p,details li{font-size:.84rem;color:var(--mu)}
 a{color:var(--ac)}
 #mtabs{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--card);border-top:1px solid var(--bd);padding-bottom:env(safe-area-inset-bottom,0);z-index:5}
 #mtabs button{flex:1;background:none;border:0;padding:11px 0 9px;font-size:.78rem;color:var(--mu);display:flex;flex-direction:column;align-items:center;gap:2px}
-#mtabs button i{font-style:normal;font-size:1.35rem;line-height:1}
+
 #mtabs button.on{color:var(--ac);font-weight:700}
 #toast{position:fixed;left:50%;bottom:calc(80px + env(safe-area-inset-bottom,0));transform:translate(-50%,20px);background:#222;color:#fff;padding:10px 16px;border-radius:12px;font-size:.88rem;opacity:0;pointer-events:none;transition:.25s;z-index:9;max-width:90%}
 #toast.on{opacity:1;transform:translate(-50%,0)}
 .foot{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:14px}
+.brand{display:flex;align-items:center;gap:10px;margin:2px 0 14px}
+.brand svg{width:36px;height:36px;flex:none;border-radius:9px}
+.brand b{display:block;font-size:1.08rem;letter-spacing:.03em;line-height:1.1}
+.brand span{display:block;font-size:.66rem;color:var(--mu);letter-spacing:.09em;text-transform:uppercase}
+.cgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.cw{text-align:center;font-size:.72rem;color:var(--mu);padding:2px 0}
+.cd{background:var(--inp);border:1px solid transparent;border-radius:10px;min-height:54px;padding:4px 2px;display:flex;flex-direction:column;align-items:center;gap:3px}
+.cd .n{font-size:.9rem;width:26px;height:26px;line-height:26px;border-radius:50%;text-align:center}
+.cd.today .n{background:var(--ac);color:#fff;font-weight:700}
+.cd.sel{border-color:var(--ac);background:var(--ac2)}
+.dots{display:flex;gap:3px;flex-wrap:wrap;justify-content:center;min-height:7px}
+.dots i{width:6px;height:6px;border-radius:50%;display:block}
+.dt{background:var(--bl)}.dt.late{background:var(--hi)}.dt.done{background:var(--mu);opacity:.5}.df{background:var(--ok)}.dm{background:var(--warn)}.ds{background:var(--tx);opacity:.35}
+.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:.74rem;color:var(--mu);margin-top:8px}
+.legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px}
+.ready{display:flex;gap:14px;align-items:center;margin-bottom:6px}
+.drv{margin:7px 0;font-size:.82rem}
+.drv .bar{height:6px;background:var(--bd);border-radius:99px;overflow:hidden;margin-top:3px}.drv .bar i{display:block;height:100%}
+.ins{display:flex;gap:10px;padding:9px 0;border-top:1px solid var(--bd);font-size:.9rem}
+.ins:nth-of-type(1){border-top:0}
+.ic2{flex:none;width:6px;border-radius:4px;background:var(--mu)}
+.ins.hi .ic2{background:var(--hi)}.ins.warn .ic2{background:var(--warn)}.ins.ok .ic2{background:var(--ok)}.ins.info .ic2{background:var(--bl)}
+.stack{display:flex;height:14px;border-radius:99px;overflow:hidden;margin:6px 0}.stack i{display:block;height:100%}
+#cmon::first-letter{text-transform:uppercase}
+#mtabs svg{width:24px;height:24px;stroke-width:1.9}
 .warnbox{border:1px solid var(--warn);border-radius:10px;padding:8px 10px;font-size:.84rem;color:var(--warn);margin-top:8px}
 </style></head><body>
 <div id="toast" role="status"></div>
 <main>
 
-<section data-main="notas">
+<div class="brand"><svg viewBox="0 0 64 64" role="img" aria-label="Pulso"><defs><linearGradient id="lgx" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b4f39"/><stop offset="1" stop-color="#17b27a"/></linearGradient></defs><rect width="64" height="64" fill="url(#lgx)"/><circle cx="32" cy="32" r="21" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="2"/><polyline points="9,34 21,34 26,22 33,46 39,28 43,34 53,34" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="53" cy="34" r="4" fill="#c6f432"/></svg><div><b>Pulso</b><span>Rendimiento y organización</span></div></div>
+
+<section data-main="panel">
+ <header><h1 id="phi">Hola</h1><div class="sub" id="psub"></div></header>
+ <div class="card" id="pready"></div>
+ <div class="card"><h2>Cómo llegas hoy <small>opcional · 30 s</small></h2><div id="pwell"></div></div>
+ <div class="card" id="pins"></div>
+ <div class="card"><h2>Hoy</h2><div id="ptoday"></div></div>
+ <div class="card"><h2>Energía y sueño <small>14 días</small></h2><div id="penergy"></div></div>
+ <div class="card"><h2>Carga e intensidad</h2><div id="pload"></div></div>
+ <div class="card"><h2>Recuperación y respuesta a la carga</h2><div id="presp"></div></div>
+ <div class="card"><h2>Rendimiento</h2><div id="pperf"></div></div>
+ <div class="card"><h2>Salud y prevención</h2><div id="phealth"></div></div>
+ <div class="card"><h2>Organización</h2><div id="porg"></div></div>
+ <div class="card"><details><summary>ℹ️ Cómo se calcula y en qué se basa</summary><div id="phow"></div></details></div>
+</section>
+
+<section data-main="notas" hidden>
  <header><h1>Notas y tareas</h1><div class="sub" id="nsub"></div></header>
  <div id="nfoot"></div>
  <div class="card">
@@ -112,6 +154,19 @@ a{color:var(--ac)}
  <div class="chips sc" id="nfil"></div>
  <input type="search" id="nsr" placeholder="Buscar en notas y tareas…" aria-label="Buscar">
  <div class="card" id="nlist" style="margin-top:10px"></div>
+</section>
+
+<section data-main="cal" hidden>
+ <header><h1>Calendario</h1><div class="sub">Tus tareas, entrenos y partidos</div></header>
+ <div class="card">
+  <div class="row2" style="margin:0 0 10px"><button class="ghost" data-a="cprev" aria-label="Mes anterior">‹</button><b id="cmon"></b><span><button class="ghost" data-a="ctoday">Hoy</button> <button class="ghost" data-a="cnext" aria-label="Mes siguiente">›</button></span></div>
+  <div id="cgrid"></div>
+  <div class="legend"><span><i style="background:var(--bl)"></i>Tarea</span><span><i style="background:var(--hi)"></i>Vencida</span><span><i style="background:var(--ok)"></i>Entreno</span><span><i style="background:var(--warn)"></i>Partido</span><span><i style="background:var(--tx);opacity:.35"></i>Sesión hecha</span></div>
+ </div>
+ <div class="card"><h2 id="cdt"></h2><div id="cday"></div>
+  <div class="row2"><input type="text" id="cq" aria-label="Nueva tarea para este día"><button class="pri" data-a="cadd" aria-label="Añadir">+</button></div>
+  <div class="hint">Puedes escribir «viernes», «12/11» o #etiqueta para cambiar el día o etiquetar.</div></div>
+ <div class="card"><h2>Próximos 7 días</h2><div id="cnext"></div></div>
 </section>
 
 <section data-main="fut" hidden>
@@ -202,7 +257,11 @@ a{color:var(--ac)}
 </section>
 </main>
 <input type="file" id="impf" accept=".json,application/json" hidden>
-<nav id="mtabs"><button data-a="main" data-v="notas"><i>✓</i>Notas</button><button data-a="main" data-v="fut"><i>⚽</i>Fútbol</button></nav>
+<nav id="mtabs" aria-label="Secciones">
+<button data-a="main" data-v="panel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15a8 8 0 1 1 16 0"/><path d="M12 15l3.5-4.5"/><path d="M5 20h14"/></svg>Panel</button>
+<button data-a="main" data-v="notas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3.5"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg>Notas</button>
+<button data-a="main" data-v="cal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Calendario</button>
+<button data-a="main" data-v="fut"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8l3.4 2.5-1.3 4h-4.2l-1.3-4z"/><path d="M12 3v5M15.4 10.5L20 9M14.1 14.5l2.7 3.6M9.9 14.5L7.2 18.1M8.6 10.5L4 9"/></svg>Fútbol</button></nav>
 <script>
 "use strict";
 const KEY="midia:v3";
@@ -224,7 +283,7 @@ const avg=a=>a.length?sum(a)/a.length:null;
 /* ---------- Estado ---------- */
 function norm(o){o=o||{};return{notes:o.notes||[],sess:o.sess||[],well:o.well||{},mol:o.mol||{},inj:o.inj||[],prev:o.prev||[],marks:o.marks||[],next:o.next||[],
  sched:Object.assign({dows:[1,2,4],t:"20:00",e:"21:30",skip:[],on:true,from:today()},o.sched||{}),
- obj:Object.assign({par:0,g:0,a:0,min:0},o.obj||{}),ui:Object.assign({main:"notas",mode:"task",f:"all",tag:"",fv:"hoy",pg:2},o.ui||{})}}
+ obj:Object.assign({par:0,g:0,a:0,min:0},o.obj||{}),ui:Object.assign({main:"panel",mode:"task",f:"all",tag:"",fv:"hoy",pg:2},o.ui||{})}}
 let S=norm();
 function migrate(){try{const r=localStorage.getItem("midia:v1");if(!r)return;const o=JSON.parse(r);
  (o.tasks||[]).forEach(t=>{const x=t.text||t.t||t.title;if(x)S.notes.push({id:t.id||uid(),x:String(x),task:true,done:!!t.done,pin:false,due:t.date||"",tags:[],c:Date.now()})});
@@ -378,10 +437,7 @@ function renderHoy(){const s=loadStats(),T=s.T;
  nx.forEach(x=>{ag+=`<div class="ev"><span class="badge par">Partido</span><span class="t">${esc(x.t||"")} ${x.riv?"vs "+esc(x.riv):""} ${x.loc==="L"?"(local)":x.loc==="V"?"(visitante)":""}</span><button class="ghost" data-a="nextReg" data-id="${x.id}">Registrar</button></div>`});
  done.forEach(x=>{ag+=`<div class="ev"><span class="badge">✓ ${TIPOS[x.k]}</span><span class="t">${hm(x.m)} · esfuerzo ${x.r} · ${x.m*x.r} UA</span></div>`});
  $("fagenda").innerHTML=ag||`<div class="empty">Hoy no tienes nada programado.</div>`;
- /* bienestar */
- const w=S.well[T]||{},h=hooper(T),b=wellBase(T),wf=wellFlag(T);
- $("fwell").innerHTML=HQ.map(q=>`<div style="margin:6px 0"><div class="row2" style="margin:0 0 3px"><span>${q[1]}</span><small class="hint" style="margin:0">${w[q[0]]?w[q[0]]+"/7":""}</small></div><div class="sc7">${[1,2,3,4,5,6,7].map(n=>`<button class="${w[q[0]]===n?"on":""}" data-a="well" data-q="${q[0]}" data-v="${n}">${n}</button>`).join("")}</div></div>`).join("")+
-  `<div class="hint">1 = muy bien · 7 = muy mal.${h!==null?" Total de hoy: <b>"+h+"</b>/28"+(b?" · tu media: "+num(b.m)+(wf==="hi"?" · peor de lo normal":wf==="lo"?" · mejor de lo normal":" · normal"):" · con 7 días registrados comparo con tu media"):""}</div>`;
+ $("fwell").innerHTML=wellHtml();
  /* KPIs */
  const ac=s.acwr;$("fkpi").innerHTML=kpi(Math.round(s.acute),"UA últimos 7 días")+kpi(ac===null?"—":num(ac,2),"ACWR"+(ac!==null?" · "+zone(ac):""),ac===null?"":ac>1.5?"hi":ac>1.3?"warn":ac<0.8?"":"ok")+
   kpi(s.ew===null?"—":num(s.ew,2),"ACWR (media móvil)")+kpi(s.mono===null?"—":num(s.mono,2),"Monotonía",s.mono!==null&&s.pmn>=2&&s.chronic!==null&&s.mono>1.25*s.pma?"warn":"")+kpi(hm(s.min7),"jugado en 7 días")+kpi(s.lastM?ddiff(s.lastM,T)+" d":"—","desde el último partido");
@@ -452,7 +508,7 @@ function renderTem(){const T=today(),ss=seasonStart(),L=S.sess.filter(x=>x.d>=ss
 function render(){
  const main=S.ui.main;document.querySelectorAll("[data-main]").forEach(e=>e.hidden=e.dataset.main!==main);
  document.querySelectorAll("#mtabs button").forEach(b=>b.classList.toggle("on",b.dataset.v===main));
- if(main==="notas")renderNotes();else{
+ if(main==="panel")renderPanel();else if(main==="notas")renderNotes();else if(main==="cal")renderCal();else{
   $("fnav").innerHTML=FNAV.map(f=>`<button class="chip ${S.ui.fv===f[0]?"on":""}" data-a="fv" data-v="${f[0]}">${f[1]}</button>`).join("");
   document.querySelectorAll("[data-fv]").forEach(e=>e.hidden=e.dataset.fv!==S.ui.fv);
   $("fsub").textContent=new Date().toLocaleDateString("es-ES",{weekday:"long",day:"numeric",month:"long"});
@@ -478,7 +534,7 @@ function download(name,text,type){const u=URL.createObjectURL(new Blob([text],{t
 const csvc=v=>{v=v==null?"":String(v);return /[",\n;]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v};
 function exportCsv(){const h=["fecha","hora","tipo","minutos","esfuerzo","UA","rival","campo","competicion","gf","gc","goles","asistencias","tiros","amarillas","rojas","posicion","titular","nota","comentario"];
  const rows=[...S.sess].sort((a,b)=>a.d.localeCompare(b.d)).map(x=>[x.d,x.t||"",TIPOS[x.k]||x.k,x.m,x.r,x.m*x.r,x.riv,x.loc,x.comp,x.gf,x.gc,x.g,x.a,x.sh,x.yc,x.rc,x.pos,x.k==="par"?(x.st?"si":"no"):"",x.p||"",x.n].map(csvc).join(","));
- download("mi-futbol.csv","﻿"+[h.join(",")].concat(rows).join("\n"),"text/csv");}
+ download("pulso-futbol.csv","﻿"+[h.join(",")].concat(rows).join("\n"),"text/csv");}
 
 document.addEventListener("click",e=>{
  const b=e.target.closest("[data-a]");if(!b)return;const a=b.dataset.a,id=b.dataset.id,v=b.dataset.v;
@@ -487,11 +543,17 @@ document.addEventListener("click",e=>{
  let sv=true;
  switch(a){
  case"main":S.ui.main=v;window.scrollTo(0,0);break;
+ case"cprev":calMove(-1);sv=false;break;
+ case"cnext":calMove(1);sv=false;break;
+ case"ctoday":CAL=today().slice(0,7);SEL=today();sv=false;break;
+ case"cday":SEL=v;sv=false;break;
+ case"cadd":addCalTask();return;
+ case"creg":prefill({d:v,k:"ent"});return;
  case"nmode":S.ui.mode=v;break;
  case"nadd":addNote();return;
  case"nfil":S.ui.f=v;S.ui.tag="";break;
  case"ntag":S.ui.tag=S.ui.tag===v?"":v;break;
- case"ntog":{const n=S.notes.find(x=>x.id===id);if(n)n.done=!n.done;break}
+ case"ntog":{const n=S.notes.find(x=>x.id===id);if(n){n.done=!n.done;n.dn=n.done?Date.now():0}break}
  case"npin":{const n=S.notes.find(x=>x.id===id);if(n)n.pin=!n.pin;break}
  case"nedit":EDIT=id;sv=false;break;
  case"ncancel":EDIT="";sv=false;break;
@@ -522,7 +584,7 @@ document.addEventListener("click",e=>{
  case"nextAdd":{const d=$("nd").value;if(!d){toast("Pon la fecha del partido");return}S.next.push({id:uid(),d,t:$("nt").value,riv:$("nriv").value.trim(),loc:$("nloc").value,comp:$("ncomp").value.trim()});["nd","nt","nriv","ncomp"].forEach(i=>$(i).value="");$("nloc").value="";toast("Partido añadido");break}
  case"nextDel":S.next=S.next.filter(x=>x.id!==id);break;
  case"nextReg":{const x=S.next.find(n=>n.id===id);if(x){prefill({d:x.d<=today()?x.d:today(),t:x.t,k:"par",m:90,riv:x.riv,comp:x.comp,loc:x.loc,nid:x.id})}return}
- case"exp":download("mi-dia.json",JSON.stringify(S),"application/json");return;
+ case"exp":download("pulso-copia.json",JSON.stringify(S),"application/json");return;
  case"csv":exportCsv();return;
  case"imp":$("impf").click();return;
  default:return}
@@ -535,10 +597,145 @@ document.addEventListener("change",e=>{const t=e.target;
  else if(t.id==="ss_e"){S.sched.e=t.value;save();render()}
  else if(t.id==="ss_on"){S.sched.on=t.checked;save();render()}
  else if(t.dataset&&t.dataset.obj){S.obj[t.dataset.obj]=Math.max(0,parseInt(t.value,10)||0);save();render()}
+ else if(t.hasAttribute&&t.hasAttribute("data-wsh")){const T=today(),x=parseFloat(String(t.value).replace(",","."));S.well[T]=S.well[T]||{};if(isFinite(x)&&x>=0&&x<=14)S.well[T].sh=x;else delete S.well[T].sh;save();render()}
  else if(t.id==="impf"){const f=t.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const o=JSON.parse(r.result);if(!o||typeof o!=="object"||(!o.sess&&!o.notes))throw 0;try{localStorage.setItem(KEY+":bak",JSON.stringify(S))}catch(x){}S=norm(o);save();render();toast("Copia importada")}catch(x){toast("Ese archivo no es una copia válida")}t.value=""};r.readAsText(f)}});
 $("nq").addEventListener("input",noteHint);
 $("nq").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey&&window.matchMedia&&matchMedia("(pointer:fine)").matches){e.preventDefault();addNote()}});
 $("nsr").addEventListener("input",renderNotes);
+$("cq").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();addCalTask()}});
+
+
+/* ================= v4: CALENDARIO + PANEL ================= */
+const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
+const clamp=(v,a,b)=>Math.max(a==null?0:a,Math.min(b==null?100:b,v));
+const MESES=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+let CAL=today().slice(0,7),SEL=today();
+
+function wellHtml(){const T=today(),w=S.well[T]||{},h=hooper(T),b=wellBase(T),wf=wellFlag(T);
+ return HQ.map(q=>`<div style="margin:6px 0"><div class="row2" style="margin:0 0 3px"><span>${q[1]}</span><small class="hint" style="margin:0">${w[q[0]]?w[q[0]]+"/7":""}</small></div><div class="sc7">${[1,2,3,4,5,6,7].map(n=>`<button class="${w[q[0]]===n?"on":""}" data-a="well" data-q="${q[0]}" data-v="${n}">${n}</button>`).join("")}</div></div>`).join("")+
+ `<div style="margin:8px 0"><label>Horas dormidas anoche (opcional)</label><input type="text" inputmode="decimal" autocomplete="off" data-wsh value="${w.sh!=null?w.sh:""}" placeholder="7,5" style="max-width:130px"></div>`+
+ `<div class="hint">1 = muy bien · 7 = muy mal.${h!==null?" Total de hoy: <b>"+h+"</b>/28"+(b?" · tu media: "+num(b.m)+(wf==="hi"?" · peor de lo normal":wf==="lo"?" · mejor de lo normal":" · normal"):" · con 7 días registrados comparo con tu media"):""}</div>`}
+
+/* ---------- Calendario ---------- */
+function agendaOf(d){const T=today(),o=[];const tr=trainOn(d);
+ if(tr)o.push({k:"ent",d,can:tr.can,txt:tr.t+(tr.e?"–"+tr.e:"")});
+ S.next.filter(x=>x.d===d).forEach(x=>o.push({k:"par",id:x.id,txt:(x.t||"")+(x.riv?" vs "+x.riv:"")+(x.loc==="L"?" (local)":x.loc==="V"?" (visitante)":"")}));
+ return o}
+function renderCal(){const T=today(),[y,m]=CAL.split("-").map(Number),lead=dow(CAL+"-01"),dim=new Date(y,m,0).getDate();
+ $("cmon").textContent=cap(MESES[m-1])+" "+y;
+ const tmap={},smap={};S.notes.forEach(n=>{if(n.task&&n.due)(tmap[n.due]=tmap[n.due]||[]).push(n)});S.sess.forEach(x=>(smap[x.d]=smap[x.d]||[]).push(x));
+ let g=["L","M","X","J","V","S","D"].map(n=>`<div class="cw">${n}</div>`).join("");for(let i=0;i<lead;i++)g+="<div></div>";
+ for(let k=1;k<=dim;k++){const d=CAL+"-"+String(k).padStart(2,"0"),tk=tmap[d]||[],open=tk.filter(x=>!x.done),late=open.length&&d<T,tr=trainOn(d),ses=smap[d]||[],mt=ses.some(x=>x.k==="par")||S.next.some(x=>x.d===d);
+  g+=`<button class="cd ${d===T?"today":""} ${d===SEL?"sel":""}" data-a="cday" data-v="${d}" aria-label="${esc(fmtD(d,{weekday:"long",day:"numeric",month:"long"}))}"><span class="n">${k}</span><span class="dots">${open.length?`<i class="dt ${late?"late":""}"></i>`:tk.length?`<i class="dt done"></i>`:""}${tr&&!tr.can?`<i class="df"></i>`:""}${mt?`<i class="dm"></i>`:""}${ses.length&&d<=T?`<i class="ds"></i>`:""}</span></button>`}
+ $("cgrid").innerHTML=`<div class="cgrid">${g}</div>`;
+ const d=SEL;$("cdt").textContent=cap(fmtD(d,{weekday:"long",day:"numeric",month:"long"}))+(d===T?" · hoy":"");
+ $("cq").placeholder=d===T?"Añadir tarea para hoy…":"Añadir tarea para el "+fmtD(d)+"…";
+ const tk=S.notes.filter(n=>n.task&&(n.due===d||(d===T&&!n.done&&n.due&&n.due<T))).sort(noteSort);
+ let h=`<h3>Tareas</h3>`+(tk.length?tk.map(noteRow).join(""):`<div class="empty">Sin tareas para este día.</div>`);
+ let f="";agendaOf(d).forEach(e=>{
+  if(e.k==="ent")f+=`<div class="ev ${e.can?"can":""}"><span class="badge">Entreno</span><span class="t">${e.txt}${e.can?" · cancelado":""}</span>${e.can?`<button class="ghost" data-a="trest" data-id="${d}">Restaurar</button>`:`<button class="ghost" data-a="tskip" data-id="${d}">Cancelar</button>`}</div>`;
+  else f+=`<div class="ev"><span class="badge par">Partido</span><span class="t">${esc(e.txt)}</span>${d<=T?`<button class="ghost" data-a="nextReg" data-id="${e.id}">Registrar</button>`:""}</div>`});
+ const ses=S.sess.filter(x=>x.d===d);f+=ses.map(sessRow).join("");
+ if(d<=T&&ses.length<2)f+=`<div class="ev"><span class="t hint">${ses.length?"Puedes añadir otra sesión.":"Sin sesión registrada."}</span><button class="ghost" data-a="creg" data-v="${d}">Registrar sesión</button></div>`;
+ h+=`<h3>Fútbol</h3>`+(f||`<div class="empty">Nada programado.</div>`);
+ const hq=hooper(d),mol=S.mol[d]||[];
+ if(hq!==null||mol.length||(S.well[d]&&S.well[d].sh!=null))h+=`<h3>Salud</h3><div class="hint" style="margin:0">${hq!==null?"Cuestionario: "+hq+"/28. ":""}${S.well[d]&&S.well[d].sh!=null?"Sueño: "+num(S.well[d].sh)+" h. ":""}${mol.length?"Molestias: "+esc(mol.map(x=>molTxt(x)+" "+x.n+"/10").join(", "))+".":""}</div>`;
+ $("cday").innerHTML=h;
+ let nx="";for(let i=0;i<7;i++){const dd=shift(T,i),tks=S.notes.filter(n=>n.task&&!n.done&&(n.due===dd||(i===0&&n.due&&n.due<T))),ag=agendaOf(dd).filter(e=>!e.can),sl=S.sess.filter(x=>x.d===dd);
+  if(!tks.length&&!ag.length&&!sl.length)continue;
+  nx+=`<h3>${i===0?"Hoy":i===1?"Mañana":cap(fmtD(dd,{weekday:"long",day:"numeric",month:"short"}))}</h3>`+ag.map(e=>`<div class="ev"><span class="badge ${e.k==="par"?"par":""}">${e.k==="par"?"Partido":"Entreno"}</span><span class="t">${esc(e.txt)}</span></div>`).join("")+tks.map(n=>`<div class="ev"><span class="badge" style="background:var(--inp);color:var(--bl)">Tarea</span><span class="t">${esc(n.x)}${n.due&&n.due<T?` <span class="tag late">vencida</span>`:""}</span></div>`).join("")}
+ $("cnext").innerHTML=nx||`<div class="empty">Semana libre. Añade tareas o partidos y aparecerán aquí.</div>`}
+function addCalTask(){const raw=$("cq").value.trim();if(!raw){toast("Escribe la tarea");return}
+ const p=parseQ(raw);S.notes.push({id:uid(),x:p.x,task:true,done:false,pin:p.pin,due:p.due||SEL,tags:p.tags,c:Date.now()});$("cq").value="";save();toast("Tarea añadida al "+fmtD(p.due||SEL));render()}
+function calMove(n){const [y,m]=CAL.split("-").map(Number),dt=new Date(y,m-1+n,1);CAL=dt.getFullYear()+"-"+String(dt.getMonth()+1).padStart(2,"0");SEL=CAL===today().slice(0,7)?today():CAL+"-01"}
+
+/* ---------- Panel: cálculos ---------- */
+const energy=d=>{const w=S.well[d];return w&&w.sl&&w.fa?Math.round(100-((w.sl+w.fa)/2-1)/6*100):null};
+function readiness(s){const T=s.T,P=[],h=hooper(T),b=wellBase(T),mi=molInfo(T),dm=s.lastM?ddiff(s.lastM,T):null,hrs=(S.well[T]||{}).sh;
+ if(h!==null)P.push({k:"Bienestar",w:3,v:clamp(b?80-22*((h-b.m)/Math.max(b.sd,1.5)):100-(h-4)/24*100),d:h+"/28"+(b?" · tu media "+num(b.m):"")});
+ if(s.acwr!==null)P.push({k:"Carga (ACWR)",w:2,v:s.acwr<0.8?75:s.acwr<=1.3?100:s.acwr<=1.5?65:35,d:num(s.acwr,2)});
+ if(dm!==null&&dm<=6)P.push({k:"Tras el partido",w:2,v:[35,50,65,85,100,100,100][dm],d:dm===0?"hoy":"hace "+dm+" d"});
+ if(hrs!=null)P.push({k:"Sueño",w:1,v:clamp(hrs>=7?100:100-(7-hrs)*18),d:num(hrs)+" h"});
+ if(!P.length)return null;
+ P.push({k:"Molestias",w:2,v:clamp(mi.maxD?100-9*mi.maxD:mi.maxO?100-4*mi.maxO:100),d:mi.mol.length?mi.mol.length+" anotada"+(mi.mol.length>1?"s":""):"ninguna"});
+ const sc=Math.round(sum(P.map(p=>p.w*p.v))/sum(P.map(p=>p.w)));return{sc,P}}
+const rdLabel=sc=>sc>=85?["Alta","var(--ok)"]:sc>=65?["Buena","var(--ok)"]:sc>=45?["Media","var(--warn)"]:["Baja","var(--hi)"];
+function gauge(sc,col){const R=50,C=2*Math.PI*R;return `<svg viewBox="0 0 120 120" width="118" height="118" role="img" aria-label="Disponibilidad ${sc} de 100"><circle cx="60" cy="60" r="${R}" fill="none" stroke="var(--bd)" stroke-width="10"/><circle cx="60" cy="60" r="${R}" fill="none" stroke="${col}" stroke-width="10" stroke-linecap="round" stroke-dasharray="${(sc/100*C).toFixed(1)} ${C.toFixed(1)}" transform="rotate(-90 60 60)"/><text x="60" y="68" text-anchor="middle" font-size="32" font-weight="700" fill="var(--tx)">${sc}</text></svg>`}
+function bandMin(from,to){const o={s:0,m:0,h:0};S.sess.forEach(x=>{if(x.d>=from&&x.d<=to){x.r<=4?o.s+=x.m:x.r<=6?o.m+=x.m:o.h+=x.m}});return o}
+function insights(s){const T=s.T,L=[],add=(lv,t)=>L.push({lv,t});
+ const hs=[];for(let i=0;i<7;i++){const w=S.well[shift(T,-i)];if(w&&w.sh!=null)hs.push(w.sh)}
+ if(hs.length>=3){const a=avg(hs),n7=hs.filter(x=>x<7).length;add(a<7?"warn":"ok",`Duermes de media ${num(a)} h (${hs.length} registros recientes) y ${n7} noche${n7===1?"":"s"} por debajo de 7 h. El consenso de expertos considera insuficiente dormir habitualmente menos de 7 h, aunque la necesidad es individual.`)}
+ const b=wellBase(T),rec=[];for(let i=0;i<7;i++){const x=hooper(shift(T,-i));if(x!==null)rec.push(x)}
+ if(b&&rec.length>=3){const df=avg(rec)-b.m,lim=Math.max(b.sd,1.5);if(df>lim)add("warn",`Tu cuestionario de los últimos días (${num(avg(rec))}) es peor que tu media de 4 semanas (${num(b.m)}): acumulas fatiga, estrés o mal sueño.`);else if(df<-lim)add("ok",`Tu cuestionario de la última semana (${num(avg(rec))}) es mejor que tu media habitual (${num(b.m)}).`)}
+ if(s.acwr!==null){const a=num(s.acwr,2);if(s.acwr>1.5)add("hi",`Tu carga de 7 días es un ${Math.round((s.acwr-1)*100)}% mayor que tu media de las 4 semanas previas (ACWR ${a}). Conviene descargar.`);else if(s.acwr>1.3)add("warn",`Tu carga semanal sube un ${Math.round((s.acwr-1)*100)}% sobre tu base (ACWR ${a}). No la subas más esta semana.`);else if(s.acwr<0.8)add("info",`Tu carga reciente es un ${Math.round((1-s.acwr)*100)}% menor que tu base (ACWR ${a}): hay margen para subir poco a poco.`);else add("ok",`Tu carga está en zona estable respecto a tu base (ACWR ${a}).`)}
+ else if(s.first){const rem=Math.max(0,27-ddiff(s.first,T));add("info",rem>0?`Te faltan unos ${rem} días de registros para calcular tu ACWR (carga aguda frente a crónica).`:"Sigue registrando: el ACWR se activa con 4 semanas de datos.")}
+ else add("info","Registra tu primera sesión en Fútbol → Registrar: con 4 semanas de datos calculo tu carga aguda frente a crónica.");
+ const dm=s.lastM?ddiff(s.lastM,T):null;if(dm!==null&&dm<=3)add("warn",`Estás en el día ${dm} tras el partido: la fatiga puede notarse hasta unas 72 h (Silva et al., 2018).`);
+ const pv=prevWeek(T);if(pv>=S.ui.pg)add("ok",`Prevención esta semana: ${pv}/${S.ui.pg}. Objetivo cumplido.`);else if(dow(T)>=2)add("info",`Prevención esta semana: ${pv}/${S.ui.pg}. Aún puedes meter FIFA 11+, nórdicos o fuerza.`);
+ const M=matches().filter(x=>x.p);if(M.length>=6){const l5=avg(M.slice(-5).map(x=>x.p)),all=avg(M.map(x=>x.p));if(l5-all>=1)add("ok",`Tu nota en los últimos 5 partidos (${num(l5)}) está por encima de tu media (${num(all)}).`);else if(all-l5>=1)add("info",`Tu nota en los últimos 5 partidos (${num(l5)}) está por debajo de tu media (${num(all)}).`)}
+ const zc={};for(let i=0;i<14;i++)(S.mol[shift(T,-i)]||[]).forEach(x=>{const k=x.z+"|"+(x.s||"");(zc[k]=zc[k]||new Set()).add(shift(T,-i))});
+ Object.keys(zc).forEach(k=>{if(zc[k].size>=3){const [z,sd]=k.split("|");add("warn",`${molTxt({z,s:sd})} lleva ${zc[k].size} días con molestias en las últimas 2 semanas. Si persiste, que lo vea un fisio.`)}});
+ const bm=bandMin(shift(T,-27),T),tm=bm.s+bm.m+bm.h;if(tm>=120){const hp=bm.h/tm;if(hp>=0.6)add("warn",`El ${Math.round(hp*100)}% de tus minutos de las últimas 4 semanas ha sido de esfuerzo alto (7 o más).`);else if(hp<=0.1&&tm>=300)add("info","Casi toda tu carga reciente es de esfuerzo suave (menos del 10% intenso).")}
+ const late=S.notes.filter(n=>n.task&&!n.done&&n.due&&n.due<T).length;if(late)add("info",`Tienes ${late} tarea${late>1?"s":""} vencida${late>1?"s":""}.`);
+ let nw=0;for(let i=0;i<14;i++)if(hooper(shift(T,-i))!==null)nw++;if(nw<5)add("info","Rellena el cuestionario unos días más (30 s): desbloquea tus tendencias de energía y bienestar.");
+ const ord={hi:0,warn:1,info:2,ok:3};return L.sort((a,b)=>ord[a.lv]-ord[b.lv]).slice(0,7)}
+
+function renderPanel(){const s=loadStats(),T=s.T,hr=new Date().getHours();
+ $("phi").textContent=hr<6?"Buenas noches":hr<14?"Buenos días":hr<21?"Buenas tardes":"Buenas noches";
+ $("psub").textContent=new Date().toLocaleDateString("es-ES",{weekday:"long",day:"numeric",month:"long"});
+ /* disponibilidad */
+ const rd=readiness(s),rc=recommend(s);
+ if(rd){if(rc.lv==="hi")rd.sc=Math.min(rd.sc,39);else if(rc.lv==="warn")rd.sc=Math.min(rd.sc,69);const [lb,col]=rdLabel(rd.sc);$("pready").innerHTML=`<h2>Disponibilidad de hoy <small>índice orientativo</small></h2><div class="ready">${gauge(rd.sc,col)}<div style="flex:1;min-width:0"><div style="font-weight:700;color:${col}">${lb}</div><div class="hint" style="margin:2px 0 6px">${esc(rc.t)}</div></div></div>${rd.P.map(p=>`<div class="drv"><div class="row2" style="margin:0"><span>${p.k}</span><span class="hint" style="margin:0">${esc(p.d)}</span></div><div class="bar"><i style="width:${Math.round(p.v)}%;background:${p.v>=65?"var(--ok)":p.v>=45?"var(--warn)":"var(--hi)"}"></i></div></div>`).join("")}`}
+ else $("pready").innerHTML=`<h2>Disponibilidad de hoy</h2><div class="empty">Aún no tengo datos de hoy. Rellena «Cómo llegas hoy» más abajo o registra sesiones y te calculo un índice de disponibilidad.</div>`;
+ $("pwell").innerHTML=wellHtml();
+ /* insights */
+ const ins=insights(s);$("pins").innerHTML=`<h2>Lo que dicen tus datos</h2>`+ins.map(i=>`<div class="ins ${i.lv}"><span class="ic2"></span><span>${esc(i.t)}</span></div>`).join("");
+ /* hoy */
+ const ag=agendaOf(T),sess=S.sess.filter(x=>x.d===T),tk=S.notes.filter(n=>n.task&&!n.done&&n.due&&n.due<=T).sort(noteSort).slice(0,5);
+ $("ptoday").innerHTML=ag.map(e=>`<div class="ev ${e.can?"can":""}"><span class="badge ${e.k==="par"?"par":""}">${e.k==="par"?"Partido":"Entreno"}</span><span class="t">${esc(e.txt)}${e.can?" · cancelado":""}</span></div>`).join("")+sess.map(x=>`<div class="ev"><span class="badge">✓ ${TIPOS[x.k]}</span><span class="t">${hm(x.m)} · ${x.m*x.r} UA</span></div>`).join("")+(tk.length?`<h3>Tareas de hoy y vencidas</h3>`+tk.map(noteRow).join(""):"")||`<div class="empty">Día libre de compromisos.</div>`;
+ /* energía */
+ const ev=[],el=[],ec=[],hv=[],hc=[];for(let i=13;i>=0;i--){const d=shift(T,-i),e=energy(d),w=S.well[d];ev.push(e===null?0:e);el.push(String(+d.slice(8)));ec.push(e===null?"var(--bd)":e>=65?"var(--ok)":e>=40?"var(--warn)":"var(--hi)");hv.push(w&&w.sh!=null?w.sh:0);hc.push(w&&w.sh!=null&&w.sh<7?"var(--warn)":"var(--ac)")}
+ const e7=[],e0=[];for(let i=0;i<7;i++){const a=energy(shift(T,-i)),b=energy(shift(T,-7-i));if(a!==null)e7.push(a);if(b!==null)e0.push(b)}
+ const sh7=[];for(let i=0;i<14;i++){const w=S.well[shift(T,-i)];if(w&&w.sh!=null)sh7.push(w.sh)}
+ $("penergy").innerHTML=ev.some(x=>x>0)?`<div class="kpi">${kpi(e7.length?Math.round(avg(e7)):"—","energía media 7 d",e7.length&&e0.length?(avg(e7)>=avg(e0)?"ok":"warn"):"")}${kpi(e7.length&&e0.length?((avg(e7)-avg(e0)>=0?"+":"")+Math.round(avg(e7)-avg(e0))):"—","vs. 7 días antes")}${kpi(sh7.length?num(avg(sh7))+" h":"—","sueño medio")}</div><h3>Energía diaria (0–100)</h3>${bars(ev,el,ec)}<div class="hint">Índice propio: sale de tu sueño y fatiga del cuestionario. Gris = sin dato.</div>${hv.some(x=>x>0)?`<h3>Horas dormidas</h3>${bars(hv,el,hc,7)}<div class="hint">Línea = 7 h. Naranja = por debajo.</div>`:""}`:`<div class="empty">Rellena sueño y fatiga en el cuestionario de hoy y verás aquí tu energía día a día.</div>`;
+ /* carga */
+ const ws=weekStart(T),wl=[],ww=[];for(let i=7;i>=0;i--){const st=shift(ws,-7*i);wl.push(fmtD(st,{day:"numeric",month:"numeric"}));ww.push(Math.round(sumL(st,7)))}
+ const bm=bandMin(shift(T,-27),T),tm=bm.s+bm.m+bm.h,l7=S.sess.filter(x=>x.d>=shift(T,-6)&&x.d<=T);
+ const byT={};S.sess.filter(x=>x.d>=shift(T,-27)&&x.d<=T).forEach(x=>byT[x.k]=(byT[x.k]||0)+x.m);
+ $("pload").innerHTML=`<div class="kpi">${kpi(Math.round(s.acute),"UA 7 días")}${kpi(s.acwr===null?"—":num(s.acwr,2),"ACWR"+(s.acwr!==null?" · "+zone(s.acwr):""),s.acwr===null?"":s.acwr>1.5?"hi":s.acwr>1.3?"warn":s.acwr<0.8?"":"ok")}${kpi(l7.length,"sesiones 7 d")}${kpi(hm(s.min7),"tiempo 7 d")}</div>`+
+  (ww.some(x=>x>0)?`<h3>Carga por semana (UA)</h3>${bars(ww,wl,ww.map((_,i)=>i===7?"var(--warn)":"var(--ac)"))}`:`<div class="empty">Sin sesiones registradas todavía.</div>`)+
+  (tm>0?`<h3>Intensidad de las últimas 4 semanas</h3><div class="stack"><i style="width:${bm.s/tm*100}%;background:var(--ok)"></i><i style="width:${bm.m/tm*100}%;background:var(--warn)"></i><i style="width:${bm.h/tm*100}%;background:var(--hi)"></i></div><div class="legend"><span><i style="background:var(--ok)"></i>Suave (1-4) ${Math.round(bm.s/tm*100)}%</span><span><i style="background:var(--warn)"></i>Medio (5-6) ${Math.round(bm.m/tm*100)}%</span><span><i style="background:var(--hi)"></i>Alto (7+) ${Math.round(bm.h/tm*100)}%</span></div><div class="hint">Por tiempo: ${Object.keys(byT).map(k=>TIPOS[k]+" "+hm(byT[k])).join(" · ")}</div>`:"");
+ /* respuesta a la carga */
+ let rs="";const M=matches(),off=[[],[],[],[]];let nm=0;M.forEach(m=>{let any=false;for(let k=0;k<=3;k++){const h=hooper(shift(m.d,k));if(h!==null){off[k].push(h);any=true}}if(any)nm++});
+ const offOk=off.filter(a=>a.length).length;
+ if(offOk>=2&&sum(off.map(a=>a.length))>=3)rs+=`<h3>Cuestionario tras un partido (media de ${nm} partido${nm>1?"s":""})</h3>${bars(off.map(a=>a.length?avg(a):0),["Día 0","+1 día","+2 días","+3 días"],off.map(a=>a.length?"var(--ac)":"var(--bd)"))}<div class="hint">Más alto = peor (4 a 28). Un estudio con sub-17 de élite halló el peor bienestar 2 días después del partido; tus datos pueden ser distintos.</div>`;
+ const dl=[...new Set(S.sess.map(x=>x.d))].filter(d=>d<T).map(d=>({d,l:ld(d)})).filter(x=>x.l>0);
+ if(dl.length>=6){const so=dl.map(x=>x.l).sort((a,b)=>a-b),med=so[Math.floor(so.length/2)],H=[],E=[];dl.forEach(x=>{const h=hooper(shift(x.d,1));if(h!==null)(x.l>=med?H:E).push(h)});
+  if(H.length>=3&&E.length>=3){const df=avg(H)-avg(E);rs+=`<h3>Cómo respondes a la carga</h3><div class="kpi">${kpi(num(avg(H)),"cuestionario tras día duro",df>1?"warn":"")}${kpi(num(avg(E)),"tras día suave")}</div><div class="hint">${Math.abs(df)<1?"Apenas notas diferencia al día siguiente.":df>0?"Tras tus días más cargados llegas peor al día siguiente ("+num(df)+" puntos).":"Tras tus días más cargados llegas igual o mejor."} Basado en ${H.length+E.length} días: es una tendencia, no una causa.</div>`}}
+ $("presp").innerHTML=rs||`<div class="empty">Necesito unos días de cuestionario junto a tus sesiones y partidos para mostrar cómo recuperas.</div>`;
+ /* rendimiento */
+ const Mp=M.filter(x=>x.p),st=mstats(M),l5=M.slice(-5),s5=mstats(l5);let pf="";
+ if(M.length){pf+=`<div class="kpi">${kpi(st.pj,"partidos")}${kpi(Mp.length?num(avg(Mp.map(x=>x.p))):"—","nota media")}${kpi(Mp.length>=2?num(avg(Mp.slice(-5).map(x=>x.p))):"—","nota últimos 5")}${kpi(st.min>0?num(p90(st.g+st.a,st.min),2):"—","G+A / 90")}${kpi(s5.min>0?num(p90(s5.g+s5.a,s5.min),2):"—","G+A / 90 últ. 5")}${kpi(Math.round(st.min/st.pj)+"'","minutos / partido")}</div>`;
+  if(Mp.length>=2)pf+=`<h3>Evolución de tu nota</h3>${spark(Mp.map(x=>x.p))}`;
+  const lo=M.filter(x=>x.p&&S.well[x.d]&&S.well[x.d].sh!=null&&S.well[x.d].sh<7),hi=M.filter(x=>x.p&&S.well[x.d]&&S.well[x.d].sh!=null&&S.well[x.d].sh>=7);
+  if(lo.length>=2&&hi.length>=2)pf+=`<h3>Sueño y nota</h3><div class="kpi">${kpi(num(avg(hi.map(x=>x.p))),"nota con ≥7 h ("+hi.length+")")}${kpi(num(avg(lo.map(x=>x.p))),"nota con <7 h ("+lo.length+")")}</div><div class="hint">Pocos partidos: es una pista, no una conclusión. Una revisión en futbolistas encontró relación entre sueño reducido y menor rendimiento, aunque con resultados inconsistentes.</div>`}
+ $("pperf").innerHTML=pf||`<div class="empty">Cuando registres partidos verás aquí tu rendimiento y su evolución.</div>`;
+ /* salud y prevención */
+ const zc={};for(let i=0;i<30;i++)(S.mol[shift(T,-i)]||[]).forEach(x=>{const k=x.z+"|"+(x.s||"");(zc[k]=zc[k]||new Set()).add(shift(T,-i))});
+ const zl=Object.keys(zc).map(k=>({k,n:zc[k].size})).sort((a,b)=>b.n-a.n).slice(0,3);
+ const act=S.inj.filter(x=>!x.d1),pw=[],pl=[];for(let i=3;i>=0;i--){const a=shift(ws,-7*i),b=shift(a,6);pw.push(S.prev.filter(x=>x.d>=a&&x.d<=b).length);pl.push(fmtD(a,{day:"numeric",month:"numeric"}))}
+ $("phealth").innerHTML=(act.length?`<div class="warnbox">Lesión en curso: ${esc(act.map(x=>molTxt(x)).join(", "))}.</div>`:"")+
+  `<h3>Zonas con más días de molestias (30 d)</h3>`+(zl.length?zl.map(z=>{const [zz,sd]=z.k.split("|");return `<div class="ev"><span class="t">${esc(molTxt({z:zz,s:sd}))}</span><span class="badge ${z.n>=5?"par":""}">${z.n} día${z.n>1?"s":""}</span></div>`}).join(""):`<div class="empty">Sin molestias en 30 días.</div>`)+
+  `<h3>Prevención por semana (objetivo ${S.ui.pg})</h3>`+bars(pw,pl,pw.map(v=>v>=S.ui.pg?"var(--ok)":"var(--warn)"),S.ui.pg);
+ /* organización */
+ const open=S.notes.filter(n=>n.task&&!n.done),lateT=open.filter(n=>n.due&&n.due<T),todayT=open.filter(n=>n.due===T),d7=S.notes.filter(n=>n.done&&n.dn&&n.dn>=Date.now()-7*864e5).length;
+ const up=open.filter(n=>n.due&&n.due>T).sort((a,b)=>a.due.localeCompare(b.due)).slice(0,3);
+ $("porg").innerHTML=`<div class="kpi">${kpi(open.length,"tareas abiertas")}${kpi(todayT.length,"para hoy")}${kpi(lateT.length,"vencidas",lateT.length?"hi":"ok")}${kpi(d7,"hechas en 7 días")}${kpi(S.notes.filter(n=>!n.task).length,"notas")}</div>`+(up.length?`<h3>Próximas</h3>`+up.map(n=>`<div class="ev"><span class="t">${esc(n.x)}</span><span class="tag">${esc(dueLbl(n.due))}</span></div>`).join(""):"");
+ $("phow").innerHTML=`<p><b>Disponibilidad</b>: media ponderada de bienestar (cuestionario frente a tu media), carga (ACWR), días desde el partido, molestias y horas dormidas. Es un índice <b>orientativo de elaboración propia</b>, no validado científicamente. Si la recomendación del día es de precaución (dolor, pico de carga, partido reciente), el índice se limita para no contradecirla.</p>
+ <p><b>Energía</b>: sale de tu sueño y fatiga del cuestionario (índice propio). <b>Sueño</b>: el consenso de expertos no fija una cifra única y pide un enfoque individual; dormir habitualmente menos de 7 h se considera insuficiente. Una revisión sistemática en futbolistas sugiere que dormir poco puede empeorar el rendimiento y aumentar el riesgo de lesión, con evidencia inconsistente.</p>
+ <p><b>Recuperación</b>: la fatiga tras un partido puede notarse hasta 72 h. <b>Carga</b>: UA = minutos × esfuerzo; ACWR = 7 días ÷ media de las 4 semanas anteriores (no predice lesiones por sí solo).</p>
+ <p>Las comparaciones con pocos datos son tendencias, no causas.</p>
+ <ul><li><a href="https://researchonline.ljmu.ac.uk/id/eprint/16297/" target="_blank" rel="noopener">Walsh et al., 2021 · Sueño y deportista (BJSM)</a></li><li><a href="https://mdpi.com/2227-9032/9/7/808" target="_blank" rel="noopener">Sueño, rendimiento, carga y lesiones en futbolistas (revisión, 2021)</a></li><li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8062971" target="_blank" rel="noopener">Índice de Hooper en fútbol (Frontiers, 2021)</a></li><li><a href="https://research-repository.uwa.edu.au/en/publications/acute-and-residual-soccer-match-related-fatigue-a-systematic-revi/" target="_blank" rel="noopener">Silva et al., 2018 · fatiga tras partido</a></li><li><a href="https://frontiersin.org/articles/10.3389/fnins.2017.00612/full" target="_blank" rel="noopener">Haddad et al., 2017 · RPE de sesión</a></li></ul>`}
 
 /* ---------- Arranque ---------- */
 (function init(){const T=today();["sd","md","id0","pvd","kd"].forEach(i=>$(i).value=T);
@@ -547,7 +744,8 @@ $("nsr").addEventListener("input",renderNotes);
  $("mp").innerHTML=`<option value="">—</option>`+[1,2,3,4,5,6,7,8,9,10].map(n=>`<option>${n}</option>`).join("");
  $("kn").innerHTML=PRESET.map(p=>`<option>${p}</option>`).join("");
  $("mnp").style.gridTemplateColumns="repeat(11,1fr)";
- if(!S.ui.main)S.ui.main="notas";
+ if(!S.ui.v4){S.ui.v4=1;S.ui.main="panel";save()}
+ if(!["panel","notas","cal","fut"].includes(S.ui.main))S.ui.main="panel";
  render();
  if("serviceWorker"in navigator&&location.protocol.startsWith("http"))addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
 })();
