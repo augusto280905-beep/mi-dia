@@ -65,6 +65,8 @@ Tarjeta «Calendario externo» en el Panel. La dirección secreta iCal (`https:/
 
 - v13.1 (p12d): Deporte = pestañas **Resumen** (`healthDash` + Mi semana) / **Entrenos** (elegir: fuerza extra, prevención y core, soltar, registrar; historial). `S.ui.dv`. Fuerza editable: quitar (`gdelx`), series ±(`gsets`), añadir (`gaddo/gaddx`).
 
+- v13.2 (p12e): inicio sin anillos: `homeHero` = estado (de `hmod`) con barra, «Lo siguiente», 3 indicadores (carga con marca del techo, sueño, cuerpo). El cuestionario de inicio es un chequeo dinámico de 4 preguntas una a una (`checkinHtml`, `CK`, acciones `ckset/ckskip/ckedit/cksh`); guarda lo mismo (`S.well[d].sl/fa/st/so`, Hooper 1–7) y las horas dormidas. La vista Sueño conserva el cuestionario clásico (`wellHtml`).
+
 ## Pendiente
 1. Desplegar y probar push en el Supabase real (SQL + función) y en el iPhone.
 2. Tras cada cambio: `npm test`, subir VER y caché del SW, commit y push.

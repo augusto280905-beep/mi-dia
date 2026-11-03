@@ -23,8 +23,8 @@ function boot(){const store={};const dom=new JSDOM(html,{runScripts:"dangerously
  await sleep(3700);
  console.log("Inicio nuevo");
  ev(`S.well["${T}"]={sh:7,sl:3,fa:3,st:2,so:3};save();render()`);
- t("el inicio tiene anillos y ya no repite las tres áreas",d.querySelectorAll("#hhero .rg").length===3&&!d.querySelector(".areas, .area"));
- t("los anillos reflejan tus datos (sueño 7 de 8)",/7 h de 8/.test($("hhero").textContent));
+ t("el inicio tiene estado, siguiente y tres indicadores, sin anillos ni áreas",!!d.querySelector("#hhero .h4t")&&d.querySelectorAll("#hhero .kp").length===3&&!d.querySelector("#hhero .rg, .areas, .area"));
+ t("el sueño aparece con su necesidad (7 h, necesidad 8 h)",/7 h/.test($("hhero").textContent)&&/necesidad 8 h/.test($("hhero").textContent));
  t("cada área tiene su color de pestaña",d.body.dataset.area==="home");
  ["cal","fut","eq"].forEach((m,i)=>{ev(`S.ui.main="${m}";render()`);t("área "+m+" → "+["org","dep","eq"][i],d.body.dataset.area===["org","dep","eq"][i])});
  t("las pestañas son Hoy, Organiza, Deporte, Entrenador",[...d.querySelectorAll("#mtabs button")].map(b=>b.textContent.trim()).join()==="Hoy,Organiza,Deporte,Entrenador");
