@@ -532,6 +532,57 @@ section[data-main]>header:not(.hhead) h1::before{content:"";display:inline-block
 .s5l{display:flex;justify-content:space-between;font-size:.7rem;color:var(--mu);margin-top:3px}
 .hs-grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:8px}.hs-grid3 .hst{padding:10px}.hs-grid3 .hst b{font-size:1.4rem}.insay{margin:8px 0 0;font-size:.88rem;line-height:1.42}
 #mtabs button.pend{position:relative}#mtabs button.pend::after{content:"";position:absolute;top:6px;right:calc(50% - 20px);width:10px;height:10px;border-radius:50%;background:var(--hi);border:2px solid var(--card)}
+/* ===== v14: chequeo, agenda, Organiza tipo Notion ===== */
+.ck2{padding:14px}.ck2.fin{padding:10px 14px}
+.ckh2{display:flex;align-items:center;gap:10px}.ckh2>div{flex:1;min-width:0}.ckh2 b{display:block;font-size:.95rem}.ckh2 small{color:var(--mu);font-size:.8rem}.ckb{display:flex;gap:4px;align-items:center}
+.ckok{width:30px;height:30px;border-radius:50%;background:var(--ok);color:#fff;display:grid;place-items:center;font-weight:700;flex:none}.ckok.off{background:var(--inp);color:var(--mu)}
+.ck2q{margin-top:14px}.ck2t{display:flex;justify-content:space-between;align-items:baseline;gap:8px}.ck2t b{font-size:.9rem;font-weight:600}.ck2t span{font-size:.8rem;color:var(--mu)}
+.cks2{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:6px}.cks2 button{height:36px;border-radius:12px;border:2px solid transparent;background:color-mix(in srgb,var(--k) 20%,var(--inp));display:grid;place-items:center;padding:0}.cks2 button i{width:12px;height:12px;border-radius:50%;background:var(--k);opacity:.85}.cks2 button.on{border-color:var(--tx);background:color-mix(in srgb,var(--k) 45%,var(--inp))}.cks2 button.on i{width:16px;height:16px;opacity:1}
+.ck2l{display:flex;justify-content:space-between;font-size:.7rem;color:var(--mu);margin-top:2px}
+.ck2h{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px;font-size:.9rem}.ck2.fin .ck2h{margin-top:8px}
+.stp{display:flex;align-items:center;gap:6px}.stp button{width:40px;height:40px;border-radius:12px;border:1px solid var(--bd);background:var(--inp);font-size:1.2rem;color:var(--tx)}.stp input{width:64px;text-align:center;height:40px}
+.ckcfg{margin-top:10px;padding:10px 12px;border-radius:14px;background:var(--inp)}.ckr{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 0;font-size:.88rem}.ckr input[type=time]{width:110px}
+.tgl{width:48px;height:28px;border-radius:20px;border:0;background:var(--bd);position:relative;flex:none}.tgl i{position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:transform .15s}.tgl.on{background:var(--ok)}.tgl.on i{transform:translateX(20px)}
+@media (prefers-reduced-motion:reduce){.tgl i{transition:none}}
+/* agenda compacta */
+.agd{padding:10px 12px}.agdh{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+.agt{display:flex;gap:4px;background:var(--inp);border-radius:12px;padding:3px}.agt button{border:0;background:transparent;border-radius:10px;padding:7px 14px;font-weight:600;font-size:.88rem;color:var(--mu)}.agt button.on{background:var(--card);color:var(--tx);box-shadow:0 1px 3px rgba(0,0,0,.12)}.agt em{font-style:normal;font-size:.75rem;opacity:.7;margin-left:3px}
+.ag{display:flex;align-items:center;gap:10px;width:100%;min-height:44px;text-align:left;border:0;background:transparent;border-bottom:1px solid var(--bd);padding:6px 2px;color:var(--tx)}
+.ag:last-of-type{border-bottom:0}.ag time{font-family:var(--fh);font-size:1rem;font-weight:600;width:44px;flex:none;color:var(--mu)}.ag>i{width:4px;align-self:stretch;border-radius:3px;background:var(--c);flex:none;margin:2px 0}.ag span{flex:1;font-size:.9rem;font-weight:560;line-height:1.25}
+.ag.org{--c:var(--c-org)}.ag.dep{--c:var(--c-dep)}.ag.eq{--c:var(--c-eq)}.ag.past{opacity:.5}
+.ag.tk .agm{display:flex;align-items:center;gap:10px;flex:1;min-width:0;border:0;background:transparent;text-align:left;color:var(--tx);padding:0;min-height:40px}.ag.tk .agm span{flex:1;overflow:hidden;text-overflow:ellipsis}.ag.tk em{font-style:normal;font-size:.72rem;white-space:nowrap}.ag.tk em.late{color:var(--hi);font-weight:600}
+.agmore{margin-top:6px;width:100%}
+/* Organiza */
+.nvseg{display:flex;gap:4px;background:var(--inp);border-radius:14px;padding:4px;margin:0 0 12px}.nvseg button{flex:1;border:0;background:transparent;border-radius:11px;padding:9px 4px;font-weight:600;font-size:.85rem;color:var(--mu)}.nvseg button.on{background:var(--card);color:var(--tx);box-shadow:0 1px 3px rgba(0,0,0,.12)}.nvseg em{font-style:normal;opacity:.7;font-size:.75rem}.nvseg.st{margin-top:12px}
+.nxts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}.nxt{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:10px 6px;text-align:center}.nxt b{display:block;font-family:var(--fh);font-size:1.6rem;line-height:1}.nxt span{font-size:.68rem;color:var(--mu)}
+.nxa{padding:12px}.nxar{display:flex;gap:8px}.nxar input{flex:1;min-width:0}.nxah{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:8px;font-size:.76rem;color:var(--mu)}
+.nsec{margin:14px 0 0}.nsec>h3,.nsec summary h3{margin:0 2px 6px;font-size:.75rem;letter-spacing:.09em;text-transform:uppercase;color:var(--mu);display:inline-flex;gap:8px;align-items:center}.nsec h3 em{font-style:normal;background:var(--inp);border-radius:10px;padding:1px 8px;font-size:.72rem}.nsec.late>h3{color:var(--hi)}.nsec summary{cursor:pointer;list-style:none}
+.nsec .item.nr,.nlistc .item.nr{background:var(--card)}.nsec>.item.nr{border:1px solid var(--bd);border-radius:14px;margin-bottom:6px}
+.item.nr{display:flex;align-items:flex-start;gap:10px;padding:10px 12px}.item.nr .nxb{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;text-align:left;border:0;background:transparent;color:var(--tx);padding:0;min-height:30px}.item.nr .tx{font-size:.95rem;font-weight:560;line-height:1.3}.item.nr.done .tx{text-decoration:line-through;opacity:.5}.item.nr .nts{font-size:.8rem;color:var(--mu);line-height:1.3}
+.item.nr .meta{display:flex;flex-wrap:wrap;gap:5px;margin-top:2px}.nc{font-size:.7rem;padding:2px 8px;border-radius:10px;background:var(--inp);color:var(--mu);white-space:nowrap}.nc.pj{background:color-mix(in srgb,var(--pc) 16%,var(--inp));color:var(--tx)}.nc.hoy{background:color-mix(in srgb,var(--ac) 22%,var(--inp));color:var(--tx);font-weight:600}.nc.late{background:color-mix(in srgb,var(--hi) 20%,var(--inp));color:var(--hi);font-weight:600}.nc.en{background:color-mix(in srgb,var(--warn) 24%,var(--inp));color:var(--tx)}
+.chk.p3{border-color:var(--hi)}.chk.p2{border-color:var(--warn)}.chk.p1{border-color:var(--bl)}
+.pjg{display:grid;grid-template-columns:1fr 1fr;gap:10px}.pjc{display:flex;flex-direction:column;align-items:flex-start;gap:3px;text-align:left;border:1px solid var(--bd);border-top:4px solid var(--pc);background:var(--card);border-radius:16px;padding:12px;color:var(--tx);min-height:112px}.pjc b{font-size:.98rem;line-height:1.2}.pjc small{color:var(--mu);font-size:.76rem}.pjc em{font-style:normal;font-size:.72rem;color:var(--mu)}.pjc .mb{width:100%;margin-top:auto}.pjc.add{border-style:dashed;border-top-width:1px;justify-content:center;align-items:center;text-align:center;color:var(--mu)}
+.pji0{font-size:1.5rem;line-height:1}.pjc .mb i,.pjh .mb i{background:var(--pc)}
+.pjh{margin-bottom:12px}.pjt{display:flex;align-items:center;gap:12px;margin:8px 0}.pjt>div{flex:1;min-width:0}.pjt h2{margin:0;font-size:1.3rem}.pjt small{color:var(--mu)}.pjt .pji0{font-size:2rem}
+.pji,.pjk{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}.pji button{width:42px;height:42px;border-radius:12px;border:2px solid transparent;background:var(--inp);font-size:1.2rem}.pji button.on{border-color:var(--tx)}.pjk button{width:32px;height:32px;border-radius:50%;border:3px solid transparent}.pjk button.on{border-color:var(--tx)}
+.pjf .foot{display:flex;justify-content:space-between;gap:8px;margin-top:8px}.ghost.del.arm,.del.arm{color:var(--hi);border-color:var(--hi)}
+.mvr{padding:0 12px 8px 44px;margin-top:-4px}.nlistc{padding:6px}.nlistc .item.nr{border-bottom:1px solid var(--bd)}.nlistc .item.nr:last-child{border-bottom:0}
+.nxfr{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
+.nxcal{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+/* hoja de edición */
+#nxs{position:fixed;inset:0;z-index:60;display:none}#nxs.on{display:block}body.nxo{overflow:hidden}
+.nxbk{position:absolute;inset:0;background:rgba(0,0,0,.5)}
+.nxs{position:absolute;left:0;right:0;bottom:0;max-height:92dvh;display:flex;flex-direction:column;background:var(--bg,var(--card));color:var(--tx);border-radius:22px 22px 0 0;box-shadow:0 -8px 30px rgba(0,0,0,.3);max-width:640px;margin:0 auto}
+.nxsh{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 6px}.nxsh b{font-size:1.05rem}
+.nxsb{overflow:auto;padding:4px 16px 12px;-webkit-overflow-scrolling:touch}.nxsb label{display:block;margin:14px 0 5px;font-size:.74rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mu)}
+.nxti{font-size:1.1rem;font-weight:600}.nxtype{margin:10px 0}.nxsb textarea{margin-top:4px}
+.nxsf{display:flex;gap:8px;padding:10px 16px calc(12px + env(safe-area-inset-bottom));border-top:1px solid var(--bd)}.nxsf .pri{margin-left:auto;min-width:110px}
+.sbr{display:flex;align-items:center;gap:10px;padding:4px 0}.sbr span{flex:1}.sbr span.dn{text-decoration:line-through;opacity:.5}.sba{display:flex;gap:8px;margin-top:6px}.sba input{flex:1;min-width:0}
+.seg2.pr4 button,.seg2.dq button{font-size:.8rem;padding:9px 4px}
+
+.item.nr .meta{align-items:flex-start;align-content:flex-start;height:auto}.item.nr .nxb{align-items:flex-start;justify-content:flex-start;height:auto}
+.nvseg button{white-space:nowrap}.nvseg em,.agt em{display:inline}
+.evd summary{cursor:pointer}.evr{padding:8px 0;border-top:1px solid var(--bd);font-size:.85rem}.evr b{display:block;font-weight:600}.evr span{color:var(--mu);display:block;margin-top:2px;line-height:1.35}
 </style></head><body>
 <div id="splash" aria-hidden="true"><div class="sav"><i class="ring"></i><img src="data:image/jpeg;base64,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" alt=""></div><svg class="spl" viewBox="0 0 120 20"><polyline class="ln" points="4,12 34,12 42,4 52,17 60,8 66,12 116,12" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><b>Aitxorapp</b><span>Rendimiento y organización</span></div>
 
@@ -588,6 +639,8 @@ section[data-main]>header:not(.hhead) h1::before{content:"";display:inline-block
  <header><h1>Organización</h1><div class="sub" id="nsub"></div></header>
  <div class="agseg"><button data-a="main" data-v="cal">Calendario</button><button data-a="main" data-v="notas">Tareas</button></div>
  <div id="nfoot"></div>
+ <div id="nx"></div>
+ <div hidden id="nold">
  <div class="card">
   <textarea id="nq" rows="2" placeholder="Apunta algo… (mañana, viernes, 12/11, #etiqueta, ! para fijar)" aria-label="Nueva nota o tarea"></textarea>
   <div class="row2"><div class="seg" id="nmode"><button data-a="nmode" data-v="task">Tarea</button><button data-a="nmode" data-v="note">Nota</button></div><button class="pri" data-a="nadd">Añadir</button></div>
@@ -596,6 +649,7 @@ section[data-main]>header:not(.hhead) h1::before{content:"";display:inline-block
  <div class="chips sc" id="nfil"></div>
  <input type="search" id="nsr" placeholder="Buscar en notas y tareas…" aria-label="Buscar">
  <div class="card" id="nlist" style="margin-top:10px"></div>
+</div>
 </section>
 
 <section data-main="cal" hidden>
@@ -3188,7 +3242,7 @@ function calItems(d){const T=today(),o=[],tr=trainOn(d);
  S.team.games.filter(g=>g.d===d).forEach(g=>o.push({ar:"eq",t:g.h||"",txt:(g.loc==="V"?"@ ":"vs ")+(g.riv||"Rival"),sub:"Partido del equipo"+(g.j?" · J"+g.j:"")+(g.v?" · "+g.v:""),match:1,at:`data-t="conopen" data-id="${g.id}"`}));
  extOn(d).forEach(x=>o.push({ar:"ext",t:x.allday?"":x.t,txt:x.title,sub:x.allday?"Todo el día":(x.loc||"Calendario")}));
  return o.sort((a,b)=>(a.t||"99:99").localeCompare(b.t||"99:99"))}
-const calTasks=d=>{const T=today();return S.notes.filter(n=>n.task&&(n.due===d||(d===T&&!n.done&&n.due&&n.due<T))).sort(noteSort)};
+const calTasks=d=>{const T=today();return S.notes.filter(n=>n.task&&(n.due===d||(d===T&&!n.done&&n.due&&n.due<T))).sort(tsort)};
 function calRow(x,mini){const inner=`<time>${x.t?x.t:"Día"}${x.e?`<i>${x.e}</i>`:""}</time><span class="cm"><b>${esc(x.txt)}</b>${x.sub?`<small>${esc(x.sub)}</small>`:""}</span>`;
  const main=x.at?`<button class="cmain" ${x.at}>${inner}</button>`:`<div class="cmain">${inner}</div>`;
  return `<div class="crow ${x.ar} ${x.muted?"muted":""} ${x.match?"match":""} ${mini?"mini":""}">${main}${x.btn&&!mini?`<button class="ghost mini" data-a="${x.btn[0]}" data-id="${x.btn[2]}">${x.btn[1]}</button>`:""}</div>`}
@@ -3284,7 +3338,7 @@ function sessInsights(){const T=today(),L=S.sess.filter(x=>(x.k==="ent"||x.k==="
 function insightCard(){const I=sessInsights();
  if(!I)return `<div class="card hs-in"><h2>Tus entrenos</h2><div class="empty">Cuando cuentes tus primeras sesiones, aquí verás cómo llegas, cuánto te cuestan y qué te dejan en las piernas.</div></div>`;
  const t=(l,v,s)=>`<div class="hst"><span>${l}</span><b>${v}</b><em>${s}</em></div>`,say=[];
- if(I.both>=3){if(I.legs>=I.both*.6)say.push(`En ${I.legs} de tus ${I.both} últimas sesiones las piernas pesaron más que la respiración: apunta a fatiga muscular más que de cardio. (RPE diferencial: McLaren et al. 2016, Int J Sports Physiol Perform; la lectura es criterio propio.)`);else if(I.air>=I.both*.6)say.push(`En ${I.air} de ${I.both} sesiones la respiración pesó más que las piernas: el cardio es lo que más te exige. (RPE diferencial: McLaren et al. 2016; lectura: criterio propio.)`)}
+ if(I.both>=3){if(I.legs>=I.both*.6)say.push(`En ${I.legs} de tus ${I.both} últimas sesiones las piernas pesaron más que la respiración: apunta a fatiga muscular más que de cardio. (Separar respiración y piernas es el «RPE diferencial»: McLaren et al. 2016, IJSPP 11:404-6; 2017, JSAMS 20:290-5. Interpretarlo así es criterio propio.)`);else if(I.air>=I.both*.6)say.push(`En ${I.air} de ${I.both} sesiones la respiración pesó más que las piernas: el cardio es lo que más te exige. (RPE diferencial: McLaren et al. 2016, 2017. Lectura: criterio propio.)`)}
  if(I.en!=null&&I.en<=2.5)say.push("Sueles llegar con poca energía al entreno: revisa el sueño y la comida previa. (Criterio propio.)");
  if(I.tired>=2)say.push("Acabas con las piernas muy cargadas en "+I.tired+" de tus últimas 3 sesiones: cuida la recuperación y no sumes piernas pesadas. (Criterio propio.)");
  if(I.lim>=2)say.push("Has entrenado limitado en "+I.lim+" de tus últimas 5 sesiones: si es por una molestia, mira «Cuerpo». (Criterio propio.)");
@@ -3305,8 +3359,218 @@ function expFootUA(d){const tr=trainOn(d);if(!tr||tr.can)return 0;if(S.sess.some
  const mins=tr.e?Math.max(30,durHM(tr.t,tr.e)):90,rs=S.sess.filter(x=>x.k==="ent"&&x.r>0&&x.d<d).sort((a,b)=>b.d.localeCompare(a.d)).slice(0,8).map(x=>x.r).sort((a,b)=>a-b),med=rs.length?rs[Math.floor(rs.length/2)]:6;return mins*med}
 const _lm2=loadMargin;loadMargin=function(){const m=_lm2();if(!m)return m;const e=expFootUA(today());if(e>0){m.exp=e;m.hi=Math.max(0,m.hi-e);m.lo=Math.min(m.lo,m.hi);m.note="Hoy ya tienes fútbol (unas "+Math.round(e)+" UA previstas): lo que queda es para un extra. "+(m.note||"")}return m};
 
+/* ================= v14: inicio — chequeo configurable y agenda compacta ================= */
+/* ---- Chequeo: las 4 preguntas a la vista, se cambian cuando quieras ---- */
+const CKH=["","Genial","Muy bien","Bien","Normal","Regular","Mal","Fatal"];
+const CKS=[["sl","Sueño","¿Cómo has dormido?","Mal","Genial"],["fa","Piernas y cuerpo","¿Cómo notas el cuerpo?","Cargado","Fresco"],["st","Cabeza","¿Estrés o ánimo?","Estresado","Tranquilo"],["so","Agujetas","¿Dolor muscular?","Mucho","Ninguno"]];
+CK.open=false;CK.cfg=false;
+function checkinHtml(){const T=today(),w=S.well[T]||{},ans=CKS.filter(q=>w[q[0]]).length,done=ans===4,np=pnPrefs();
+ if(S.ui.ckh&&done&&!CK.open&&!CK.cfg)return "";
+ const sh=sleepH(T),h=hooper(T),b=wellBase(T),wf=wellFlag(T);
+ const txt=done?(b?(wf==="hi"?"Peor de lo normal":wf==="lo"?"Mejor de lo normal":"Como sueles estar"):h<=10?"Te notas muy bien":h<=16?"Te notas bien":"Te notas cargado"):ans?ans+" de 4 respondidas":"30 segundos";
+ const col=n=>`hsl(${Math.round(135-(n-1)*(135/6))} 70% 48%)`;
+ const head=`<div class="ckh2"><span class="ckok ${done?"":"off"}">${done?"✓":ans}</span><div><b>Chequeo de hoy</b><small>${esc(txt)}${done&&h!==null?" · "+h+"/28":""}</small></div><span class="ckb">${done&&!CK.open?`<button class="ghost mini" data-t="ck2open">Cambiar</button>`:""}${CK.open&&done?`<button class="ghost mini" data-t="ck2close">Listo</button>`:""}<button class="ic" data-t="ck2cfg" aria-label="Configurar el chequeo" aria-expanded="${CK.cfg}">⚙</button></span></div>`;
+ const cfg=CK.cfg?`<div class="ckcfg"><div class="ckr"><span>Avisarme cada día</span><button class="tgl ${np.well?"on":""}" role="switch" aria-checked="${!!np.well}" data-t="ck2np"><i></i></button></div>
+  <div class="ckr"><span>Hora del aviso</span><input type="time" data-c="ck2t" value="${esc(np.wt||"09:00")}" aria-label="Hora del aviso del chequeo"></div>
+  <div class="ckr"><span>Ocultar este cuadro cuando lo termine</span><button class="tgl ${S.ui.ckh?"on":""}" role="switch" aria-checked="${!!S.ui.ckh}" data-t="ck2hide"><i></i></button></div>
+  <p class="hint">Son las 4 preguntas del índice de bienestar de Hooper y Mackinnon (1995), de 1 a 7. Las comparo con tu propia media de las últimas 4 semanas, no con una cifra fija. El aviso llega como notificación si las tienes activadas en Ajustes.</p></div>`:"";
+ const rows=(!done||CK.open)?CKS.map(q=>{const cur=w[q[0]];return `<div class="ck2q"><div class="ck2t"><b>${q[2]}</b><span>${cur?CKH[cur]:"—"}</span></div><div class="cks2" role="group" aria-label="${q[2]}">${[1,2,3,4,5,6,7].map(n=>`<button class="${cur===n?"on":""}" style="--k:${col(n)}" data-t="ck2set" data-q="${q[0]}" data-v="${n}" aria-label="${CKH[n]}"><i></i></button>`).join("")}</div><div class="ck2l"><span>${q[4]}</span><span>${q[3]}</span></div></div>`}).join(""):"";
+ const hrs=`<div class="ck2h"><span>Horas dormidas anoche</span><span class="stp"><button data-t="cksp" data-v="-0.5" aria-label="Media hora menos">−</button><input type="text" inputmode="decimal" autocomplete="off" data-wsh value="${sh!=null?String(sh).replace(".",","):""}" placeholder="7,5" aria-label="Horas dormidas anoche"><button data-t="cksp" data-v="0.5" aria-label="Media hora más">+</button></span></div>`;
+ return `<section class="card ck2 ${done&&!CK.open?"fin":""}">${head}${cfg}${rows}${(!done||CK.open||CK.cfg)?hrs:sh==null?hrs:""}</section>`}
+TA.ck2set=b=>{const T=today();S.well[T]=Object.assign(S.well[T]||{},{[b.dataset.q]:+b.dataset.v});save();render()};
+TA.ck2open=()=>{CK.open=true;render()};TA.ck2close=()=>{CK.open=false;render()};TA.ck2cfg=()=>{CK.cfg=!CK.cfg;render()};
+TA.ck2np=()=>{S.ui.np=Object.assign({},S.ui.np||{},{well:!pnPrefs().well});save();render()};
+TA.ck2hide=()=>{S.ui.ckh=S.ui.ckh?0:1;save();render()};
+TC.ck2t=el=>{if(/^\d{2}:\d{2}$/.test(el.value)){S.ui.np=Object.assign({},S.ui.np||{},{wt:el.value});save();toast("Aviso a las "+el.value)}};
+TA.cksp=b=>{const T=today(),w=S.well[T]=S.well[T]||{},c=w.sh!=null?w.sh:7.5,v=Math.max(0,Math.min(14,Math.round((c+ +b.dataset.v)*2)/2));w.sh=v;delete w.shs;save();render()};
+const _rh4=renderHome;renderHome=function(){_rh4();const el=$("pwell");if(el)el.innerHTML=checkinHtml();const t=$("htl");if(t)t.innerHTML=homeAgenda()};
+
+/* ---- Agenda de hoy y mañana: una sola tarjeta compacta ---- */
+function homeAgenda(){const T=today(),tab=S.ui.hd==="m"?"m":"t",d=tab==="m"?shift(T,1):T;
+ const base=homeItems().filter(x=>x.go!=="notas");
+ const mine=n=>n.task&&!n.done&&(n.due===d||(d===T&&n.due&&n.due<T));
+ const tks=S.notes.filter(mine).sort(tsort);
+ const L=base.filter(x=>x.d===d).map(x=>({t:x.t,ar:x.ar,txt:x.txt.replace(/^Entreno del equipo · /,"Equipo · ").replace(/^Mi partido/,"Partido"),at:x.go==="eq"&&x.id==="ent"?`data-t="popen" data-id="${x.dd}"`:x.go==="eq"&&x.id==="con"?`data-t="conopen" data-id="${x.dd}"`:`data-t="go" data-v="${x.go}" data-id="${x.id}"`,past:x.past}));
+ const rows=[...L.map(x=>({k:0,t:x.t||"",h:`<button class="ag ${x.ar} ${x.past?"past":""}" ${x.at}><time>${x.t||"Día"}</time><i></i><span>${esc(x.txt)}</span></button>`})),
+  ...tks.map(n=>{const p=pjOf(n.pj),late=n.due<T;return {k:1,t:n.tm||"",h:`<div class="ag org tk"><button class="chk ${n.pr===3?"p3":""}" data-t="nxt" data-id="${n.id}" aria-label="Completar: ${esc(n.x)}"></button><button class="agm" data-t="nxopen" data-id="${n.id}"><time>${n.tm||"Día"}</time><span>${esc(n.x)}</span>${late?`<em class="late">vencida</em>`:p?`<em style="color:${PJC[p.k||0]}">${esc(p.ic||"")} ${esc(p.n)}</em>`:""}</button></div>`}})]
+  .sort((a,b)=>(a.t||"99:99").localeCompare(b.t||"99:99")||a.k-b.k);
+ const cnt=dd=>base.filter(x=>x.d===dd).length+S.notes.filter(n=>n.task&&!n.done&&(n.due===dd||(dd===T&&n.due&&n.due<T))).length;
+ const lim=S.ui.hx?99:4,show=rows.slice(0,lim);
+ return `<section class="card agd"><div class="agdh"><div class="agt" role="tablist"><button role="tab" aria-selected="${tab==="t"}" class="${tab==="t"?"on":""}" data-t="hdset" data-v="t">Hoy <em>${cnt(T)}</em></button><button role="tab" aria-selected="${tab==="m"}" class="${tab==="m"?"on":""}" data-t="hdset" data-v="m">Mañana <em>${cnt(shift(T,1))}</em></button></div><button class="ic" data-t="nxnew" data-d="${d}" aria-label="Añadir tarea o recordatorio">＋</button></div>
+ ${rows.length?show.map(r=>r.h).join("")+(rows.length>4?`<button class="ghost mini agmore" data-t="hdx">${S.ui.hx?"Ver menos":"Ver "+(rows.length-4)+" más"}</button>`:""):`<div class="empty">${tab==="t"?"Nada para hoy.":"Nada para mañana."} <button class="ghost mini" data-t="nxnew" data-d="${d}">Añadir</button></div>`}</section>`}
+TA.hdset=b=>{S.ui.hd=b.dataset.v;S.ui.hx=0;save();render()};TA.hdx=()=>{S.ui.hx=S.ui.hx?0:1;save();render()};
+
+/* ================= v14: Organiza tipo Notion — proyectos, tareas, recordatorios ================= */
+const PJC=["#4f7cff","#2fb36b","#ff8a3d","#e5484d","#9b5de5","#14b8c4"],PJI=["📁","🎓","💼","🏠","🏋️","⚽","💡","🧾","✈️","🛒","📚","🎯"];
+const PRL=["Sin prioridad","Baja","Media","Alta"],STL={p:"Por hacer",e:"En curso",d:"Hecha"};
+const RML=[[-1,"Sin aviso"],[0,"A la hora"],[10,"10 min antes"],[30,"30 min antes"],[60,"1 hora antes"],[1440,"1 día antes"]];
+const RPL={"":"No se repite",d:"Cada día",w:"Cada semana",m:"Cada mes"};
+const PJ=()=>S.proj||(S.proj=[]);
+const pjOf=id=>id?PJ().find(p=>p.id===id):null;
+let NX={sheet:null,nw:false,arm:false,pjf:"",pe:false,newp:false,ps:"p",q:"",f:"open",ord:"date",np:{ic:"📁",k:0}};
+const _norm0=norm;norm=function(o){const r=_norm0(o);r.proj=Array.isArray(o&&o.proj)?o.proj:[];return r};
+if(!S.proj)S.proj=[];
+const _sm0=syMerge;syMerge=function(a,b){const o=_sm0(a,b),ids=new Set((a.proj||[]).map(x=>x.id));o.proj=(a.proj||[]).concat(((b&&b.proj)||[]).filter(x=>!ids.has(x.id)));return o};
+
+const tst=n=>n.done?"d":(n.st||"p");
+const tsort=(a,b)=>((a.done?1:0)-(b.done?1:0))||((a.due||"9999").localeCompare(b.due||"9999"))||((a.tm||"99:99").localeCompare(b.tm||"99:99"))||((b.pr||0)-(a.pr||0))||((b.pin?1:0)-(a.pin?1:0))||(b.c-a.c);
+function nextDue(d,rp){if(rp==="d")return shift(d,1);if(rp==="w")return shift(d,7);const[y,m,dd]=d.split("-").map(Number),last=new Date(y,m+1,0).getDate(),t=new Date(y,m,1);return t.getFullYear()+"-"+String(t.getMonth()+1).padStart(2,"0")+"-"+String(Math.min(dd,last)).padStart(2,"0")}
+function setDone(n,v){if(v&&n.rp&&n.due){let nx=nextDue(n.due,n.rp),g=0;while(nx<today()&&g++<400)nx=nextDue(nx,n.rp);n.due=nx;n.done=false;n.st="p";n.dc=(n.dc||0)+1;(n.sb||[]).forEach(s=>s.d=false);toast("Hecha. Próxima: "+fmtD(nx,{weekday:"short",day:"numeric",month:"short"}));return}
+ n.done=!!v;n.st=v?"d":"p";n.dn=v?Date.now():0}
+function parseX(raw){let s=raw,tm="",pj="",m=s.match(/(?:\ba las\s+)?\b(\d{1,2}):(\d{2})\b/);
+ if(m&&+m[1]<24&&+m[2]<60){tm=String(m[1]).padStart(2,"0")+":"+m[2];s=s.replace(m[0]," ")}
+ else{m=s.match(/\ba las\s+(\d{1,2})(?:\s?h\b)?/i);if(m&&+m[1]<24){tm=String(m[1]).padStart(2,"0")+":00";s=s.replace(m[0]," ")}}
+ m=s.match(/@([\p{L}\d_-]+)/u);if(m){const k=m[1].toLowerCase(),p=PJ().find(p=>p.n.toLowerCase().replace(/\s+/g,"").startsWith(k));if(p){pj=p.id;s=s.replace(m[0]," ")}}
+ const p=parseQ(s);p.tm=tm;p.pj=pj;return p}
+const newTask=o=>Object.assign({id:uid(),x:"",task:true,done:false,st:"p",pin:false,due:"",tm:"",tags:[],pj:"",pr:0,rm:-1,rp:"",nt:"",sb:[],c:Date.now()},o||{});
+
+/* ---- fila de tarea (también en Calendario e Inicio) ---- */
+noteRow=function(n){const T=today(),p=pjOf(n.pj),sb=n.sb||[],sd=sb.filter(s=>s.d).length,mt=[];
+ if(p)mt.push(`<span class="nc pj" style="--pc:${PJC[p.k||0]}">${esc(p.ic||"📁")} ${esc(p.n)}</span>`);
+ if(n.task&&n.due&&!n.done){const late=n.due<T;mt.push(`<span class="nc ${late?"late":n.due===T?"hoy":""}">${late?"Vencida · ":""}${n.due===T?"Hoy":esc(dueLbl(n.due))}${n.tm?" · "+esc(n.tm):""}</span>`)}
+ if(n.task&&n.due&&n.rm>=0&&!n.done)mt.push(`<span class="nc" title="Con recordatorio">🔔</span>`);
+ if(n.rp)mt.push(`<span class="nc" title="${RPL[n.rp]}">↻</span>`);
+ if(sb.length)mt.push(`<span class="nc">☑ ${sd}/${sb.length}</span>`);
+ if(n.st==="e"&&!n.done)mt.push(`<span class="nc en">En curso</span>`);
+ (n.tags||[]).forEach(t=>mt.push(`<span class="nc t">#${esc(t)}</span>`));
+ const lead=n.task?`<button class="chk ${n.done?"on":""} p${n.pr||0}" data-t="nxt" data-id="${n.id}" aria-label="${n.done?"Marcar como pendiente":"Completar"}: ${esc(n.x)}">${n.done?"✓":""}</button>`:`<span class="dot" aria-hidden="true">${n.pin?"📌":"•"}</span>`;
+ return `<div class="item nr ${n.done?"done":""}">${lead}<button class="body nxb" data-t="nxopen" data-id="${n.id}"><span class="tx">${esc(n.x)}</span>${n.nt?`<span class="nts">${esc(n.nt.replace(/\s+/g," ").slice(0,90))}</span>`:""}${mt.length?`<span class="meta">${mt.join("")}</span>`:""}</button></div>`};
+
+/* ---- vistas ---- */
+const NVS=[["hoy","Hoy"],["proy","Proyectos"],["todo","Todas"],["nota","Notas"]];
+function nxStats(){const T=today(),o=S.notes.filter(n=>n.task&&!n.done);return{hoy:o.filter(n=>n.due===T).length,late:o.filter(n=>n.due&&n.due<T).length,wk:o.filter(n=>n.due>T&&n.due<=shift(T,7)).length,open:o.length,done7:S.notes.filter(n=>n.done&&n.dn>=Date.now()-7*864e5).length}}
+function nxAdd(ph){const c=NX.pjf&&NX.pjf!=="none"?pjOf(NX.pjf):null;
+ return `<div class="card nxa"><div class="nxar"><input type="text" id="nxq" enterkeyhint="done" autocomplete="off" placeholder="${ph}" aria-label="Nueva tarea"><button class="pri" data-t="nxq">Añadir</button></div>
+ <div class="nxah"><span id="nxh">${c?`Se añadirá a ${esc(c.ic||"")} ${esc(c.n)}. `:""}Escribe «mañana», «viernes 18:30», @proyecto o #etiqueta.</span><button class="ghost mini" data-t="nxnew" data-p="${c?c.id:""}">Con detalles ›</button></div></div>`}
+function secT(t,l,cls){return l.length?`<div class="nsec ${cls||""}"><h3>${t}<em>${l.length}</em></h3>${l.map(noteRow).join("")}</div>`:""}
+function nxHoy(){const T=today(),o=S.notes.filter(n=>n.task&&!n.done).sort(tsort),st=nxStats();
+ const late=o.filter(n=>n.due&&n.due<T),td=o.filter(n=>n.due===T),tm=o.filter(n=>n.due===shift(T,1)),wk=o.filter(n=>n.due>shift(T,1)&&n.due<=shift(T,7)),lt=o.filter(n=>n.due>shift(T,7)),nd=o.filter(n=>!n.due),dn=S.notes.filter(n=>n.task&&n.done&&n.dn&&new Date(n.dn).toDateString()===new Date().toDateString());
+ const tile=(l,v,c)=>`<div class="nxt"><b style="${c?"color:"+c:""}">${v}</b><span>${l}</span></div>`;
+ return `<div class="nxts">${tile("Para hoy",st.hoy)}${tile("Vencidas",st.late,st.late?"var(--hi)":"")}${tile("Próx. 7 días",st.wk)}${tile("Hechas (7 d)",st.done7)}</div>`+nxAdd("Qué tienes que hacer…")+
+  (o.length?"":`<div class="card empty">Todo al día. Añade una tarea arriba o crea un proyecto.</div>`)+
+  secT("Vencidas",late,"late")+secT("Hoy",td)+secT("Mañana",tm)+secT("Esta semana",wk)+secT("Más adelante",lt)+
+  (nd.length?`<details class="nsec"><summary><h3>Sin fecha<em>${nd.length}</em></h3></summary>${nd.map(noteRow).join("")}</details>`:"")+
+  (dn.length?`<details class="nsec"><summary><h3>Hechas hoy<em>${dn.length}</em></h3></summary>${dn.map(noteRow).join("")}</details>`:"")}
+function pjStat(id){const l=S.notes.filter(n=>n.task&&(id==="none"?!pjOf(n.pj):n.pj===id)),d=l.filter(n=>n.done).length,o=l.filter(n=>!n.done).sort(tsort);return{tot:l.length,d,open:o.length,nx:o.find(n=>n.due),pct:l.length?Math.round(d/l.length*100):0}}
+function nxIcons(sel,k,pre){return `<div class="pji" role="group" aria-label="Icono">${PJI.map(i=>`<button class="${sel===i?"on":""}" data-t="${pre}ic" data-v="${i}">${i}</button>`).join("")}</div><div class="pjk" role="group" aria-label="Color">${PJC.map((c,j)=>`<button class="${k===j?"on":""}" style="background:${c}" data-t="${pre}k" data-v="${j}" aria-label="Color ${j+1}"></button>`).join("")}</div>`}
+function nxProyList(){const ps=PJ().filter(p=>!p.a),arch=PJ().filter(p=>p.a),card=(id,ic,nm,c)=>{const s=pjStat(id);return `<button class="pjc" style="--pc:${c}" data-t="pjopen" data-id="${id}"><span class="pji0">${ic}</span><b>${esc(nm)}</b><small>${s.open} abiertas${s.tot?" · "+s.pct+" %":""}</small><span class="mb"><i style="width:${s.pct}%"></i></span>${s.nx?`<em>Próxima: ${esc(dueLbl(s.nx.due))}</em>`:""}</button>`};
+ return `<div class="pjg">${card("none","📥","Bandeja","#8a93a6")}${ps.map(p=>card(p.id,p.ic||"📁",p.n,PJC[p.k||0])).join("")}<button class="pjc add" data-t="pjnew"><span class="pji0">＋</span><b>Nuevo proyecto</b><small>Uni, trabajo, casa, un viaje…</small></button></div>`+
+  (NX.newp?`<div class="card pjf"><h2>Nuevo proyecto</h2><input type="text" id="pjn" placeholder="Nombre (p. ej. TFG, Reforma, Viaje a Roma)" aria-label="Nombre del proyecto">${nxIcons(NX.np.ic,NX.np.k,"pjn")}<div class="foot"><button class="ghost" data-t="pjnew">Cancelar</button><button class="pri" data-t="pjmk">Crear proyecto</button></div></div>`:"")+
+  (arch.length?`<details class="nsec"><summary><h3>Archivados<em>${arch.length}</em></h3></summary>${arch.map(p=>`<div class="item"><span class="dot">${p.ic||"📁"}</span><div class="body"><div class="tx">${esc(p.n)}</div></div><button class="ghost mini" data-t="pjarch" data-id="${p.id}">Restaurar</button></div>`).join("")}</details>`:"")}
+function nxProj(){const id=NX.pjf,p=id==="none"?{id:"none",n:"Bandeja",ic:"📥",k:0}:pjOf(id);if(!p){NX.pjf="";return nxProyList()}
+ const s=pjStat(id),l=S.notes.filter(n=>n.task&&(id==="none"?!pjOf(n.pj):n.pj===id)),by=k=>l.filter(n=>tst(n)===k).sort(tsort),cnt=k=>by(k).length,col=id==="none"?"#8a93a6":PJC[p.k||0];
+ return `<div class="pjh" style="--pc:${col}"><button class="ghost mini" data-t="pjopen" data-id="">‹ Proyectos</button><div class="pjt"><span class="pji0">${p.ic||"📁"}</span><div><h2>${esc(p.n)}</h2><small>${s.d} de ${s.tot} hechas${s.nx?" · próxima "+esc(dueLbl(s.nx.due)):""}</small></div>${id!=="none"?`<button class="ic" data-t="pjedit" aria-label="Editar proyecto">⋯</button>`:""}</div><span class="mb big"><i style="width:${s.pct}%"></i></span></div>`+
+  (NX.pe&&id!=="none"?`<div class="card pjf"><input type="text" id="pjn" value="${esc(p.n)}" aria-label="Nombre del proyecto" data-c="pjrn">${nxIcons(p.ic,p.k||0,"pje")}<div class="foot"><button class="ghost" data-t="pjarch" data-id="${p.id}">Archivar</button><button class="ghost del ${NX.arm?"arm":""}" data-t="pjdel" data-id="${p.id}">${NX.arm?"¿Borrar y soltar tareas?":"Borrar"}</button></div></div>`:"")+
+  nxAdd("Nueva tarea en este proyecto…")+
+  `<div class="nvseg st" role="tablist">${["p","e","d"].map(k=>`<button role="tab" aria-selected="${NX.ps===k}" class="${NX.ps===k?"on":""}" data-t="pjst" data-v="${k}">${STL[k]} <em>${cnt(k)}</em></button>`).join("")}</div>`+
+  `<div class="card nlistc">${by(NX.ps).length?by(NX.ps).map(n=>noteRow(n)+(NX.ps!=="d"?`<div class="mvr"><button class="ghost mini" data-t="nxmv" data-id="${n.id}">${NX.ps==="p"?"Empezar ›":"Marcar hecha ✓"}</button></div>`:"")).join(""):`<div class="empty">${NX.ps==="p"?"Nada por hacer aquí.":NX.ps==="e"?"Nada en curso.":"Aún no hay nada hecho."}</div>`}</div>`+
+  (id!=="none"?`<div class="card"><h2>Notas del proyecto</h2><textarea rows="4" data-c="pjnt" data-id="${p.id}" placeholder="Ideas, enlaces, contactos, decisiones…" aria-label="Notas del proyecto">${esc(p.nt||"")}</textarea></div>`:"")}
+function nxTodas(){const q=NX.q.trim().toLowerCase(),T=today();let l=S.notes.filter(n=>n.task);
+ if(NX.f==="open")l=l.filter(n=>!n.done);else if(NX.f==="en")l=l.filter(n=>!n.done&&n.st==="e");else if(NX.f==="done")l=l.filter(n=>n.done);else if(NX.f==="hi")l=l.filter(n=>!n.done&&n.pr===3);else if(NX.f==="rm")l=l.filter(n=>!n.done&&n.rm>=0&&n.due);
+ if(NX.pjf2)l=l.filter(n=>NX.pjf2==="none"?!pjOf(n.pj):n.pj===NX.pjf2);
+ if(q)l=l.filter(n=>(n.x+" "+(n.nt||"")+" "+(n.tags||[]).join(" ")).toLowerCase().includes(q));
+ l.sort(NX.ord==="pr"?(a,b)=>((a.done?1:0)-(b.done?1:0))||((b.pr||0)-(a.pr||0))||tsort(a,b):NX.ord==="new"?(a,b)=>b.c-a.c:tsort);
+ const F=[["open","Abiertas"],["en","En curso"],["hi","Alta prioridad"],["rm","Con aviso"],["done","Hechas"]];
+ return nxAdd("Nueva tarea…")+`<div class="chips sc">${F.map(f=>`<button class="chip ${NX.f===f[0]?"on":""}" data-t="nxf" data-v="${f[0]}">${f[1]}</button>`).join("")}</div>
+ <div class="nxfr"><select data-c="nxpf" aria-label="Proyecto"><option value="">Todos los proyectos</option><option value="none" ${NX.pjf2==="none"?"selected":""}>Bandeja</option>${PJ().filter(p=>!p.a).map(p=>`<option value="${p.id}" ${NX.pjf2===p.id?"selected":""}>${esc((p.ic||"")+" "+p.n)}</option>`).join("")}</select><select data-c="nxord" aria-label="Orden"><option value="date" ${NX.ord==="date"?"selected":""}>Por fecha</option><option value="pr" ${NX.ord==="pr"?"selected":""}>Por prioridad</option><option value="new" ${NX.ord==="new"?"selected":""}>Más nuevas</option></select></div>
+ <input type="search" data-c="nxs" value="${esc(NX.q)}" placeholder="Buscar en tareas…" aria-label="Buscar">
+ <div class="card nlistc" style="margin-top:10px">${l.length?l.map(noteRow).join(""):`<div class="empty">${q?"Nada con esa búsqueda.":"Nada con este filtro."}</div>`}</div>`}
+function nxNotas(){const q=NX.q.trim().toLowerCase();let l=S.notes.filter(n=>!n.task);if(q)l=l.filter(n=>(n.x+" "+(n.nt||"")+" "+(n.tags||[]).join(" ")).toLowerCase().includes(q));l.sort((a,b)=>((b.pin?1:0)-(a.pin?1:0))||(b.c-a.c));
+ return nxAdd("Apunta una nota, idea o enlace…")+`<input type="search" data-c="nxs" value="${esc(NX.q)}" placeholder="Buscar en notas…" aria-label="Buscar"><div class="card nlistc" style="margin-top:10px">${l.length?l.map(noteRow).join(""):`<div class="empty">Aún no hay notas.</div>`}</div>`}
+function nxView(){const v=S.ui.nv||"hoy";
+ return `<div class="nvseg" role="tablist">${NVS.map(x=>`<button role="tab" aria-selected="${v===x[0]}" class="${v===x[0]?"on":""}" data-t="nxv" data-v="${x[0]}">${x[1]}</button>`).join("")}</div>`+(v==="proy"?(NX.pjf?nxProj():nxProyList()):v==="todo"?nxTodas():v==="nota"?nxNotas():nxHoy())}
+renderNotes=function(){$("nsub").textContent=new Date().toLocaleDateString("es-ES",{weekday:"long",day:"numeric",month:"long"});const el=$("nx");if(el)el.innerHTML=nxView();const ev=footToday(today());$("nfoot").innerHTML=ev.length?`<div class="card" data-a="main" data-v="fut" style="cursor:pointer;border-color:var(--ac)"><b>⚽ Hoy</b> · ${ev.map(e=>esc(e.label)).join(" · ")}</div>`:""};
+
+/* ---- hoja de edición (sirve en Inicio, Calendario y Organiza) ---- */
+function nxSheet(){const n=NX.sheet;if(!n)return "";const ch=(a,v,l,on)=>`<button class="${on?"on":""}" data-t="${a}" data-v="${v}">${l}</button>`,T=today();
+ const sb=n.sb||[];
+ return `<div class="nxbk" data-t="nxclose"></div><div class="nxs" role="dialog" aria-modal="true" aria-label="${NX.nw?"Nueva tarea":"Editar"}"><div class="nxsh"><b>${NX.nw?(n.task?"Nueva tarea":"Nueva nota"):"Detalles"}</b><button class="ic" data-t="nxclose" aria-label="Cerrar">✕</button></div>
+ <div class="nxsb"><input type="text" id="nx_x" class="nxti" value="${esc(n.x)}" placeholder="${n.task?"¿Qué hay que hacer?":"Título o idea"}" aria-label="Título" data-c="nxf" data-k="x">
+ <div class="seg2 nxtype">${ch("nxty","1","Tarea",n.task)}${ch("nxty","0","Nota",!n.task)}</div>
+ <textarea id="nx_nt" rows="3" placeholder="Notas, enlaces, detalles…" aria-label="Notas" data-c="nxf" data-k="nt">${esc(n.nt||"")}</textarea>
+ <label>Proyecto</label><select data-c="nxf" data-k="pj" aria-label="Proyecto"><option value="">Bandeja (sin proyecto)</option>${PJ().filter(p=>!p.a||p.id===n.pj).map(p=>`<option value="${p.id}" ${n.pj===p.id?"selected":""}>${esc((p.ic||"")+" "+p.n)}</option>`).join("")}</select>
+ ${n.task?`<label>Estado</label><div class="seg2">${["p","e","d"].map(k=>ch("nxst",k,STL[k],tst(n)===k)).join("")}</div>
+ <label>Prioridad</label><div class="seg2 pr4">${[0,1,2,3].map(k=>ch("nxpr",k,PRL[k],(n.pr||0)===k)).join("")}</div>
+ <label>Fecha y hora</label><div class="seg2 dq">${ch("nxdq","0","Hoy",n.due===T)}${ch("nxdq","1","Mañana",n.due===shift(T,1))}${ch("nxdq","7","En 1 semana",n.due===shift(T,7))}${ch("nxdq","","Sin fecha",!n.due)}</div>
+ <div class="g2"><div><input type="date" id="nx_d" value="${esc(n.due||"")}" aria-label="Fecha" data-c="nxf" data-k="d"></div><div><input type="time" id="nx_tm" value="${esc(n.tm||"")}" aria-label="Hora (opcional)" data-c="nxf" data-k="tm"></div></div>
+ <label>🔔 Recordatorio</label><select data-c="nxf" data-k="rm" aria-label="Recordatorio">${RML.map(r=>`<option value="${r[0]}" ${(n.rm>=0?n.rm:-1)===r[0]?"selected":""}>${r[0]===0&&!n.tm?"El día a las 9:00":r[1]}</option>`).join("")}</select>
+ ${(n.rm>=0)?`<p class="hint">${PN&&PN.on?"Te llegará una notificación al móvil.":"Para recibirlo como notificación, actívalas en Ajustes (hay que entrar en tu cuenta y abrir la app desde la pantalla de inicio)."}${n.tm?"":" Sin hora, el aviso llega a las 9:00 (o la víspera, si eliges 1 día antes)."}</p>`:""}
+ <label>Repetir</label><select data-c="nxf" data-k="rp" aria-label="Repetir">${Object.keys(RPL).map(k=>`<option value="${k}" ${(n.rp||"")===k?"selected":""}>${RPL[k]}</option>`).join("")}</select>
+ <label>Subtareas</label><div class="nxsub">${sb.map(s=>`<div class="sbr"><button class="chk ${s.d?"on":""}" data-t="nxsbt" data-id="${s.id}" aria-label="Subtarea ${esc(s.x)}">${s.d?"✓":""}</button><span class="${s.d?"dn":""}">${esc(s.x)}</span><button class="x" data-t="nxsbx" data-id="${s.id}" aria-label="Quitar">×</button></div>`).join("")}<div class="sba"><input type="text" id="nx_sb" placeholder="Añadir subtarea" aria-label="Nueva subtarea" enterkeyhint="done"><button class="ghost mini" data-t="nxsba">Añadir</button></div></div>`:""}
+ <label>Etiquetas</label><input type="text" id="nx_tg" value="${esc((n.tags||[]).map(t=>"#"+t).join(" "))}" placeholder="#uni #urgente" aria-label="Etiquetas" data-c="nxf" data-k="tg">
+ </div><div class="nxsf">${NX.nw?"":`<button class="ghost del ${NX.arm?"arm":""}" data-t="nxdel">${NX.arm?"¿Borrar?":"Borrar"}</button>${n.task?`<button class="ghost" data-t="nxdone">${n.done?"Reabrir":"Hecha ✓"}</button>`:""}`}<button class="pri" data-t="nxsave">${NX.nw?"Añadir":"Listo"}</button></div></div>`}
+function nxRead(){const n=NX.sheet;if(!n)return;const v=id=>{const e=$(id);return e?e.value:null};
+ const x=v("nx_x");if(x!==null)n.x=x;const nt=v("nx_nt");if(nt!==null)n.nt=nt;const d=v("nx_d");if(d!==null)n.due=d;const tm=v("nx_tm");if(tm!==null)n.tm=tm;
+ const tg=v("nx_tg");if(tg!==null)n.tags=tg.split(/[\s,]+/).map(t=>t.replace(/^#/,"").trim()).filter(Boolean)}
+function nxPersist(){if(!NX.sheet)return;if(NX.sheet.rm>=0&&!NX.sheet.due)NX.sheet.due=today();if(!NX.nw)save()}
+function nxMount(){let el=$("nxs");if(!el){el=document.createElement("div");el.id="nxs";document.body.appendChild(el)}return el}
+const _rn14=render;render=function(){_rn14();const el=nxMount();el.innerHTML=NX.sheet?nxSheet():"";el.className=NX.sheet?"on":"";document.body.classList.toggle("nxo",!!NX.sheet);
+ if(NX.sheet&&NX.focus){NX.focus=0;const i=$("nx_x");if(i&&!i.value)try{i.focus()}catch(e){}}};
+const nxOpenS=(n,nw)=>{NX.sheet=n;NX.nw=!!nw;NX.arm=false;NX.focus=nw?1:0;render()};
+TA.nxopen=b=>{const n=S.notes.find(x=>x.id===b.dataset.id);if(n)nxOpenS(n,false)};
+TA.nxnew=b=>{const m=b.dataset.m==="rec",d=b.dataset.d||"",h=new Date(),hh=String(Math.min(23,h.getHours()+1)).padStart(2,"0")+":00";
+ nxOpenS(newTask({pj:b.dataset.p||(NX.pjf&&NX.pjf!=="none"&&S.ui.nv==="proy"?NX.pjf:""),due:d||(m?today():""),tm:m?hh:"",rm:m?0:-1}),true)};
+TA.nxclose=()=>{nxRead();if(NX.sheet&&!NX.nw){if(!NX.sheet.x.trim())NX.sheet.x="(sin título)";nxPersist()}NX.sheet=null;NX.arm=false;render()};
+TA.nxsave=()=>{nxRead();const n=NX.sheet;if(!n)return;if(!n.x.trim()){toast("Pon un título");return}nxPersist();if(NX.nw){S.notes.push(n);save()}NX.sheet=null;NX.nw=false;render()};
+TA.nxdel=()=>{if(!NX.arm){NX.arm=true;render();setTimeout(()=>{NX.arm=false},3000);return}S.notes=S.notes.filter(x=>x.id!==NX.sheet.id);NX.sheet=null;NX.arm=false;save();render()};
+TA.nxdone=()=>{nxRead();const n=NX.sheet;setDone(n,!n.done);NX.sheet=null;save();render()};
+TA.nxty=b=>{nxRead();const n=NX.sheet;n.task=b.dataset.v==="1";if(!n.task){n.due="";n.tm="";n.rm=-1}nxPersist();render()};
+TA.nxst=b=>{nxRead();const n=NX.sheet,v=b.dataset.v;n.st=v;n.done=v==="d";n.dn=n.done?Date.now():0;nxPersist();render()};
+TA.nxpr=b=>{nxRead();NX.sheet.pr=+b.dataset.v;nxPersist();render()};
+TA.nxdq=b=>{nxRead();const v=b.dataset.v;NX.sheet.due=v===""?"":shift(today(),+v);if(!NX.sheet.due){NX.sheet.tm="";NX.sheet.rm=-1}nxPersist();render()};
+TC.nxf=el=>{const n=NX.sheet;if(!n)return;nxRead();const k=el.dataset.k,v=el.value;if(k==="pj")n.pj=v;else if(k==="rm"){n.rm=+v;if(n.rm>=0&&!n.due)n.due=today()}else if(k==="rp")n.rp=v;nxPersist();render()};
+TA.nxsba=()=>{nxRead();const i=$("nx_sb"),t=i?i.value.trim():"";if(!t)return;(NX.sheet.sb=NX.sheet.sb||[]).push({id:uid(),x:t,d:false});nxPersist();render();const j=$("nx_sb");if(j)try{j.focus()}catch(e){}};
+TA.nxsbt=b=>{nxRead();const s=(NX.sheet.sb||[]).find(x=>x.id===b.dataset.id);if(s)s.d=!s.d;nxPersist();render()};
+TA.nxsbx=b=>{nxRead();NX.sheet.sb=(NX.sheet.sb||[]).filter(x=>x.id!==b.dataset.id);nxPersist();render()};
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&NX.sheet)TA.nxclose();if(e.key==="Enter"&&!e.shiftKey&&e.target){if(e.target.id==="nxq"){e.preventDefault();TA.nxq()}else if(e.target.id==="nx_sb"){e.preventDefault();TA.nxsba()}}});
+document.addEventListener("input",e=>{if(e.target&&e.target.id==="nxq"){const h=$("nxh"),v=e.target.value.trim();if(!h)return;if(!v){return}const p=parseX(v),b=[];if(p.due)b.push(fmtD(p.due,{weekday:"long",day:"numeric",month:"short"}));if(p.tm)b.push(p.tm);const pj=pjOf(p.pj);if(pj)b.push(pj.ic+" "+pj.n);if(p.tags.length)b.push(p.tags.map(t=>"#"+t).join(" "));h.textContent=b.length?"Entiendo: "+b.join(" · "):"Se añadirá sin fecha."}});
+
+/* ---- acciones ---- */
+TA.nxt=b=>{const n=S.notes.find(x=>x.id===b.dataset.id);if(!n)return;setDone(n,!n.done);save();render()};
+TA.nxv=b=>{S.ui.nv=b.dataset.v;NX.q="";if(b.dataset.v!=="proy")NX.pjf="";save();render()};
+TA.nxq=()=>{const el=$("nxq"),raw=el?el.value.trim():"";if(!raw){toast("Escribe algo primero");return}
+ const p=parseX(raw),v=S.ui.nv||"hoy",inProj=v==="proy"&&NX.pjf&&NX.pjf!=="none"?NX.pjf:"",task=v==="nota"?!!p.due:true;
+ const o=newTask({x:p.x,task,pin:p.pin,due:task?(p.due||(p.tm?today():"")):"",tm:task?p.tm:"",tags:p.tags,pj:p.pj||inProj,rm:task&&p.tm?10:-1});
+ S.notes.push(o);save();render();toast(o.rm>=0?"Añadida con aviso 10 min antes":"Añadida");const e=$("nxq");if(e)try{e.focus()}catch(x){}};
+TA.pjopen=b=>{NX.pjf=b.dataset.id||"";NX.pe=false;NX.ps="p";NX.arm=false;render();window.scrollTo(0,0)};
+TA.pjnew=()=>{NX.newp=!NX.newp;NX.np={ic:"📁",k:0};render()};
+TA.pjnic=b=>{const n=$("pjn");NX.np.nm=n?n.value:"";NX.np.ic=b.dataset.v;render();const e=$("pjn");if(e&&NX.np.nm)e.value=NX.np.nm};
+TA.pjnk=b=>{const n=$("pjn");NX.np.nm=n?n.value:"";NX.np.k=+b.dataset.v;render();const e=$("pjn");if(e&&NX.np.nm)e.value=NX.np.nm};
+TA.pjmk=()=>{const e=$("pjn"),n=e?e.value.trim():"";if(!n){toast("Ponle un nombre al proyecto");return}const p={id:uid(),n,ic:NX.np.ic,k:NX.np.k,a:false,nt:"",c:Date.now()};PJ().push(p);NX.newp=false;NX.pjf=p.id;NX.ps="p";save();render();window.scrollTo(0,0)};
+TA.pjedit=()=>{NX.pe=!NX.pe;NX.arm=false;render()};
+TC.pjrn=el=>{const p=pjOf(NX.pjf);if(p&&el.value.trim()){p.n=el.value.trim();save();render()}};
+TA.pjeic=b=>{const p=pjOf(NX.pjf);if(p){p.ic=b.dataset.v;save();render()}};TA.pjek=b=>{const p=pjOf(NX.pjf);if(p){p.k=+b.dataset.v;save();render()}};
+TA.pjarch=b=>{const p=pjOf(b.dataset.id);if(p){p.a=!p.a;if(p.a){NX.pjf="";NX.pe=false}save();render()}};
+TA.pjdel=b=>{if(!NX.arm){NX.arm=true;render();setTimeout(()=>{NX.arm=false},3000);return}const id=b.dataset.id;S.notes.forEach(n=>{if(n.pj===id)n.pj=""});S.proj=PJ().filter(p=>p.id!==id);NX.pjf="";NX.pe=false;NX.arm=false;save();render()};
+TA.pjst=b=>{NX.ps=b.dataset.v;render()};
+TA.nxmv=b=>{const n=S.notes.find(x=>x.id===b.dataset.id);if(!n)return;if(tst(n)==="p"){n.st="e"}else setDone(n,true);save();render()};
+TC.pjnt=el=>{const p=pjOf(el.dataset.id);if(p){p.nt=el.value;save()}};
+TA.nxf=b=>{NX.f=b.dataset.v;render()};TC.nxpf=el=>{NX.pjf2=el.value;render()};TC.nxord=el=>{NX.ord=el.value;render()};
+TC.nxs=el=>{NX.q=el.value;render();const e=document.querySelector('[data-c="nxs"]');if(e){try{e.focus();e.setSelectionRange(e.value.length,e.value.length)}catch(x){}}};
+
+/* ---- Calendario: recordatorios y tareas con detalles en el día elegido ---- */
+const _rc14=renderCal;renderCal=function(){_rc14();const c=$("cday");if(c)c.insertAdjacentHTML("beforeend",`<div class="nxcal"><button class="ghost mini" data-t="nxnew" data-d="${SEL}" data-m="rec">🔔 Recordatorio con hora</button><button class="ghost mini" data-t="nxnew" data-d="${SEL}">＋ Tarea con detalles</button></div>`)};
+
+/* ---- Avisos push de cada tarea con recordatorio ---- */
+const _pnb14=pnBuild;pnBuild=function(now){const out=_pnb14(now);now=now||Date.now();if(pnPrefs().tk===false)return out;
+ S.notes.forEach(n=>{if(!n.task||n.done||!n.due||!(n.rm>=0))return;const q=n.due.split("-").map(Number),hm=/^\d{1,2}:\d{2}$/.test(n.tm||"")?n.tm:"09:00",[h,mi]=hm.split(":").map(Number),w=new Date(q[0],q[1]-1,q[2],h,mi-n.rm,0,0),t=w.getTime();
+  if(t>now+30000&&t<now+15*864e5){const p=pjOf(n.pj);out.push({key:"k:"+n.id+":"+n.due+(n.tm||""),at:w.toISOString(),title:String(n.x).slice(0,80),body:(p?p.n+" · ":"")+fmtD(n.due,{weekday:"short",day:"numeric",month:"short"})+(n.tm?" · "+n.tm:"")})}});
+ return out};
+
+/* ================= v14: estudios en los que me baso ================= */
+const EVID=[
+["Carga de entrenamiento: esfuerzo de la sesión × minutos","Foster C et al. (2001). A new approach to monitoring exercise training. J Strength Cond Res 15(1):109-115.","ok"],
+["Carga aguda frente a crónica y riesgo de lesión","Gabbett TJ (2016). The training-injury prevention paradox. Br J Sports Med 50(5):273-280.","ok"],
+["Chequeo de bienestar (sueño, fatiga, estrés, agujetas)","Hooper SL, Mackinnon LT (1995). Monitoring overtraining in athletes. Sports Med 20(5):321-327.","ok"],
+["Sueño del deportista y horas necesarias","Walsh NP et al. (2021). Sleep and the athlete: narrative review and 2021 expert consensus recommendations. Br J Sports Med 55(7):356-368.","ok"],
+["Respiración frente a piernas tras el entreno","McLaren SJ et al. (2016). The sensitivity of differential ratings of perceived exertion as measures of internal load. Int J Sports Physiol Perform 11(3):404-406. Y McLaren SJ et al. (2017). J Sci Med Sport 20(3):290-295.","ok"],
+["Prevenir lesiones de isquiotibiales (ejercicio nórdico)","Van Dyk N, Behan FP, Whiteley R (2019). Including the Nordic hamstring exercise in injury prevention programmes halves the rate of hamstring injuries: a systematic review and meta-analysis of 8459 athletes. Br J Sports Med 53(21):1362-1370.","ok"],
+["Calentamiento preventivo tipo FIFA 11+","Soligard T et al. (2008). Comprehensive warm-up programme to prevent injuries in young female footballers. BMJ 337:a2469.","ok"]];
+function evidCard(){return `<details class="card evd"><summary><b>Estudios en los que me baso</b></summary><p class="hint">Cada fila es un trabajo real. Comprobé hoy que existe con esos datos (título, revista, año y páginas) en su editorial o en una biblioteca científica; no he leído cada texto completo. Lo que no tiene estudio detrás va marcado en la app como «criterio propio».</p>${EVID.map(e=>`<div class="evr"><b>${esc(e[0])}</b><span>${esc(e[1])}</span></div>`).join("")}<p class="hint">Sin estudio propio (criterio mío, sin validar): puntuación de preparación, umbrales de aviso de molestias, el orden de las sesiones de gimnasio, la escala de 1 a 5 de respiración y piernas, y cómo combino todo en las recomendaciones. Las recomendaciones de salud no sustituyen a un médico o fisio.</p></details>`}
+const _hd14=healthDash;healthDash=function(){return _hd14()+evidCard()};
+
 /* ---------- Arranque ---------- */
-const VER="13.3 (3 nov 2026)";
+const VER="14.0 (3 nov 2026)";
 (function init(){const T=today();["sd","md","id0","pvd","kd"].forEach(i=>$(i).value=T);
  $("st").value="";
  $("mz").innerHTML=$("iz").innerHTML=ZONAS.map(z=>`<option value="${z[0]}">${z[1]}</option>`).join("");

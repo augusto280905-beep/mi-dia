@@ -112,16 +112,17 @@ function boot(){const store={};const dom=new JSDOM(html,{runScripts:"dangerously
 
  console.log("Inicio: estado y check-in");
  ev(`S.well={};S.ui.main='panel';CK={i:0,edit:false};render()`);
- t("check-in: pregunta 1 de 4 con 7 respuestas",/1 de 4/.test($("pwell").textContent)&&$("pwell").querySelectorAll(".cks button").length===7);
- click($("pwell").querySelector('[data-t="ckset"][data-v="2"]'));
- t("al responder pasa sola a la siguiente",/2 de 4/.test($("pwell").textContent)&&ev("S.well[today()].sl")===2);
- ["3","2","3"].forEach(v=>click($("pwell").querySelector('[data-t="ckset"][data-v="'+v+'"]')));
- t("tras 4 respuestas queda un resumen compacto con total",!!$("pwell").querySelector(".ckd")&&/10\/28/.test($("pwell").textContent)&&!$("pwell").querySelector(".cks"));
- t("el total es el mismo índice de Hooper de antes",ev("hooper(today())")===10);
- click($("pwell").querySelector('[data-t="cksh"]'));
- t("horas dormidas con un toque",ev("S.well[today()].sh")===5);
- click($("pwell").querySelector('[data-t="ckedit"]'));t("se puede cambiar",!!$("pwell").querySelector(".cks"));
- ev("CK={i:0,edit:false};render()");
+ t("chequeo: las 4 preguntas a la vista con 7 respuestas",$("pwell").querySelectorAll(".ck2q").length===4&&$("pwell").querySelectorAll(".cks2 button").length===28);
+click($("pwell").querySelector('[data-t="ck2set"][data-q="sl"][data-v="2"]'));
+t("responder guarda y no oculta el resto",ev("S.well[today()].sl")===2&&$("pwell").querySelectorAll(".ck2q").length===4);
+[["fa","3"],["st","2"],["so","3"]].forEach(x=>click($("pwell").querySelector('[data-t="ck2set"][data-q="'+x[0]+'"][data-v="'+x[1]+'"]')));
+t("tras 4 respuestas queda un resumen compacto con total",!!$("pwell").querySelector(".ck2.fin")&&/10\/28/.test($("pwell").textContent)&&!$("pwell").querySelector(".cks2"));
+t("el total es el mismo índice de Hooper de antes",ev("hooper(today())")===10);
+click($("pwell").querySelector('[data-t="cksp"][data-v="0.5"]'));
+t("horas dormidas con +/− de media hora",ev("S.well[today()].sh")===8);
+click($("pwell").querySelector('[data-t="ck2open"]'));t("se puede cambiar cuando quieras",!!$("pwell").querySelector(".cks2"));
+click($("pwell").querySelector('[data-t="ck2cfg"]'));t("se configura: aviso y hora",!!$("pwell").querySelector('[data-c="ck2t"]'));
+ev("CK.open=false;CK.cfg=false;render()");
  console.log("Informe de las 23:00");
  t("hora por defecto 23:00",ev("pnPrefs().rt")==="23:00");
  t("migra 21:30 antiguo a 23:00",(()=>{ev("S.ui.np={rep:true,rt:'21:30'};S.ui.v13=0;if(!S.ui.v13){S.ui.v13=1;if(S.ui.np&&S.ui.np.rt==='21:30')S.ui.np.rt='23:00'}");return ev("pnPrefs().rt")==="23:00"})());
