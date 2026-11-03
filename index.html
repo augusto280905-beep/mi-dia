@@ -270,8 +270,9 @@ a{color:var(--ac)}
   <div class="card"><h2>Temporada <small id="tsub"></small></h2><div class="kpi" id="tkpi"></div></div>
   <div class="card"><h2>Objetivos</h2><div id="tobj"></div></div>
   <div class="card"><h2>Semanas</h2><div id="tweeks"></div></div>
+  <div class="card"><h2>Cuenta y sincronización</h2><div id="syn"></div></div>
   <div class="card"><h2>Mis datos</h2><div class="foot" style="margin-top:0"><button class="ghost" data-a="exp">Copia (.json)</button><button class="ghost" data-a="csv">Sesiones (.csv)</button><button class="ghost" data-a="imp">Importar copia</button></div>
-   <div class="hint">Los datos se guardan solo en este dispositivo. Haz una copia de vez en cuando.<span id="ver"></span></div></div>
+   <div class="hint">Los datos se guardan en este dispositivo y, si inicias sesión arriba, también en la nube. Haz una copia de vez en cuando.<span id="ver"></span></div></div>
  </div>
 </section>
 </main>
@@ -311,7 +312,7 @@ function migrate(){try{const r=localStorage.getItem("midia:v1");if(!r)return;con
  save()}catch(e){}}
 try{const r=localStorage.getItem(KEY);if(r)S=norm(JSON.parse(r));else migrate()}catch(e){}
 let tt;function toast(m){const t=$("toast");t.textContent=m;t.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("on"),2800)}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){toast("No se pudo guardar en este dispositivo")}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){toast("No se pudo guardar en este dispositivo")}try{syMark()}catch(e){}}
 
 let ARM="",armT,EDIT="",RPE=0,MN=0,PRE_NEXT="",XV={en:0,fl:0,pf:0};
 const delBtn=(a,id)=>`<button class="x ${ARM===a+id?"arm":""}" data-a="${a}" data-id="${id}" aria-label="Borrar">${ARM===a+id?"¿Borrar?":"×"}</button>`;
@@ -879,8 +880,111 @@ function renderPanel(){const s=loadStats(),T=s.T,hr=new Date().getHours(),fit=fi
  <ul><li><a href="https://simplifaster.com/articles/train-more-without-injuries/" target="_blank" rel="noopener">Gabbett · carga e injury risk (zona 0,8–1,3)</a></li><li><a href="https://simplifaster.com/articles/acwr-high-performance-tool/" target="_blank" rel="noopener">Debate sobre el ACWR</a></li><li><a href="https://ctyeh.com/articles/2494?lang=en" target="_blank" rel="noopener">CTL, ATL y TSB: definición y limitaciones</a></li><li><a href="https://efdeportes.com/efd106/monitorizacion-del-entrenamiento-en-deportes-de-equipo.htm" target="_blank" rel="noopener">Foster · monotonía, tensión y session-RPE</a></li><li><a href="https://bjsm.bmj.com/content/50/5/281" target="_blank" rel="noopener">Saw et al., 2016 · medidas subjetivas (BJSM)</a></li><li><a href="https://researchonline.ljmu.ac.uk/id/eprint/16297/" target="_blank" rel="noopener">Walsh et al., 2021 · sueño y deportista (BJSM)</a></li><li><a href="https://mdpi.com/2227-9032/9/7/808" target="_blank" rel="noopener">Sueño, rendimiento, carga y lesiones en futbolistas</a></li><li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8062971" target="_blank" rel="noopener">Índice de Hooper en fútbol (Frontiers, 2021)</a></li><li><a href="https://research-repository.uwa.edu.au/en/publications/acute-and-residual-soccer-match-related-fatigue-a-systematic-revi/" target="_blank" rel="noopener">Silva et al., 2018 · fatiga tras partido</a></li><li><a href="https://frontiersin.org/articles/10.3389/fnins.2017.00612/full" target="_blank" rel="noopener">Haddad et al., 2017 · RPE de sesión</a></li></ul>
  <p class="hint">Orientación general; no sustituye a un médico o fisioterapeuta.</p>`}
 
+/* ================= v6: SINCRONIZACIÓN (Supabase) ================= */
+const SB={url:"https://mjbsqkchyjfqncrgtfsv.supabase.co",key:"sb_publishable_KZkfAENfqUT7LwuTI3M7aw_dmJTnxyo"};
+const SYK="aitx:sync";
+let SY=(()=>{const d={ses:null,base:null,dirty:false,last:0};try{return Object.assign(d,JSON.parse(localStorage.getItem(SYK)||"{}"))}catch(e){return d}})();
+let syMsg="",syBusy=false,syStep="email",syMail="",syTimer=0,syVer=0;
+const sySave=()=>{try{localStorage.setItem(SYK,JSON.stringify(SY))}catch(e){}};
+
+async function syApi(path,o){o=o||{};const h={apikey:SB.key,"Content-Type":"application/json"};
+ if(o.auth!==false&&SY.ses)h.Authorization="Bearer "+SY.ses.access;Object.assign(h,o.headers||{});
+ const r=await fetch(SB.url+path,{method:o.method||"GET",headers:h,body:o.body?JSON.stringify(o.body):undefined});
+ let j=null;try{j=await r.json()}catch(e){}return{ok:r.ok,status:r.status,j}}
+function syMsgOf(r){return(r.j&&(r.j.msg||r.j.message||r.j.error_description||r.j.error))||("error "+r.status)}
+function setSes(j){const p=SY.ses||{};SY.ses={access:j.access_token,refresh:j.refresh_token,exp:j.expires_at||Math.floor(Date.now()/1000)+(j.expires_in||3600),
+ uid:(j.user&&j.user.id)||p.uid,email:(j.user&&j.user.email)||p.email||syMail};sySave()}
+async function syTok(){const s=SY.ses;if(!s)return false;if(s.exp>Date.now()/1000+60)return true;
+ const r=await syApi("/auth/v1/token?grant_type=refresh_token",{method:"POST",auth:false,body:{refresh_token:s.refresh}});
+ if(r.ok&&r.j&&r.j.access_token){setSes(r.j);return true}
+ if(r.status>=400&&r.status<500){SY.ses=null;SY.base=null;sySave();syMsg="La sesión caducó. Vuelve a entrar.";syStep="email"}
+ return false}
+
+/* Fusión cuando los dos lados cambiaron: unión por id, gana este dispositivo en los conflictos */
+function syMerge(a,b){b=norm(b);const o=norm(JSON.parse(JSON.stringify(a)));
+ ["notes","sess","inj","prev","marks","next"].forEach(k=>{const ids=new Set((a[k]||[]).map(x=>x.id));o[k]=(a[k]||[]).concat((b[k]||[]).filter(x=>!ids.has(x.id)))});
+ Object.keys(b.well).forEach(d=>{o.well[d]=Object.assign({},b.well[d],a.well[d]||{})});
+ Object.keys(b.mol).forEach(d=>{const l=a.mol[d]||[],ids=new Set(l.map(x=>x.id));o.mol[d]=l.concat((b.mol[d]||[]).filter(x=>!ids.has(x.id)))});
+ o.sched=Object.assign({},b.sched,a.sched);o.sched.skip=[...new Set([].concat(b.sched.skip||[],a.sched.skip||[]))];
+ o.obj=Object.assign({},b.obj,a.obj);o.ui=Object.assign({},b.ui,a.ui);return o}
+function syEmpty(s){return!s.notes.length&&!s.sess.length&&!s.inj.length&&!s.prev.length&&!s.marks.length&&!s.next.length&&!Object.keys(s.well).length&&!Object.keys(s.mol).length}
+function syPersist(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function syTake(data){const keep={};["main","mode","f","tag","fv"].forEach(k=>keep[k]=S.ui[k]);S=norm(data);Object.assign(S.ui,keep);syPersist()}
+
+function syMark(){if(!SY)return;SY.dirty=true;syVer++;sySave();if(SY.ses){clearTimeout(syTimer);syTimer=setTimeout(sync,2500)}}
+
+async function sync(manual){
+ if(syBusy||!SY.ses)return;
+ if(typeof navigator!=="undefined"&&navigator.onLine===false){syMsg="Sin conexión. Se sincronizará al volver.";syUi();return}
+ syBusy=true;syMsg="Sincronizando…";syUi();let changed=false;
+ try{
+  if(!await syTok())throw new Error(SY.ses?"No se pudo renovar la sesión":"auth");
+  const uid=SY.ses.uid;let done=false;
+  for(let i=0;i<4&&!done;i++){
+   const g=await syApi(`/rest/v1/app_state?select=data,rev&user_id=eq.${uid}`);
+   if(!g.ok)throw new Error(syMsgOf(g));
+   const row=g.j&&g.j[0];
+   if(!row){const v=syVer,p=await syApi("/rest/v1/app_state",{method:"POST",headers:{Prefer:"return=representation"},body:{user_id:uid,data:S}});
+    if(p.status===409)continue;if(!p.ok)throw new Error(syMsgOf(p));
+    SY.base=p.j[0].rev;if(v===syVer)SY.dirty=false;done=true;break}
+   if(SY.base==null||row.rev!==SY.base){
+    if(SY.base==null&&syEmpty(S)){syTake(row.data);SY.dirty=false;changed=true}
+    else if(SY.base==null||SY.dirty){S=syMerge(S,row.data);syPersist();SY.dirty=true;changed=true}
+    else{syTake(row.data);changed=true}
+    SY.base=row.rev}
+   if(!SY.dirty){done=true;break}
+   const v=syVer,p=await syApi(`/rest/v1/app_state?user_id=eq.${uid}&rev=eq.${SY.base}`,{method:"PATCH",headers:{Prefer:"return=representation"},body:{data:S}});
+   if(!p.ok)throw new Error(syMsgOf(p));
+   if(!p.j||!p.j.length)continue;
+   SY.base=p.j[0].rev;if(v===syVer)SY.dirty=false;done=true}
+  if(!done)throw new Error("Conflicto repetido, reintenta");
+  SY.last=Date.now();syMsg="";
+  if(manual)toast("Sincronizado");
+ }catch(e){
+  const m=String(e&&e.message||e);syMsg=/Failed to fetch|NetworkError|Load failed|fetch/i.test(m)?"Sin conexión. Se reintentará.":"No se pudo sincronizar: "+m}
+ syBusy=false;sySave();
+ if(changed)render();
+ syUi();
+ if(SY.ses&&SY.dirty&&!syMsg){clearTimeout(syTimer);syTimer=setTimeout(sync,2500)}}
+
+/* ---------- Interfaz ---------- */
+function syUi(){const el=$("syn");if(!el)return;
+ const ago=SY.last?"Última vez: "+new Date(SY.last).toLocaleString("es-ES",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"}):"";
+ let h;
+ if(SY.ses){h=`<div class="row2" style="margin:0"><span><b>${esc(SY.ses.email||"")}</b></span><small class="hint" style="margin:0">${SY.dirty?"cambios por enviar":"al día"}</small></div>
+  <div class="hint">${esc(syMsg||ago)}</div>
+  <div class="foot" style="margin-top:8px"><button class="ghost" data-s="now"${syBusy?" disabled":""}>Sincronizar ahora</button><button class="ghost" data-s="out">Cerrar sesión</button></div>`}
+ else if(syStep==="code"){h=`<label for="syc">Código que te llegó a ${esc(syMail)}</label><input type="text" id="syc" inputmode="numeric" autocomplete="one-time-code" maxlength="10" placeholder="123456" style="max-width:200px">
+  <div class="hint">${esc(syMsg)}</div><div class="foot" style="margin-top:8px"><button class="pri" data-s="verify"${syBusy?" disabled":""}>Entrar</button><button class="ghost" data-s="back">Cambiar email</button></div>`}
+ else{h=`<label for="sye">Email</label><input type="email" id="sye" autocomplete="email" inputmode="email" placeholder="tu@email.com" value="${esc(syMail)}">
+  <div class="hint">${esc(syMsg)||"Te enviaré un código por email. Sin contraseñas. Con la misma cuenta, tus datos se sincronizan en todos tus dispositivos."}</div>
+  <div class="foot" style="margin-top:8px"><button class="pri" data-s="send"${syBusy?" disabled":""}>Enviar código</button></div>`}
+ el.innerHTML=h}
+async function syAction(a){
+ if(a==="send"){const m=($("sye").value||"").trim().toLowerCase();if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(m)){syMsg="Revisa el email";syUi();return}
+  syMail=m;syBusy=true;syMsg="Enviando…";syUi();
+  try{const r=await syApi("/auth/v1/otp",{method:"POST",auth:false,body:{email:m,create_user:true}});
+   if(r.ok){syStep="code";syMsg=""}else syMsg="No se pudo enviar: "+syMsgOf(r)}catch(e){syMsg="Sin conexión"}
+  syBusy=false;syUi()}
+ else if(a==="verify"){const c=($("syc").value||"").replace(/\D/g,"");if(c.length<6){syMsg="Escribe el código completo";syUi();return}
+  syBusy=true;syMsg="Comprobando…";syUi();
+  try{let r=await syApi("/auth/v1/verify",{method:"POST",auth:false,body:{type:"email",email:syMail,token:c}});
+   if(!r.ok&&r.status>=400&&r.status<500)r=await syApi("/auth/v1/verify",{method:"POST",auth:false,body:{type:"signup",email:syMail,token:c}});
+   if(r.ok&&r.j&&r.j.access_token){setSes(r.j);SY.base=null;syMsg="";syBusy=false;sySave();syUi();sync(true);return}
+   syMsg="Código incorrecto o caducado"}catch(e){syMsg="Sin conexión"}
+  syBusy=false;syUi()}
+ else if(a==="back"){syStep="email";syMsg="";syUi()}
+ else if(a==="now"){sync(true)}
+ else if(a==="out"){try{syApi("/auth/v1/logout",{method:"POST"}).catch(()=>{})}catch(e){}
+  SY.ses=null;SY.base=null;SY.dirty=false;SY.last=0;sySave();syStep="email";syMsg="";syUi()}}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-s]");if(b)syAction(b.dataset.s)});
+document.addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target&&(e.target.id==="sye"||e.target.id==="syc")){e.preventDefault();syAction(e.target.id==="sye"?"send":"verify")}});
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)sync()});
+addEventListener("online",()=>sync());
+setInterval(()=>{if(!document.hidden)sync()},90000);
+
 /* ---------- Arranque ---------- */
-const VER="5.2 (3 nov 2026)";
+const VER="6.0 (3 nov 2026)";
 (function init(){const T=today();["sd","md","id0","pvd","kd"].forEach(i=>$(i).value=T);
  $("st").value="";
  $("mz").innerHTML=$("iz").innerHTML=ZONAS.map(z=>`<option value="${z[0]}">${z[1]}</option>`).join("");
@@ -890,6 +994,7 @@ const VER="5.2 (3 nov 2026)";
  if(!S.ui.v4){S.ui.v4=1;S.ui.main="panel";save()}
  if(!["panel","notas","cal","fut"].includes(S.ui.main))S.ui.main="panel";
  render();
+ syUi();sync();
  $("ver").textContent=" Versión "+VER+".";
  if("serviceWorker"in navigator&&location.protocol.startsWith("http")){const had=!!navigator.serviceWorker.controller;let rl=false;
   navigator.serviceWorker.addEventListener("controllerchange",()=>{if(rl||!had)return;rl=true;location.reload()});
