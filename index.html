@@ -155,6 +155,9 @@ a{color:var(--ac)}
  <div class="card" id="phealth"></div>
  <div class="card" id="porg"></div>
  <div class="card"><details><summary>ℹ️ Metodología y fuentes</summary><div id="phow"></div></details></div>
+<div class="card" id="acct"><h2>Cuenta y sincronización</h2><div id="syn"></div></div>
+ <div class="card"><h2>Mis datos</h2><div class="foot" style="margin-top:0"><button class="ghost" data-a="exp">Copia (.json)</button><button class="ghost" data-a="csv">Sesiones (.csv)</button><button class="ghost" data-a="imp">Importar copia</button></div>
+  <div class="hint">Los datos se guardan en este dispositivo y, si inicias sesión arriba, también en la nube. Haz una copia de vez en cuando.<span id="ver"></span></div></div>
 </section>
 
 <section data-main="notas" hidden>
@@ -270,9 +273,6 @@ a{color:var(--ac)}
   <div class="card"><h2>Temporada <small id="tsub"></small></h2><div class="kpi" id="tkpi"></div></div>
   <div class="card"><h2>Objetivos</h2><div id="tobj"></div></div>
   <div class="card"><h2>Semanas</h2><div id="tweeks"></div></div>
-  <div class="card"><h2>Cuenta y sincronización</h2><div id="syn"></div></div>
-  <div class="card"><h2>Mis datos</h2><div class="foot" style="margin-top:0"><button class="ghost" data-a="exp">Copia (.json)</button><button class="ghost" data-a="csv">Sesiones (.csv)</button><button class="ghost" data-a="imp">Importar copia</button></div>
-   <div class="hint">Los datos se guardan en este dispositivo y, si inicias sesión arriba, también en la nube. Haz una copia de vez en cuando.<span id="ver"></span></div></div>
  </div>
 </section>
 </main>
@@ -982,7 +982,7 @@ addEventListener("online",()=>sync());
 setInterval(()=>{if(!document.hidden)sync()},90000);
 
 /* ---------- Arranque ---------- */
-const VER="6.1 (3 nov 2026)";
+const VER="6.2 (3 nov 2026)";
 (function init(){const T=today();["sd","md","id0","pvd","kd"].forEach(i=>$(i).value=T);
  $("st").value="";
  $("mz").innerHTML=$("iz").innerHTML=ZONAS.map(z=>`<option value="${z[0]}">${z[1]}</option>`).join("");

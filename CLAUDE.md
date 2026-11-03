@@ -11,7 +11,7 @@ Publicada en GitHub Pages: https://augusto280905-beep.github.io/mi-dia/ (rama ma
 - `tests/`: pruebas con jsdom. `npm install && npm test`.
 
 ## Secciones
-Panel (dashboard), Notas (tareas/notas rápidas), Calendario, Fútbol (Hoy/Registrar/Partidos/Salud/Físico/Temporada).
+Panel (dashboard; al final: Cuenta y sincronización + Mis datos), Notas (tareas/notas rápidas), Calendario, Fútbol (Hoy/Registrar/Partidos/Salud/Físico/Temporada).
 
 ## Datos
 Estado `S` en localStorage `midia:v3` = {notes,sess,well,mol,inj,prev,marks,next,sched,obj,ui}. `norm()` rellena valores por defecto.
