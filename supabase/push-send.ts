@@ -2,6 +2,8 @@
 // GET  -> devuelve la clave pública (la crea la primera vez)
 // POST -> envía los avisos vencidos (lo llama el cron cada minuto)
 // POST /ical -> lee un calendario de Google (dirección secreta iCal) para el usuario con sesión iniciada
+// POST /health/register -> guarda (hash) un código personal para recibir datos del Apple Watch (usuario con sesión)
+// POST /health?t=CODIGO -> recibe sueño / pulso en reposo / VFC desde Atajos de iPhone o Health Auto Export
 import webpush from "npm:web-push@3.6.7";
 import { createClient } from "npm:@supabase/supabase-js@2";
 
@@ -59,10 +61,74 @@ async function ical(req: Request) {
   return new Response(trimIcs(text), { headers: { ...cors, "Content-Type": "text/calendar; charset=utf-8" } });
 }
 
+
+// ---------- Apple Watch / Salud ----------
+async function sha(s: string) {
+  const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s));
+  return [...new Uint8Array(b)].map((x) => x.toString(16).padStart(2, "0")).join("");
+}
+async function healthRegister(req: Request) {
+  const token = (req.headers.get("Authorization") ?? "").replace(/^Bearer\s+/i, "");
+  const { data: u } = await db.auth.getUser(token);
+  if (!u?.user) return json({ error: "Sesión no válida. Vuelve a entrar." }, 401);
+  const { code } = await req.json().catch(() => ({ code: "" }));
+  if (typeof code !== "string" || !/^[a-f0-9]{32}$/.test(code)) return json({ error: "Código no válido." }, 400);
+  await db.from("health_tokens").delete().eq("user_id", u.user.id);
+  const { error } = await db.from("health_tokens").insert({ hash: await sha(code), user_id: u.user.id });
+  if (error) return json({ error: error.message }, 500);
+  return json({ ok: true });
+}
+const num = (v: unknown) => (typeof v === "number" && isFinite(v) ? v : typeof v === "string" && v.trim() !== "" && isFinite(+v) ? +v : null);
+// Acepta {date, sleep_h, rhr, hrv} sencillo o el JSON de Health Auto Export ({data:{metrics:[...]}})
+function extractHealth(b: any): Record<string, Record<string, number>> {
+  const out: Record<string, Record<string, number>> = {};
+  const put = (d: unknown, k: string, v: number | null) => {
+    if (v === null || typeof d !== "string" || !/^\d{4}-\d{2}-\d{2}/.test(d)) return;
+    (out[d.slice(0, 10)] ||= {})[k] = Math.round(v * 100) / 100;
+  };
+  const today = new Date().toISOString().slice(0, 10);
+  if (b && typeof b === "object") {
+    const d = typeof b.date === "string" ? b.date : today;
+    put(d, "sleep_h", num(b.sleep_h)); put(d, "rhr", num(b.rhr)); put(d, "hrv", num(b.hrv));
+    const ms = b?.data?.metrics;
+    if (Array.isArray(ms)) {
+      for (const m of ms) {
+        const name = String(m?.name ?? ""), toH = String(m?.units ?? "").startsWith("min") ? 1 / 60 : 1;
+        for (const p of Array.isArray(m?.data) ? m.data : []) {
+          if (name === "sleep_analysis") {
+            const t = num(p.totalSleep) ?? num(p.asleep) ?? ((num(p.core) ?? 0) + (num(p.deep) ?? 0) + (num(p.rem) ?? 0) || null);
+            put(p.date ?? p.sleepEnd, "sleep_h", t === null ? null : t * toH);
+          } else if (name === "resting_heart_rate") put(p.date, "rhr", num(p.qty));
+          else if (name === "heart_rate_variability") put(p.date, "hrv", num(p.qty));
+        }
+      }
+    }
+  }
+  return out;
+}
+async function health(req: Request) {
+  const url = new URL(req.url);
+  const code = url.searchParams.get("t") ?? req.headers.get("x-health-code") ?? "";
+  if (!/^[a-f0-9]{32}$/.test(code)) return json({ error: "Falta el código." }, 401);
+  const { data: t } = await db.from("health_tokens").select("user_id").eq("hash", await sha(code)).maybeSingle();
+  if (!t) return json({ error: "Código desconocido." }, 401);
+  const body = await req.json().catch(() => null);
+  const days = extractHealth(body);
+  let n = 0;
+  for (const [date, vals] of Object.entries(days)) {
+    const { data: old } = await db.from("health_in").select("data").eq("user_id", t.user_id).eq("date", date).maybeSingle();
+    await db.from("health_in").upsert({ user_id: t.user_id, date, data: { ...(old?.data ?? {}), ...vals }, updated_at: new Date().toISOString() }, { onConflict: "user_id,date" });
+    n++;
+  }
+  return json({ ok: true, days: n });
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: cors });
   try {
     if (req.method === "POST" && new URL(req.url).pathname.endsWith("/ical")) return await ical(req);
+    if (req.method === "POST" && new URL(req.url).pathname.endsWith("/health/register")) return await healthRegister(req);
+    if (req.method === "POST" && new URL(req.url).pathname.endsWith("/health")) return await health(req);
     const c = await config();
     if (req.method === "GET") return json({ publicKey: c.public_key });
     webpush.setVapidDetails("https://augusto280905-beep.github.io/mi-dia/", c.public_key, c.private_key);

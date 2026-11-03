@@ -14,7 +14,7 @@ function boot(store,ss){const dom=new JSDOM(html,{runScripts:"dangerously",url:"
  const store={},ss={};let dom=boot(store,ss),w=dom.window,d=w.document;const ev=s=>w.eval(s),$=id=>d.getElementById(id);
  const click=el=>{if(!el)throw new Error("sin elemento");el.dispatchEvent(new w.MouseEvent("click",{bubbles:true,cancelable:true}))};
  const T=()=>ev("today()");const sh=n=>ev(`shift(today(),${n})`);
- const tab=v=>click(d.querySelector(`#mtabs [data-v="${v}"]`));const sub=v=>click(d.querySelector(`#tnav [data-v="${v}"]`));
+ const tab=v=>click(d.querySelector(`#mtabs [data-v="${v}"]`));const sub=v=>{ev(`S.ui.tv="${v}";render()`)};
  const chg=(el,v)=>{if(v!==undefined){if(el.type==="checkbox")el.checked=v;else el.value=v}el.dispatchEvent(new w.Event("change",{bubbles:true}))};
  /* arranque */
  t("arranca en Hoy y existe el arranque animado",ev("S.ui.main")==="panel"&&!!$("splash")&&d.body.classList.contains("boot"));
@@ -30,8 +30,8 @@ function boot(store,ss){const dom=new JSDOM(html,{runScripts:"dangerously",url:"
  /* sin datos de asistencia */
  t("Hoy: sin sesiones explica que falta base",/base|Descanso|UA/.test($("hload").textContent));
  /* ir a Equipo */
- tab("eq");t("Equipo: 7 apartados",d.querySelectorAll("#tnav .chip").length===7&&/24 jugadores/.test($("tsub").textContent));
- t("Resumen sin datos no falla",/Asistencia a entrenos/.test($("tview").textContent));
+ tab("eq");t("Equipo: menú con tarjetas y 24 jugadores",d.querySelectorAll("#tview .htile").length>=6&&/24 jugadores/.test($("tsub").textContent));
+ sub("res");t("Resumen sin datos no falla",/Asistencia a entrenos/.test($("tview").textContent));
  /* asistencia: 4 entrenos */
  sub("asi");t("asistencia: lista a los 24 agrupados por línea",d.querySelectorAll("#tview .ar").length===24&&/Porteros/.test($("tview").textContent)&&/Delanteros/.test($("tview").textContent));
  const mark=(dd,pid,s)=>{ev(`S.ui.td="${dd}"`);ev("render()");click(d.querySelector(`#tview [data-t="ast"][data-id="${pid}"][data-v="${s}"]`))};

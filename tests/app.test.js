@@ -14,7 +14,7 @@ const chg=el=>el.dispatchEvent(new w.Event("change",{bubbles:true}));
 const inp=el=>el.dispatchEvent(new w.Event("input",{bubbles:true}));
 const ev=s=>w.eval(s);
 const T=ev("today()");const sh=n=>ev(`shift("${T}",${n})`);
-const goF=v=>{click(A("main",'[data-v="fut"]'));click(A("fv",`[data-v="${v}"]`))};
+const goF=v=>{click(A("main",'[data-v="fut"]'));ev(`S.ui.fv="${v}";render()`)};
 const goN=()=>click(A("main",'[data-v="notas"]'));
 const txt=id=>$(id).textContent;
 

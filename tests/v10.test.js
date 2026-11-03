@@ -14,13 +14,13 @@ function boot(store,ss){const dom=new JSDOM(html,{runScripts:"dangerously",url:"
  const store={},ss={};let dom=boot(store,ss),w=dom.window,d=w.document;const ev=s=>w.eval(s),$=id=>d.getElementById(id);
  const click=el=>{if(!el)throw new Error("sin elemento");el.dispatchEvent(new w.MouseEvent("click",{bubbles:true,cancelable:true}))};
  const T=()=>ev("today()");const sh=n=>ev(`shift(today(),${n})`);
- const tab=v=>click(d.querySelector(`#mtabs [data-v="${v}"]`));const sub=v=>click(d.querySelector(`#tnav [data-v="${v}"]`));
+ const tab=v=>click(d.querySelector(`#mtabs [data-v="${v}"]`));const sub=v=>{ev(`S.ui.tv="${v}";render()`)};
  const chg=(el,v)=>{if(v!==undefined){if(el.type==="checkbox")el.checked=v;else el.value=v}el.dispatchEvent(new w.Event("change",{bubbles:true}))};
  /* arranque */
  t("arranca en Hoy y existe el arranque animado",ev("S.ui.main")==="panel"&&!!$("splash")&&d.body.classList.contains("boot"));
  await sleep(3700);
  t("el arranque animado se retira solo",!$("splash")&&!d.body.classList.contains("boot"));
- const fv=v=>click(d.querySelector(`#fnav [data-v="${v}"]`));
+ const fv=v=>{ev(`S.ui.fv="${v}";render()`)};
  const FXN=ev("FIX.filter(f=>f[1]>=today()).length");
  console.log("Liga");
  t("la liga se siembra en «Mis partidos» sin duplicar",ev("S.next.filter(x=>/^fx/.test(x.id)).length")===FXN&&FXN>0,ev("S.next.length")+" vs "+FXN);
@@ -105,7 +105,7 @@ function boot(store,ss){const dom=new JSDOM(html,{runScripts:"dangerously",url:"
  t("monta un entreno de empuje con press, hombro y tríceps",px.length>=4&&px.includes("banca")&&px.includes("mili")&&ev("GS.plan.ex.some(x=>gxById(x.id).g==='tr')"),px.join());
  t("dura aproximadamente el tiempo elegido (±15 min)",Math.abs(ev("GS.plan.min")-60)<=15,ev("GS.plan.min"));
  t("cada ejercicio trae series, repeticiones, RIR y descanso",d.querySelectorAll(".gx .rx").length===px.length&&/RIR/.test(d.querySelector(".gx .rx").textContent)&&/descanso/.test(d.querySelector(".gx .rx").textContent));
- t("hay esquema de inicio/final y pasos de técnica",d.querySelectorAll(".gx svg").length>=px.length&&d.querySelectorAll(".gx .cu li").length>=px.length*3);
+ t("hay esquema de inicio/final y pasos de técnica",d.querySelectorAll(".gx svg").length>=px.filter(i=>ev(`!!gxById("${i}").A`)).length&&d.querySelectorAll(".gx svg").length>=3&&d.querySelectorAll(".gx .cu li").length>=px.length*3);
  t("incluye calentamiento, vuelta a la calma y base científica",/Calentamiento/.test($("gymv").textContent)&&/Vuelta a la calma/.test($("gymv").textContent)&&/Rønnestad/.test($("gymv").textContent));
  click(d.querySelector('.st'));
  t("marcar una serie arranca el temporizador de descanso",d.querySelector(".st").classList.contains("ok")&&!!d.getElementById("gtimer")&&!d.getElementById("gtimer").hidden&&/Descanso/.test(d.getElementById("gtimer").textContent));

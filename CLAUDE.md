@@ -40,6 +40,15 @@ La app (`pnBuild`) calcula avisos de 14 días (tareas del día, cuestionario, en
 ## Calendario externo (Google, solo lectura)
 Tarjeta «Calendario externo» en el Panel. La dirección secreta iCal (`https://calendar.google.com/calendar/ical/…/private-…/basic.ics`) se guarda en `S.ui.ical` (sincronizada en la fila del usuario, protegida por RLS; NO va en la copia .json ni en el repo). El navegador no puede leer Google por CORS, así que la app llama a `POST /functions/v1/push-send/ical` con la sesión del usuario; la función valida el usuario y que la URL sea de calendar.google.com, descarga el .ics y lo recorta (sin descripciones ni invitados). El cliente lo interpreta (`icsEvents`: UTC, hora local/TZID, todo el día, RRULE diaria/semanal/mensual/anual, EXDATE, RECURRENCE-ID, cancelados) y lo guarda en localStorage `aitx:ical` (ventana −35/+120 días, refresco cada 15 min). Se muestra en Calendario, Panel (hoy/mañana) y genera avisos 30 min antes (clave `x:`). Limitación: las horas con TZID se tratan como hora local del dispositivo.
 
+## v11: menús, pizarra animada, reloj, informe
+- Salud y Entrenador abren en un **menú de tarjetas** (`S.ui.fv` / `S.ui.tv` = "hub"; al tocar la pestaña inferior vuelve al menú). Salud: Fútbol / Gimnasio / Cuerpo / Informe y guías (`renderFut`, p11d). Ya no hay «Registrar» como pestaña: tras el entreno (según `S.sched`) Hoy y Salud muestran la tarjeta `postCard` (30 s: duración, esfuerzo, energía, piernas, molestias; partido: resultado/goles). «Mis sesiones» separa fútbol y gimnasio.
+- Entrenador: horario `S.team.sch` (por defecto mar/jue 18:45) → «Preparar entreno de hoy» (`planFor`, foco por días al partido: Douchet 2023, encuesta, el detalle es criterio propio). Convocatoria por partido (`tvCon`: —/suplente/titular, máx. 18, once, `g.xi`), estrategia con plantillas (córner, falta, banda, salida) en la pizarra.
+- Pizarra: fotogramas `TBD.fr=[{p:{id:[x,y]},a:[flechas]}]`, reproducción con rAF (`bdPlay`).
+- Gimnasio: figuras animadas (`figLive`, IntersectionObserver, respeta prefers-reduced-motion). Recomendaciones con fuentes en `REC` (p11d); varias fuentes no se pudieron abrir y verificar.
+- Apple Watch: un PWA no lee HealthKit. `supabase/health.sql` + rutas `/health/register` y `/health?t=CODE` en `push-send`; el iPhone envía con Atajos o Health Auto Export; la app lee `health_in` (`hlPull`) y rellena `S.well[d].sh` (`shs:"w"`), `rhr`, `hrv`. Sin probar en el iPhone real. El código vive en `S.ui.hlk`; en la nube solo se guarda su sha256.
+- Informe del día (`dayReport`, `inf:` push a las 21:30, pref `rep`): el aviso es genérico; el informe se calcula al abrir la app.
+- Pruebas: `tests/v11.test.js`.
+
 ## Pendiente
 1. Desplegar y probar push en el Supabase real (SQL + función) y en el iPhone.
 2. Tras cada cambio: `npm test`, subir VER y caché del SW, commit y push.
