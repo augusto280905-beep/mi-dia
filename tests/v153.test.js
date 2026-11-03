@@ -23,4 +23,25 @@ t("cita a Walsh 2021",/Walsh/.test(h));
 ev(`S.ui.main="fut";S.ui.dv="res";S.ui.fv="hub";render()`);
 t("aparece en Deporte → Resumen",!!q(".sl-c")&&!!q(".slg"),ev("S.ui.main+' '+S.ui.dv"));
 }catch(e){ko++;console.log("  ✗ excepción",e.message,(e.stack||"").split("\n")[1])}
-console.log(`\nRESULTADO: ${ok} correctas, ${ko} fallos`);process.exit(ko?1:0)},800);
+},800);
+
+setTimeout(()=>{try{
+console.log("\nv15.3 · entreno extra");
+ev(`const T=today();S.sess=[];S.well={};S.ui.sn=8;S.mol={};
+for(let i=1;i<=28;i++){const dd=shift(T,-i);if(i%2===0)S.sess.push({id:"b"+i,d:dd,k:"ent",m:90,r:6})}`);
+ev(`S.well[today()]={sh:8,shs:"w"}`);
+const sets0=ev(`buildGym(["cu","is","gl"],60,"mt").ex.reduce((a,x)=>a+x.s,0)`);
+t("con sueño suficiente no hay aviso de sueño",ev("slPoor()")===null);
+ev(`S.well[today()]={sh:5,shs:"w"}`);
+t("con 5 h de sueño detecta poco sueño",!!ev("slPoor()"));
+t("el estado baja a «con cuidado»",ev("recommend(loadStats()).lv")!=="ok"&&/dormiste/.test(ev("recommend(loadStats()).why.join(' ')")));
+const sets1=ev(`buildGym(["cu","is","gl"],60,"mt").ex.reduce((a,x)=>a+x.s,0)`);
+t("con poco sueño salen menos series",sets1<sets0,sets0+" vs "+sets1);
+ev(`GS.plan=buildGym(["pe","es"],60,"mt");GS.plan.lv="warn"`);
+const why=ev("loadWhy(GS.plan)");
+t("explica el sueño con su fuente",/Cómo llegas hoy: sueño/.test(why)&&/Walsh/.test(why)&&/criterio propio/.test(why));
+t("explica la carga con su fuente",/Gabbett/.test(why));
+ev(`S.ui.main="fut";S.ui.fv="gym";render()`);
+t("el gimnasio muestra «Cómo llegas hoy»",!!q(".xarr")&&/Sueño anoche/.test(q(".xarr").textContent),ev("S.ui.main+' '+S.ui.fv"));
+}catch(e){ko++;console.log("  ✗ excepción",e.message,(e.stack||"").split("\n")[1])}
+console.log(`\nRESULTADO: ${ok} correctas, ${ko} fallos`);process.exit(ko?1:0)},1400);
