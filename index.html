@@ -583,6 +583,22 @@ section[data-main]>header:not(.hhead) h1::before{content:"";display:inline-block
 .item.nr .meta{align-items:flex-start;align-content:flex-start;height:auto}.item.nr .nxb{align-items:flex-start;justify-content:flex-start;height:auto}
 .nvseg button{white-space:nowrap}.nvseg em,.agt em{display:inline}
 .evd summary{cursor:pointer}.evr{padding:8px 0;border-top:1px solid var(--bd);font-size:.85rem}.evr b{display:block;font-weight:600}.evr span{color:var(--mu);display:block;margin-top:2px;line-height:1.35}
+
+.cqold .row2,.cqold .hint{display:none}.cqold h2{margin-bottom:6px}
+.cact{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 12px}
+.crow.tk{display:flex;align-items:flex-start;gap:8px}.crow.tk .cmain{flex:1;min-width:0}.crow .chk{margin-top:10px;flex:none}
+.crow.ev .cmain time{color:var(--c-org)}.crow .cmain small{display:block;color:var(--mu)}.crow.org.ev{border-left:4px solid var(--c-org)}
+h3.lt{color:var(--hi)}
+.pkb{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;min-height:48px;border-radius:14px;border:1px solid var(--bd);background:var(--inp);color:var(--tx);padding:0 14px;font-size:1rem;text-align:left;margin-top:8px}.pkb.open{border-color:var(--ac)}.pkb i{font-style:normal;color:var(--mu)}
+.pkr{display:grid;grid-template-columns:1fr 1fr;gap:8px}.pkr .pkb:only-child{grid-column:1/3}
+.mcal{margin-top:8px;border:1px solid var(--bd);border-radius:16px;padding:10px;background:var(--card)}.mch{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}.mch button{width:44px;height:44px;border-radius:12px;border:0;background:var(--inp);font-size:1.3rem;color:var(--tx)}
+.mcg{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}.mcg i{font-style:normal;text-align:center;font-size:.7rem;color:var(--mu);padding:4px 0}.mcg button{height:42px;border-radius:12px;border:2px solid transparent;background:var(--inp);color:var(--tx);font-size:.95rem;font-weight:560;padding:0}.mcg button.td{border-color:var(--ac)}.mcg button.on{background:var(--ac);color:var(--onac);border-color:var(--ac)}
+.tpk{margin-top:8px;border:1px solid var(--bd);border-radius:16px;padding:10px;background:var(--card)}.tpq{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}.tpq button,.plc button{border-radius:12px;border:1px solid var(--bd);background:var(--inp);color:var(--tx);padding:9px 12px;font-size:.88rem}.tpq button.on{background:var(--ac);color:var(--onac)}
+.tpt{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mu);margin:8px 0 4px}
+.tph{display:grid;grid-template-columns:repeat(6,1fr);gap:5px}.tpm{display:grid;grid-template-columns:repeat(6,1fr);gap:5px}.tph button,.tpm button{height:42px;border-radius:12px;border:0;background:var(--inp);color:var(--tx);font-size:.95rem;font-weight:560;padding:0}.tph button.on,.tpm button.on{background:var(--ac);color:var(--onac)}
+.tpd{width:100%;margin-top:10px}
+.plc{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.plc .map{border-color:var(--ac);color:var(--tx);font-weight:600}
+.nc.loc{background:color-mix(in srgb,var(--c-org) 16%,var(--inp));color:var(--tx)}.dot.ev{font-size:1rem}.evi{width:26px;text-align:center;flex:none}
 </style></head><body>
 <div id="splash" aria-hidden="true"><div class="sav"><i class="ring"></i><img src="data:image/jpeg;base64,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" alt=""></div><svg class="spl" viewBox="0 0 120 20"><polyline class="ln" points="4,12 34,12 42,4 52,17 60,8 66,12 116,12" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><b>Aitxorapp</b><span>Rendimiento y organización</span></div>
 
@@ -3388,11 +3404,11 @@ const _rh4=renderHome;renderHome=function(){_rh4();const el=$("pwell");if(el)el.
 /* ---- Agenda de hoy y mañana: una sola tarjeta compacta ---- */
 function homeAgenda(){const T=today(),tab=S.ui.hd==="m"?"m":"t",d=tab==="m"?shift(T,1):T;
  const base=homeItems().filter(x=>x.go!=="notas");
- const mine=n=>n.task&&!n.done&&(n.due===d||(d===T&&n.due&&n.due<T));
+ const mine=n=>n.task&&!n.done&&(n.due===d||(d===T&&n.due&&n.due<T&&!n.ev));
  const tks=S.notes.filter(mine).sort(tsort);
  const L=base.filter(x=>x.d===d).map(x=>({t:x.t,ar:x.ar,txt:x.txt.replace(/^Entreno del equipo · /,"Equipo · ").replace(/^Mi partido/,"Partido"),at:x.go==="eq"&&x.id==="ent"?`data-t="popen" data-id="${x.dd}"`:x.go==="eq"&&x.id==="con"?`data-t="conopen" data-id="${x.dd}"`:`data-t="go" data-v="${x.go}" data-id="${x.id}"`,past:x.past}));
  const rows=[...L.map(x=>({k:0,t:x.t||"",h:`<button class="ag ${x.ar} ${x.past?"past":""}" ${x.at}><time>${x.t||"Día"}</time><i></i><span>${esc(x.txt)}</span></button>`})),
-  ...tks.map(n=>{const p=pjOf(n.pj),late=n.due<T;return {k:1,t:n.tm||"",h:`<div class="ag org tk"><button class="chk ${n.pr===3?"p3":""}" data-t="nxt" data-id="${n.id}" aria-label="Completar: ${esc(n.x)}"></button><button class="agm" data-t="nxopen" data-id="${n.id}"><time>${n.tm||"Día"}</time><span>${esc(n.x)}</span>${late?`<em class="late">vencida</em>`:p?`<em style="color:${PJC[p.k||0]}">${esc(p.ic||"")} ${esc(p.n)}</em>`:""}</button></div>`}})]
+  ...tks.map(n=>{const p=pjOf(n.pj),late=n.due<T&&!n.ev;return {k:1,t:n.tm||"",h:`<div class="ag org tk">${n.ev?`<span class="evi">📅</span>`:`<button class="chk ${n.pr===3?"p3":""}" data-t="nxt" data-id="${n.id}" aria-label="Completar: ${esc(n.x)}"></button>`}<button class="agm" data-t="nxopen" data-id="${n.id}"><time>${n.tm||"Día"}</time><span>${esc(n.x)}</span>${late?`<em class="late">vencida</em>`:n.lc?`<em>📍 ${esc(n.lc)}</em>`:p?`<em style="color:${PJC[p.k||0]}">${esc(p.ic||"")} ${esc(p.n)}</em>`:""}</button></div>`}})]
   .sort((a,b)=>(a.t||"99:99").localeCompare(b.t||"99:99")||a.k-b.k);
  const cnt=dd=>base.filter(x=>x.d===dd).length+S.notes.filter(n=>n.task&&!n.done&&(n.due===dd||(dd===T&&n.due&&n.due<T))).length;
  const lim=S.ui.hx?99:4,show=rows.slice(0,lim);
@@ -3421,30 +3437,32 @@ function parseX(raw){let s=raw,tm="",pj="",m=s.match(/(?:\ba las\s+)?\b(\d{1,2})
  if(m&&+m[1]<24&&+m[2]<60){tm=String(m[1]).padStart(2,"0")+":"+m[2];s=s.replace(m[0]," ")}
  else{m=s.match(/\ba las\s+(\d{1,2})(?:\s?h\b)?/i);if(m&&+m[1]<24){tm=String(m[1]).padStart(2,"0")+":00";s=s.replace(m[0]," ")}}
  m=s.match(/@([\p{L}\d_-]+)/u);if(m){const k=m[1].toLowerCase(),p=PJ().find(p=>p.n.toLowerCase().replace(/\s+/g,"").startsWith(k));if(p){pj=p.id;s=s.replace(m[0]," ")}}
- const p=parseQ(s);p.tm=tm;p.pj=pj;return p}
-const newTask=o=>Object.assign({id:uid(),x:"",task:true,done:false,st:"p",pin:false,due:"",tm:"",tags:[],pj:"",pr:0,rm:-1,rp:"",nt:"",sb:[],c:Date.now()},o||{});
+ let lc="";m=s.match(/\s+en\s+([^#@!]+?)\s*$/i);if(m&&(tm||/\b(lunes|martes|mi[eé]rcoles|jueves|viernes|s[aá]bado|domingo|ma[nñ]ana|hoy)\b|\d\/\d/i.test(s))&&m[1].trim().split(/\s+/).length<=5){lc=m[1].trim();s=s.replace(m[0]," ")}
+ const p=parseQ(s);p.tm=tm;p.pj=pj;p.lc=lc;return p}
+const newTask=o=>Object.assign({id:uid(),x:"",task:true,done:false,st:"p",pin:false,due:"",tm:"",te:"",lc:"",ev:0,tags:[],pj:"",pr:0,rm:-1,rp:"",nt:"",sb:[],c:Date.now()},o||{});
 
 /* ---- fila de tarea (también en Calendario e Inicio) ---- */
 noteRow=function(n){const T=today(),p=pjOf(n.pj),sb=n.sb||[],sd=sb.filter(s=>s.d).length,mt=[];
  if(p)mt.push(`<span class="nc pj" style="--pc:${PJC[p.k||0]}">${esc(p.ic||"📁")} ${esc(p.n)}</span>`);
- if(n.task&&n.due&&!n.done){const late=n.due<T;mt.push(`<span class="nc ${late?"late":n.due===T?"hoy":""}">${late?"Vencida · ":""}${n.due===T?"Hoy":esc(dueLbl(n.due))}${n.tm?" · "+esc(n.tm):""}</span>`)}
+ if(n.task&&n.due&&!n.done){const late=n.due<T&&!n.ev;mt.push(`<span class="nc ${late?"late":n.due===T?"hoy":""}">${late?"Vencida · ":""}${n.due===T?"Hoy":esc(dueLbl(n.due))}${n.tm?" · "+esc(n.tm)+(n.te?"–"+esc(n.te):""):""}</span>`)}
+ if(n.lc)mt.push(`<span class="nc loc" data-t="nxmapr" data-q="${esc(n.lc)}">📍 ${esc(n.lc)}</span>`);
  if(n.task&&n.due&&n.rm>=0&&!n.done)mt.push(`<span class="nc" title="Con recordatorio">🔔</span>`);
  if(n.rp)mt.push(`<span class="nc" title="${RPL[n.rp]}">↻</span>`);
  if(sb.length)mt.push(`<span class="nc">☑ ${sd}/${sb.length}</span>`);
  if(n.st==="e"&&!n.done)mt.push(`<span class="nc en">En curso</span>`);
  (n.tags||[]).forEach(t=>mt.push(`<span class="nc t">#${esc(t)}</span>`));
- const lead=n.task?`<button class="chk ${n.done?"on":""} p${n.pr||0}" data-t="nxt" data-id="${n.id}" aria-label="${n.done?"Marcar como pendiente":"Completar"}: ${esc(n.x)}">${n.done?"✓":""}</button>`:`<span class="dot" aria-hidden="true">${n.pin?"📌":"•"}</span>`;
+ const lead=n.ev?`<span class="dot ev" aria-hidden="true">📅</span>`:n.task?`<button class="chk ${n.done?"on":""} p${n.pr||0}" data-t="nxt" data-id="${n.id}" aria-label="${n.done?"Marcar como pendiente":"Completar"}: ${esc(n.x)}">${n.done?"✓":""}</button>`:`<span class="dot" aria-hidden="true">${n.pin?"📌":"•"}</span>`;
  return `<div class="item nr ${n.done?"done":""}">${lead}<button class="body nxb" data-t="nxopen" data-id="${n.id}"><span class="tx">${esc(n.x)}</span>${n.nt?`<span class="nts">${esc(n.nt.replace(/\s+/g," ").slice(0,90))}</span>`:""}${mt.length?`<span class="meta">${mt.join("")}</span>`:""}</button></div>`};
 
 /* ---- vistas ---- */
 const NVS=[["hoy","Hoy"],["proy","Proyectos"],["todo","Todas"],["nota","Notas"]];
-function nxStats(){const T=today(),o=S.notes.filter(n=>n.task&&!n.done);return{hoy:o.filter(n=>n.due===T).length,late:o.filter(n=>n.due&&n.due<T).length,wk:o.filter(n=>n.due>T&&n.due<=shift(T,7)).length,open:o.length,done7:S.notes.filter(n=>n.done&&n.dn>=Date.now()-7*864e5).length}}
+function nxStats(){const T=today(),o=S.notes.filter(n=>n.task&&!n.done);return{hoy:o.filter(n=>n.due===T).length,late:o.filter(n=>n.due&&n.due<T&&!n.ev).length,wk:o.filter(n=>n.due>T&&n.due<=shift(T,7)).length,open:o.length,done7:S.notes.filter(n=>n.done&&n.dn>=Date.now()-7*864e5).length}}
 function nxAdd(ph){const c=NX.pjf&&NX.pjf!=="none"?pjOf(NX.pjf):null;
  return `<div class="card nxa"><div class="nxar"><input type="text" id="nxq" enterkeyhint="done" autocomplete="off" placeholder="${ph}" aria-label="Nueva tarea"><button class="pri" data-t="nxq">Añadir</button></div>
  <div class="nxah"><span id="nxh">${c?`Se añadirá a ${esc(c.ic||"")} ${esc(c.n)}. `:""}Escribe «mañana», «viernes 18:30», @proyecto o #etiqueta.</span><button class="ghost mini" data-t="nxnew" data-p="${c?c.id:""}">Con detalles ›</button></div></div>`}
 function secT(t,l,cls){return l.length?`<div class="nsec ${cls||""}"><h3>${t}<em>${l.length}</em></h3>${l.map(noteRow).join("")}</div>`:""}
 function nxHoy(){const T=today(),o=S.notes.filter(n=>n.task&&!n.done).sort(tsort),st=nxStats();
- const late=o.filter(n=>n.due&&n.due<T),td=o.filter(n=>n.due===T),tm=o.filter(n=>n.due===shift(T,1)),wk=o.filter(n=>n.due>shift(T,1)&&n.due<=shift(T,7)),lt=o.filter(n=>n.due>shift(T,7)),nd=o.filter(n=>!n.due),dn=S.notes.filter(n=>n.task&&n.done&&n.dn&&new Date(n.dn).toDateString()===new Date().toDateString());
+ const late=o.filter(n=>n.due&&n.due<T&&!n.ev),td=o.filter(n=>n.due===T),tm=o.filter(n=>n.due===shift(T,1)),wk=o.filter(n=>n.due>shift(T,1)&&n.due<=shift(T,7)),lt=o.filter(n=>n.due>shift(T,7)),nd=o.filter(n=>!n.due),dn=S.notes.filter(n=>n.task&&n.done&&n.dn&&new Date(n.dn).toDateString()===new Date().toDateString());
  const tile=(l,v,c)=>`<div class="nxt"><b style="${c?"color:"+c:""}">${v}</b><span>${l}</span></div>`;
  return `<div class="nxts">${tile("Para hoy",st.hoy)}${tile("Vencidas",st.late,st.late?"var(--hi)":"")}${tile("Próx. 7 días",st.wk)}${tile("Hechas (7 d)",st.done7)}</div>`+nxAdd("Qué tienes que hacer…")+
   (o.length?"":`<div class="card empty">Todo al día. Añade una tarea arriba o crea un proyecto.</div>`)+
@@ -3482,43 +3500,68 @@ function nxView(){const v=S.ui.nv||"hoy";
 renderNotes=function(){$("nsub").textContent=new Date().toLocaleDateString("es-ES",{weekday:"long",day:"numeric",month:"long"});const el=$("nx");if(el)el.innerHTML=nxView();const ev=footToday(today());$("nfoot").innerHTML=ev.length?`<div class="card" data-a="main" data-v="fut" style="cursor:pointer;border-color:var(--ac)"><b>⚽ Hoy</b> · ${ev.map(e=>esc(e.label)).join(" · ")}</div>`:""};
 
 /* ---- hoja de edición (sirve en Inicio, Calendario y Organiza) ---- */
-function nxSheet(){const n=NX.sheet;if(!n)return "";const ch=(a,v,l,on)=>`<button class="${on?"on":""}" data-t="${a}" data-v="${v}">${l}</button>`,T=today();
- const sb=n.sb||[];
- return `<div class="nxbk" data-t="nxclose"></div><div class="nxs" role="dialog" aria-modal="true" aria-label="${NX.nw?"Nueva tarea":"Editar"}"><div class="nxsh"><b>${NX.nw?(n.task?"Nueva tarea":"Nueva nota"):"Detalles"}</b><button class="ic" data-t="nxclose" aria-label="Cerrar">✕</button></div>
- <div class="nxsb"><input type="text" id="nx_x" class="nxti" value="${esc(n.x)}" placeholder="${n.task?"¿Qué hay que hacer?":"Título o idea"}" aria-label="Título" data-c="nxf" data-k="x">
- <div class="seg2 nxtype">${ch("nxty","1","Tarea",n.task)}${ch("nxty","0","Nota",!n.task)}</div>
- <textarea id="nx_nt" rows="3" placeholder="Notas, enlaces, detalles…" aria-label="Notas" data-c="nxf" data-k="nt">${esc(n.nt||"")}</textarea>
+const p2=n=>String(n).padStart(2,"0"),capD=d=>cap(fmtD(d,{weekday:"long",day:"numeric",month:"long"}));
+function miniCal(n){const T=today(),m=NX.pm||(n.due||T).slice(0,7),[y,mo]=m.split("-").map(Number),lead=dow(m+"-01"),dim=new Date(y,mo,0).getDate();
+ let g=["L","M","X","J","V","S","D"].map(x=>`<i class="mw">${x}</i>`).join("");for(let i=0;i<lead;i++)g+="<i></i>";
+ for(let k=1;k<=dim;k++){const d=m+"-"+p2(k);g+=`<button class="${d===n.due?"on":""} ${d===T?"td":""}" data-t="nxday" data-v="${d}" aria-label="${esc(capD(d))}">${k}</button>`}
+ return `<div class="mcal"><div class="mch"><button data-t="nxpm" data-v="-1" aria-label="Mes anterior">‹</button><b>${cap(MESES[mo-1])} ${y}</b><button data-t="nxpm" data-v="1" aria-label="Mes siguiente">›</button></div><div class="mcg">${g}</div></div>`}
+function timePick(n,f){const v=n[f]||"",hh=v.slice(0,2),mm=v.slice(3),qs=f==="tm"?["09:00","12:00","15:00","18:00","20:00"]:[];
+ const q=f==="te"&&n.tm?[["+30 min",30],["+1 h",60],["+1 h 30",90],["+2 h",120]].map(x=>`<button data-t="nxtq" data-f="te" data-v="${addHM(n.tm,x[1])}">${x[0]}</button>`).join(""):qs.map(x=>`<button class="${v===x?"on":""}" data-t="nxtq" data-f="${f}" data-v="${x}">${x.replace(/^0/,"")}</button>`).join("");
+ return `<div class="tpk"><div class="tpq">${q}<button data-t="nxtq" data-f="${f}" data-v="">Sin hora</button></div>
+ <div class="tpt">Hora</div><div class="tph">${Array.from({length:24},(_,i)=>`<button class="${hh===p2(i)?"on":""}" data-t="nxth" data-f="${f}" data-v="${p2(i)}">${i}</button>`).join("")}</div>
+ <div class="tpt">Minutos</div><div class="tpm">${Array.from({length:12},(_,i)=>`<button class="${mm===p2(i*5)?"on":""}" data-t="nxtmn" data-f="${f}" data-v="${p2(i*5)}">${p2(i*5)}</button>`).join("")}</div>
+ <button class="ghost mini tpd" data-t="nxpo" data-v="">Listo</button></div>`}
+function nxWhen(n){const T=today(),ch=(a,v,l,on)=>`<button class="${on?"on":""}" data-t="${a}" data-v="${v}">${l}</button>`;
+ return `<label>Fecha</label><div class="seg2 dq">${ch("nxdq","0","Hoy",n.due===T)}${ch("nxdq","1","Mañana",n.due===shift(T,1))}${ch("nxdq","7","En 1 semana",n.due===shift(T,7))}${ch("nxdq","","Sin fecha",!n.due)}</div>
+ <button class="pkb ${NX.po==="d"?"open":""}" data-t="nxpo" data-v="d"><span>📅 ${n.due?esc(capD(n.due)):"Elegir un día del calendario"}</span><i>${NX.po==="d"?"▴":"▾"}</i></button>${NX.po==="d"?miniCal(n):""}
+ <label>${n.ev?"Hora de inicio y fin":"Hora (opcional)"}</label><div class="pkr"><button class="pkb ${NX.po==="tm"?"open":""}" data-t="nxpo" data-v="tm"><span>🕒 ${n.tm?esc(n.tm):"Sin hora"}</span><i>${NX.po==="tm"?"▴":"▾"}</i></button>${n.ev?`<button class="pkb ${NX.po==="te"?"open":""}" data-t="nxpo" data-v="te"><span>→ ${n.te?esc(n.te):"Fin"}</span><i>${NX.po==="te"?"▴":"▾"}</i></button>`:""}</div>${NX.po==="tm"||NX.po==="te"?timePick(n,NX.po):""}`}
+function nxPlaces(){const c={};S.notes.forEach(n=>{if(n.lc)c[n.lc]=(c[n.lc]||0)+1});NX.pl=Object.keys(c).sort((a,b)=>c[b]-c[a]).slice(0,5);return NX.pl}
+function nxSheet(){const n=NX.sheet;if(!n)return "";const ch=(a,v,l,on)=>`<button class="${on?"on":""}" data-t="${a}" data-v="${v}">${l}</button>`,sb=n.sb||[],pl=nxPlaces().filter(x=>x!==n.lc);
+ const ttl=NX.nw?(n.ev?"Nuevo compromiso":n.task?"Nueva tarea":"Nueva nota"):"Detalles";
+ return `<div class="nxbk" data-t="nxclose"></div><div class="nxs" role="dialog" aria-modal="true" aria-label="${ttl}"><div class="nxsh"><b>${ttl}</b><button class="ic" data-t="nxclose" aria-label="Cerrar">✕</button></div>
+ <div class="nxsb"><input type="text" id="nx_x" class="nxti" value="${esc(n.x)}" placeholder="${n.ev?"¿Qué compromiso tienes?":n.task?"¿Qué hay que hacer?":"Título o idea"}" aria-label="Título" data-c="nxf" data-k="x">
+ <div class="seg2 nxtype">${ch("nxty","t","Tarea",n.task&&!n.ev)}${ch("nxty","e","Compromiso",!!n.ev)}${ch("nxty","n","Nota",!n.task)}</div>
+ ${n.task?nxWhen(n):""}
+ <label>📍 Lugar</label><input type="text" id="nx_lc" value="${esc(n.lc||"")}" placeholder="Oficina, calle y número, sala, enlace…" aria-label="Lugar" data-c="nxf" data-k="lc" autocomplete="off">
+ ${pl.length||n.lc?`<div class="plc">${pl.map((x,i)=>`<button data-t="nxlc" data-v="${i}">${esc(x)}</button>`).join("")}${n.lc?`<button class="map" data-t="nxmapr" data-q="${esc(n.lc)}">Abrir en mapas ↗</button>`:""}</div>`:""}
  <label>Proyecto</label><select data-c="nxf" data-k="pj" aria-label="Proyecto"><option value="">Bandeja (sin proyecto)</option>${PJ().filter(p=>!p.a||p.id===n.pj).map(p=>`<option value="${p.id}" ${n.pj===p.id?"selected":""}>${esc((p.ic||"")+" "+p.n)}</option>`).join("")}</select>
- ${n.task?`<label>Estado</label><div class="seg2">${["p","e","d"].map(k=>ch("nxst",k,STL[k],tst(n)===k)).join("")}</div>
- <label>Prioridad</label><div class="seg2 pr4">${[0,1,2,3].map(k=>ch("nxpr",k,PRL[k],(n.pr||0)===k)).join("")}</div>
- <label>Fecha y hora</label><div class="seg2 dq">${ch("nxdq","0","Hoy",n.due===T)}${ch("nxdq","1","Mañana",n.due===shift(T,1))}${ch("nxdq","7","En 1 semana",n.due===shift(T,7))}${ch("nxdq","","Sin fecha",!n.due)}</div>
- <div class="g2"><div><input type="date" id="nx_d" value="${esc(n.due||"")}" aria-label="Fecha" data-c="nxf" data-k="d"></div><div><input type="time" id="nx_tm" value="${esc(n.tm||"")}" aria-label="Hora (opcional)" data-c="nxf" data-k="tm"></div></div>
- <label>🔔 Recordatorio</label><select data-c="nxf" data-k="rm" aria-label="Recordatorio">${RML.map(r=>`<option value="${r[0]}" ${(n.rm>=0?n.rm:-1)===r[0]?"selected":""}>${r[0]===0&&!n.tm?"El día a las 9:00":r[1]}</option>`).join("")}</select>
- ${(n.rm>=0)?`<p class="hint">${PN&&PN.on?"Te llegará una notificación al móvil.":"Para recibirlo como notificación, actívalas en Ajustes (hay que entrar en tu cuenta y abrir la app desde la pantalla de inicio)."}${n.tm?"":" Sin hora, el aviso llega a las 9:00 (o la víspera, si eliges 1 día antes)."}</p>`:""}
- <label>Repetir</label><select data-c="nxf" data-k="rp" aria-label="Repetir">${Object.keys(RPL).map(k=>`<option value="${k}" ${(n.rp||"")===k?"selected":""}>${RPL[k]}</option>`).join("")}</select>
- <label>Subtareas</label><div class="nxsub">${sb.map(s=>`<div class="sbr"><button class="chk ${s.d?"on":""}" data-t="nxsbt" data-id="${s.id}" aria-label="Subtarea ${esc(s.x)}">${s.d?"✓":""}</button><span class="${s.d?"dn":""}">${esc(s.x)}</span><button class="x" data-t="nxsbx" data-id="${s.id}" aria-label="Quitar">×</button></div>`).join("")}<div class="sba"><input type="text" id="nx_sb" placeholder="Añadir subtarea" aria-label="Nueva subtarea" enterkeyhint="done"><button class="ghost mini" data-t="nxsba">Añadir</button></div></div>`:""}
- <label>Etiquetas</label><input type="text" id="nx_tg" value="${esc((n.tags||[]).map(t=>"#"+t).join(" "))}" placeholder="#uni #urgente" aria-label="Etiquetas" data-c="nxf" data-k="tg">
- </div><div class="nxsf">${NX.nw?"":`<button class="ghost del ${NX.arm?"arm":""}" data-t="nxdel">${NX.arm?"¿Borrar?":"Borrar"}</button>${n.task?`<button class="ghost" data-t="nxdone">${n.done?"Reabrir":"Hecha ✓"}</button>`:""}`}<button class="pri" data-t="nxsave">${NX.nw?"Añadir":"Listo"}</button></div></div>`}
+ ${n.task&&!n.ev?`<label>Estado</label><div class="seg2">${["p","e","d"].map(k=>ch("nxst",k,STL[k],tst(n)===k)).join("")}</div><label>Prioridad</label><div class="seg2 pr4">${[0,1,2,3].map(k=>ch("nxpr",k,PRL[k],(n.pr||0)===k)).join("")}</div>`:""}
+ ${n.task?`<label>🔔 Recordatorio</label><select data-c="nxf" data-k="rm" aria-label="Recordatorio">${RML.map(r=>`<option value="${r[0]}" ${(n.rm>=0?n.rm:-1)===r[0]?"selected":""}>${r[0]===0&&!n.tm?"El día a las 9:00":r[1]}</option>`).join("")}</select>
+ ${n.rm>=0?`<p class="hint">${PN&&PN.on?"Te llegará una notificación al móvil.":"Para recibirlo como notificación, actívalas en Ajustes (hay que entrar en tu cuenta y abrir la app desde la pantalla de inicio)."}${n.tm?"":" Sin hora, el aviso llega a las 9:00."}</p>`:""}
+ <label>Repetir</label><select data-c="nxf" data-k="rp" aria-label="Repetir">${Object.keys(RPL).map(k=>`<option value="${k}" ${(n.rp||"")===k?"selected":""}>${RPL[k]}</option>`).join("")}</select>`:""}
+ <label>Notas</label><textarea id="nx_nt" rows="3" placeholder="Detalles, enlaces, con quién…" aria-label="Notas" data-c="nxf" data-k="nt">${esc(n.nt||"")}</textarea>
+ ${n.task&&!n.ev?`<label>Subtareas</label><div class="nxsub">${sb.map(s=>`<div class="sbr"><button class="chk ${s.d?"on":""}" data-t="nxsbt" data-id="${s.id}" aria-label="Subtarea ${esc(s.x)}">${s.d?"✓":""}</button><span class="${s.d?"dn":""}">${esc(s.x)}</span><button class="x" data-t="nxsbx" data-id="${s.id}" aria-label="Quitar">×</button></div>`).join("")}<div class="sba"><input type="text" id="nx_sb" placeholder="Añadir subtarea" aria-label="Nueva subtarea" enterkeyhint="done"><button class="ghost mini" data-t="nxsba">Añadir</button></div></div>`:""}
+ <label>Etiquetas</label><input type="text" id="nx_tg" value="${esc((n.tags||[]).map(t=>"#"+t).join(" "))}" placeholder="#cliente #urgente" aria-label="Etiquetas" data-c="nxf" data-k="tg">
+ </div><div class="nxsf">${NX.nw?"":`<button class="ghost del ${NX.arm?"arm":""}" data-t="nxdel">${NX.arm?"¿Borrar?":"Borrar"}</button>${n.task&&!n.ev?`<button class="ghost" data-t="nxdone">${n.done?"Reabrir":"Hecha ✓"}</button>`:""}`}<button class="pri" data-t="nxsave">${NX.nw?"Añadir":"Listo"}</button></div></div>`}
 function nxRead(){const n=NX.sheet;if(!n)return;const v=id=>{const e=$(id);return e?e.value:null};
- const x=v("nx_x");if(x!==null)n.x=x;const nt=v("nx_nt");if(nt!==null)n.nt=nt;const d=v("nx_d");if(d!==null)n.due=d;const tm=v("nx_tm");if(tm!==null)n.tm=tm;
+ const x=v("nx_x");if(x!==null)n.x=x;const nt=v("nx_nt");if(nt!==null)n.nt=nt;const lc=v("nx_lc");if(lc!==null)n.lc=lc.trim();
  const tg=v("nx_tg");if(tg!==null)n.tags=tg.split(/[\s,]+/).map(t=>t.replace(/^#/,"").trim()).filter(Boolean)}
 function nxPersist(){if(!NX.sheet)return;if(NX.sheet.rm>=0&&!NX.sheet.due)NX.sheet.due=today();if(!NX.nw)save()}
 function nxMount(){let el=$("nxs");if(!el){el=document.createElement("div");el.id="nxs";document.body.appendChild(el)}return el}
 const _rn14=render;render=function(){_rn14();const el=nxMount();el.innerHTML=NX.sheet?nxSheet():"";el.className=NX.sheet?"on":"";document.body.classList.toggle("nxo",!!NX.sheet);
  if(NX.sheet&&NX.focus){NX.focus=0;const i=$("nx_x");if(i&&!i.value)try{i.focus()}catch(e){}}};
-const nxOpenS=(n,nw)=>{NX.sheet=n;NX.nw=!!nw;NX.arm=false;NX.focus=nw?1:0;render()};
+const nxOpenS=(n,nw)=>{NX.po="";NX.sheet=n;NX.nw=!!nw;NX.arm=false;NX.focus=nw?1:0;render()};
 TA.nxopen=b=>{const n=S.notes.find(x=>x.id===b.dataset.id);if(n)nxOpenS(n,false)};
-TA.nxnew=b=>{const m=b.dataset.m==="rec",d=b.dataset.d||"",h=new Date(),hh=String(Math.min(23,h.getHours()+1)).padStart(2,"0")+":00";
- nxOpenS(newTask({pj:b.dataset.p||(NX.pjf&&NX.pjf!=="none"&&S.ui.nv==="proy"?NX.pjf:""),due:d||(m?today():""),tm:m?hh:"",rm:m?0:-1}),true)};
-TA.nxclose=()=>{nxRead();if(NX.sheet&&!NX.nw){if(!NX.sheet.x.trim())NX.sheet.x="(sin título)";nxPersist()}NX.sheet=null;NX.arm=false;render()};
-TA.nxsave=()=>{nxRead();const n=NX.sheet;if(!n)return;if(!n.x.trim()){toast("Pon un título");return}nxPersist();if(NX.nw){S.notes.push(n);save()}NX.sheet=null;NX.nw=false;render()};
+TA.nxnew=b=>{const m=b.dataset.m,d=b.dataset.d||"",h=new Date(),hh=p2(Math.min(23,h.getHours()+1))+":00",ev=m==="ev",rec=m==="rec";NX.po="";
+ nxOpenS(newTask({pj:b.dataset.p||(NX.pjf&&NX.pjf!=="none"&&S.ui.nv==="proy"?NX.pjf:""),due:d||(rec||ev?today():""),tm:rec||ev?hh:"",te:ev?addHM(hh,60):"",ev:ev?1:0,rm:rec?0:ev?30:-1}),true)};
+TA.nxclose=()=>{nxRead();NX.po="";if(NX.sheet&&!NX.nw){if(!NX.sheet.x.trim())NX.sheet.x="(sin título)";nxPersist()}NX.sheet=null;NX.arm=false;render()};
+TA.nxsave=()=>{nxRead();NX.po="";const n=NX.sheet;if(!n)return;if(!n.x.trim()){toast("Pon un título");return}nxPersist();if(NX.nw){S.notes.push(n);save()}NX.sheet=null;NX.nw=false;render()};
 TA.nxdel=()=>{if(!NX.arm){NX.arm=true;render();setTimeout(()=>{NX.arm=false},3000);return}S.notes=S.notes.filter(x=>x.id!==NX.sheet.id);NX.sheet=null;NX.arm=false;save();render()};
 TA.nxdone=()=>{nxRead();const n=NX.sheet;setDone(n,!n.done);NX.sheet=null;save();render()};
-TA.nxty=b=>{nxRead();const n=NX.sheet;n.task=b.dataset.v==="1";if(!n.task){n.due="";n.tm="";n.rm=-1}nxPersist();render()};
+TA.nxty=b=>{nxRead();const n=NX.sheet,v=b.dataset.v;n.task=v!=="n";n.ev=v==="e"?1:0;if(v==="n"){n.due="";n.tm="";n.te="";n.rm=-1}else if(v==="e"){if(!n.due)n.due=today();if(n.rm<0)n.rm=30}nxPersist();render()};
 TA.nxst=b=>{nxRead();const n=NX.sheet,v=b.dataset.v;n.st=v;n.done=v==="d";n.dn=n.done?Date.now():0;nxPersist();render()};
 TA.nxpr=b=>{nxRead();NX.sheet.pr=+b.dataset.v;nxPersist();render()};
-TA.nxdq=b=>{nxRead();const v=b.dataset.v;NX.sheet.due=v===""?"":shift(today(),+v);if(!NX.sheet.due){NX.sheet.tm="";NX.sheet.rm=-1}nxPersist();render()};
-TC.nxf=el=>{const n=NX.sheet;if(!n)return;nxRead();const k=el.dataset.k,v=el.value;if(k==="pj")n.pj=v;else if(k==="rm"){n.rm=+v;if(n.rm>=0&&!n.due)n.due=today()}else if(k==="rp")n.rp=v;nxPersist();render()};
+TA.nxdq=b=>{nxRead();const v=b.dataset.v;NX.sheet.due=v===""?"":shift(today(),+v);if(!NX.sheet.due){NX.sheet.tm="";NX.sheet.te="";NX.sheet.rm=-1}NX.po="";nxPersist();render()};
+TA.nxpo=b=>{nxRead();const v=b.dataset.v;NX.po=NX.po===v?"":v;if(NX.po==="d")NX.pm=null;render()};
+TA.nxday=b=>{nxRead();NX.sheet.due=b.dataset.v;NX.po="";nxPersist();render()};
+TA.nxpm=b=>{const n=NX.sheet,m=(NX.pm||(n.due||today()).slice(0,7)).split("-").map(Number),t=new Date(m[0],m[1]-1+ +b.dataset.v,1);NX.pm=t.getFullYear()+"-"+p2(t.getMonth()+1);render()};
+const nxSetT=(f,v)=>{const n=NX.sheet;n[f]=v;if(f==="tm"){if(v&&!n.due)n.due=today();if(!v){n.te="";if(n.rm===0)n.rm=-1}if(v&&n.ev&&(!n.te||n.te<=v))n.te=addHM(v,60)}nxPersist();render()};
+TA.nxtq=b=>{nxRead();nxSetT(b.dataset.f,b.dataset.v);if(!b.dataset.v)NX.po=""};
+TA.nxth=b=>{nxRead();const f=b.dataset.f,o=NX.sheet[f]||"";nxSetT(f,b.dataset.v+":"+(o?o.slice(3):"00"))};
+TA.nxtmn=b=>{nxRead();const f=b.dataset.f,o=NX.sheet[f]||"09:00";nxSetT(f,o.slice(0,2)+":"+b.dataset.v)};
+TA.nxlc=b=>{nxRead();NX.sheet.lc=NX.pl[+b.dataset.v]||"";nxPersist();render()};
+TA.nxmapr=b=>{const q=b.dataset.q;if(!q)return;const u=/^https?:\/\//i.test(q)?q:"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q);try{window.open(u,"_blank","noopener")}catch(e){}};
+TC.nxf=el=>{const n=NX.sheet;if(!n)return;nxRead();const k=el.dataset.k,v=el.value;if(k==="pj")n.pj=v;else if(k==="rm"){n.rm=+v;if(n.rm>=0&&!n.due)n.due=today()}else if(k==="rp")n.rp=v;else if(k==="lc")n.lc=v.trim();nxPersist();render()};
 TA.nxsba=()=>{nxRead();const i=$("nx_sb"),t=i?i.value.trim():"";if(!t)return;(NX.sheet.sb=NX.sheet.sb||[]).push({id:uid(),x:t,d:false});nxPersist();render();const j=$("nx_sb");if(j)try{j.focus()}catch(e){}};
 TA.nxsbt=b=>{nxRead();const s=(NX.sheet.sb||[]).find(x=>x.id===b.dataset.id);if(s)s.d=!s.d;nxPersist();render()};
 TA.nxsbx=b=>{nxRead();NX.sheet.sb=(NX.sheet.sb||[]).filter(x=>x.id!==b.dataset.id);nxPersist();render()};
@@ -3530,7 +3573,7 @@ TA.nxt=b=>{const n=S.notes.find(x=>x.id===b.dataset.id);if(!n)return;setDone(n,!
 TA.nxv=b=>{S.ui.nv=b.dataset.v;NX.q="";if(b.dataset.v!=="proy")NX.pjf="";save();render()};
 TA.nxq=()=>{const el=$("nxq"),raw=el?el.value.trim():"";if(!raw){toast("Escribe algo primero");return}
  const p=parseX(raw),v=S.ui.nv||"hoy",inProj=v==="proy"&&NX.pjf&&NX.pjf!=="none"?NX.pjf:"",task=v==="nota"?!!p.due:true;
- const o=newTask({x:p.x,task,pin:p.pin,due:task?(p.due||(p.tm?today():"")):"",tm:task?p.tm:"",tags:p.tags,pj:p.pj||inProj,rm:task&&p.tm?10:-1});
+ const o=newTask({x:p.x,task,pin:p.pin,due:task?(p.due||(p.tm?today():"")):"",tm:task?p.tm:"",tags:p.tags,pj:p.pj||inProj,lc:p.lc||"",rm:task&&p.tm?10:-1});
  S.notes.push(o);save();render();toast(o.rm>=0?"Añadida con aviso 10 min antes":"Añadida");const e=$("nxq");if(e)try{e.focus()}catch(x){}};
 TA.pjopen=b=>{NX.pjf=b.dataset.id||"";NX.pe=false;NX.ps="p";NX.arm=false;render();window.scrollTo(0,0)};
 TA.pjnew=()=>{NX.newp=!NX.newp;NX.np={ic:"📁",k:0};render()};
@@ -3548,13 +3591,10 @@ TC.pjnt=el=>{const p=pjOf(el.dataset.id);if(p){p.nt=el.value;save()}};
 TA.nxf=b=>{NX.f=b.dataset.v;render()};TC.nxpf=el=>{NX.pjf2=el.value;render()};TC.nxord=el=>{NX.ord=el.value;render()};
 TC.nxs=el=>{NX.q=el.value;render();const e=document.querySelector('[data-c="nxs"]');if(e){try{e.focus();e.setSelectionRange(e.value.length,e.value.length)}catch(x){}}};
 
-/* ---- Calendario: recordatorios y tareas con detalles en el día elegido ---- */
-const _rc14=renderCal;renderCal=function(){_rc14();const c=$("cday");if(c)c.insertAdjacentHTML("beforeend",`<div class="nxcal"><button class="ghost mini" data-t="nxnew" data-d="${SEL}" data-m="rec">🔔 Recordatorio con hora</button><button class="ghost mini" data-t="nxnew" data-d="${SEL}">＋ Tarea con detalles</button></div>`)};
-
 /* ---- Avisos push de cada tarea con recordatorio ---- */
 const _pnb14=pnBuild;pnBuild=function(now){const out=_pnb14(now);now=now||Date.now();if(pnPrefs().tk===false)return out;
  S.notes.forEach(n=>{if(!n.task||n.done||!n.due||!(n.rm>=0))return;const q=n.due.split("-").map(Number),hm=/^\d{1,2}:\d{2}$/.test(n.tm||"")?n.tm:"09:00",[h,mi]=hm.split(":").map(Number),w=new Date(q[0],q[1]-1,q[2],h,mi-n.rm,0,0),t=w.getTime();
-  if(t>now+30000&&t<now+15*864e5){const p=pjOf(n.pj);out.push({key:"k:"+n.id+":"+n.due+(n.tm||""),at:w.toISOString(),title:String(n.x).slice(0,80),body:(p?p.n+" · ":"")+fmtD(n.due,{weekday:"short",day:"numeric",month:"short"})+(n.tm?" · "+n.tm:"")})}});
+  if(t>now+30000&&t<now+15*864e5){const p=pjOf(n.pj);out.push({key:"k:"+n.id+":"+n.due+(n.tm||""),at:w.toISOString(),title:String(n.x).slice(0,80),body:(p?p.n+" · ":"")+(n.lc?"📍 "+n.lc+" · ":"")+fmtD(n.due,{weekday:"short",day:"numeric",month:"short"})+(n.tm?" · "+n.tm:"")})}});
  return out};
 
 /* ================= v14: estudios en los que me baso ================= */
@@ -3569,8 +3609,47 @@ const EVID=[
 function evidCard(){return `<details class="card evd"><summary><b>Estudios en los que me baso</b></summary><p class="hint">Cada fila es un trabajo real. Comprobé hoy que existe con esos datos (título, revista, año y páginas) en su editorial o en una biblioteca científica; no he leído cada texto completo. Lo que no tiene estudio detrás va marcado en la app como «criterio propio».</p>${EVID.map(e=>`<div class="evr"><b>${esc(e[0])}</b><span>${esc(e[1])}</span></div>`).join("")}<p class="hint">Sin estudio propio (criterio mío, sin validar): puntuación de preparación, umbrales de aviso de molestias, el orden de las sesiones de gimnasio, la escala de 1 a 5 de respiración y piernas, y cómo combino todo en las recomendaciones. Las recomendaciones de salud no sustituyen a un médico o fisio.</p></details>`}
 const _hd14=healthDash;healthDash=function(){return _hd14()+evidCard()};
 
+/* ================= v14.1: calendario enfocado a compromisos y tareas ================= */
+CALF="org";
+["all","org","dep","eq"].forEach(k=>delete CAL_AREAS[k]);
+CAL_AREAS.org=["Agenda","org"];CAL_AREAS.all=["Todo",""];CAL_AREAS.dep=["Mi deporte","dep"];CAL_AREAS.eq=["Equipo","eq"];
+const calNotes=(d,T)=>S.notes.filter(n=>n.task&&(n.due===d||(d===T&&!n.done&&!n.ev&&n.due&&n.due<T)));
+function agRow(n,mini){const T=today(),p=pjOf(n.pj),late=n.due<T&&!n.done&&!n.ev,sub=[];
+ if(n.lc)sub.push("📍 "+n.lc);if(p)sub.push((p.ic||"")+" "+p.n);if((n.sb||[]).length)sub.push("☑ "+n.sb.filter(s=>s.d).length+"/"+n.sb.length);if(n.rm>=0&&n.due&&!n.done)sub.push("🔔");if(n.rp)sub.push("↻");
+ const lead=n.ev||mini?"":`<button class="chk ${n.done?"on":""} p${n.pr||0}" data-t="nxt" data-id="${n.id}" aria-label="${n.done?"Marcar como pendiente":"Completar"}: ${esc(n.x)}">${n.done?"✓":""}</button>`;
+ return `<div class="crow org ${n.ev?"ev":"tk"} ${n.done?"muted":""} ${mini?"mini":""}">${lead}<button class="cmain" data-t="nxopen" data-id="${n.id}"><time>${n.tm||(late?"Venc.":"Día")}${n.te?`<i>${n.te}</i>`:""}</time><span class="cm"><b>${esc(n.x)}</b>${sub.length?`<small>${esc(sub.join(" · "))}</small>`:""}</span></button>${n.lc&&!mini?`<button class="ghost mini" data-t="nxmapr" data-q="${esc(n.lc)}" aria-label="Abrir ${esc(n.lc)} en mapas">Mapa</button>`:""}</div>`}
+function calDayHtml(d){const T=today(),items=calItems(d).filter(x=>calShow(x.ar)&&x.ar!=="org"),sess=S.sess.filter(x=>x.d===d),ns=calShow("org")?calNotes(d,T):[];
+ const timed=[...items.map(x=>({t:x.t||"99:99",h:calRow(x)})),...ns.filter(n=>n.tm).map(n=>({t:n.tm,h:agRow(n)}))].sort((a,b)=>a.t.localeCompare(b.t));
+ const day=ns.filter(n=>!n.tm&&n.ev),todo=ns.filter(n=>!n.tm&&!n.ev&&!(n.due<T&&d===T)),late=ns.filter(n=>!n.tm&&!n.ev&&n.due<T&&d===T);
+ let h="";
+ h+=`<div class="cact"><button class="pri mini" data-t="nxnew" data-d="${d}" data-m="ev">＋ Compromiso</button><button class="ghost mini" data-t="nxnew" data-d="${d}" data-m="t">＋ Tarea</button><button class="ghost mini" data-t="nxnew" data-d="${d}" data-m="rec">🔔 Recordatorio</button></div>`;
+ if(day.length)h+=`<div class="clist">${day.map(n=>agRow(n)).join("")}</div>`;
+ if(timed.length)h+=`<div class="clist">${timed.map(x=>x.h).join("")}</div>`;
+ if(late.length)h+=`<h3 class="lt">Vencidas</h3><div class="clist">${late.map(n=>agRow(n)).join("")}</div>`;
+ if(todo.length)h+=`<h3>Tareas sin hora</h3><div class="clist">${todo.map(n=>agRow(n)).join("")}</div>`;
+ if(CALF!=="org"&&CALF!=="eq"&&sess.length)h+=`<h3>Hecho</h3>`+sess.map(sessRow).join("");
+ const planned=(trainOn(d)&&!trainOn(d).can)||S.next.some(x=>x.d===d);
+ if(d<=T&&planned&&!sess.length&&calShow("dep"))h+=`<div class="ctell"><span>Entreno sin contar</span><button class="pri" data-t="postgo" data-d="${d}">Contar el entreno</button></div>`;
+ if(!timed.length&&!day.length&&!late.length&&!todo.length)h+=`<div class="empty">Nada este día. Añade un compromiso o una tarea.</div>`;
+ if(CALF==="all"||CALF==="dep"){const hq=hooper(d),mol=S.mol[d]||[];if(hq!==null||mol.length||(S.well[d]&&S.well[d].sh!=null))h+=`<h3>Cuerpo</h3><div class="hint" style="margin:0">${hq!==null?"Chequeo: "+hq+"/28. ":""}${S.well[d]&&S.well[d].sh!=null?"Sueño: "+num(S.well[d].sh)+" h. ":""}${mol.length?"Molestias: "+esc(mol.map(x=>molTxt(x)+" "+x.n+"/10").join(", "))+".":""}</div>`}
+ return h}
+renderCal=function(){const T=today(),[y,m]=CAL.split("-").map(Number),lead=dow(CAL+"-01"),dim=new Date(y,m,0).getDate();
+ $("cmon").textContent=cap(MESES[m-1])+" "+y;
+ let g=["L","M","X","J","V","S","D"].map(n=>`<div class="cw">${n}</div>`).join("");for(let i=0;i<lead;i++)g+="<div></div>";
+ for(let k=1;k<=dim;k++){const d=CAL+"-"+String(k).padStart(2,"0"),c=calDots(d);
+  g+=`<button class="cd2 ${d===T?"today":""} ${d===SEL?"sel":""} ${c.match?"m":""}" data-a="cday" data-v="${d}" aria-label="${esc(fmtD(d,{weekday:"long",day:"numeric",month:"long"}))}"><span class="n">${k}</span><span class="dots">${c.dots}</span></button>`}
+ $("cgrid").innerHTML=`<div class="cfil" role="group" aria-label="Qué ver">${Object.keys(CAL_AREAS).map(k=>`<button class="${CALF===k?"on":""} ${CAL_AREAS[k][1]}" data-t="calf" data-v="${k}">${k==="all"||k==="org"?"":'<i></i>'}${CAL_AREAS[k][0]}</button>`).join("")}</div><div class="cgrid">${g}</div>`;
+ const d=SEL;$("cdt").textContent=cap(fmtD(d,{weekday:"long",day:"numeric",month:"long"}))+(d===T?" · hoy":"");
+ $("cday").innerHTML=calDayHtml(d);
+ let nx="",shown=0;for(let i=0;i<8&&shown<10;i++){const dd=shift(T,i);if(dd===SEL)continue;
+  const its=calItems(dd).filter(x=>calShow(x.ar)&&x.ar!=="org"),ns=calShow("org")?calNotes(dd,T).filter(n=>!n.done):[];if(!its.length&&!ns.length)continue;
+  shown+=its.length+ns.length;
+  nx+=`<button class="cnh" data-a="cday" data-v="${dd}"><b>${i===0?"Hoy":i===1?"Mañana":cap(fmtD(dd,{weekday:"long",day:"numeric",month:"short"}))}</b><span>${its.length+ns.length}</span></button><div class="clist">${its.map(x=>calRow(x,1)).join("")}${ns.slice(0,4).map(n=>agRow(n,1)).join("")}</div>`}
+ $("cnext").innerHTML=nx||`<div class="empty">Sin nada más en los próximos días.</div>`;
+ const cq=$("cq");if(cq&&cq.closest(".card"))cq.closest(".card").classList.add("cqold")};
+
 /* ---------- Arranque ---------- */
-const VER="14.0 (3 nov 2026)";
+const VER="14.1 (3 nov 2026)";
 (function init(){const T=today();["sd","md","id0","pvd","kd"].forEach(i=>$(i).value=T);
  $("st").value="";
  $("mz").innerHTML=$("iz").innerHTML=ZONAS.map(z=>`<option value="${z[0]}">${z[1]}</option>`).join("");

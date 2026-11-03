@@ -84,7 +84,7 @@ function boot(store,ss){const dom=new JSDOM(html,{runScripts:"dangerously",url:"
  const pid=ev("S.team.plan[0].id");
  /* en Hoy/Calendario/avisos */
  tab("panel");ev(`S.ui.hd="m";S.ui.hx=1;render()`);t("Hoy lista el entreno de mañana",/Equipo · Salida de balón/.test($("htl").textContent),$("htl").textContent);
- ev(`S.ui.main="cal";CAL=today().slice(0,7);SEL="${sh(1)}";render()`);t("Calendario muestra el entreno del equipo",/Entreno del equipo/.test($("cday").textContent));
+ ev(`S.ui.main="cal";CAL=today().slice(0,7);SEL="${sh(1)}";CALF="all";render()`);t("Calendario muestra el entreno del equipo",/Entreno del equipo/.test($("cday").textContent));
  const B=JSON.parse(ev("JSON.stringify(pnBuild())")),q=B.find(x=>x.key==="q:"+pid);t("aviso 1 h antes (18:30)",q&&new Date(q.at).getHours()===18&&new Date(q.at).getMinutes()===30&&/Salida de balón/.test(q.body),JSON.stringify(q));
  /* partidos */
  tab("eq");sub("par");click(d.querySelector('[data-t="gnew"]'));
