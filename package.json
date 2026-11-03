@@ -1,1 +1,1 @@
-{"name":"aitxorapp","private":true,"scripts":{"test":"node tests/app.test.js index.html && node tests/sync.test.js index.html"},"devDependencies":{"jsdom":"^24.0.0"}}
+{"name":"aitxorapp","private":true,"scripts":{"test":"node tests/app.test.js index.html && node tests/sync.test.js index.html && node tests/push.test.js index.html"},"devDependencies":{"jsdom":"^24.0.0"}}

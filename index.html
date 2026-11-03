@@ -156,6 +156,7 @@ a{color:var(--ac)}
  <div class="card" id="porg"></div>
  <div class="card"><details><summary>ℹ️ Metodología y fuentes</summary><div id="phow"></div></details></div>
 <div class="card" id="acct"><h2>Cuenta y sincronización</h2><div id="syn"></div></div>
+ <div class="card"><h2>Notificaciones</h2><div id="pnc"></div></div>
  <div class="card"><h2>Mis datos</h2><div class="foot" style="margin-top:0"><button class="ghost" data-a="exp">Copia (.json)</button><button class="ghost" data-a="csv">Sesiones (.csv)</button><button class="ghost" data-a="imp">Importar copia</button></div>
   <div class="hint">Los datos se guardan en este dispositivo y, si inicias sesión arriba, también en la nube. Haz una copia de vez en cuando.<span id="ver"></span></div></div>
 </section>
@@ -312,7 +313,7 @@ function migrate(){try{const r=localStorage.getItem("midia:v1");if(!r)return;con
  save()}catch(e){}}
 try{const r=localStorage.getItem(KEY);if(r)S=norm(JSON.parse(r));else migrate()}catch(e){}
 let tt;function toast(m){const t=$("toast");t.textContent=m;t.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("on"),2800)}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){toast("No se pudo guardar en este dispositivo")}try{syMark()}catch(e){}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){toast("No se pudo guardar en este dispositivo")}try{syMark()}catch(e){}try{pnMark()}catch(e){}}
 
 let ARM="",armT,EDIT="",RPE=0,MN=0,PRE_NEXT="",XV={en:0,fl:0,pf:0};
 const delBtn=(a,id)=>`<button class="x ${ARM===a+id?"arm":""}" data-a="${a}" data-id="${id}" aria-label="Borrar">${ARM===a+id?"¿Borrar?":"×"}</button>`;
@@ -938,7 +939,7 @@ async function sync(manual){
    if(!p.j||!p.j.length)continue;
    SY.base=p.j[0].rev;if(v===syVer)SY.dirty=false;done=true}
   if(!done)throw new Error("Conflicto repetido, reintenta");
-  SY.last=Date.now();syMsg="";
+  SY.last=Date.now();syMsg="";try{pnMark()}catch(e){}
   if(manual)toast("Sincronizado");
  }catch(e){
   const m=String(e&&e.message||e);syMsg=/Failed to fetch|NetworkError|Load failed|fetch/i.test(m)?"Sin conexión. Se reintentará.":"No se pudo sincronizar: "+m}
@@ -981,8 +982,91 @@ document.addEventListener("visibilitychange",()=>{if(!document.hidden)sync()});
 addEventListener("online",()=>sync());
 setInterval(()=>{if(!document.hidden)sync()},90000);
 
+/* ================= v7: NOTIFICACIONES PUSH ================= */
+const PNK="aitx:push";
+let PN=(()=>{const d={on:false};try{return Object.assign(d,JSON.parse(localStorage.getItem(PNK)||"{}"))}catch(e){return d}})();
+let pnMsg="",pnBusy=false,pnTimer=0;
+const pnSaveLocal=()=>{try{localStorage.setItem(PNK,JSON.stringify(PN))}catch(e){}};
+const pnSupported=()=>typeof navigator!=="undefined"&&"serviceWorker"in navigator&&typeof window.PushManager!=="undefined"&&typeof window.Notification!=="undefined";
+function pnPrefs(){return Object.assign({task:true,train:true,rpe:true,match:true,well:true,tt:"08:30",wt:"09:00"},S.ui.np||{})}
+function pnB64u(s){const p="=".repeat((4-s.length%4)%4),b=(s+p).replace(/-/g,"+").replace(/_/g,"/"),r=atob(b),o=new Uint8Array(r.length);for(let i=0;i<r.length;i++)o[i]=r.charCodeAt(i);return o}
+
+/* Calcula los avisos de los próximos 14 días a partir de tus datos */
+function pnBuild(now){now=now||Date.now();const p=pnPrefs(),T=today(),out=[];
+ const OK=/^\d{1,2}:\d{2}$/;
+ const at=(d,hm,addMin)=>{const[y,m,dd]=d.split("-").map(Number),[h,mi]=(OK.test(hm)?hm:"09:00").split(":").map(Number);return new Date(y,m-1,dd,h,mi+(addMin||0),0,0)};
+ const add=(key,when,title,body)=>{const t=when.getTime();if(t>now+30000&&t<now+15*864e5)out.push({key,at:when.toISOString(),title,body:body||""})};
+ for(let i=0;i<=14;i++){const d=shift(T,i);
+  if(p.task){const tk=S.notes.filter(n=>n.task&&!n.done&&n.due===d);
+   if(tk.length)add("td:"+d,at(d,p.tt),tk.length===1?"Tarea para hoy":tk.length+" tareas para hoy",tk.slice(0,3).map(n=>n.x).join(" · ")+(tk.length>3?" …":""))}
+  if(p.well&&!(d===T&&hooper(T)!==null))add("w:"+d,at(d,p.wt),"¿Cómo llegas hoy?","Cuestionario de 30 s para ajustar tu carga.");
+  const tr=trainOn(d);
+  if(tr&&!tr.can){
+   if(p.train)add("e:"+d,at(d,tr.t,-60),"Entreno a las "+tr.t,"Sale una hora antes. Revisa cómo llegas en el Panel.");
+   if(p.rpe&&!S.sess.some(x=>x.d===d))add("r:"+d,at(d,tr.e||tr.t,tr.e?15:105),"Registra tu sesión","Minutos, esfuerzo y cómo te has sentido.")}
+  if(p.match)S.next.filter(x=>x.d===d).forEach(x=>{const rv=x.riv?" vs "+x.riv:"";
+   add("m0:"+x.id,at(d,x.t&&OK.test(x.t)?x.t:"11:00",-120),"Partido hoy"+rv,x.t?"A las "+x.t+(x.loc==="L"?" (local)":x.loc==="V"?" (visitante)":""):"");
+   add("m1:"+x.id,at(shift(d,-1),"20:00"),"Partido mañana"+rv,"Descansa, hidrátate y revisa tu preparación.")})}
+ return out}
+
+/* Sube a la nube solo lo que cambió */
+async function pnSync(){if(!PN.on||!SY.ses||pnBusy)return;pnBusy=true;
+ try{if(!await syTok())throw new Error("auth");const uid=SY.ses.uid,want=pnBuild();
+  const g=await syApi(`/rest/v1/reminders?select=key,at,title,body&user_id=eq.${uid}&sent=eq.false`);if(!g.ok)throw new Error(syMsgOf(g));
+  const have=new Map((g.j||[]).filter(r=>!/^test:/.test(r.key)).map(r=>[r.key,r])),wk=new Set(want.map(r=>r.key));
+  const del=[...have.keys()].filter(k=>!wk.has(k));
+  const up=want.filter(r=>{const h=have.get(r.key);return!h||new Date(h.at).getTime()!==new Date(r.at).getTime()||h.title!==r.title||h.body!==r.body});
+  if(del.length){const l=encodeURIComponent("("+del.map(k=>'"'+k+'"').join(",")+")");
+   const r=await syApi(`/rest/v1/reminders?user_id=eq.${uid}&sent=eq.false&key=in.${l}`,{method:"DELETE"});if(!r.ok)throw new Error(syMsgOf(r))}
+  if(up.length){const r=await syApi("/rest/v1/reminders?on_conflict=user_id,key",{method:"POST",headers:{Prefer:"resolution=merge-duplicates,return=minimal"},body:up.map(x=>({user_id:uid,key:x.key,at:x.at,title:x.title,body:x.body,sent:false}))});if(!r.ok)throw new Error(syMsgOf(r))}
+  pnMsg=""}catch(e){const m=String(e&&e.message||e);pnMsg=/fetch/i.test(m)?"":"No se pudieron programar los avisos: "+m}
+ pnBusy=false;pnUi()}
+function pnMark(){if(PN.on&&SY.ses){clearTimeout(pnTimer);pnTimer=setTimeout(pnSync,4000)}}
+
+async function pnEnable(){
+ if(!SY.ses){pnMsg="Primero entra en tu cuenta (tarjeta de arriba).";pnUi();return}
+ if(!pnSupported()){pnMsg="Este navegador no admite avisos. En el iPhone: añade la app a la pantalla de inicio (Compartir → Añadir a pantalla de inicio) y ábrela desde ahí.";pnUi();return}
+ pnBusy=true;pnMsg="Activando…";pnUi();
+ try{const perm=await Notification.requestPermission();
+  if(perm!=="granted"){pnMsg="Permiso denegado. Actívalo en los ajustes del dispositivo (Notificaciones → Aitxorapp).";pnBusy=false;pnUi();return}
+  if(!await syTok())throw new Error("sesión caducada");
+  const kr=await fetch(SB.url+"/functions/v1/push-send",{headers:{apikey:SB.key}});if(!kr.ok)throw new Error("el servidor de avisos no responde ("+kr.status+")");
+  const {publicKey}=await kr.json();if(!publicKey)throw new Error("sin clave");
+  const reg=await navigator.serviceWorker.ready;let sub=await reg.pushManager.getSubscription();
+  if(!sub)sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:pnB64u(publicKey)});
+  const j=sub.toJSON(),r=await syApi("/rest/v1/push_subs?on_conflict=endpoint",{method:"POST",headers:{Prefer:"resolution=merge-duplicates,return=minimal"},body:{user_id:SY.ses.uid,endpoint:j.endpoint,p256dh:j.keys.p256dh,auth:j.keys.auth,ua:(navigator.userAgent||"").slice(0,200)}});
+  if(!r.ok)throw new Error(syMsgOf(r));
+  PN.on=true;pnSaveLocal();pnMsg="";pnBusy=false;pnUi();toast("Avisos activados en este dispositivo");pnSync();return}
+ catch(e){pnMsg="No se pudo activar: "+String(e&&e.message||e)}
+ pnBusy=false;pnUi()}
+async function pnDisable(){
+ try{if(pnSupported()){const reg=await navigator.serviceWorker.ready,sub=await reg.pushManager.getSubscription();
+   if(sub){const ep=sub.endpoint;await sub.unsubscribe();if(SY.ses&&await syTok())await syApi(`/rest/v1/push_subs?endpoint=eq.${encodeURIComponent(ep)}`,{method:"DELETE"})}}}catch(e){}
+ PN.on=false;pnSaveLocal();pnMsg="";pnUi()}
+async function pnTest(){if(!SY.ses||!await syTok()){pnMsg="Entra en tu cuenta primero";pnUi();return}
+ const r=await syApi("/rest/v1/reminders?on_conflict=user_id,key",{method:"POST",headers:{Prefer:"resolution=merge-duplicates,return=minimal"},body:{user_id:SY.ses.uid,key:"test:"+Date.now(),at:new Date(Date.now()-1000).toISOString(),title:"Aitxorapp",body:"Prueba: los avisos funcionan.",sent:false}});
+ pnMsg=r.ok?"Prueba enviada: debería llegarte en menos de un minuto.":"No se pudo enviar la prueba: "+syMsgOf(r);pnUi()}
+
+function pnUi(){const el=$("pnc");if(!el)return;const p=pnPrefs();
+ const cb=(k,l)=>`<label class="chk" style="display:flex;gap:8px;align-items:center;margin:6px 0"><input type="checkbox" data-np="${k}" ${p[k]?"checked":""} style="width:auto;min-height:0"> ${l}</label>`;
+ let h;
+ if(!PN.on){h=`<div class="hint" style="margin-top:0">Te aviso de tareas, entrenos, partidos y del cuestionario diario, también con la app cerrada.</div>
+  <div class="hint">${esc(pnMsg)}</div><div class="foot" style="margin-top:8px"><button class="pri" data-p="on"${pnBusy?" disabled":""}>Activar en este dispositivo</button></div>`}
+ else{h=`<div class="row2" style="margin:0"><span><b>Activadas</b> en este dispositivo</span></div>
+  ${cb("task","Tareas del día")}<div class="row2" style="margin:0 0 4px 26px"><label for="pnTt" style="margin:0">a las</label><input type="time" id="pnTt" data-npt="tt" value="${esc(p.tt)}" style="max-width:120px"></div>
+  ${cb("well","Cuestionario «¿Cómo llegas hoy?»")}<div class="row2" style="margin:0 0 4px 26px"><label for="pnWt" style="margin:0">a las</label><input type="time" id="pnWt" data-npt="wt" value="${esc(p.wt)}" style="max-width:120px"></div>
+  ${cb("train","Entreno (1 h antes)")}${cb("rpe","Registrar la sesión después del entreno")}${cb("match","Partidos (víspera y día del partido)")}
+  <div class="hint">${esc(pnMsg)}</div>
+  <div class="foot" style="margin-top:8px"><button class="ghost" data-p="test">Enviar prueba</button><button class="ghost" data-p="off">Desactivar</button></div>`}
+ el.innerHTML=h}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-p]");if(!b)return;const a=b.dataset.p;if(a==="on")pnEnable();else if(a==="off")pnDisable();else if(a==="test")pnTest()});
+document.addEventListener("change",e=>{const t=e.target;if(!t||!t.dataset)return;
+ if(t.dataset.np){S.ui.np=Object.assign(pnPrefs(),{[t.dataset.np]:t.checked});save()}
+ else if(t.dataset.npt){S.ui.np=Object.assign(pnPrefs(),{[t.dataset.npt]:t.value||pnPrefs()[t.dataset.npt]});save()}});
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)pnMark()});
+
 /* ---------- Arranque ---------- */
-const VER="6.2 (3 nov 2026)";
+const VER="7.0 (3 nov 2026)";
 (function init(){const T=today();["sd","md","id0","pvd","kd"].forEach(i=>$(i).value=T);
  $("st").value="";
  $("mz").innerHTML=$("iz").innerHTML=ZONAS.map(z=>`<option value="${z[0]}">${z[1]}</option>`).join("");
@@ -992,7 +1076,7 @@ const VER="6.2 (3 nov 2026)";
  if(!S.ui.v4){S.ui.v4=1;S.ui.main="panel";save()}
  if(!["panel","notas","cal","fut"].includes(S.ui.main))S.ui.main="panel";
  render();
- syUi();sync();
+ syUi();pnUi();sync();
  $("ver").textContent=" Versión "+VER+".";
  if("serviceWorker"in navigator&&location.protocol.startsWith("http")){const had=!!navigator.serviceWorker.controller;let rl=false;
   navigator.serviceWorker.addEventListener("controllerchange",()=>{if(rl||!had)return;rl=true;location.reload()});
