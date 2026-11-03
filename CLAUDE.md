@@ -11,8 +11,11 @@ Publicada en GitHub Pages: https://augusto280905-beep.github.io/mi-dia/ (rama ma
 - `supabase/push.sql` + `supabase/push-send.ts`: notificaciones push (tablas push_subs, reminders, push_config + cron cada minuto + Edge Function `push-send` con Verify JWT desactivado). La función genera sola las claves VAPID y las guarda en `push_config` (RLS sin políticas), así que no hay secretos que pegar.
 - `tests/`: pruebas con jsdom. `npm install && npm test`.
 
-## Secciones
-Panel (dashboard; al final: Cuenta y sincronización + Mis datos), Notas (tareas/notas rápidas), Calendario, Fútbol (Hoy/Registrar/Partidos/Salud/Físico/Temporada).
+## Secciones (v9)
+Barra de 5 pestañas: **Hoy** (panel: próximo evento, accesos rápidos, resumen del equipo, preparación; «Más datos de rendimiento» desplegable con las tarjetas antiguas), **Equipo** (modo entrenador: Resumen/Asistencia/Plantilla/Entrenos/Ejercicios/Pizarra/Partidos), **Calendario**, **Notas**, **Mi fútbol** (Hoy/Registrar/Partidos/Salud/Físico/Temporada). Ajustes (engranaje de la cabecera, `data-main="ajustes"`): cuenta y sincronización, calendario externo, notificaciones, mis datos. Al abrir hay una animación de bienvenida (`#splash`, una vez por sesión, respeta reduced-motion).
+
+## Equipo (entrenador de juveniles, fútbol 11)
+`S.team={pl,att,ex,plan,bd,games,del,seed,seedEx}`. Plantilla inicial (24 jugadores) sembrada con ids deterministas `sp_<nombre>`; 16 ejercicios base `se_*` (plantillas editables). Asistencia: `att` = [{id:"a"+fecha,d,m:{jugador:"p|r|f|j|l|''"}}]; `""` = borrado (para que la fusión no lo resucite). Borrados con lápidas en `team.del`. Alertas (`teamAlerts`): ≥2 faltas seguidas o ≥4 sesiones con <70 % asistencia — criterio propio, sin validar. Pizarra: SVG con arrastre por pointer events, formaciones 4-3-3/4-4-2/4-2-3-1/3-5-2/4-1-4-1. Los entrenos y partidos aparecen en Calendario y generan avisos push (claves `q:` y `g:`). Los datos de menores viven solo en la cuenta privada de Supabase del usuario.
 
 ## Datos
 Estado `S` en localStorage `midia:v3` = {notes,sess,well,mol,inj,prev,marks,next,sched,obj,ui}. `norm()` rellena valores por defecto.

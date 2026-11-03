@@ -23,7 +23,7 @@ t("sin errores",errs.length===0,errs.join("\n"));
 t("arranca en el Panel",!d.querySelector('[data-main="panel"]').hidden&&d.querySelector('[data-main="notas"]').hidden);
 t("panel vacío invita a registrar",/Registra tu primera sesión/.test($("pins").textContent)&&/Aún no tengo datos/.test($("phero").textContent),$("pins").textContent);
 t("marca visible",/Aitxorapp/.test(d.querySelector(".brand").textContent)&&d.title==="Aitxorapp",d.title);
-t("cuatro secciones: Panel, Notas, Calendario, Fútbol",d.querySelectorAll("#mtabs button").length===4&&!/Hábitos|Check-in/.test(d.querySelector("main").textContent));
+t("cinco secciones: Hoy, Equipo, Calendario, Notas, Mi fútbol",d.querySelectorAll("#mtabs button").length===5&&!/Hábitos|Check-in/.test(d.querySelector("main").textContent));
 
 console.log("\n2. Notas y tareas");goN();
 const nq=$("nq");
