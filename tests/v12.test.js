@@ -38,7 +38,7 @@ function boot(){const store={};const dom=new JSDOM(html,{runScripts:"dangerously
  t("guarda la sesión en la fecha de ese día",ev(`S.sess.some(x=>x.d==="${pd.dataset.d}"&&x.r===6)`));
  ev("render()");t("y ese día pasa a ✓",!!d.querySelector("#fhub .wd.ok"));
  t("no hay tarjetas de Físico ni Plan de hoy en el menú",!/Físico|Plan de hoy/.test($("fhub").textContent));
- t("el menú ofrece Entreno extra",/Entreno extra/.test($("fhub").textContent)&&!!d.querySelector("#fhub .xcta"));
+ ev("S.ui.dv='ent';render()");t("Entrenos ofrece fuerza extra con tu margen",/Fuerza extra/.test($("fhub").textContent)&&!!d.querySelector("#fhub .xcta"));ev("S.ui.dv='res';render()");
  console.log("Entreno extra explicado");
  ev(`S.sess=[];for(let i=1;i<=28;i++){const x=shift(today(),-i);if(i%3===0)S.sess.push({id:"a"+i,d:x,t:"",k:"ent",m:70,r:6})};S.next=[];S.mol={};save();S.ui.fv="gym";GS.plan=null;GS.m=["pe","ho","tr"];GS.pre="";render()`);
  t("el gimnasio muestra tu margen de carga arriba",/Tu margen de hoy/.test($("gymv").textContent));
