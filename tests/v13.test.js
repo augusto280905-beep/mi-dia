@@ -80,6 +80,28 @@ function boot(){const store={};const dom=new JSDOM(html,{runScripts:"dangerously
  t("sin partido cerca y semana floja → curl nórdico con animación",/Van Dyk/.test(H.textContent)&&!!H.querySelector(".hfig"));
  ev(`S.next=[{id:"n1",d:shift(today(),0),t:"",riv:"X",loc:"L"}];S.sess.push({id:"pp",d:shift(today(),-1),t:"",k:"par",m:90,r:8,riv:"Y",loc:"L",gf:1,gc:0,g:0,a:0,sh:0,yc:0,rc:0,pos:"",st:true,p:0});render()`);
  t("el día después de jugar → «Soltar» (foam roller y estiramiento con sus estudios)",/Soltar/.test(H.textContent)&&/Wiewelhove/.test(H.textContent)&&/Herbert/.test(H.textContent));
+
+ console.log("Deporte: Resumen y Entrenos");
+ ev(`S.ui.main='fut';S.ui.fv='hub';S.ui.dv='res';render()`);
+ t("Deporte abre en Resumen con el panel",!!$("fhub").querySelector(".hs-hero")&&$("fhub").querySelectorAll(".dvseg button").length===2&&!$("fhub").querySelector(".opt"));
+ click($("fhub").querySelector('[data-t="dvset"][data-v="ent"]'));
+ t("Entrenos: opciones para elegir (fuerza, prevención, recuperar, registrar)",$("fhub").querySelectorAll(".opt").length===4&&/Fuerza extra/.test($("fhub").textContent)&&!$("fhub").querySelector(".hs-hero"));
+ click($("fhub").querySelector('[data-t="goprev"]'));
+ t("Prevención y core abre el gimnasio con ese día",ev("S.ui.fv")==="gym"&&ev("GS.pre")==="core");
+ ev(`S.sess=[];for(let i=1;i<=28;i++){const x=shift(today(),-i);if(i%3===0)S.sess.push({id:"a"+i,d:x,t:"",k:"ent",m:70,r:6})};S.next=[];S.mol={};S.team.games=[];GS.m=["pe","ho","tr"];GS.pre="";GS.plan=null;render()`);
+ click(d.querySelector('[data-t="gmake"]'));
+ const n0=ev("GS.plan.ex.length"),s0=ev("GS.plan.ex[0].s"),id0=ev("GS.plan.ex[0].id");
+ click(d.querySelector('[data-t="gsets"][data-v="1"]'));
+ t("+ serie en un ejercicio",ev("GS.plan.ex[0].s")===s0+1);
+ click(d.querySelector('[data-t="gdelx"]'));
+ t("quitar un ejercicio",ev("GS.plan.ex.length")===n0-1&&!ev("GS.plan.ex.some(x=>x.id==='"+id0+"')"));
+ click(d.querySelector('[data-t="gaddo"]'));
+ t("el selector lista ejercicios para añadir",d.querySelectorAll(".gaddl .gad").length>5);
+ click(d.querySelector('.gaddl .gad'));
+ t("añadir un ejercicio",ev("GS.plan.ex.length")===n0&&!ev("GS.addOpen"));
+ t("el plan sigue explicando las cargas",!!d.querySelector(".whyc"));
+ click(d.querySelector('[data-t="gfin"]'));
+ t("terminar guarda la sesión de gimnasio con lo que elegiste",ev("S.sess.filter(x=>x.k==='gym').length")>=1);
  console.log("Inicio nuevo");
  ev(`S.ui.main='panel';render()`);
  t("sin tarjetas de Organización/Deporte/Entrenador",!d.querySelector(".areas")&&!/Organización|Deporte y salud/.test($("hmatch").textContent+$("hweek").textContent+$("hrec").textContent));

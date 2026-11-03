@@ -63,6 +63,8 @@ Tarjeta «Calendario externo» en el Panel. La dirección secreta iCal (`https:/
 - Informe: aviso `inf:` a las 23:00 (migra 21:30), texto = agenda de mañana (`repPush`, calculado al sincronizar; sin datos de salud).
 - Pruebas: `tests/v13.test.js` (con canvas simulado).
 
+- v13.1 (p12d): Deporte = pestañas **Resumen** (`healthDash` + Mi semana) / **Entrenos** (elegir: fuerza extra, prevención y core, soltar, registrar; historial). `S.ui.dv`. Fuerza editable: quitar (`gdelx`), series ±(`gsets`), añadir (`gaddo/gaddx`).
+
 ## Pendiente
 1. Desplegar y probar push en el Supabase real (SQL + función) y en el iPhone.
 2. Tras cada cambio: `npm test`, subir VER y caché del SW, commit y push.
