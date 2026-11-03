@@ -884,7 +884,7 @@ function renderPanel(){const s=loadStats(),T=s.T,hr=new Date().getHours(),fit=fi
 const SB={url:"https://mjbsqkchyjfqncrgtfsv.supabase.co",key:"sb_publishable_KZkfAENfqUT7LwuTI3M7aw_dmJTnxyo"};
 const SYK="aitx:sync";
 let SY=(()=>{const d={ses:null,base:null,dirty:false,last:0};try{return Object.assign(d,JSON.parse(localStorage.getItem(SYK)||"{}"))}catch(e){return d}})();
-let syMsg="",syBusy=false,syStep="email",syMail="",syTimer=0,syVer=0;
+let syMsg="",syBusy=false,syMail="",syTimer=0,syVer=0;
 const sySave=()=>{try{localStorage.setItem(SYK,JSON.stringify(SY))}catch(e){}};
 
 async function syApi(path,o){o=o||{};const h={apikey:SB.key,"Content-Type":"application/json"};
@@ -897,7 +897,7 @@ function setSes(j){const p=SY.ses||{};SY.ses={access:j.access_token,refresh:j.re
 async function syTok(){const s=SY.ses;if(!s)return false;if(s.exp>Date.now()/1000+60)return true;
  const r=await syApi("/auth/v1/token?grant_type=refresh_token",{method:"POST",auth:false,body:{refresh_token:s.refresh}});
  if(r.ok&&r.j&&r.j.access_token){setSes(r.j);return true}
- if(r.status>=400&&r.status<500){SY.ses=null;SY.base=null;sySave();syMsg="La sesión caducó. Vuelve a entrar.";syStep="email"}
+ if(r.status>=400&&r.status<500){SY.ses=null;SY.base=null;sySave();syMsg="La sesión caducó. Vuelve a entrar."}
  return false}
 
 /* Fusión cuando los dos lados cambiaron: unión por id, gana este dispositivo en los conflictos */
@@ -954,37 +954,35 @@ function syUi(){const el=$("syn");if(!el)return;
  if(SY.ses){h=`<div class="row2" style="margin:0"><span><b>${esc(SY.ses.email||"")}</b></span><small class="hint" style="margin:0">${SY.dirty?"cambios por enviar":"al día"}</small></div>
   <div class="hint">${esc(syMsg||ago)}</div>
   <div class="foot" style="margin-top:8px"><button class="ghost" data-s="now"${syBusy?" disabled":""}>Sincronizar ahora</button><button class="ghost" data-s="out">Cerrar sesión</button></div>`}
- else if(syStep==="code"){h=`<label for="syc">Código que te llegó a ${esc(syMail)}</label><input type="text" id="syc" inputmode="numeric" autocomplete="one-time-code" maxlength="10" placeholder="123456" style="max-width:200px">
-  <div class="hint">${esc(syMsg)}</div><div class="foot" style="margin-top:8px"><button class="pri" data-s="verify"${syBusy?" disabled":""}>Entrar</button><button class="ghost" data-s="back">Cambiar email</button></div>`}
  else{h=`<label for="sye">Email</label><input type="email" id="sye" autocomplete="email" inputmode="email" placeholder="tu@email.com" value="${esc(syMail)}">
-  <div class="hint">${esc(syMsg)||"Te enviaré un código por email. Sin contraseñas. Con la misma cuenta, tus datos se sincronizan en todos tus dispositivos."}</div>
-  <div class="foot" style="margin-top:8px"><button class="pri" data-s="send"${syBusy?" disabled":""}>Enviar código</button></div>`}
+  <label for="syp" style="margin-top:8px">Contraseña (mínimo 6 caracteres)</label><input type="password" id="syp" autocomplete="current-password" placeholder="••••••••">
+  <div class="hint">${esc(syMsg)||"Con la misma cuenta, tus datos se sincronizan en todos tus dispositivos. Primera vez: pulsa «Crear cuenta»."}</div>
+  <div class="foot" style="margin-top:8px"><button class="pri" data-s="login"${syBusy?" disabled":""}>Entrar</button><button class="ghost" data-s="signup"${syBusy?" disabled":""}>Crear cuenta</button></div>`}
  el.innerHTML=h}
+async function syAuth(kind){const m=($("sye").value||"").trim().toLowerCase(),pw=$("syp").value||"";
+ if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(m)){syMsg="Revisa el email";syUi();return}
+ if(pw.length<6){syMsg="La contraseña necesita al menos 6 caracteres";syUi();return}
+ syMail=m;syBusy=true;syMsg=kind==="signup"?"Creando cuenta…":"Entrando…";syUi();
+ try{const r=kind==="signup"?await syApi("/auth/v1/signup",{method:"POST",auth:false,body:{email:m,password:pw}}):await syApi("/auth/v1/token?grant_type=password",{method:"POST",auth:false,body:{email:m,password:pw}});
+  if(r.ok&&r.j&&r.j.access_token){setSes(r.j);SY.base=null;syMsg="";syBusy=false;sySave();syUi();sync(true);return}
+  if(r.ok&&kind==="signup")syMsg="Cuenta creada. Revisa tu email para confirmarla y luego pulsa «Entrar».";
+  else if(r.status===400||r.status===401)syMsg=kind==="signup"?syMsgOf(r):"Email o contraseña incorrectos";
+  else if(r.status===422||r.status===409)syMsg="Ese email ya tiene cuenta: pulsa «Entrar»";
+  else syMsg=syMsgOf(r)}catch(e){syMsg="Sin conexión"}
+ syBusy=false;syUi()}
 async function syAction(a){
- if(a==="send"){const m=($("sye").value||"").trim().toLowerCase();if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(m)){syMsg="Revisa el email";syUi();return}
-  syMail=m;syBusy=true;syMsg="Enviando…";syUi();
-  try{const r=await syApi("/auth/v1/otp",{method:"POST",auth:false,body:{email:m,create_user:true}});
-   if(r.ok){syStep="code";syMsg=""}else syMsg="No se pudo enviar: "+syMsgOf(r)}catch(e){syMsg="Sin conexión"}
-  syBusy=false;syUi()}
- else if(a==="verify"){const c=($("syc").value||"").replace(/\D/g,"");if(c.length<6){syMsg="Escribe el código completo";syUi();return}
-  syBusy=true;syMsg="Comprobando…";syUi();
-  try{let r=await syApi("/auth/v1/verify",{method:"POST",auth:false,body:{type:"email",email:syMail,token:c}});
-   if(!r.ok&&r.status>=400&&r.status<500)r=await syApi("/auth/v1/verify",{method:"POST",auth:false,body:{type:"signup",email:syMail,token:c}});
-   if(r.ok&&r.j&&r.j.access_token){setSes(r.j);SY.base=null;syMsg="";syBusy=false;sySave();syUi();sync(true);return}
-   syMsg="Código incorrecto o caducado"}catch(e){syMsg="Sin conexión"}
-  syBusy=false;syUi()}
- else if(a==="back"){syStep="email";syMsg="";syUi()}
- else if(a==="now"){sync(true)}
+ if(a==="login"||a==="signup")return syAuth(a);
+ if(a==="now"){sync(true)}
  else if(a==="out"){try{syApi("/auth/v1/logout",{method:"POST"}).catch(()=>{})}catch(e){}
-  SY.ses=null;SY.base=null;SY.dirty=false;SY.last=0;sySave();syStep="email";syMsg="";syUi()}}
+  SY.ses=null;SY.base=null;SY.dirty=false;SY.last=0;sySave();syMsg="";syUi()}}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-s]");if(b)syAction(b.dataset.s)});
-document.addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target&&(e.target.id==="sye"||e.target.id==="syc")){e.preventDefault();syAction(e.target.id==="sye"?"send":"verify")}});
+document.addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target&&(e.target.id==="sye"||e.target.id==="syp")){e.preventDefault();syAction("login")}});
 document.addEventListener("visibilitychange",()=>{if(!document.hidden)sync()});
 addEventListener("online",()=>sync());
 setInterval(()=>{if(!document.hidden)sync()},90000);
 
 /* ---------- Arranque ---------- */
-const VER="6.0 (3 nov 2026)";
+const VER="6.1 (3 nov 2026)";
 (function init(){const T=today();["sd","md","id0","pvd","kd"].forEach(i=>$(i).value=T);
  $("st").value="";
  $("mz").innerHTML=$("iz").innerHTML=ZONAS.map(z=>`<option value="${z[0]}">${z[1]}</option>`).join("");

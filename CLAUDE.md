@@ -18,7 +18,7 @@ Estado `S` en localStorage `midia:v3` = {notes,sess,well,mol,inj,prev,marks,next
 Sueño: `S.well[fecha].sh` = horas de la noche anterior, introducidas a mano (sin importar de Apple Health).
 
 ## Sincronización (Supabase)
-`SB` (URL + clave publishable, públicas por diseño) en index.html. Login por código de email (OTP) con fetch directo, sin librería.
+`SB` (URL + clave publishable, públicas por diseño) en index.html. Login con email + contraseña (Supabase Auth, fetch directo, sin librería). "Confirm email" desactivado en Supabase porque las plantillas no se pueden editar sin SMTP propio.
 Un único documento por usuario (`app_state.data` = S). Concurrencia optimista con `rev`. Si ambos lados cambian: unión por id, gana el dispositivo local (los borrados pueden reaparecer). Estado de sync en localStorage `aitx:sync`.
 NUNCA poner la secret/service_role key en el repo.
 

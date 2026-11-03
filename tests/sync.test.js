@@ -3,15 +3,16 @@ const html=fs.readFileSync(process.argv[2],"utf8");
 let ok=0,bad=0;const t=(n,c,i)=>{if(c){ok++;console.log("  ✓",n)}else{bad++;console.log("  ✗",n,i===undefined?"":"→ "+i)}};
 const errs=[];const vc=new VirtualConsole();vc.on("jsdomError",e=>errs.push(e.message));
 /* servidor simulado */
-const srv={rows:{},codes:{},users:{},online:true,patchFail:0,calls:[]};
+const srv={rows:{},pw:{},confirm:false,users:{},online:true,patchFail:0,calls:[]};
 const KEYPUB="sb_publishable_KZkfAENfqUT7LwuTI3M7aw_dmJTnxyo";
 function mockFetch(url,o){o=o||{};srv.calls.push((o.method||"GET")+" "+url.replace("https://mjbsqkchyjfqncrgtfsv.supabase.co",""));
  if(!srv.online)return Promise.reject(new TypeError("Failed to fetch"));
  const u=new URL(url),p=u.pathname,h=o.headers||{},body=o.body?JSON.parse(o.body):null;
  const R=(s,j)=>Promise.resolve({ok:s>=200&&s<300,status:s,json:()=>Promise.resolve(j)});
  if(h.apikey!==KEYPUB)return R(401,{message:"bad key"});
- if(p==="/auth/v1/otp"){srv.codes[body.email]="123456";return R(200,{})}
- if(p==="/auth/v1/verify"){if(srv.codes[body.email]===body.token&&body.type==="email"){const uid=srv.users[body.email]=srv.users[body.email]||"u-"+body.email;return R(200,{access_token:"A."+uid,refresh_token:"R",expires_at:Math.floor(Date.now()/1000)+3600,user:{id:uid,email:body.email}})}return R(403,{msg:"Token has expired or is invalid"})}
+ const sess=uid=>({access_token:"A."+uid,refresh_token:"R",expires_at:Math.floor(Date.now()/1000)+3600,user:{id:uid,email:body.email}});
+ if(p==="/auth/v1/signup"){if(srv.pw[body.email])return R(422,{msg:"User already registered"});srv.pw[body.email]=body.password;srv.users[body.email]="u-"+body.email;return srv.confirm?R(200,{id:"x"}):R(200,sess("u-"+body.email))}
+ if(p==="/auth/v1/token"){if(srv.pw[body.email]&&srv.pw[body.email]===body.password)return R(200,sess(srv.users[body.email]));return R(400,{error_description:"Invalid login credentials"})}
  if(p==="/auth/v1/logout")return R(204,{});
  if(p.startsWith("/rest/v1/app_state")){const auth=h.Authorization||"";if(!auth.startsWith("Bearer A."))return R(401,{message:"JWT"});const uid=auth.slice(9);
   const m=(o.method||"GET");
@@ -25,25 +26,27 @@ function device(){const store={};const dom=new JSDOM(html,{runScripts:"dangerous
  Object.defineProperty(w,"localStorage",{value:{getItem:k=>k in store?store[k]:null,setItem:(k,v)=>{store[k]=String(v)},removeItem:k=>{delete store[k]}}});
  w.scrollTo=()=>{};w.fetch=mockFetch}});return{w:dom.window,d:dom.window.document,store}}
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
-async function login(D,mail){const {w,d}=D;d.getElementById("sye").value=mail;w.eval('syAction("send")');await sleep(30);
- const codeShown=!!d.getElementById("syc");d.getElementById("syc")&&(d.getElementById("syc").value="123456");w.eval('syAction("verify")');await sleep(80);return codeShown}
+async function login(D,mail,pw,kind){const {w,d}=D;d.getElementById("sye").value=mail;d.getElementById("syp").value=pw||"secreto1";w.eval('syAction("'+(kind||"login")+'")');await sleep(80)}
 (async()=>{
  console.log("Sincronización");
  const A=device(),aw=A.w;
  aw.eval('S.notes.push({id:"n1",x:"nota A",task:false,done:false,pin:false,due:"",tags:[],c:1});save()');
  aw.eval("syUi()");
  t("muestra formulario de email sin sesión",!!A.d.getElementById("sye"));
- aw.eval('syAction("send")');await sleep(10);
+ aw.eval('syAction("login")');await sleep(10);
  t("email vacío pide revisar",/Revisa el email/.test(A.d.getElementById("syn").textContent));
- const shown=await login(A,"aitor@x.com");
- t("pasa a pedir código",shown);
+ await login(A,"aitor@x.com","123","signup");
+ t("contraseña corta se rechaza",/al menos 6/.test(A.d.getElementById("syn").textContent)&&!aw.eval("SY.ses"));
+ await login(A,"aitor@x.com","secreto1","login");
+ t("entrar sin cuenta da error claro",/incorrectos/.test(A.d.getElementById("syn").textContent)&&!aw.eval("SY.ses"));
+ await login(A,"aitor@x.com","secreto1","signup");
  t("sesión iniciada y fila creada en la nube",!!srv.rows["u-aitor@x.com"]&&srv.rows["u-aitor@x.com"].data.notes.length===1,JSON.stringify(Object.keys(srv.rows)));
  t("al día tras primera subida",aw.eval("SY.dirty")===false&&aw.eval("SY.base")===1);
  t("la interfaz muestra email y estado",/aitor@x\.com/.test(A.d.getElementById("syn").textContent)&&/al día/.test(A.d.getElementById("syn").textContent));
  t("no se guarda el token en los datos de la app",!/A\.u-/.test(A.store["midia:v3"]));
  /* dispositivo B, vacío */
  const B=device(),bw=B.w;
- await login(B,"aitor@x.com");
+ await login(B,"aitor@x.com","secreto1","login");
  t("B vacío descarga los datos de A",bw.eval("S.notes.length")===1&&bw.eval("S.notes[0].x")==="nota A");
  t("B persistió localmente lo descargado",JSON.parse(B.store["midia:v3"]).notes.length===1);
  /* B edita → A recibe */
@@ -73,12 +76,15 @@ async function login(D,mail){const {w,d}=D;d.getElementById("sye").value=mail;w.
  aw.eval('S.notes.push({id:"n5",x:"carrera",task:false,done:false,pin:false,due:"",tags:[],c:5});save()');
  await aw.eval("sync()");await sleep(30);
  t("reintenta tras conflicto de revisión y no pierde nada",srv.rows["u-aitor@x.com"].data.notes.some(n=>n.id==="n5")&&aw.eval("SY.dirty")===false,aw.eval("syMsg"));
- /* código incorrecto */
- const C=device();C.d.getElementById("sye").value="otro@x.com";C.w.eval('syAction("send")');await sleep(20);
- C.d.getElementById("syc").value="000000";C.w.eval('syAction("verify")');await sleep(40);
- t("código incorrecto no inicia sesión",!C.w.eval("SY.ses")&&/incorrecto/.test(C.d.getElementById("syn").textContent));
+ /* contraseña incorrecta */
+ const C=device();await login(C,"aitor@x.com","mala-clave","login");
+ t("contraseña incorrecta no inicia sesión",!C.w.eval("SY.ses")&&/incorrectos/.test(C.d.getElementById("syn").textContent));
+ await login(C,"aitor@x.com","secreto1","signup");
+ t("crear cuenta con email existente avisa",/ya tiene cuenta/.test(C.d.getElementById("syn").textContent));
+ srv.confirm=true;const C2=device();await login(C2,"nuevo@x.com","secreto1","signup");
+ t("si Supabase exige confirmar, avisa de revisar el email",!C2.w.eval("SY.ses")&&/Revisa tu email/.test(C2.d.getElementById("syn").textContent));srv.confirm=false;
  /* usuarios aislados */
- const D=device();await login(D,"otro@x.com");
+ const D=device();await login(D,"otro@x.com","secreto2","signup");
  t("otro usuario no ve los datos de aitor",D.w.eval("S.notes.length")===0);
  /* cerrar sesión */
  aw.eval('syAction("out")');await sleep(10);
