@@ -105,7 +105,7 @@ function boot(){const store={};const dom=new JSDOM(html,{runScripts:"dangerously
  fvw("gym");t("Gimnasio carga",$("gymv").textContent.length>50);
 
  console.log("Tras el entreno");
- ev(`S.sess=[];S.ui.pk="";S.sched={on:true,from:"2020-01-01",dows:[0,1,2,3,4,5,6],t:"00:00",e:"00:30",skip:[]};save();S.ui.main="panel";render()`);
+ ev(`S.sess=[];S.ui.pk="";S.sched={on:true,from:"${T}",dows:[0,1,2,3,4,5,6],t:"00:00",e:"00:30",skip:[]};save();S.ui.main="panel";render()`);
  t("si ya ha acabado el entreno, Hoy pregunta cómo ha ido",!!d.querySelector("#hpost .post")&&/entreno/i.test($("hpost").textContent));
  click(d.querySelector('#hpost [data-t="pfs"][data-k="r"][data-v="7"]'));
  click(d.querySelector('#hpost [data-t="pfs"][data-k="en"][data-v="4"]'));

@@ -506,6 +506,32 @@ section[data-main]>header:not(.hhead) h1::before{content:"";display:inline-block
 .cksh{display:flex;align-items:center;gap:6px;margin-top:10px;flex-wrap:wrap}.cksh span{font-size:.78rem;color:var(--mu);margin-right:4px}.cksh button{min-height:38px;padding:6px 12px;border-radius:12px;background:var(--inp);border:0;color:var(--tx);font-weight:600}
 @media (prefers-reduced-motion:reduce){.cks button{transition:none}}
 .cksh input{width:84px;min-height:38px;padding:6px 10px;border-radius:12px}
+/* ===== v13.3 calendario ===== */
+.legend{display:none}
+.cfil{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 10px}.cfil button{display:flex;align-items:center;gap:6px;min-height:38px;padding:6px 12px;border-radius:99px;border:1px solid var(--bd);background:var(--card);color:var(--tx);font-weight:600;font-size:.84rem}
+.cfil button i{width:9px;height:9px;border-radius:50%;background:var(--mu)}.cfil .org i{background:var(--c-org)}.cfil .dep i{background:var(--c-dep)}.cfil .eq i{background:var(--c-eq)}
+.cfil button.on{background:var(--tx);color:var(--bg);border-color:var(--tx)}
+.cd2{position:relative;display:grid;grid-template-rows:auto 10px;justify-items:center;align-content:center;gap:5px;min-height:54px;border-radius:14px;border:2px solid transparent;background:var(--inp);color:var(--tx);padding:4px 0}
+.cd2 .n{font-weight:600;font-size:.95rem}.cd2 .dots{display:flex;gap:3px;height:8px;align-items:center}
+.cd2 .dt,.cd2 .dd,.cd2 .de{display:block;width:7px;height:7px;border-radius:50%}.cd2 .dt{background:var(--c-org)}.cd2 .dt.late{background:var(--hi)}.cd2 .dt.done{background:var(--mu);opacity:.5}.cd2 .dd{background:var(--c-dep)}.cd2 .de{background:var(--c-eq)}
+.cd2.m{background:color-mix(in srgb,var(--c-dep) 16%,var(--inp))}.cd2.today .n{color:var(--onac);background:var(--ac);border-radius:99px;min-width:28px;text-align:center;padding:1px 6px}
+.cd2.sel{border-color:var(--tx)}
+.clist{display:grid;gap:6px}.crow{display:flex;align-items:center;gap:8px;border-radius:16px;background:var(--inp);border-left:5px solid var(--mu);padding:2px 8px 2px 0;min-height:56px}
+.crow.org{border-left-color:var(--c-org)}.crow.dep{border-left-color:var(--c-dep)}.crow.eq{border-left-color:var(--c-eq)}.crow.ext{border-left-color:var(--mu)}.crow.muted{opacity:.55}
+.crow.match{background:color-mix(in srgb,var(--c-dep) 14%,var(--inp))}.crow.eq.match{background:color-mix(in srgb,var(--c-eq) 14%,var(--inp))}
+.cmain{flex:1;min-width:0;display:flex;align-items:center;gap:12px;background:none;border:0;color:var(--tx);text-align:left;padding:8px 6px 8px 10px;min-height:52px}
+.cmain time{flex:none;width:58px;font-family:var(--fh);font-size:1.15rem;line-height:1.05;display:grid;font-variant-numeric:tabular-nums}.cmain time i{font-style:normal;font-family:var(--fb,inherit);font-size:.68rem;color:var(--mu)}
+.cm{display:grid;min-width:0}.cm b{font-size:.98rem;overflow-wrap:anywhere}.cm small{color:var(--mu);font-size:.78rem}
+.crow.mini{min-height:44px}.crow.mini .cmain{min-height:40px;padding:4px 6px 4px 10px}.crow.mini time{font-size:1rem;width:52px}
+.ctell{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px;padding:10px 12px;border-radius:16px;background:color-mix(in srgb,var(--warn) 14%,transparent)}.ctell span{font-weight:600}
+.cnh{display:flex;justify-content:space-between;align-items:center;width:100%;background:none;border:0;color:var(--tx);padding:10px 2px 6px;text-align:left}.cnh b{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--mu)}.cnh span{font-size:.75rem;background:var(--inp);border-radius:99px;padding:2px 9px;color:var(--mu);font-weight:600}
+/* ===== v13.3 registro de sesión ===== */
+.pfh{margin:16px 0 6px;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mu)}.pfh small{text-transform:none;letter-spacing:0;font-weight:500}.pfi{margin:0 0 4px}
+.s5{margin:8px 0}.s5h{display:flex;justify-content:space-between;align-items:baseline}.s5h b{font-size:.9rem;font-weight:600}.s5h small{color:var(--mu)}
+.s5b{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:5px}.s5b button{height:46px;border-radius:14px;border:2px solid transparent;background:color-mix(in srgb,var(--k) 18%,var(--inp));color:var(--tx);font-weight:700;font-size:1rem}.s5b button.on{background:var(--k);color:#fff;border-color:var(--tx)}
+.s5l{display:flex;justify-content:space-between;font-size:.7rem;color:var(--mu);margin-top:3px}
+.hs-grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:8px}.hs-grid3 .hst{padding:10px}.hs-grid3 .hst b{font-size:1.4rem}.insay{margin:8px 0 0;font-size:.88rem;line-height:1.42}
+#mtabs button.pend{position:relative}#mtabs button.pend::after{content:"";position:absolute;top:6px;right:calc(50% - 20px);width:10px;height:10px;border-radius:50%;background:var(--hi);border:2px solid var(--card)}
 </style></head><body>
 <div id="splash" aria-hidden="true"><div class="sav"><i class="ring"></i><img src="data:image/jpeg;base64,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" alt=""></div><svg class="spl" viewBox="0 0 120 20"><polyline class="ln" points="4,12 34,12 42,4 52,17 60,8 66,12 116,12" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><b>Aitxorapp</b><span>Rendimiento y organización</span></div>
 
@@ -1432,7 +1458,7 @@ function pnBuild(now){now=now||Date.now();const p=pnPrefs(),T=today(),out=[];
   const tr=trainOn(d);
   if(tr&&!tr.can){
    if(p.train)add("e:"+d,at(d,tr.t,-60),"Entreno a las "+tr.t,"Sale una hora antes. Revisa cómo llegas en el Panel.");
-   if(p.rpe&&!S.sess.some(x=>x.d===d))add("r:"+d,at(d,tr.e||tr.t,tr.e?15:105),"¿Qué tal el entreno?","Cuéntame en 30 s: minutos, esfuerzo y cómo te has sentido.")}
+   if(p.rpe&&!S.sess.some(x=>x.d===d))add("r:"+d,at(d,tr.e||tr.t,tr.e?15:105),"¿Qué tal el entreno?","Cuéntalo en menos de un minuto: esfuerzo, respiración, piernas y molestias.")}
   if(p.match)S.next.filter(x=>x.d===d).forEach(x=>{const rv=x.riv?" vs "+x.riv:"";
    add("m0:"+x.id,at(d,x.t&&OK.test(x.t)?x.t:"11:00",-120),"Partido hoy"+rv,x.t?"A las "+x.t+(x.loc==="L"?" (local)":x.loc==="V"?" (visitante)":""):"");
    add("m1:"+x.id,at(shift(d,-1),"20:00"),"Partido mañana"+rv,"Descansa, hidrátate y revisa tu preparación.")})
@@ -2335,7 +2361,8 @@ const ICN={
 const TV_TITLES={res:"Resumen y alertas",asi:"Asistencia",pla:"Plantilla",ent:"Entrenos",eje:"Ejercicios",piz:"Pizarra y estrategia",par:"Partidos",con:"Convocatoria"};
 const DOWL=["L","M","X","J","V","S","D"],DOWN=["lunes","martes","miércoles","jueves","viernes","sábado","domingo"];
 /* Horario de entrenos del equipo: martes y jueves a las 18:45 (editable) */
-const tsch=()=>Object.assign({dows:[1,3],t:"18:45",dur:90},S.team.sch||{});
+const tsch=()=>{const o=Object.assign({dows:[1,3],t:"18:45",dur:90},S.team.sch||{});o.durs=Object.assign({1:90,3:120},o.durs||{});return o};
+const tdur=d=>{const sc=tsch(),i=typeof d==="number"?d:dow(d);return +sc.durs[i]||+sc.dur||90};
 const isTrainDay=d=>tsch().dows.includes(dow(d));
 const nextTrainDay=(from)=>{for(let i=0;i<8;i++){const d=shift(from,i);if(isTrainDay(d))return d}return from};
 const planOn=d=>S.team.plan.find(p=>p.d===d);
@@ -2348,7 +2375,8 @@ function trainFocus(d){const g=upGame(d);let md,asumido=false;
  if(md===2)return{md,asumido,hl:"Bajar volumen",txt:"Faltan 2 días: menos carga, velocidad y detalle táctico.",tp:"Balón parado y ajustes del partido",bl:[["Calentamiento","Calentamiento",15],["Técnica","Velocidad y coordinación",10],["ABP","Balón parado",25],["Juego","Juego reducido",15],["Vuelta a la calma","Vuelta a la calma",5]]};
  return{md,asumido,hl:"Activación",txt:md<=0?"Hoy es el día del partido.":"Víspera del partido: sesión corta, activar sin cansar.",tp:"Activación y balón parado",bl:[["Calentamiento","Calentamiento",15],["Técnica","Activación con balón",15],["ABP","Balón parado",20],["Vuelta a la calma","Vuelta a la calma",5]]}}
 function planFor(d){const f=trainFocus(d),sc=tsch(),L=S.team.ex;let seed=0;for(const ch of d)seed+=ch.charCodeAt(0);
- const bl=f.bl.map((b,i)=>{const c=L.filter(e=>e.c===b[0]);const e=c.length?c[(seed+i)%c.length]:null;return{id:uid(),ex:e?e.id:"",n:e?e.n:b[1],min:e?(e.min||b[2]):b[2],nt:""}});
+ const tot0=f.bl.reduce((a,b)=>a+b[2],0),kk=tdur(d)/tot0;
+ const bl=f.bl.map((b,i)=>{const c=L.filter(e=>e.c===b[0]);const e=c.length?c[(seed+i)%c.length]:null;return{id:uid(),ex:e?e.id:"",n:e?e.n:b[1],min:Math.max(5,Math.round(b[2]*kk/5)*5),nt:""}});
  return{_new:1,id:uid(),d,h:sc.t,tp:f.tp,obj:f.txt,bl,nt:"",bj:S.team.pl.filter(x=>x.inj).map(x=>x.id),tn:2,tm:[],tg:[]}}
 const untilTxt=(d,hm)=>{const[h,m]=(hm||"18:45").split(":").map(Number),t=new Date(d+"T12:00:00");t.setHours(h,m,0,0);const df=Math.round((t-Date.now())/60000);
  if(df>=60*24)return"en "+Math.round(df/1440)+" días";if(df>=60)return"en "+Math.floor(df/60)+" h "+(df%60?(df%60)+" min":"");if(df>0)return"en "+df+" min";if(df>-100)return"en curso";return"terminado"};
@@ -2357,7 +2385,7 @@ function tvHub(){const T=today(),sc=tsch(),isT=isTrainDay(T),dayT=isT?T:nextTrai
  const lab=d=>d===T?"Hoy":d===shift(T,1)?"Mañana":cap(fmtD(d,{weekday:"long",day:"numeric",month:"short"}));
  let h=`<div class="hero2 ${isT?"live":""}"><div class="hk">${isT?"Entreno de hoy":"Próximo entreno"} · ${esc(sc.t)}</div><div class="hb">${esc(lab(dayT))}</div>
   <div class="hs">${p?`<b>${esc(p.tp||"Sesión preparada")}</b> · ${planMin(p)} min · ${(p.bl||[]).length} bloques`:`${esc(f.hl)}: ${esc(f.txt)}`}${f.asumido&&!p?` <span class="hint2">(asumo partido el sábado)</span>`:""}</div>
-  <div class="hrow"><span class="pillw">${isT?untilTxt(dayT,sc.t):"Mar y jue · "+sc.t}</span>${p?`<button class="whi" data-t="popen" data-id="${p.id}">Abrir sesión</button>`:`<button class="whi" data-t="ptoday" data-d="${dayT}">${isT?"Preparar entreno de hoy":"Preparar este entreno"}</button>`}</div></div>`;
+  <div class="hrow"><span class="pillw">${isT?untilTxt(dayT,sc.t):sc.dows.map(i=>DOWL[i]+" "+tdur(i)+" min").join(" · ")+" · "+sc.t}</span>${p?`<button class="whi" data-t="popen" data-id="${p.id}">Abrir sesión</button>`:`<button class="whi" data-t="ptoday" data-d="${dayT}">${isT?"Preparar entreno de hoy":"Preparar este entreno"}</button>`}</div></div>`;
  h+=`<div class="hero2 alt"><div class="hk">Convocatoria</div>${g?`<div class="hb">vs ${esc(g.riv||"rival")}</div><div class="hs">${cap(fmtD(g.d,{weekday:"long",day:"numeric",month:"short"}))}${g.h?" · "+esc(g.h):""}${g.v?" · "+esc(g.v):""} · ${(g.conv||[]).length} convocados · ${(g.xi||[]).filter(Boolean).length}/11 en el once</div><div class="hrow"><span class="pillw">${g.loc==="V"?"Fuera":"Casa"}</span><button class="whi" data-t="conopen" data-id="${g.id}">Montar convocatoria</button></div>`
   :`<div class="hb">Sin partido a la vista</div><div class="hs">Añade el próximo partido para montar convocatoria, once y estrategia.</div><div class="hrow"><span></span><button class="whi" data-t="conopen" data-id="">Añadir partido</button></div>`}</div>`;
  const tile=(k,t,s,warn)=>`<button class="htile ${warn?"warn":""}" data-t="tv" data-v="${k}"><span class="hic">${ICN[k]}</span><b>${t}</b><small>${s}</small></button>`;
@@ -2365,10 +2393,12 @@ function tvHub(){const T=today(),sc=tsch(),isT=isTrainDay(T),dayT=isT?T:nextTrai
  h+=`<div class="htiles">${tile("asi","Asistencia",ss.length?Math.round(pr/tot*100)+" % · 30 días":"Pasar lista",al.length>0)}${tile("pla","Plantilla",S.team.pl.length+" jugadores"+(inj?" · "+inj+" lesionados":""),inj>0)}${tile("piz","Pizarra",S.team.bd.length+" jugadas · estrategia")}${tile("eje","Ejercicios",S.team.ex.length+" fichas")}${tile("par","Partidos",gameStats().pj?gameStats().g+"V "+gameStats().e+"E "+gameStats().p+"D":"Resultados")}${tile("res","Resumen",al.length?al.length+" alertas":"Sin alertas",al.length>0)}</div>`;
  if(al.length)h+=`<div class="card"><h2>Atención <small>faltas</small></h2>${al.slice(0,4).map(a=>`<div class="ev"><span class="t"><b>${esc(a.pl.n)}</b> <span class="hint">${a.pl.p}</span></span><span class="tag" style="color:var(--${a.k})">${a.t}</span></div>`).join("")}</div>`;
  h+=`<div class="card"><h2>Horario de entrenos</h2><div class="dsel">${DOWL.map((l,i)=>`<button class="${sc.dows.includes(i)?"on":""}" data-t="sdow" data-v="${i}" aria-pressed="${sc.dows.includes(i)}">${l}</button>`).join("")}</div>
-  <div class="g2"><div><label>Hora</label><input type="time" data-c="sch" data-k="t" value="${esc(sc.t)}"></div><div><label>Duración (min)</label><input type="text" inputmode="numeric" data-c="sch" data-k="dur" value="${sc.dur}"></div></div>
+  <div class="g2"><div><label>Hora de inicio</label><input type="time" data-c="sch" data-k="t" value="${esc(sc.t)}"></div></div>
+  <div class="g2">${sc.dows.map(i=>`<div><label>Duración del ${DOWN[i]} (min)</label><input type="text" inputmode="numeric" data-c="schd" data-i="${i}" value="${tdur(i)}"></div>`).join("")}</div>
   <div class="hint">Con tu horario, cada día de entreno te preparo la sesión en un toque. La propuesta de cada día (cuánta carga, qué tipo de tareas) sigue la costumbre de los preparadores de academias, según una encuesta a 36 clubes franceses (Douchet 2023); los detalles son criterio propio.</div></div>`;
  return h}
 TA.sdow=b=>{const sc=tsch(),i=+b.dataset.v,a=sc.dows.slice(),j=a.indexOf(i);if(j>=0)a.splice(j,1);else a.push(i);a.sort();S.team.sch=Object.assign({},sc,{dows:a});save();render()};
+TC.schd=t=>{const sc=tsch(),i=+t.dataset.i;S.team.sch=Object.assign({},sc,{durs:Object.assign({},sc.durs,{[i]:Math.max(20,Math.min(240,parseInt(t.value,10)||90))})});save();render()};
 TC.sch=t=>{const sc=tsch();S.team.sch=Object.assign({},sc,{[t.dataset.k]:t.dataset.k==="dur"?Math.max(20,parseInt(t.value,10)||90):t.value});save();render()};
 TA.popen=b=>{const p=S.team.plan.find(x=>x.id===b.dataset.id);if(p){TPD=JSON.parse(JSON.stringify(p));S.ui.tv="ent";window.scrollTo(0,0);render()}};
 TA.ptoday=b=>{TPD=planFor(b.dataset.d);S.ui.tv="ent";window.scrollTo(0,0);render()};
@@ -3078,7 +3108,7 @@ saludHub=function(){const c=ctxNow(),T=c.T,m=loadMargin(),g=gymRec(),pend=postPe
  const ok=m&&m.hi>=10,sl=sleepH(T),lastS=S.sess.filter(x=>x.d<=T&&x.k!=="gym").sort((a,b)=>b.d.localeCompare(a.d))[0],nM=Object.keys(S.mol).filter(d=>d>=shift(T,-3)).reduce((a,d)=>a+S.mol[d].length,0),nx=S.next.filter(x=>x.d>=T).sort((a,b)=>a.d.localeCompare(b.d))[0];
  const gl=S.sess.filter(x=>x.k==="gym").length;
  return seg+post+`<section class="xcta ${ok?"":"off"}"><div class="xh"><span class="xi">${AI.dep}</span><div><small>Hoy, según tu carga</small><b>${ok?"Te caben "+Math.round(m.lo/10)*10+"–"+Math.round(m.hi/10)*10+" UA":"Mejor no sumar carga"}</b></div></div>
-  <p>${m?esc(m.note||"Entre tu semana y el techo ACWR 1,3 (Gabbett 2016)."):"Con unas 3 semanas de sesiones calculo tu margen. Mientras, puedes montarlo a mano."} ${ok&&g.best?"Lo que mejor encaja: "+esc(g.best.lbl)+".":""}</p></section>
+  <p>${m?esc(m.note||"Entre tu semana y el techo ACWR 1,3 (Gabbett 2016)."):"Con unas 3 semanas de sesiones calculo tu margen. Mientras, puedes montarlo a mano."} ${ok&&g.best?"Lo que mejor encaja: "+esc(g.best.lbl)+".":""}</p>${m&&m.exp?`<p class="hint" style="margin:6px 0 0">Doble sesión: si haces fuerza el mismo día que el fútbol, mejor tren superior o ligera, separada unas horas, y sin piernas pesadas antes de entrenar (criterio propio).</p>`:""}</section>
  <h3 class="gh2">Elige qué entreno hacer</h3>
  <button class="opt" data-a="fv" data-v="gym"><span class="hic">${IC2.gym}</span><span class="ot"><b>Fuerza extra</b><small>Eliges músculos, tiempo y objetivo; lo configuro con tu carga y puedes quitar, añadir o cambiar ejercicios.</small></span><i>›</i></button>
  <button class="opt" data-t="goprev"><span class="hic">${IC2.sal}</span><span class="ot"><b>Prevención y core</b><small>Nórdicos, Copenhagen, plancha y glúteo para isquios, ingle y zona media.</small></span><i>›</i></button>
@@ -3144,8 +3174,139 @@ TA.ckskip=()=>{CK.i=4;render()};TA.ckedit=()=>{CK.edit=true;CK.i=0;render()};TA.
 TA.cksh=b=>{const T=today();S.well[T]=Object.assign(S.well[T]||{},{sh:+b.dataset.v});save();render()};
 const _rh3=renderHome;renderHome=function(){_rh3();const el=$("pwell");if(el)el.innerHTML=checkinHtml()};
 
+/* ================= v13.3: calendario más claro (un solo listado por día, filtros por área) ================= */
+let CALF="all";
+const CAL_AREAS={all:["Todo",""],org:["Tareas","org"],dep:["Mi deporte","dep"],eq:["Equipo","eq"]};
+const calShow=ar=>CALF==="all"||(CALF==="org"&&(ar==="org"||ar==="ext"))||CALF===ar;
+function calItems(d){const T=today(),o=[],tr=trainOn(d);
+ if(tr&&!tr.can)o.push({ar:"dep",t:tr.t,e:tr.e||"",txt:"Mi entreno",sub:"Fútbol",btn:["tskip","Cancelar",d]});
+ if(tr&&tr.can)o.push({ar:"dep",t:tr.t,txt:"Mi entreno",sub:"Cancelado",muted:1,btn:["trest","Restaurar",d]});
+ S.next.filter(x=>x.d===d).forEach(x=>o.push({ar:"dep",t:x.t||"",txt:(x.loc==="V"?"@ ":"vs ")+(x.riv||"Rival"),sub:"Mi partido"+(x.comp?" · "+x.comp:""),match:1,btn:d<=T?["nextReg","Registrar",x.id]:null}));
+ const hh=tsch().t;
+ S.team.plan.filter(p=>p.d===d).forEach(p=>{const h=p.h||hh;o.push({ar:"eq",t:h,e:addHM(h,tdur(d)),txt:"Entreno del equipo",sub:p.tp||"Sesión preparada",at:`data-t="popen" data-id="${p.id}"`})});
+ if(isTrainDay(d)&&!planOn(d))o.push({ar:"eq",t:hh,e:addHM(hh,tdur(d)),txt:"Entreno del equipo",sub:"Sin preparar · toca para prepararlo",at:`data-t="ptoday" data-d="${d}"`});
+ S.team.games.filter(g=>g.d===d).forEach(g=>o.push({ar:"eq",t:g.h||"",txt:(g.loc==="V"?"@ ":"vs ")+(g.riv||"Rival"),sub:"Partido del equipo"+(g.j?" · J"+g.j:"")+(g.v?" · "+g.v:""),match:1,at:`data-t="conopen" data-id="${g.id}"`}));
+ extOn(d).forEach(x=>o.push({ar:"ext",t:x.allday?"":x.t,txt:x.title,sub:x.allday?"Todo el día":(x.loc||"Calendario")}));
+ return o.sort((a,b)=>(a.t||"99:99").localeCompare(b.t||"99:99"))}
+const calTasks=d=>{const T=today();return S.notes.filter(n=>n.task&&(n.due===d||(d===T&&!n.done&&n.due&&n.due<T))).sort(noteSort)};
+function calRow(x,mini){const inner=`<time>${x.t?x.t:"Día"}${x.e?`<i>${x.e}</i>`:""}</time><span class="cm"><b>${esc(x.txt)}</b>${x.sub?`<small>${esc(x.sub)}</small>`:""}</span>`;
+ const main=x.at?`<button class="cmain" ${x.at}>${inner}</button>`:`<div class="cmain">${inner}</div>`;
+ return `<div class="crow ${x.ar} ${x.muted?"muted":""} ${x.match?"match":""} ${mini?"mini":""}">${main}${x.btn&&!mini?`<button class="ghost mini" data-a="${x.btn[0]}" data-id="${x.btn[2]}">${x.btn[1]}</button>`:""}</div>`}
+function calDots(d){const T=today(),tk=S.notes.filter(n=>n.task&&n.due===d),open=tk.filter(x=>!x.done),late=open.length&&d<T,it=calItems(d),o=[];
+ if(calShow("org")&&(tk.length||it.some(x=>x.ar==="ext")))o.push(`<i class="dt ${late?"late":open.length||it.some(x=>x.ar==="ext")?"":"done"}"></i>`);
+ if(calShow("dep")&&(it.some(x=>x.ar==="dep")||S.sess.some(x=>x.d===d)))o.push(`<i class="dd"></i>`);
+ if(calShow("eq")&&it.some(x=>x.ar==="eq"))o.push(`<i class="de"></i>`);
+ return{dots:o.join(""),match:it.some(x=>x.match&&calShow(x.ar))}}
+renderCal=function(){const T=today(),[y,m]=CAL.split("-").map(Number),lead=dow(CAL+"-01"),dim=new Date(y,m,0).getDate();
+ $("cmon").textContent=cap(MESES[m-1])+" "+y;
+ let g=["L","M","X","J","V","S","D"].map(n=>`<div class="cw">${n}</div>`).join("");for(let i=0;i<lead;i++)g+="<div></div>";
+ for(let k=1;k<=dim;k++){const d=CAL+"-"+String(k).padStart(2,"0"),c=calDots(d);
+  g+=`<button class="cd2 ${d===T?"today":""} ${d===SEL?"sel":""} ${c.match?"m":""}" data-a="cday" data-v="${d}" aria-label="${esc(fmtD(d,{weekday:"long",day:"numeric",month:"long"}))}"><span class="n">${k}</span><span class="dots">${c.dots}</span></button>`}
+ $("cgrid").innerHTML=`<div class="cfil" role="group" aria-label="Qué ver">${Object.keys(CAL_AREAS).map(k=>`<button class="${CALF===k?"on":""} ${CAL_AREAS[k][1]}" data-t="calf" data-v="${k}">${k==="all"?"":'<i></i>'}${CAL_AREAS[k][0]}</button>`).join("")}</div><div class="cgrid">${g}</div>`;
+ const d=SEL,sess=S.sess.filter(x=>x.d===d),items=calItems(d).filter(x=>calShow(x.ar)),tks=calShow("org")?calTasks(d):[];
+ $("cdt").textContent=cap(fmtD(d,{weekday:"long",day:"numeric",month:"long"}))+(d===T?" · hoy":"");
+ $("cq").placeholder=d===T?"Añadir tarea para hoy…":"Añadir tarea para el "+fmtD(d)+"…";
+ let h="";
+ if(items.length)h+=`<div class="clist">${items.map(x=>calRow(x)).join("")}</div>`;
+ if(tks.length)h+=`<h3>Tareas</h3>`+tks.map(noteRow).join("");
+ if(CALF!=="org"&&CALF!=="eq"&&sess.length)h+=`<h3>Hecho</h3>`+sess.map(sessRow).join("");
+ const planned=(trainOn(d)&&!trainOn(d).can)||S.next.some(x=>x.d===d);
+ if(d<=T&&planned&&!sess.length&&calShow("dep"))h+=`<div class="ctell"><span>Entreno sin contar</span><button class="pri" data-t="postgo" data-d="${d}">Contar el entreno</button></div>`;
+ if(!h)h=`<div class="empty">Nada este día. Añade una tarea abajo.</div>`;
+ const hq=hooper(d),mol=S.mol[d]||[];
+ if(hq!==null||mol.length||(S.well[d]&&S.well[d].sh!=null))h+=`<h3>Cuerpo</h3><div class="hint" style="margin:0">${hq!==null?"Chequeo: "+hq+"/28. ":""}${S.well[d]&&S.well[d].sh!=null?"Sueño: "+num(S.well[d].sh)+" h. ":""}${mol.length?"Molestias: "+esc(mol.map(x=>molTxt(x)+" "+x.n+"/10").join(", "))+".":""}</div>`;
+ $("cday").innerHTML=h;
+ let nx="",shown=0;for(let i=0;i<8&&shown<10;i++){const dd=shift(T,i);if(dd===SEL)continue;
+  const its=calItems(dd).filter(x=>calShow(x.ar)),tks2=calShow("org")?S.notes.filter(n=>n.task&&!n.done&&(n.due===dd||(i===0&&n.due&&n.due<T))):[];if(!its.length&&!tks2.length)continue;
+  shown+=its.length+tks2.length;
+  nx+=`<button class="cnh" data-a="cday" data-v="${dd}"><b>${i===0?"Hoy":i===1?"Mañana":cap(fmtD(dd,{weekday:"long",day:"numeric",month:"short"}))}</b><span>${its.length+tks2.length}</span></button><div class="clist">${its.map(x=>calRow(x,1)).join("")}${tks2.slice(0,3).map(n=>`<div class="crow org mini"><div class="cmain"><time>tarea</time><span class="cm"><b>${esc(n.x)}</b></span></div></div>`).join("")}</div>`}
+ $("cnext").innerHTML=nx||`<div class="empty">Sin nada más en los próximos días.</div>`};
+TA.calf=b=>{CALF=b.dataset.v;render()};
+TA.postgo=b=>{pfNew(b.dataset.d);S.ui.main="fut";S.ui.fv="hub";S.ui.dv="res";window.scrollTo(0,0);save();render()};
+
+/* ================= v13.3: registro de sesión completo, pendientes visibles, doble sesión ================= */
+/* ---- Días con entreno o partido sin contar (hoy y 3 días atrás) ---- */
+function pendDays(){const T=today(),now=hhmm(),out=[];
+ for(let i=3;i>=0;i--){const d=shift(T,-i),tr=trainOn(d),mt=S.next.find(x=>x.d===d),pl=(tr&&!tr.can)?"ent":mt?"par":"";if(!pl)continue;
+  if((S.ui.pkd||{})[d]||(d===T&&S.ui.pk===T))continue;if(S.sess.some(x=>x.d===d&&x.k!=="gym"&&x.k!=="rec"))continue;
+  const ended=d<T||(pl==="ent"?now>=addHM(tr.e||addHM(tr.t,90),-10):now>="13:00");if(ended)out.push(d)}
+ return out}
+postPending=function(){const l=pendDays();return l.length?{tr:trainOn(l[0]),end:"",dt:l[0],n:l.length}:null};
+
+/* ---- Formulario completo tras el entreno ---- */
+const PF_PA=[["t","Todo"],["p","Parte"],["l","Limitado"]];
+const PF_CX=[["pos","Juego de posición"],["tac","Táctica"],["fis","Velocidad y fuerza"],["tec","Técnica"],["jr","Juego reducido"],["abp","Balón parado"],["fin","Finalización"]];
+const _pfN2=pfNew;pfNew=function(dd){_pfN2(dd);PF.pa="t";PF.rb=0;PF.rl=0;PF.cx=[]};
+function sc5(k,lab,lo,hi,bad){const p=PF;return `<div class="s5"><div class="s5h"><b>${lab}</b><small>${p[k]?p[k]+"/5":""}</small></div><div class="s5b">${[1,2,3,4,5].map(n=>{const g=bad?5-n:n-1;return `<button class="${p[k]===n?"on":""}" style="--k:hsl(${Math.round(g/4*125)} 65% 48%)" data-t="pfs" data-k="${k}" data-v="${n}" aria-label="${lab} ${n} de 5">${n}</button>`}).join("")}</div><div class="s5l"><span>${lo}</span><span>${hi}</span></div></div>`}
+postCard=function(){if(!PF){const pd=pendDays();pfNew(pd[0]||"")}const p=PF,pend=postPending(),isP=pend&&pend.dt===p.dt;
+ const ch=(k,v,l)=>`<button class="${p[k]===v?"on":""}" data-t="pfs" data-k="${k}" data-v="${v}">${l}</button>`;
+ const when=p.dt===today()?"hoy":cap(fmtD(p.dt,{weekday:"long",day:"numeric",month:"short"}));
+ return `<div class="card post"><h2>${isP?"Cuenta el entreno":"Registrar sesión"} <small>${esc(when)}${isP&&pend.n>1?" · "+pend.n+" pendientes":""}</small></h2>
+ <div class="hint pfi">Tarda menos de un minuto. Con esto calculo tu carga, cómo llegas a cada sesión y qué te conviene después.</div>
+ <div class="pfh">La sesión</div><div class="seg2">${[["ent","Fútbol"],["par","Partido"],["gym","Gimnasio"],["otro","Otro"]].map(x=>ch("k",x[0],x[1])).join("")}</div>
+ <div class="row2"><span class="lb2">Duración</span><span class="step"><button data-t="pfm" data-v="-5" aria-label="Menos 5 minutos">−</button><b>${p.m} min</b><button data-t="pfm" data-v="5" aria-label="Más 5 minutos">+</button></span></div>
+ <div class="lb2" style="margin-top:8px">¿Cuánto hiciste? <small>participación</small></div><div class="seg2">${PF_PA.map(x=>ch("pa",x[0],x[1])).join("")}</div>
+ <div class="pfh">Intensidad</div>
+ <div class="lb2">Esfuerzo de toda la sesión <small>${p.r?RPEL[p.r]:"1 muy fácil · 10 máximo"}</small></div>${p.rs?`<div class="hint sugh">Te he puesto un ${p.r} como punto de partida. Cámbialo si no fue así.</div>`:""}
+ <div class="rpe10">${[1,2,3,4,5,6,7,8,9,10].map(n=>`<button class="${p.r===n?"on":""}" data-t="pfs" data-k="r" data-v="${n}">${n}</button>`).join("")}</div>
+ ${sc5("rb","Respiración: ¿cuánto te faltó el aire?","Nada","Muchísimo",1)}${sc5("rl","Piernas: ¿cuánto te pesaron?","Nada","Muchísimo",1)}
+ <div class="pfh">Qué trabajasteis <small>elige lo que hubo</small></div><div class="zch">${PF_CX.map(x=>`<button class="${p.cx.includes(x[0])?"on":""}" data-t="pfc" data-v="${x[0]}">${x[1]}</button>`).join("")}</div>
+ <div class="pfh">Cómo te sientes</div>
+ ${sc5("en","Energía al empezar","Sin energía","A tope")}${sc5("fl","Fatiga de piernas al acabar","Frescas","Reventadas",1)}${sc5("pf","Rendimiento: cómo jugaste o entrenaste","Flojo","Excelente")}
+ ${p.k==="par"?`<div class="pfh">El partido</div><div class="g2"><div><label>Rival</label><input type="text" data-c="pf" data-k="riv" value="${esc(p.riv)}"></div><div><label>Resultado (nosotros–rival)</label><div class="sc"><input type="text" inputmode="numeric" maxlength="2" data-c="pf" data-k="gf" value="${p.gf}"><i>–</i><input type="text" inputmode="numeric" maxlength="2" data-c="pf" data-k="gc" value="${p.gc}"></div></div></div>
+ <div class="g2"><div><label>Tus goles</label><input type="text" inputmode="numeric" data-c="pf" data-k="g" value="${p.g||""}"></div><div><label>Asistencias</label><input type="text" inputmode="numeric" data-c="pf" data-k="a" value="${p.a||""}"></div></div>`:""}
+ <div class="pfh">Molestias <small>toca: leve → fuerte → quitar</small></div>
+ <div class="zch">${ZONAS.map(z=>`<button class="${p.z[z[0]]?(p.z[z[0]]>=5?"hi":"on"):""}" data-t="pfz" data-v="${z[0]}">${z[1]}${p.z[z[0]]?(p.z[z[0]]>=5?" · fuerte":" · leve"):""}</button>`).join("")}</div>
+ <input type="text" data-c="pf" data-k="nt" value="${esc(p.nt)}" placeholder="Nota (opcional)" style="margin-top:10px">
+ ${p.err?`<div class="formerr" role="alert" id="pferr">${esc(p.err)}</div>`:""}
+ <div class="foot"><button class="ghost" data-t="pfskip">${isP?"Hoy no he entrenado":"Cancelar"}</button><button class="pri" data-t="pfsave">Guardar sesión</button></div></div>`};
+TA.pfs=function(b){const k=b.dataset.k,v=+b.dataset.v||b.dataset.v;
+ if(k==="r"){PF.r=v;PF.rs=0;PF.err=""}else if(["en","fl","pf","rb","rl"].includes(k))PF[k]=PF[k]===v?0:v;
+ else if(k==="k"){PF.k=v;if(PF.rs)PF.r=RPE_SUG[v]||6}else PF[k]=v;render()};
+TA.pfc=b=>{const v=b.dataset.v,i=PF.cx.indexOf(v);if(i>=0)PF.cx.splice(i,1);else PF.cx.push(v);render()};
+const _pfsave0=TA.pfsave;
+TA.pfsave=function(){const p=PF,n0=S.sess.length;_pfsave0.call(this);
+ if(S.sess.length>n0){const o=S.sess[S.sess.length-1];if(p.pa&&p.pa!=="t")o.pa=p.pa;if(p.rb)o.rb=p.rb;if(p.rl)o.rl=p.rl;if(p.cx&&p.cx.length)o.cx=p.cx.slice();save()}};
+/* en la lista de sesiones: participación, respiración y piernas */
+const _sessRow0=sessRow;sessRow=function(x){let h=_sessRow0(x);const e=[];
+ if(x.pa==="p")e.push("participación parcial");if(x.pa==="l")e.push("limitado");if(x.rb)e.push("respiración "+x.rb+"/5");if(x.rl)e.push("piernas "+x.rl+"/5");if(x.cx&&x.cx.length)e.push(x.cx.map(c=>(PF_CX.find(y=>y[0]===c)||[0,c])[1].toLowerCase()).join(", "));
+ return e.length?h.replace(/<\/div>$/,`<div class="hint" style="margin:0 0 6px 4px">${esc(e.join(" · "))}</div></div>`):h};
+
+/* ---- Insignia en la pestaña Deporte ---- */
+const _rn4=render;render=function(){_rn4();try{const b=document.querySelector('#mtabs button[data-v="fut"]');if(b){const n=pendDays().length;b.classList.toggle("pend",n>0);b.setAttribute("aria-label",n?"Deporte, "+n+(n===1?" sesión":" sesiones")+" por contar":"Deporte")}}catch(e){}};
+
+/* ---- Lo que se aprende de tus sesiones de fútbol ---- */
+function sessInsights(){const T=today(),L=S.sess.filter(x=>(x.k==="ent"||x.k==="par")&&x.d>=shift(T,-27)&&x.d<=T).sort((a,b)=>a.d.localeCompare(b.d));if(!L.length)return null;
+ const av=k=>{const v=L.map(x=>x[k]).filter(x=>x>0);return v.length?avg(v):null},both=L.filter(x=>x.rb&&x.rl),legs=both.filter(x=>x.rl-x.rb>=1).length,air=both.filter(x=>x.rb-x.rl>=1).length;
+ const last3=L.slice(-3),tired=last3.filter(x=>x.fl>=4).length,lim=L.slice(-5).filter(x=>x.pa&&x.pa!=="t").length;
+ const tags={};L.forEach(x=>(x.cx||[]).forEach(c=>tags[c]=(tags[c]||0)+1));
+ return{L,n:L.length,min:avg(L.map(x=>x.m)),r:avg(L.map(x=>x.r)),en:av("en"),fl:av("fl"),pf:av("pf"),rb:av("rb"),rl:av("rl"),both:both.length,legs,air,tired,lim,tags,last3}}
+function insightCard(){const I=sessInsights();
+ if(!I)return `<div class="card hs-in"><h2>Tus entrenos</h2><div class="empty">Cuando cuentes tus primeras sesiones, aquí verás cómo llegas, cuánto te cuestan y qué te dejan en las piernas.</div></div>`;
+ const t=(l,v,s)=>`<div class="hst"><span>${l}</span><b>${v}</b><em>${s}</em></div>`,say=[];
+ if(I.both>=3){if(I.legs>=I.both*.6)say.push(`En ${I.legs} de tus ${I.both} últimas sesiones las piernas pesaron más que la respiración: apunta a fatiga muscular más que de cardio. (RPE diferencial: McLaren et al. 2016, Int J Sports Physiol Perform; la lectura es criterio propio.)`);else if(I.air>=I.both*.6)say.push(`En ${I.air} de ${I.both} sesiones la respiración pesó más que las piernas: el cardio es lo que más te exige. (RPE diferencial: McLaren et al. 2016; lectura: criterio propio.)`)}
+ if(I.en!=null&&I.en<=2.5)say.push("Sueles llegar con poca energía al entreno: revisa el sueño y la comida previa. (Criterio propio.)");
+ if(I.tired>=2)say.push("Acabas con las piernas muy cargadas en "+I.tired+" de tus últimas 3 sesiones: cuida la recuperación y no sumes piernas pesadas. (Criterio propio.)");
+ if(I.lim>=2)say.push("Has entrenado limitado en "+I.lim+" de tus últimas 5 sesiones: si es por una molestia, mira «Cuerpo». (Criterio propio.)");
+ const top=Object.entries(I.tags).sort((a,b)=>b[1]-a[1])[0];
+ return `<div class="card hs-in"><h2>Tus entrenos <small>últimas 4 semanas</small></h2><div class="hs-grid3">${t("Sesiones",I.n,Math.round(I.min)+" min de media")}${t("Esfuerzo",num(I.r),"de 10")}${t("Energía al llegar",I.en!=null?num(I.en)+"/5":"—","sin datos")}${t("Piernas al acabar",I.fl!=null?num(I.fl)+"/5":"—","1 frescas · 5 reventadas")}${t("Respiración",I.rb!=null?num(I.rb)+"/5":"—","1 nada · 5 mucho")}${t("Rendimiento",I.pf!=null?num(I.pf)+"/5":"—","cómo jugaste")}</div>
+ ${top?`<div class="hint">Lo que más trabajas: ${esc((PF_CX.find(y=>y[0]===top[0])||[0,top[0]])[1].toLowerCase())}.</div>`:""}${say.map(x=>`<p class="insay">${esc(x)}</p>`).join("")}</div>`}
+const _hd2=healthDash;healthDash=function(){return _hd2().replace('<div class="card hs-ch">',insightCard()+'<div class="card hs-ch">')};
+
+/* ---- Recomendaciones que usan tus registros ---- */
+const _hr2=healthRecs;healthRecs=function(M){const R=_hr2(M),I=sessInsights();
+ if(I&&I.tired>=2)R.push({pr:88,tag:"Soltar",t:"Tus piernas acaban muy cargadas",why:"En "+I.tired+" de tus últimas 3 sesiones marcaste piernas 4 o 5 de 5.",x:"Esta semana baja las series de piernas en el gimnasio, duerme lo que necesitas y haz 10–15 min de movilidad suave al terminar.",src:"Criterio propio, sin validar (parte de tu propio registro)"});
+ if(I&&I.lim>=2)R.push({pr:84,tag:"Consulta",t:"Estás entrenando limitado",why:"Has hecho una parte o una versión limitada de "+I.lim+" de tus últimas 5 sesiones.",x:"Si es por una molestia, anótala en cada sesión; si dura más de unos días, que la vea un fisio.",src:"Criterio prudente propio"});
+ if(M.c&&expFootUA(today())>0&&M.lv==="ok")R.push({pr:62,tag:"Carga",t:"Hoy tienes fútbol: si quieres doble sesión, que sea ligera",why:"Ya cuentan unas "+Math.round(expFootUA(today()))+" UA previstas de tu entreno.",x:"Haz fuerza de tren superior o ligera, separada unas horas del fútbol, y evita piernas pesadas antes de entrenar. Te quedan pocas UA: míralas en Entrenos.",src:"Margen: Gabbett 2016 (ACWR). Orden y separación: criterio propio",go:"gym"});
+ return R.sort((a,b)=>b.pr-a.pr)};
+
+/* ---- Doble sesión: la carga prevista del fútbol de hoy ya cuenta ---- */
+function expFootUA(d){const tr=trainOn(d);if(!tr||tr.can)return 0;if(S.sess.some(x=>x.d===d&&(x.k==="ent"||x.k==="par")))return 0;
+ const mins=tr.e?Math.max(30,durHM(tr.t,tr.e)):90,rs=S.sess.filter(x=>x.k==="ent"&&x.r>0&&x.d<d).sort((a,b)=>b.d.localeCompare(a.d)).slice(0,8).map(x=>x.r).sort((a,b)=>a-b),med=rs.length?rs[Math.floor(rs.length/2)]:6;return mins*med}
+const _lm2=loadMargin;loadMargin=function(){const m=_lm2();if(!m)return m;const e=expFootUA(today());if(e>0){m.exp=e;m.hi=Math.max(0,m.hi-e);m.lo=Math.min(m.lo,m.hi);m.note="Hoy ya tienes fútbol (unas "+Math.round(e)+" UA previstas): lo que queda es para un extra. "+(m.note||"")}return m};
+
 /* ---------- Arranque ---------- */
-const VER="13.0 (3 nov 2026)";
+const VER="13.3 (3 nov 2026)";
 (function init(){const T=today();["sd","md","id0","pvd","kd"].forEach(i=>$(i).value=T);
  $("st").value="";
  $("mz").innerHTML=$("iz").innerHTML=ZONAS.map(z=>`<option value="${z[0]}">${z[1]}</option>`).join("");

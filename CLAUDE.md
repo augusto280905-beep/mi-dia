@@ -70,3 +70,5 @@ Tarjeta «Calendario externo» en el Panel. La dirección secreta iCal (`https:/
 ## Pendiente
 1. Desplegar y probar push en el Supabase real (SQL + función) y en el iPhone.
 2. Tras cada cambio: `npm test`, subir VER y caché del SW, commit y push.
+
+- v13.3 (p12f, p12g): duración del entreno del equipo por día (`tdur`, `S.team.sch.durs`: martes 90, jueves 120; `planFor` escala los bloques). Calendario nuevo: filtros por área (`CALF`), cuadrícula `.cd2` con puntos `.dt/.dd/.de`, lista única por día (`calItems`), banner «Contar el entreno» (`TA.postgo`). Registro de sesión completo (`postCard`): participación `pa`, respiración `rb`, piernas `rl` (1–5, 5 = mucho), contenido `cx`; el `fl` del formulario nuevo es 1 = frescas … 5 = reventadas (sesiones antiguas usaban caras). Pendientes: `pendDays()` (hoy y 3 días atrás), punto rojo en la pestaña Deporte, aviso push +15 min. Panel: `sessInsights`/`insightCard`; `healthRecs` usa los registros; doble sesión: `expFootUA` resta del margen `loadMargin` el fútbol previsto de hoy. RPE diferencial: McLaren 2016 (cita con confianza moderada); lecturas = criterio propio. Pruebas: `tests/v133.test.js`.
