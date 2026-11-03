@@ -13,7 +13,7 @@ function mockFetch(url,o){o=o||{};const u=new URL(url),p=u.pathname,m=o.method||
  if(p==="/rest/v1/push_subs"){srv.subs[body&&body.endpoint||u.search]=body;if(m==="DELETE"){srv.subs={}}return R(201,{})}
  if(p==="/rest/v1/reminders"){
   if(m==="GET")return R(200,Object.values(srv.rem).filter(r=>!r.sent));
-  if(m==="POST"){(Array.isArray(body)?body:[body]).forEach(r=>srv.rem[r.key]=r);return R(201,{})}
+  if(m==="POST"){(Array.isArray(body)?body:[body]).forEach(r=>{srv.rem[r.key]=r;(srv.posted=srv.posted||[]).push(r.key)});return R(201,{})}
   if(m==="DELETE"){const l=decodeURIComponent(u.searchParams.get("key")).replace(/^in\.\(|\)$/g,"").split(",").map(s=>s.replace(/"/g,""));l.forEach(k=>delete srv.rem[k]);return R(204,{})}}
  return R(404,{})}
 function device(perm){const store={};let subbed=null;const dom=new JSDOM(html,{runScripts:"dangerously",url:"https://x.github.io/mi-dia/",virtualConsole:vc,pretendToBeVisual:true,beforeParse(w){
@@ -55,10 +55,10 @@ function device(perm){const store={};let subbed=null;const dom=new JSDOM(html,{r
  await sleep(5200);
  t("avisos programados subidos",!!srv.rem["td:"+dTask]&&!!srv.rem["m1:m1"]&&Object.keys(srv.rem).length>=B.length-2,Object.keys(srv.rem).length+" vs "+B.length);
  /* completar tarea → se borra el aviso; sin reenviar lo que no cambió */
- srv.calls.length=0;
+ srv.calls.length=0;srv.posted=[];
  ev(`S.notes.find(n=>n.id==="t1").done=true;save()`);await sleep(7800);
  t("completar la tarea borra su aviso",!srv.rem["td:"+dTask],srv.calls.join(" | ")+" busy="+ev("pnBusy")+" msg="+ev("pnMsg"));
- t("solo cambia lo necesario (sin reenviar todo)",!srv.calls.some(c=>c.startsWith("POST /rest/v1/reminders")),srv.calls.join(" | "));
+ t("solo cambia lo necesario (sin reenviar todo)",(srv.posted||[]).every(k=>/^inf:/.test(k))&&(srv.posted||[]).length<=3,(srv.posted||[]).join(",")+" | "+srv.calls.join(" | "));
  /* prueba */
  ev("pnTest()");await sleep(60);
  t("botón de prueba crea un aviso inmediato",Object.keys(srv.rem).some(k=>k.startsWith("test:"))&&new Date(Object.values(srv.rem).find(r=>r.key.startsWith("test:")).at).getTime()<=Date.now());

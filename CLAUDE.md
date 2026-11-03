@@ -55,6 +55,14 @@ Tarjeta «Calendario externo» en el Panel. La dirección secreta iCal (`https:/
 - Deporte: el menú es «Mi semana» (`weekStrip`: entrenos del calendario `S.sched` y partidos; `!` = entreno por contar, abre `postCard` de ese día; `S.ui.pkd` = descartados), tarjeta «Entreno extra» (margen `loadMargin()`), Cuerpo (sueño, lesiones), Registro, Guías. Sin «Físico»/peso ni «Plan de hoy» en el menú (las vistas `hoy`/`fis` siguen en el código, sin enlace).
 - Entreno extra: `loadWhy(plan)` explica cada carga con su fuente (Rønnestad 2011, ACSM 2009, Schoenfeld 2017/2016, Zourdos 2016, Gabbett 2016) o «criterio propio».
 
+## v13: calendario del equipo, Salud «Cómo estás», convocatoria, informe 23:00
+- `TFX` + `tfxSeed()` (p12b): calendario de SD Alsasua, Segunda Juvenil Grupo 5 (futnavarra.es, competición 22841486, grupo 22952004, temporada 2026-27) sembrado en `S.team.games` con ids `tf<jornada>` (campos `j` jornada, `v` campo, `src:"fn"`). No pisa ediciones ni resucita borrados. Resultados NO cargados: la web los ofusca (dígitos por CSS); se anotan a mano. Para actualizar horarios/campos: abrir futnavarra en el navegador integrado, leer cada partido y editar `TFX`.
+- Convocatoria profesional: `cvPoster` (canvas 1080×1350), `cvTexto` (WhatsApp), datos en `g.cx={cit,cl,kit,nt}`; se comparte con `navigator.share` (archivo) o se descarga.
+- Salud: `hmod()` (estado a partir de sesiones, molestias, sueño, partidos), `healthRecs()` (consejos con fuente o «criterio propio»), `healthDash()`. Inicio sin tarjetas de áreas: `homeMatches`, `homeWeek`, `homeRec`.
+- Registro: «Mis sesiones» ahora muestra el formulario (antes `postopen` no pintaba nada ahí); esfuerzo sugerido por tipo, error visible, límite 4 sesiones/día.
+- Informe: aviso `inf:` a las 23:00 (migra 21:30), texto = agenda de mañana (`repPush`, calculado al sincronizar; sin datos de salud).
+- Pruebas: `tests/v13.test.js` (con canvas simulado).
+
 ## Pendiente
 1. Desplegar y probar push en el Supabase real (SQL + función) y en el iPhone.
 2. Tras cada cambio: `npm test`, subir VER y caché del SW, commit y push.

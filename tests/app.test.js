@@ -74,8 +74,8 @@ t("cuestionario: total 10/28",/10<\/b>\/28/.test($("fwell").innerHTML),$("fwell"
 console.log("\n4. Registrar sesiones");
 goF("reg");
 const setv=(id,v)=>{$(id).value=v;chg($(id))};
-click(A("sadd"));t("exige minutos",/minutos/.test(txt("toast")));
-setv("sm","90");click(A("sadd"));t("exige esfuerzo",/esfuerzo/.test(txt("toast")));
+setv("sm","");click(A("sadd"));t("exige minutos",/minutos/.test(txt("toast"))&&/minutos/.test($("shint").textContent),txt("toast"));
+setv("sm","90");ev("RPE=0");click(A("sadd"));t("exige esfuerzo",/esfuerzo/.test(txt("toast"))&&/esfuerzo/.test($("shint").textContent),txt("toast"));
 click(A("rpe",'[data-v="6"]'));setv("sd",sh(1));click(A("sadd"));t("no admite futuro",/futura/.test(txt("toast")));
 // 28 días de historial para tener base
 const hist=[];for(let i=35;i>=8;i--){const dd=sh(-i);if([1,2,4].includes(ev(`dow("${dd}")`)))hist.push({id:"h"+i,d:dd,t:"20:00",k:"ent",m:90,r:6,n:""})}
@@ -83,7 +83,7 @@ ev(`S.sess.push(...${JSON.stringify(hist)});save();render()`);
 setv("sd",T);setv("sm","90");click(A("rpe",'[data-v="6"]'));setv("sk","ent");click(A("sadd"));
 t("guarda entreno (540 UA)",ev("S.sess.filter(x=>x.d==='"+T+"').length")===1&&/540 UA/.test($("slist").textContent),$("slist").textContent);
 setv("sm","30");click(A("rpe",'[data-v="3"]'));click(A("sadd"));t("segunda sesión del día OK",ev("S.sess.filter(x=>x.d==='"+T+"').length")===2);
-setv("sm","30");click(A("rpe",'[data-v="3"]'));click(A("sadd"));t("tercera bloqueada",/Máximo 2/.test(txt("toast"))&&ev("S.sess.filter(x=>x.d==='"+T+"').length")===2);
+setv("sm","30");click(A("rpe",'[data-v="3"]'));ev(`S.sess.push({id:"x1",d:"${T}",t:"",k:"otro",m:10,r:3,n:""},{id:"x2",d:"${T}",t:"",k:"otro",m:10,r:3,n:""})`);setv("sm","30");click(A("rpe",'[data-v="3"]'));click(A("sadd"));t("quinta del día bloqueada (máx. 4)",/Ya hay 4/.test(txt("toast"))&&ev("S.sess.filter(x=>x.d===\'"+T+"\').length")===4);ev("S.sess=S.sess.filter(x=>x.id!=='x1'&&x.id!=='x2');save();render()");
 t("el formulario de partido sale solo con «Partido»",$("pf").hidden);
 const matchDay=sh(-3);
 setv("sk","par");t("campos de partido visibles",!$("pf").hidden);
