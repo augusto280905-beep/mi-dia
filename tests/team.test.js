@@ -20,15 +20,15 @@ function boot(store,ss){const dom=new JSDOM(html,{runScripts:"dangerously",url:"
  t("arranca en Hoy y existe el arranque animado",ev("S.ui.main")==="panel"&&!!$("splash")&&d.body.classList.contains("boot"));
  await sleep(3700);
  t("el arranque animado se retira solo",!$("splash")&&!d.body.classList.contains("boot"));
- t("barra: Hoy, Equipo, Calendario, Notas, Mi fútbol",[...d.querySelectorAll("#mtabs button")].map(b=>b.textContent.trim()).join()==="Hoy,Equipo,Calendario,Notas,Mi fútbol",[...d.querySelectorAll("#mtabs button")].map(b=>b.textContent.trim()).join());
+ t("barra: Hoy, Agenda, Salud, Entrenador",[...d.querySelectorAll("#mtabs button")].map(b=>b.textContent.trim()).join()==="Hoy,Agenda,Salud,Entrenador",[...d.querySelectorAll("#mtabs button")].map(b=>b.textContent.trim()).join());
  /* plantilla */
  const pl=ev("S.team.pl");
  t("plantilla inicial: 24 jugadores con sus posiciones",pl.length===24&&pl.filter(p=>p.p==="P").length===3&&pl.filter(p=>p.p==="DC").length===2&&pl.find(p=>p.n==="Hegoi").p==="P"&&pl.find(p=>p.n==="Egoi").p==="ED"&&pl.find(p=>p.n==="M.Arregi").p==="DFCI"&&pl.find(p=>p.n==="Neko").p==="LI");
  t("posiciones: 3P 3LD 2DFCI 3DFCD 2LI 4MCD 1MCO 2EI 2DC 2ED",["P:3","LD:3","DFCI:2","DFCD:3","LI:2","MCD:4","MCO:1","EI:2","DC:2","ED:2"].every(x=>{const[c,n]=x.split(":");return pl.filter(p=>p.p===c).length===+n}));
  ev("render()");
- t("Hoy: muestra «Lo siguiente», accesos rápidos y tarjeta de equipo",/Lo siguiente/.test($("hnext").textContent)&&d.querySelectorAll("#hqa button").length===6&&!$("hteam").hidden);
+ t("Hoy: muestra «Lo siguiente», accesos rápidos y carga recomendada (sin asistencia)",/Lo siguiente/.test($("hnext").textContent)&&d.querySelectorAll("#hqa button").length===6&&$("hteam").hidden&&/Carga recomendada/.test($("hload").textContent));
  /* sin datos de asistencia */
- t("Hoy: sin entrenos invita a pasar lista",/Pasa lista/.test($("hteam").textContent));
+ t("Hoy: sin sesiones explica que falta base",/base|Descanso|UA/.test($("hload").textContent));
  /* ir a Equipo */
  tab("eq");t("Equipo: 7 apartados",d.querySelectorAll("#tnav .chip").length===7&&/24 jugadores/.test($("tsub").textContent));
  t("Resumen sin datos no falla",/Asistencia a entrenos/.test($("tview").textContent));
@@ -53,7 +53,7 @@ function boot(store,ss){const dom=new JSDOM(html,{runScripts:"dangerously",url:"
  /* resumen y Hoy */
  sub("res");t("Resumen: ranking por jugador con porcentajes y alerta de Aitor",/Aitor/.test($("tview").textContent)&&/ausencias seguidas/.test($("tview").textContent)&&d.querySelectorAll("#tview .pr").length===24);
  t("Resumen: Aitor sale primero (menor asistencia)",d.querySelector("#tview .pr .nm b").textContent==="Aitor");
- tab("panel");t("Hoy: tarjeta de equipo muestra la atención sobre Aitor",/Aitor/.test($("hteam").textContent)&&/Atención/.test($("hteam").textContent));
+ tab("panel");t("Hoy: ya no muestra asistencia de los juveniles",!/Asistencia|Atención/.test(d.querySelector('[data-main="panel"]').textContent));
  /* ficha de jugador */
  tab("eq");sub("res");click(d.querySelector(`#tview .pr[data-id="${id("Aitor")}"]`));
  t("ficha de jugador con estadísticas e historial",/Aitor/.test($("tview").textContent)&&/Últimos entrenos/.test($("tview").textContent)&&d.querySelectorAll("#tview .legend .lg").length>=4);

@@ -23,7 +23,7 @@ t("sin errores",errs.length===0,errs.join("\n"));
 t("arranca en el Panel",!d.querySelector('[data-main="panel"]').hidden&&d.querySelector('[data-main="notas"]').hidden);
 t("panel vacío invita a registrar",/Registra tu primera sesión/.test($("pins").textContent)&&/Aún no tengo datos/.test($("phero").textContent),$("pins").textContent);
 t("marca visible",/Aitxorapp/.test(d.querySelector(".brand").textContent)&&d.title==="Aitxorapp",d.title);
-t("cinco secciones: Hoy, Equipo, Calendario, Notas, Mi fútbol",d.querySelectorAll("#mtabs button").length===5&&!/Hábitos|Check-in/.test(d.querySelector("main").textContent));
+t("cuatro áreas: Hoy, Agenda, Salud, Entrenador",d.querySelectorAll("#mtabs button").length===4&&!/Hábitos|Check-in/.test(d.querySelector("main").textContent));
 
 console.log("\n2. Notas y tareas");goN();
 const nq=$("nq");
@@ -116,7 +116,7 @@ t("nota media 6,5",/6,5/.test(kt));
 t("forma últimos 5",d.querySelectorAll("#pform .form5 span").length===2);
 t("local/visitante y competición",/Local/.test($("psplit").textContent)&&/Visitante/.test($("psplit").textContent)&&/Liga/.test($("psplit").textContent));
 t("historial de partidos",d.querySelectorAll("#plist .ev").length===2);
-setv("nd",sh(4));setv("nt","18:00");setv("nriv","Lugones");setv("nloc","V");click(A("nextAdd"));
+ev("S.next=[];save();render()");setv("nd",sh(4));setv("nt","18:00");setv("nriv","Lugones");setv("nloc","V");click(A("nextAdd"));
 t("añadir próximo partido",ev("S.next.length")===1&&/Lugones/.test($("pnext").textContent));
 click(A("nextReg",'[data-id]'));
 t("«Registrar» precarga el formulario de partido",d.querySelector('[data-fv="reg"]').hidden===false&&$("sk").value==="par"&&$("mriv").value==="Lugones"&&$("mloc").value==="V");

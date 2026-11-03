@@ -11,8 +11,13 @@ Publicada en GitHub Pages: https://augusto280905-beep.github.io/mi-dia/ (rama ma
 - `supabase/push.sql` + `supabase/push-send.ts`: notificaciones push (tablas push_subs, reminders, push_config + cron cada minuto + Edge Function `push-send` con Verify JWT desactivado). La función genera sola las claves VAPID y las guarda en `push_config` (RLS sin políticas), así que no hay secretos que pegar.
 - `tests/`: pruebas con jsdom. `npm install && npm test`.
 
-## Secciones (v9)
-Barra de 5 pestañas: **Hoy** (panel: próximo evento, accesos rápidos, resumen del equipo, preparación; «Más datos de rendimiento» desplegable con las tarjetas antiguas), **Equipo** (modo entrenador: Resumen/Asistencia/Plantilla/Entrenos/Ejercicios/Pizarra/Partidos), **Calendario**, **Notas**, **Mi fútbol** (Hoy/Registrar/Partidos/Salud/Físico/Temporada). Ajustes (engranaje de la cabecera, `data-main="ajustes"`): cuenta y sincronización, calendario externo, notificaciones, mis datos. Al abrir hay una animación de bienvenida (`#splash`, una vez por sesión, respeta reduced-motion).
+## Secciones (v10)
+Barra de 4 áreas: **Hoy** (siguiente, estado/disponibilidad, «Carga recomendada para hoy» = margen de UA para quedar en ACWR ≤1,3 menos lo ya acumulado, con recortes propios por estado/partido; tareas; energía; cuestionario; «Más datos» desplegable), **Agenda** (Calendario y Tareas con selector `.agseg`; `S.ui.main` cal/notas), **Salud** (`fut`: Hoy = «Plan de hoy» visual según partido/carga, Gimnasio, Registrar, Partidos + Liga SD Alsasua, Lesiones, Físico, Temporada), **Entrenador** (`eq`). Ajustes con el engranaje. Splash con la foto del usuario (base64 en index.html; iconos pulso-*.png son esa foto).
+
+## v10: Liga, gimnasio, bajas
+- Liga: constante `FIX` (BeSoccer, Preferente G1 2026-27, sin horarios), sembrada en `S.next` con ids `fx<jornada>`; resultados editables en `S.ui.fxr`. Para actualizar: volver a leer BeSoccer y editar `FIX`.
+- Entrenos: `plan.bj` (bajas; lesionados por defecto), `plan.tm` equipos de posesión (reparto por líneas en serpentina), `tn`, `tgk`, `tg`.
+- Gimnasio (p10b): catálogo `GX` con esquemas por cinemática inversa (`figPair`), `gymRec` (qué grupo toca: criterio propio), `buildGym`, sesión guardada como `k:"gym"` con `ms` (series por músculo) y `gx`. Fuentes citadas en la propia app; reglas de calendario propias y sin validar.
 
 ## Equipo (entrenador de juveniles, fútbol 11)
 `S.team={pl,att,ex,plan,bd,games,del,seed,seedEx}`. Plantilla inicial (24 jugadores) sembrada con ids deterministas `sp_<nombre>`; 16 ejercicios base `se_*` (plantillas editables). Asistencia: `att` = [{id:"a"+fecha,d,m:{jugador:"p|r|f|j|l|''"}}]; `""` = borrado (para que la fusión no lo resucite). Borrados con lápidas en `team.del`. Alertas (`teamAlerts`): ≥2 faltas seguidas o ≥4 sesiones con <70 % asistencia — criterio propio, sin validar. Pizarra: SVG con arrastre por pointer events, formaciones 4-3-3/4-4-2/4-2-3-1/3-5-2/4-1-4-1. Los entrenos y partidos aparecen en Calendario y generan avisos push (claves `q:` y `g:`). Los datos de menores viven solo en la cuenta privada de Supabase del usuario.

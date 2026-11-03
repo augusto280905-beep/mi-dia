@@ -9,6 +9,7 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="pulso-180.png">
 <link rel="icon" href="pulso-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#f4f4ef;--card:#fff;--tx:#1b1d1c;--mu:#6f726f;--ac:#0f6b4b;--ac2:#e8f3ee;--ok:#2fa36b;--bl:#3b82f6;--bd:#e3e3dc;--warn:#d9822b;--hi:#d24b4b;--inp:#f4f4ef}
 @media (prefers-color-scheme:dark){:root{--bg:#101211;--card:#181b1a;--tx:#ecefed;--mu:#97a09b;--ac:#3fc08c;--ac2:#1b2b25;--ok:#4cc38a;--bl:#6ea8ff;--bd:#2a2f2d;--warn:#e8a050;--hi:#f07070;--inp:#101211}}
@@ -184,39 +185,117 @@ details.more[open]>summary{margin-bottom:12px}details.more>summary::-webkit-deta
 .nx .t{flex:1;min-width:0}.nx.past{opacity:.45}
 .tag{font-size:.7rem;border-radius:6px;padding:2px 7px;background:var(--inp);color:var(--mu);font-weight:600;white-space:nowrap}
 .badge.eq{background:#dff1ea;color:#0b6b48}
+/* ===== v10: diseño pro ===== */
+:root{--fh:"Barlow Condensed","Arial Narrow","Helvetica Neue",system-ui,sans-serif;--fb:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;--sh:0 1px 2px rgba(14,30,22,.05),0 10px 24px -14px rgba(14,30,22,.22)}
+body{font-family:var(--fb);font-feature-settings:"tnum" 1,"cv11" 1;-webkit-font-smoothing:antialiased;line-height:1.42}
+main{padding-bottom:112px}
+h1{font-family:var(--fh);font-size:2.05rem;font-weight:700;letter-spacing:.02em;text-transform:uppercase;line-height:1}
+h2{font-family:var(--fh);font-size:1.22rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase}
+h2 small,h2 a{font-family:var(--fb);text-transform:none;letter-spacing:0;font-size:.74rem;font-weight:500}
+h3{font-size:.7rem;text-transform:uppercase;letter-spacing:.11em;font-weight:700}
+.card{border-radius:20px;box-shadow:var(--sh);border-color:color-mix(in srgb,var(--bd) 70%,transparent)}
+.tile b,.k b,.big{font-family:var(--fh);font-weight:700;letter-spacing:.01em}
+.pri{border-radius:12px;font-weight:650;box-shadow:0 6px 14px -8px var(--ac)}
+.chip{font-weight:550}.chip.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.brand{margin:4px 0 12px}.brand img{width:34px;height:34px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px var(--card),0 0 0 3.5px var(--ac);flex:none}
+.brand b{font-family:var(--fh);font-size:1.25rem;letter-spacing:.07em;text-transform:uppercase}
+.hhead{background:linear-gradient(135deg,#093d2d 0,#0f6b4b 55%,#15a373 100%);color:#fff;border-radius:22px;padding:18px 16px 16px;margin:0 0 12px;box-shadow:0 14px 28px -16px #0f6b4b;align-items:flex-end}
+.hhead h1{color:#fff;font-size:2.3rem}.hhead .sub{color:rgba(255,255,255,.82)}.hhead .ic,.hhead button{background:rgba(255,255,255,.16);border:0;color:#fff;border-radius:12px}
+/* barra inferior flotante */
+#mtabs{left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom,0px));border:1px solid var(--bd);border-radius:24px;padding:6px;background:color-mix(in srgb,var(--card) 86%,transparent);-webkit-backdrop-filter:saturate(1.6) blur(16px);backdrop-filter:saturate(1.6) blur(16px);box-shadow:0 14px 34px -14px rgba(10,30,22,.45)}
+#mtabs button{border-radius:18px;padding:8px 0 6px;font-size:.7rem;letter-spacing:.02em;font-weight:600;transition:background .2s,color .2s}
+#mtabs button.on{background:var(--ac2);color:var(--ac)}
+.agseg{display:flex;gap:4px;background:var(--inp);padding:4px;border-radius:14px;margin:0 0 12px}
+.agseg button{flex:1;border:0;background:none;padding:9px;border-radius:11px;font-weight:600;color:var(--mu)}
+.agseg button.on{background:var(--card);color:var(--tx);box-shadow:0 1px 4px rgba(0,0,0,.12)}
+/* splash con foto */
+#splash .sav{position:relative;width:132px;height:132px;animation:spop .8s cubic-bezier(.2,1.4,.4,1) both}
+#splash .sav img{width:132px;height:132px;border-radius:50%;object-fit:cover;border:3px solid rgba(255,255,255,.9);box-shadow:0 16px 40px rgba(0,0,0,.4)}
+#splash .sav .ring{position:absolute;inset:-12px;border-radius:50%;border:2px solid rgba(255,255,255,.5);animation:sring 1.7s .3s ease-out both}
+#splash svg.spl{width:150px;height:25px;filter:none;animation:none}
+#splash b{font-family:var(--fh);font-size:2.3rem;letter-spacing:.14em;text-transform:uppercase}
+/* carga recomendada */
+.adv{display:flex;justify-content:space-between;align-items:flex-end;gap:10px}.adv .big{font-size:2.3rem;line-height:1;display:block;color:var(--ac)}
+.gbar{position:relative;height:9px;border-radius:9px;margin:10px 0 6px;background:linear-gradient(90deg,var(--bd) 0 61.5%,color-mix(in srgb,var(--ok) 30%,transparent) 61.5% 100%);overflow:hidden}
+.gbar .b1{position:absolute;top:0;bottom:0;background:var(--ac);border-radius:9px}
+.lbars{display:flex;gap:6px;align-items:flex-end;height:84px;margin-top:4px}
+.lb{flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:3px;font-size:.66rem;color:var(--mu)}
+.lb i{display:block;width:100%;max-width:26px;border-radius:6px 6px 3px 3px;background:color-mix(in srgb,var(--ac) 45%,var(--card))}.lb.t i{background:var(--ac)}.lb b{font-weight:600;min-height:1em;font-size:.62rem}
+.lb span{font-weight:700}.lb.t span{color:var(--ac)}
+/* plan de hoy y gimnasio */
+.hl{font-family:var(--fh);font-size:1.55rem;font-weight:700;line-height:1.05;margin:0 0 4px;letter-spacing:.01em}
+.pit{border:1px solid var(--bd);border-radius:16px;padding:10px;margin:0 0 10px;background:color-mix(in srgb,var(--card) 92%,var(--inp))}
+.ph{display:flex;flex-direction:column;margin-bottom:6px}.ph b{font-size:.98rem}.ph span{font-size:.8rem;color:var(--mu)}
+.fig2{display:flex;gap:6px}.fig2 figure{margin:0;flex:1;min-width:0;background:var(--ac2);border-radius:12px;padding:4px}
+.fig2 svg{width:100%;height:auto;max-height:150px;display:block}.fig2 figcaption{text-align:center;font-size:.68rem;color:var(--mu);padding-bottom:2px}
+.fig1 svg{width:100%;height:auto;max-height:170px;display:block}
+.vid{display:inline-block;margin-top:8px;font-size:.84rem;font-weight:650;color:var(--ac);text-decoration:none;border:1px solid var(--ac);border-radius:99px;padding:5px 12px}
+.gcta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:6px;padding-top:10px;border-top:1px dashed var(--bd)}
+.gps{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.gp{text-align:left;border:1.5px solid var(--bd);background:var(--card);border-radius:14px;padding:10px 11px;display:flex;flex-direction:column;gap:2px;font:inherit}
+.gp b{font-size:.9rem}.gp span{font-size:.72rem;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:.06em}.gp em{font-style:normal;font-size:.72rem;color:var(--mu)}
+.gp.rec{border-color:var(--ac);background:var(--ac2)}.gp.rec span{color:var(--ac)}.gp.no{opacity:.62}.gp.on{outline:2.5px solid var(--ac);outline-offset:1px}
+.gx .gh{display:flex;gap:10px;align-items:center;margin-bottom:8px}.bn{flex:none;width:28px;height:28px;border-radius:9px;background:var(--ac);color:#fff;display:grid;place-items:center;font-family:var(--fh);font-weight:700;font-size:1.05rem}
+.rx{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 6px}.rx span{background:var(--inp);border-radius:99px;padding:5px 11px;font-size:.8rem}.rx b{font-family:var(--fh);font-size:1.1rem}
+.sets{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:6px 0}
+.st{width:42px;height:42px;border-radius:13px;border:1.5px solid var(--bd);background:var(--card);font-family:var(--fh);font-size:1.3rem;font-weight:700;color:var(--mu)}.st.ok{background:var(--ac);border-color:var(--ac);color:#fff}
+.cu{margin:8px 0 4px;padding-left:18px;font-size:.88rem}.cu li{margin:3px 0}.wu{padding-left:18px;font-size:.88rem}.wu li{margin:5px 0}
+.nofig{background:var(--inp);border-radius:12px;padding:12px;font-size:.84rem;color:var(--mu)}
+#gtimer{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(92px + env(safe-area-inset-bottom,0px));z-index:8;background:var(--tx);color:var(--bg);border:0;border-radius:99px;padding:11px 18px;font-weight:650;font-size:.9rem;box-shadow:0 10px 26px rgba(0,0,0,.35);font-variant-numeric:tabular-nums}
+#gtimer[hidden]{display:none}
+/* liga */
+.lgr{display:grid;grid-template-columns:34px 76px 1fr auto;align-items:center;gap:6px;padding:8px 2px;border-bottom:1px solid var(--bd);font-size:.88rem}
+.lgr:last-child{border-bottom:0}.lgr .j{font-family:var(--fh);font-weight:700;color:var(--mu);font-size:1rem}.lgr .d{color:var(--mu);font-size:.8rem}.lgr.past .t{color:var(--mu)}
+.lgr.nx{background:var(--ac2);border-radius:12px;padding-left:8px;padding-right:8px;border-bottom-color:transparent}.lgr.nx .t{font-weight:700}
+.rs{font-family:var(--fh);font-size:1.1rem;padding:2px 10px;border-radius:9px;color:#fff}.rs.W{background:var(--ok)}.rs.D{background:var(--mu)}.rs.L{background:var(--hi)}
+.sc input{width:30px;text-align:center;padding:5px 2px;border-radius:8px;border:1px solid var(--bd);background:var(--inp);color:var(--tx);font:inherit}.sc i{padding:0 3px;font-style:normal;color:var(--mu)}
+a.abtn{text-decoration:none;color:var(--tx);display:inline-block}
+/* bajas y equipos */
+.bjg{margin:8px 0}.bjg small{display:block;font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--mu);font-weight:700;margin-bottom:4px}
+.bjc{display:flex;flex-wrap:wrap;gap:6px}
+.bj{display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--ok);background:color-mix(in srgb,var(--ok) 14%,var(--card));color:var(--tx);border-radius:99px;padding:7px 12px;font:inherit;font-size:.86rem}
+.bj i{font-style:normal;font-size:.66rem;color:var(--mu);font-weight:700}
+.bj.off{border-color:var(--hi);background:color-mix(in srgb,var(--hi) 14%,var(--card));text-decoration:line-through;opacity:.8}.bj.inj:not(.off){border-color:var(--warn)}
+.tms{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-top:10px}
+.tmx{border-radius:14px;border:2px solid var(--tc);padding:8px 10px;background:color-mix(in srgb,var(--tc) 8%,var(--card))}
+.tmx h4{margin:0 0 2px;font-family:var(--fh);font-size:1.15rem;text-transform:uppercase;letter-spacing:.05em;display:flex;justify-content:space-between}
+.tmp{display:flex;justify-content:space-between;font-size:.88rem;padding:2px 0}.tmp i{font-style:normal;color:var(--mu);font-size:.7rem;font-weight:700}
+.legend i.lg{margin:0;width:22px;height:22px;border-radius:6px;display:inline-flex}
 </style></head><body>
-<div id="splash" aria-hidden="true"><svg viewBox="0 0 64 64"><defs><linearGradient id="lgs" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b4f39"/><stop offset="1" stop-color="#17b27a"/></linearGradient></defs><rect width="64" height="64" rx="15" fill="url(#lgs)" stroke="#fff" stroke-opacity=".25"/><circle class="rg" cx="32" cy="32" r="21" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="2"/><polyline class="ln" points="9,34 21,34 26,22 33,46 39,28 43,34 53,34" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><circle class="dt2" cx="53" cy="34" r="4" fill="#c6f432"/></svg><b>Aitxorapp</b><span>Rendimiento y organización</span></div>
+<div id="splash" aria-hidden="true"><div class="sav"><i class="ring"></i><img src="data:image/jpeg;base64,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" alt=""></div><svg class="spl" viewBox="0 0 120 20"><polyline class="ln" points="4,12 34,12 42,4 52,17 60,8 66,12 116,12" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><b>Aitxorapp</b><span>Rendimiento y organización</span></div>
 
 <div id="toast" role="status"></div>
 <main>
 
-<div class="brand"><svg viewBox="0 0 64 64" role="img" aria-label="Aitxorapp"><defs><linearGradient id="lgx" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b4f39"/><stop offset="1" stop-color="#17b27a"/></linearGradient></defs><rect width="64" height="64" fill="url(#lgx)"/><circle cx="32" cy="32" r="21" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="2"/><polyline points="9,34 21,34 26,22 33,46 39,28 43,34 53,34" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="53" cy="34" r="4" fill="#c6f432"/></svg><div><b>Aitxorapp</b><span>Rendimiento y organización</span></div></div>
+<div class="brand"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBAUEBAYFBQUGBgYHCQ4JCQgICRINDQoOFRIWFhUSFBQXGiEcFxgfGRQUHScdHyIjJSUlFhwpLCgkKyEkJST/2wBDAQYGBgkICREJCREkGBQYJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCT/wAARCACgAKADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDiddZb2e532zmcDhnPTisPztLsbAxmzae4dSGc9jWiLTU5ZyjBhM8eS7HgiqGi6ROdY234IgU7st0NeFGm4r3tkRy2ZzTWckaNJMrDPQntVlRI9sgCNx/EK67XpIdQvDarbrbW6qAxI689qzfE02m6XDb2Wj3C3MboGkcHJQ+ldaqSlo0aWdmzmbk5l8q3yFIwxPrRb2MkTEO4bPJzzTZ5lUYiUmRupNNWa5EaDgLnr61tZ2sibF9Z0R/KaPaT1PY1WlhLwsZWOc8e1W7W0mvJl85xAn99+cfhWmukWLXD29zcXIYH92yAFX96FSktUVy32KfgWzsZtTlTUkjaMpgbzipPFz2llJFbaXdvJatnehbOCKt6l4OmSNJLedDIvJUnawH1qpNpNtbWJJRpJ2HPtWc9JXkZum76mHbQxzh3aQAryAe9SK37zcGMYxggUixxxqANwYdRirthpFxqG24VQE3gc8ZptX1ewNWR2dnpFpHpULwWCyXRAkJfjd+NVdM1WE6hLeyxC0aI7HRG6/nxRqviS7sUnsjFEjxRqkZTrjHWuZtokmWWS5u2VTyWJOWNcri2nfqEFfVnpEnibTTpzfYrtFmkIC8Z3fX/AOvWPcW897cpaefJBKPnBQ8PXLW9zbxQJHAu5FkB8xvT6V6d/ZlvDb2V80iJLOn7tgeCcVze7Sl6mnImtNUhtrdxS6V5UqNLPH8rk9a5tNJEM94XulCzcLGT2rdsHlikuxM48yTIV8cVmWzgT+dcIk83I/djOPrWkJauxhZJ6DItFOhwi+hLPHxkA4rUs7uS+uQYcmJhmUk9Kjv9Mum0vNrMVduqk9KxfD8uqeHmlN3EVSYcc8HFE05xfLuNJbM6/WI7GTBgkYMTsz7VjalYy2GPNcmNsEEc/hUNlqwlKWT4kRZMqxHJFM8SXktvdeWDlSMqpIPHrXoU5STUTK8nuWGSxvVR53SQryy+uO1Zup6Hpeo+Zd2jCBT95Mdfeq9pI7yOiomWXOc9BTraKW2LxySKFbluentXRyrZmqZDY+G9LiDO8ivKRuXPRaq61Z2tuY5LGEyFwSQBnYfYGtyWxt4rRboMZU/iAPI9qp2+tQW04edT5ZOxCFzkk01ukkNNqVmZWi+Ftf8AFTi40/TbqUhtoZFCqAPQn6YNdS3hi8sVjsNSsZ7KYxCXbwW5bHDDt7epr0z4e/EPwxdXiaX+8sZFUZBgKgnvXoGt+FLW+WO8V/OQn5QTwPQis3Ulc9d4eCgmnqfMmrW1/Yo7RRMykEMHySRWQkbahDE7sLYNwOOtfQviDwzYNbXULR7JVViSVPKjrg+teC3lq91NdLEVxbAqgHGBThKM9zlxVGVNK5cs9K01xubZOFBV5MjFOvobSa2jSyKpABgFTjPvWRdajZxaSunwxuk6YLuP4h6Vr2ViJ9EV7SdfNb72T0PtVtqOrOGb6XKUFvbzM6yKkrOApYtk/WrV94WigljCxlkKhwCcjd6VQ0iyuPNZUG6TPOT37121pPp+l2KyajdK1wf4TyRWNarGEkkriiuZamPB4ftXt9t1FCmz5lC+/atbULCNNF0tAC9raEscH8qZeQWeoRLLE37ucY+U/wAqv2l1ptzZyaHEjPJEnKHv7VjNxdm4/wDANFGWtnuJbNp7RvcYCxOnRj39ea55TD/aEl/ZTj92uDGAPmHpUk4t7jQIIZUdIxM0T8cp1xn8hWPFay6NbS3A2gM+0Nx8w9a0p0aerRm4tNM6q1v4bqMjYz7iBt/un6Vna3YXd7qEfkh1jg52+tZ+m6hE863e4Io+8P61M3juOz1Uh4GeIjgkcij2PLL3IiatqVrSFGcLC+FbAYnsa2PE0UEEVpG3lmTb8zDqfSm6ZJFp00cEluGT+Jm/vUlxEtzfL8xZE5LGod3PmWxSp3MqSyNjYxtJA3mSNlGU9D71lXN48UpV+eu0e/vXfC3jmuEaIGVAB8p7VHqXhmxu2adkEUsnG7sK0hWsvfKVCS6nG6dqe+D7M2cHODmt/wAGwaVaeKtNl1R1WzjkEjgjIwORn8awn0aGG9Mcky4DclTwavX9iYL03YkCwiPoD1re6exULxak1se4alZabe+MrHV9CthbJfwCSUGLYJR9OzYx+Fem25VLaJdijGMDsK8j+G+oG70a2uLi6DiD5HEs27p0YZHBxXaN4jaQ7bZGMf8Az0P3a55S5Xqe5pKKitiXxvp6XUF5qItD9oiiaOJh/wAtAVyRivlm2lb+0Lhz/Hncq+vvX1D4m8aaf4f8JS6jeMsjg7IY88yOegrxKx8G2N1HLJOGNzI5kZ142Fudo9QM0lOMIuctmXHLa+N9yl9jvt5feeUTwzteSFUbczHGR0HrWnozXNvOltuwyncqtnArsbz4eajE7Gyn+07jhVC4f6e9cvrGnmEkLHKLiJtjhlw27vx7Vqq8ZqyPExeBrYWfLWjb+u5ajt5zqHktPsMxyWU4xVy30dlmkV23uv8AGxJzWa32m7hgKQlCmAX7mtyW4t9NtoXvAySEZK9zRNtIyhG2pYEEmn2sYG1pEG1cHha5yx1S503W/tDNghiSx6kd627aSykspZt7u7Nkg5xiuZljuH1V9sW9W+771nRfO5RkQ5u+h6NqFuL3RotVsFXyZZAZ4yBznqa4bxHLKHTSYMsu/Kj29K7LwjFd2thPaXv+qlX5EHVfrXP36iz1aD7TEfNjyA2OuaVOSjJpFzd1qc/aWskU7RO23ywSQe9VIrR7u5kmAJUDOfT3ro9WgiiledpOZF5wOhqroRWLTbh1GWEhXJrqhU5lzIzsmb17YTS3Ye4lTy1yygdW5q1p0QnxPFhSD0bgGsqG2T+1po5XYAt8pzwK6JI4rmVYuEK/KoBwD9a5JXiuU25uhbt9PktZPPR9yyDqOmaheON4/Knkdt5xhuBTNRdolSGKcrJFxtU/KagW5ie2RrnLYO0kHpWKb3Kg21qZl1oVxFM0EUMaludxPBHtWRqFtqEYzMgaMNtKr0IrqRc216rqLl4dgwpPcetYd9PptpLsju7iVSQPlHy5/GuuEm9wnFW0Ob1fULiJwloskEW5QwViN5966yx+K91owudOWbz7eLAWSdvmHHPPcA5FZOqWlhrjtJaXAjngZS6dN2K4zW9LeyvZLa65kDnjtt4Kn8QaqdmtUdeBpucpJS962nY6jUfHGoeO9fs4l3rp8DBYIj/Ecglj9cfgK9S0eV/LedcspIVf9vHVvzya8JtJGsRBNC6qxJCgHBWvePB9tfahZxpawNcNDbh3VBkhcDJxXnYtuUopLToj9CySEKOGmm9b6s1hIEQA/McZJrI8X6S2r2gubdUOo2/zJI3WUY+4x7+xPSuln0a4tdIg1GeMJDcOyIOh4/z+lZbbsk54K9PxrmU502b1KFDGQcJar9Tx2e7mivd7ybccvGOx7jFWr2V9UsZJWcM6qGjyMlQK1viBoarq1veWqFFukxKfSQdSPqMfjmqWi2bRPPCCHEilRntXqurHlUkfmmLw7w9eVGfR/wDDC6BcWaaJcEobl1QrJH/d96z/AA9HLJP5rFWSHt7UW2n3WiyvywR22MB/ED3rbTw5JZaVLJbqhWfGWbGYx61E5xg209zz20utjcnvbvSLqK6CB4ZtqgHtxU+o2g1e4W7MaKwX8M1R0rVBITYX22eCMAbvT6VphY0lRYi5tm6D0rkUmpamkE5NtnOavZRXEBgVdso4Y46VSg0V7DSik3zGRyTtHX0rob2GNI5HiYeu6s6e6uo7e2iJXGN5PGK6YVJpe6S1bUuT2cLadFLEAJuBuY8n3o09rOOznt7yRvtGflOeakdyk6LIFIU4AJ7VppZ6e6hkUF+pNYupfRmkUppJ7nOT6rHpwi2AOmQvPJYmo5JHhvU+VAJuQme9bt/ZafZiLMayqfnDDnBp1ppsd7um2Kfl3IcfdNaTqRSuip6LQyHjEFvN5g+Zgdo9OKytPtIbn9/c/dXotdJaadPJdyzXXzDGOnFULTSTBfSvKwKYJAAp0qi2uEE5PU4y+0u8F001vGyRmTOf9nPervxS01YprDUI88xLFJ6ZxkH+YrqShktJFjjOAfzq54q0iPWNJ+zMgDeUpUkZwccGt/aqUH6oujJUcVCSZ4nJcg2yoQd6NlT2x3r2r4J+Lr5tVtxp8sa3cj+Som+62f4T9f04rye+8KX9tI8ahZdke/IOC2ByAO+KseAL68sdXge2kWMB+GYdDx0PY8VjXpyhaUtGj7jK68KkpUY2cZrXrv3PsDxSNV1vS7i7v7M6fHpyr+5bkSOTgsD3GOlcENiq2ed3U1dn8a6xrmiRWN/cLIEO7IGGf03euKzJ38pAWPua4MRUjOfNH8T08uwdXDwdKoktdEtrfPXfUx/E1ob/AE+ZFTLgExjvkf41xaX0VrEEZAs6jIOeRXe3U5YqyHJzkVxfijwq9h4onkjVja3kQuo8jhVYcqPowYfhWuFSk3d7HgcW4JJ0sQlrs/0/Uy9Vvnkt4rq0LyAMNwzkZrRs9Zurm0Fq6kCX5ST0GaytJEltM9usThWblH6YrodHuoLaU211EDKSeOvHatqsFFWPhJRs9yulj9hvY4A2VIzuB61vz3CfZBHEfmA9cVa+wxtKLlolCADANZr2+69kWNAVJxWd20jspyXLYk0iBbu3linTbG2QMHOar6jZRxSRW8jEKAFBPrWitqIV+z48sgg9elY2sLc3FyY8ZEXJbPUUoTak02ZX0syHV4fN1VipbeeqA8GrNjbzJH5Us7bWPyn+laMkMKzRz+VhlGC/rWhb2iyRrKI1bHIAqXUtFFOdtjnryP8As2URMXlBHGDyc1LaXslpEyB5I9w+UEVNrIEd7FciJgq/KV/+tTLqY6lbvFHFtdBzuGKqM3KKT1LUro1LDUUljkeVSxRcfL/Ooo0Vb3E5CwSLkM3rVDQDLZXHlSxgp3PWtXWo1vrZ04QY+VlqJXS0M/aPl0Kb+Q8Fwgf/AFZwMHqKv3VxGFWF3RWMQKk1zGy2trUmW5MjtgDB9+9betwQXNrCHiDMirznmq9nai15o5Wm6iOO8UmXRNQUx6YRBcgO1xBLtY88jnjOfzrD8Pxq2rhLPzrCN8lllKu0pz1APGfb8q6rxVpV3rfh57YfNcwyK1sFOCw6Ffy/lWR4Z+FGqPcRXOpyiOFW5SN9ziu2nV9rRVOq7eZ9Pk+IeH5a8VeS6Xauel6NcxW8KJc3EJP98kL+lT31zb3LNFBPHI+PuqwJq7oPwt0N5Y3me7fvywX+lTfETwhp/h97ObS4JcPu87c2844wcdfy5rGrh8JGk5Rm2/Sy/M+nwmb4nE4yEHTUVL+9f9EYMCtGNysGXOM+nsR2qbVJ2u7OBZVX/RgwQ452sc4z6Z/mapJ5+1ZoZS4PGfvfn6j9fapBcpMhhnUJ5gxjOVb/AHT/AEry4TcT38zwCxlCVJ79PJnFzNMby5VzGwX5kbpgelXbeIxSx6gxG5xjr2pzQQwXsunn5pezsO3arQtzBd21tKqvADyw612Ostj8ZnSlTk4SVmtC7Nqoa1RUJcnrntVK/ubyzt/OhxKJPTtVu9sPsbM1ugkjHPA6CrcMkstsxgt4zAxAIPUVOmj6GkYNIybe/uJ7e3kmiA3OAWJ5p95bvZrd3zMBbyDP3ulXNY0dmjRVkKRFgzAdqg1DSJp9MaCCcmJiAMiplNTaURqDkrLUjj1C4T9xKhZozkh+OKuQareOY2jtzFGxxuzwBWbqEP8Abdvbz73hdm2sUGMGprW5fTpVtZC7wKPvHpmtZQsrIzlHoXNTd7adJ5FWWM+hqtLeW97YO9sypOx27c8kU26n+1wgpHmInt2rovD1l4f0lY7ie0kur7nZBghF/wBot3+lEadvIulRcpauxN4IbW7UiO3sd6nOPNhDoSe5JHFdp4i8F2Or6dFut1tr0Dc0tsdiZ9CvcVp2F5qN9BbSTyxRhxmC0t4wMr/eY+lai3drdWskqzRmONtkjBhhWHUZrdRsrHs0qMYxSlqeI3vgGztYmN3IzPG2/HQE54qZNPtpiXkkLZwMk1J48vdSe8u20m9sxZg43OhYue+D6VyVxYeMIV3CazkQrn5X28fQijnvG7ehhKWGU7W1OxtNM0/7SGVwCvTJ61v6XbWcZJDLktyCe9eRz2viRFDS/Z48jO4S9Kq6pceKtH019SW+SRIwGIQljj16VnKUW7XOmni6aajE+ldOkt2aNW2jaeGHeuV+LF0rXmmpDPH5uHZYw+HYDA+WvnEfGLxcB5cd+qHsRGCavW3jyHxD5SeK0me4iGIr6EkOgz0IH9KitTkoWPocnUXio1ZO1r7+Z6VHcCJ/ML+S7feJXCt/vL6+4qeRVuVLKkbB/vKvzK3v7GsTRrh7mNfsep2+pRgcCcYkA+v+IraRvK+Y2ccUn+xg5+mMGvOt3Pt5pLVbmZqGlszrLIjCRRhJM5yOwP8AjUZvIoxFL8ySE7SD2NbqqrsC1uiyNxmQ7mP4dqyda8Oo7tMHGxkwYwMfNnrW1OPO1GTPieJ8phUj9bpK0l8Xmu/qWoLoxXD/ALxZVkXseBVaezuFTbDI8e7kKDxVS0srW1ZDHcyLIR8yP0U/jWh9oaKVlcltoG3FdDouL0Z8R7JlcNqTfuS27gZLVLJMUVQ0pjPp2qa8uMwoqf6xjyR2FUSIiSHzx0IrWCi9UjeEYpX6ixxPc2hSGRVEbZHNOyqWqK0fm7vvHNRzEafDJbrjeDnK+lU9Klm1C4Ef2hTGrdFHanJ9jk57SVkaRsZEki+znEb9VPpW7pN3DDqAEuGZSNqE/Ln/AGvb/Cobe38qZQGyh457U++0m5snDQhJGbq3r7U+byOhOV+axu3Wr3DSNpmlyNLdXOVmuVJAPsnooHeqer3arEul2spWytFw204E0ndj681jpJOzOH3W8w4xV5dEmYCaRwYtuevWk5X0ZrKtOS0Rh6vK7WMYSIEFwDk1etbcfaMEHcyjr0FSJpkN1IkE0pCFshuwINaLW6R7g+TjgEDqKtQUocvmcvsW53fYwZ7ZpL9w3ywPx9awvG96NK8K3KWp3GQeXuH8IJwf0ro9T0+/uJP3UUkUYPyEjg15N8R/FUi339hwOVjtzi47CRuDj6D+dKGFdaoklsaQUac4yqbXOS0+8is5d89jDdRnqHLAr9CK6K18T2auGsPD9usmOXlYuR74/wAa5zy3dBJFsUMOpP8AgavaetnB/wAfNypzjKkqqj+Zrerh29XF3+Z9ngsc4e7Ca5e+h6l4X1M6vbAzHdcA42RoNij6j/GuqtrRl+8ZEHquAPzrzvS/GWlaRaFLOCaeQd40ITP+8alTxVqmuhlRWGeFjQHA/AdfxNPB5FWxErtcsfP/ACO7NOLMJhIKMZe0l2X+e35nc6v4isNDh2oWuJyPlHX8zWBZaxd6hK8s4ILr8qDgAVjMl1ZwRTyWO4zEqk0hzv8AZR0rV8LxS3N+zXSbIxy4HLD0zX0cspw2Cw05LWVnq/60PzzF8Q4vMKqhL3Y32X6vr+XkaNw8MrgGLYAO571NHeRPIqOMsCDkelWdY0uzkDyWpdoB1YjvWbBY+aySJlDjGSOCK+WutxSnZmpNHDKxn27EJxgVSjCwyvIDu3cBSM0wR3Y3REkxKM9KdZRXEaESsGUnKkc4rCTfQObm2RvTw2zhw8SB8feA6iqENpHbMWhjSNepYDrVuI2tyzLEWbJLAMeV9qjkmiaERJNGW54J5rPna0RkpzC1hWUSO0uEzj3q5FdEyCNZCIwOCfWqGjWlzNHIsvlplshs8VYiU70snkiYuxG4dMVfNIG6sbXRce7t0mDSxFj0LHvUF1rcEcpSONguMYqi0l05kiKeZDExUsB0FRfbbZbuOBomX5d289KHNkzrVFqa1veq6gxpnHXNSXF7Ki7owHI5xWZc3C21oJLdSwduSO1Q6Xrwnme3eAoc7d3Zvej2kiHiJpak3iDxxBommi6vhIIwwUJEAWZj6A/nXznr80N/q15cwSSSRTTNIrSqFY5OckDpXoniy+/tzxS9rASbbTyYxtwd0h+8fw6fhXN+I9DiSB7+OTBV1jZPL2/Mc9fTpX1mW4Fxw3O93r8jlqYhuSTZxLDbwyg+9WLSPMi5woJ7YWnTp1BX8qhtlHnYIz9arl5ZWNFK6OwsLO3l2hkR1HJ8sGRj/SvR/gxqdto3jO1u95tLRw8BuHiWQRMwwA65G0Z71tWng7TdO8DLMBKLqKFJndkUoxbHyg8EdfeuQns40d5oiYJ+gkQ4z7EHgj2Nerg6kMTTlydNH9xzYqE8PUjzddTvPi94pstVmsdN0rxPY6gtiJGlCwLFEC2MImOB0689qx/BmnxSRyXcpnjdiFVXbPAHtwee4rkPtt60gtpw0bMOPKPyyj2Hr6jNd1Zr5UNpAqhSIwGI45715WdVPYYeNGL3ZrheadR1LHQ3LW4037Mf4z29KjiihFqIyy+So+XjkVnG4ljn2hBIgHbmoV1Ha22dMAnn2HpXyV+56UZS2kXYp4NrqOR93GKri1RgwjBXB5Haop7rzF+0W0RClgqqetatxBc2unIXX99OME44GaUbFKMnsNt4IbdndEBZ+pNMaytWO7yl355IqVNLVRktct7Zpj6dhyfMulXHHeuvkh3/AAO7+2cJ/IPWNUTYoAFMFvGHVsYI5ph0qaRf3V3MPXcKj/sy6dgkeoMCxx8y0uSHcpZxg39j8i2Y1bcNxAbqBxmkeBJYwjqpVeAcVXXTL6Jys10Tt4O1e9SQ2ciMxlmkYdlAxS5IWvcf9r4Nu3L+A8RRrD5QUbfpVDVIYLHTbmWMLHIEOxsdGPAp0dldhgWuZCmeeOcVl+KFzc21lFPKwncHY3UAf/Xq4Qi5WuNZrhql4wjqyHwl8FptRs0uINTPnv8AMfMBGSffmsz4nfDfWPDnh2a6vLOUxxumJ45CynnHPUd/avoDwVpv2WyhQDoo61l/HrUlsfBSWXO+8uFUemFG4/0r1MNm1ZJxdmjhxWW0brl0Z8TzHGeWp+kwNc3Rxk4wSfSuk1vT7W4DHywj/wB5Rio/BNukM940m11DKh/ma2lilfmS2OOOFd+U7mLxBrl/pNtpc1/PJZW+CkWMqMdMkZz7ZomuCwI4J65XkflXq/w28NeG7/azaXauT328/nXcan8GfCWqq222mtWPIMT5A/Bs12YTOqEVy8nL6W/4BnisqqNqTnf1/pnzZYW41C+tYtzRssyujL/CQfftjNemrKFEg8uIl85JHrVvxD8IIvCQj1C11iSWLzNqxOnzdD35rINpM8O0Surjnd615mb4qliKkXB7I68ur0cFFwrrVj47SFLjzwNhxghehqKfTopnJYnBOcZ71PBbyQAmYvIGHB9Kiks7pZOJDsPIHevK5Yvqd39sYK/wfgEdksSbFJ2+masvPcPbm2aTdH2BPIqqbK5Lk+c4HXAphsLwZIuD+IpOMO4POcH/ACM//9k=" alt=""><div><b>Aitxorapp</b><span>Rendimiento y organización</span></div></div>
 
 <section data-main="panel">
  <header class="hhead"><div><h1 id="phi">Hola</h1><div class="sub" id="psub"></div></div><button class="ic" data-a="main" data-v="ajustes" aria-label="Ajustes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button></header>
  <div class="card" id="hnext"></div>
  <div id="hqa"></div>
- <div class="card" id="hteam" hidden></div>
-<div class="card" id="phero"></div>
- <div class="chips sc" id="pnav" hidden></div>
- <div class="card" id="pins"></div>
+ <div class="card" id="phero"></div>
+ <div class="card" id="hload"></div>
+ <div class="card" id="porg"></div>
+ <div class="card" id="penergy"></div>
  <div class="card"><h2>Cómo llegas hoy <small>opcional · 30 s</small></h2><div id="pwell"></div></div>
-  <details class="more"><summary>Más datos de rendimiento</summary>
-<div class="card" id="ptoday"></div>
+ <div class="chips sc" id="pnav" hidden></div>
+ <details class="more"><summary>Más datos de rendimiento</summary>
+ <div class="card" id="pins"></div>
+ <div class="card" id="ptoday"></div>
  <div class="card" id="pload"></div>
  <div class="card" id="psleep"></div>
- <div class="card" id="penergy"></div>
  <div class="card" id="prisk"></div>
  <div class="card" id="presp"></div>
  <div class="card" id="pperf"></div>
  <div class="card" id="phealth"></div>
- <div class="card" id="porg"></div>
  <div class="card"><details><summary>ℹ️ Metodología y fuentes</summary><div id="phow"></div></details></div>
+ </details>
+ <div id="hteam" hidden></div></div>
  </details>
 </section>
 
 <section data-main="eq" hidden>
- <header><h1>Equipo</h1><div class="sub" id="tsub"></div></header>
+ <header><h1>Entrenador</h1><div class="sub" id="tsub"></div></header>
  <div class="chips sc" id="tnav"></div>
  <div id="tview"></div>
 </section>
@@ -231,7 +310,8 @@ details.more[open]>summary{margin-bottom:12px}details.more>summary::-webkit-deta
 </section>
 
 <section data-main="notas" hidden>
- <header><h1>Notas y tareas</h1><div class="sub" id="nsub"></div></header>
+ <header><h1>Agenda</h1><div class="sub" id="nsub"></div></header>
+ <div class="agseg"><button data-a="main" data-v="cal">Calendario</button><button data-a="main" data-v="notas">Tareas</button></div>
  <div id="nfoot"></div>
  <div class="card">
   <textarea id="nq" rows="2" placeholder="Apunta algo… (mañana, viernes, 12/11, #etiqueta, ! para fijar)" aria-label="Nueva nota o tarea"></textarea>
@@ -244,7 +324,8 @@ details.more[open]>summary{margin-bottom:12px}details.more>summary::-webkit-deta
 </section>
 
 <section data-main="cal" hidden>
- <header><h1>Calendario</h1><div class="sub">Tus tareas, entrenos y partidos</div></header>
+ <header><h1>Agenda</h1><div class="sub">Tus tareas, clases, entrenos y partidos</div></header>
+ <div class="agseg"><button data-a="main" data-v="cal">Calendario</button><button data-a="main" data-v="notas">Tareas</button></div>
  <div class="card">
   <div class="row2" style="margin:0 0 10px"><button class="ghost" data-a="cprev" aria-label="Mes anterior">‹</button><b id="cmon"></b><span><button class="ghost" data-a="ctoday">Hoy</button> <button class="ghost" data-a="cnext" aria-label="Mes siguiente">›</button></span></div>
   <div id="cgrid"></div>
@@ -257,10 +338,11 @@ details.more[open]>summary{margin-bottom:12px}details.more>summary::-webkit-deta
 </section>
 
 <section data-main="fut" hidden>
- <header><h1>Fútbol</h1><div class="sub" id="fsub"></div></header>
+ <header><h1>Salud y rendimiento</h1><div class="sub" id="fsub"></div></header>
  <div class="chips sc" id="fnav"></div>
 
  <div data-fv="hoy">
+  <div class="card" id="fplan"></div>
   <div class="card rec" id="rec"></div>
   <div class="card"><h2>Hoy <small id="fdate"></small></h2><div id="fagenda"></div></div>
   <div class="card"><h2>Cómo llegas hoy <small>opcional · 30 s</small></h2><div id="fwell"></div></div>
@@ -271,6 +353,8 @@ details.more[open]>summary{margin-bottom:12px}details.more>summary::-webkit-deta
    <details><summary>Cambiar horario fijo</summary><div id="fsched"></div></details></div>
   <div class="card"><details><summary>ℹ️ Cómo se calcula y en qué se basa</summary><div id="fhow"></div></details></div>
  </div>
+
+ <div data-fv="gym" hidden><div id="gymv"></div></div>
 
  <div data-fv="reg" hidden>
   <div class="card"><h2>Registrar sesión <small>máx. 2 al día</small></h2>
@@ -299,6 +383,7 @@ details.more[open]>summary{margin-bottom:12px}details.more>summary::-webkit-deta
  </div>
 
  <div data-fv="par" hidden>
+  <div id="liga"></div>
   <div class="card"><h2>Tu temporada en partidos</h2><div class="kpi" id="pkpi"></div><div id="pform"></div></div>
   <div class="card"><h2>Nota de tus partidos</h2><div id="prate"></div></div>
   <div class="card"><h2>Próximos partidos</h2><div id="pnext"></div>
@@ -349,10 +434,10 @@ details.more[open]>summary{margin-bottom:12px}details.more>summary::-webkit-deta
 <input type="file" id="impf" accept=".json,application/json" hidden>
 <nav id="mtabs" aria-label="Secciones">
 <button data-a="main" data-v="panel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15a8 8 0 1 1 16 0"/><path d="M12 15l3.5-4.5"/><path d="M5 20h14"/></svg>Hoy</button>
-<button data-a="main" data-v="eq"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.4-3.2 2.7-5 5.5-5s5.1 1.8 5.5 5"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.2c2.6-.3 4.5 1.2 4.9 4.3"/></svg>Equipo</button>
-<button data-a="main" data-v="cal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Calendario</button>
-<button data-a="main" data-v="notas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3.5"/><path d="M8.5 12.5l2.5 2.5 4.5-5"/></svg>Notas</button>
-<button data-a="main" data-v="fut"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8l3.4 2.5-1.3 4h-4.2l-1.3-4z"/><path d="M12 3v5M15.4 10.5L20 9M14.1 14.5l2.7 3.6M9.9 14.5L7.2 18.1M8.6 10.5L4 9"/></svg>Mi fútbol</button></nav>
+<button data-a="main" data-v="cal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Agenda</button>
+<button data-a="main" data-v="fut"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7.5-4.6-7.5-10.2A4.2 4.2 0 0 1 12 7.6a4.2 4.2 0 0 1 7.5 2.2C19.500 15.400 12 20 12 20z"/><path d="M6.500 12.500h3l1.500-2.500 2 4 1.500-1.500h2.500"/></svg>Salud</button>
+<button data-a="main" data-v="eq"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.4-3.2 2.7-5 5.5-5s5.1 1.8 5.5 5"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.2c2.6-.3 4.5 1.2 4.9 4.3"/></svg>Entrenador</button>
+</nav>
 <script>
 "use strict";
 const KEY="midia:v3";
@@ -517,7 +602,7 @@ const p90=(v,m)=>m>0?v/m*90:null;
 const seasonStart=()=>{const T=today(),y=+T.slice(0,4);return (+T.slice(5,7)>=7?y:y-1)+"-07-01"};
 
 /* ---------- RENDER FÚTBOL ---------- */
-const FNAV=[["hoy","Hoy"],["reg","Registrar"],["par","Partidos"],["sal","Salud"],["fis","Físico"],["tem","Temporada"]];
+const FNAV=[["hoy","Hoy"],["gym","Gimnasio"],["reg","Registrar"],["par","Partidos"],["sal","Lesiones"],["fis","Físico"],["tem","Temporada"]];
 function kpi(v,l,c){return `<div class="k ${c||""}"><b>${v}</b><span>${l}</span></div>`}
 function renderHoy(){const s=loadStats(),T=s.T;
  $("fdate").textContent=fmtD(T,{weekday:"long",day:"numeric",month:"short"});
@@ -600,12 +685,12 @@ function renderTem(){const T=today(),ss=seasonStart(),L=S.sess.filter(x=>x.d>=ss
 
 function render(){
  const main=S.ui.main;document.querySelectorAll("[data-main]").forEach(e=>e.hidden=e.dataset.main!==main);
- document.querySelectorAll("#mtabs button").forEach(b=>b.classList.toggle("on",b.dataset.v===main));
+ document.querySelectorAll("#mtabs button").forEach(b=>b.classList.toggle("on",b.dataset.v===main||(b.dataset.v==="cal"&&main==="notas")));document.querySelectorAll(".agseg button").forEach(b=>b.classList.toggle("on",b.dataset.v===main));
  if(main==="panel")renderPanel();else if(main==="notas")renderNotes();else if(main==="cal")renderCal();else if(main==="eq")renderTeam();else if(main==="ajustes"){syUi();pnUi();icUi()}else{
   $("fnav").innerHTML=FNAV.map(f=>`<button class="chip ${S.ui.fv===f[0]?"on":""}" data-a="fv" data-v="${f[0]}">${f[1]}</button>`).join("");
   document.querySelectorAll("[data-fv]").forEach(e=>e.hidden=e.dataset.fv!==S.ui.fv);
   $("fsub").textContent=new Date().toLocaleDateString("es-ES",{weekday:"long",day:"numeric",month:"long"});
-  ({hoy:renderHoy,reg:renderReg,par:renderPar,sal:renderSal,fis:renderFis,tem:renderTem})[S.ui.fv]()}}
+  if(!FNAV.some(f=>f[0]===S.ui.fv))S.ui.fv="hoy";({hoy:()=>{renderHoy();$("fplan").innerHTML=dayPlan()},gym:renderGym,reg:renderReg,par:()=>{renderPar();$("liga").innerHTML=renderLiga()},sal:renderSal,fis:renderFis,tem:renderTem})[S.ui.fv]()}}
 
 /* ---------- Acciones ---------- */
 const nz=id=>{const v=$(id).value;return v===""?null:Math.max(0,parseInt(v,10)||0)};
@@ -995,7 +1080,7 @@ function syMerge(a,b){b=norm(b);const o=norm(JSON.parse(JSON.stringify(a)));
   ["pl","ex","plan","bd","games"].forEach(k=>{o.team[k]=o.team[k].filter(x=>!o.team.del[x.id])})}
  o.sched=Object.assign({},b.sched,a.sched);o.sched.skip=[...new Set([].concat(b.sched.skip||[],a.sched.skip||[]))];
  o.obj=Object.assign({},b.obj,a.obj);o.ui=Object.assign({},b.ui,a.ui);return o}
-function syEmpty(s){return!s.notes.length&&!s.sess.length&&!s.inj.length&&!s.prev.length&&!s.marks.length&&!s.next.length&&!Object.keys(s.well).length&&!Object.keys(s.mol).length}
+function syEmpty(s){return!s.notes.length&&!s.sess.length&&!s.inj.length&&!s.prev.length&&!s.marks.length&&!s.next.some(x=>!/^fx\d/.test(x.id))&&!Object.keys(s.well).length&&!Object.keys(s.mol).length}
 function syPersist(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
 function syTake(data){setTimeout(()=>{syLast=syDig()},0);const keep={};["main","mode","f","tag","fv"].forEach(k=>keep[k]=S.ui[k]);S=norm(data);Object.assign(S.ui,keep);syPersist()}
 
@@ -1293,6 +1378,7 @@ const QI={
  piz:'<svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M12 5v14"/><circle cx="12" cy="12" r="2.6"/><path d="M3 9.5h2.8v5H3M21 9.5h-2.8v5H21"/></svg>',
  ses:'<svg viewBox="0 0 24 24"><path d="M4 15a8 8 0 1 1 16 0"/><path d="M12 15l3.5-4.5"/><path d="M5 20h14"/></svg>',
  tarea:'<svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3.5"/><path d="M12 8.5v7M8.5 12h7"/></svg>',
+ gym:'<svg viewBox="0 0 24 24"><path d="M3 9v6M6 7v10M18 7v10M21 9v6M6 12h12"/></svg>',
  cues:'<svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.4A4 4 0 0 1 19 10c0 5.600-7 10-7 10z"/></svg>'};
 function homeNext(){const T=today(),out=[],nowHM=new Date().toTimeString().slice(0,5);
  const add=(d,t,txt,tag,go)=>out.push({d,t:t||"",txt,tag,go});
@@ -1310,15 +1396,15 @@ function homeNext(){const T=today(),out=[],nowHM=new Date().toTimeString().slice
   `<div class="nx ${x.d===T&&x.t&&x.t<nowHM?"past":""}" data-t="go" data-v="${x.go[0]}" data-id="${x.go[1]||""}"><div class="w"><b>${x.t||"—"}</b>${lab(x.d)}</div><div class="t">${esc(x.txt)}</div><span class="tag">${x.tag}</span></div>`).join("")
   :`<div class="empty">Nada programado para los próximos días. Añade un entreno en Equipo o una tarea.</div>`)}
 function homeQA(){const q=(k,l,g,id)=>`<button data-t="go" data-v="${g}" data-id="${id||""}">${QI[k]}${l}</button>`;
- $("hqa").innerHTML=`<div class="qa">${q("lista","Pasar lista","eq","asi")}${q("plan","Preparar entreno","eq","ent")}${q("piz","Pizarra","eq","piz")}${q("ses","Mi sesión","fut","reg")}${q("tarea","Nueva tarea","notas")}${q("cues","Cómo llego","well")}</div>`}
-function homeTeam(){const el=$("hteam");if(!S.team.pl.length){el.hidden=true;return}el.hidden=false;
+ $("hqa").innerHTML=`<div class="qa">${q("ses","Registrar sesión","fut","reg")}${q("gym","Gimnasio","fut","gym")}${q("tarea","Nueva tarea","notas")}${q("cues","Cómo llego","well")}${q("plan","Preparar entreno","eq","ent")}${q("lista","Pasar lista","eq","asi")}</div>`}
+function homeTeam(){const el=$("hteam");if(el){el.hidden=true;return}if(!S.team.pl.length){return}
  const ss=attSessions(30),al=teamAlerts(30);let tot=0,pr=0;ss.forEach(a=>mv(a).forEach(s=>{tot++;if(s==="p"||s==="r")pr++}));
  const pct=tot?Math.round(pr/tot*100):null,nxt=S.team.plan.filter(p=>p.d>=today()).sort((a,b)=>a.d.localeCompare(b.d))[0],ng=S.team.games.filter(g=>g.d>=today()).sort((a,b)=>a.d.localeCompare(b.d))[0],inj=S.team.pl.filter(p=>p.inj).length;
  el.innerHTML=`<h2>Mi equipo <small><a href="#" data-t="go" data-v="eq" data-id="res" style="color:var(--ac)">ver todo</a></small></h2>
  <div class="tiles">${tile("Asistencia",pct==null?"—":pct+"%","últimos 30 d",pctCol(pct))}${tile("Plantilla",S.team.pl.length,"jugadores")}${tile("Lesionados",inj,"jugadores",inj?"var(--warn)":"var(--ok)")}</div>`+
  (al.length?`<h3>Atención</h3>`+al.slice(0,4).map(a=>`<div class="ev"><span class="t"><b>${esc(a.pl.n)}</b> <span class="hint">${a.pl.p}</span></span><span class="tag" style="color:var(--${a.k})">${a.t}</span></div>`).join(""):(ss.length?`<div class="hint">Sin alertas de asistencia.</div>`:`<div class="hint">Pasa lista en el próximo entreno y aquí verás las faltas de cada jugador.</div>`))+
  (nxt||ng?`<div class="hint" style="margin-top:8px">${nxt?"Próximo entreno: "+cap(fmtD(nxt.d,{weekday:"long",day:"numeric",month:"short"}))+(nxt.tp?" · "+esc(nxt.tp):""):""}${nxt&&ng?" · ":""}${ng?"Partido: "+cap(fmtD(ng.d,{weekday:"short",day:"numeric",month:"short"}))+" vs "+esc(ng.riv||"rival"):""}</div>`:"")}
-function renderHome(){homeNext();homeQA();homeTeam()}
+function renderHome(){homeNext();homeQA();$("hload").innerHTML=loadAdvice()}
 
 /* ---------- Arranque animado ---------- */
 (function splash(){const el=document.getElementById("splash");if(!el)return;let seen=false;try{seen=sessionStorage.getItem("aitx:splash")==="1"}catch(e){}
@@ -1514,7 +1600,7 @@ document.addEventListener("input",e=>{if(e.target&&e.target.id==="esr"){const q=
 
 /* ---------- Entrenos ---------- */
 let TPD=null;
-function newPlan(d){TPD={_new:1,id:uid(),d:d||shift(today(),1),h:"",tp:"",obj:"",bl:[],nt:""}}
+function newPlan(d){TPD={_new:1,id:uid(),d:d||shift(today(),1),h:"",tp:"",obj:"",bl:[],nt:"",bj:S.team.pl.filter(x=>x.inj).map(x=>x.id),tn:2,tm:[],tg:[]}}
 function tvEnt(){const P=S.team.plan.slice().sort((a,b)=>b.d.localeCompare(a.d)),T=today(),up=P.filter(p=>p.d>=T).reverse(),pa=P.filter(p=>p.d<T);
  const row=p=>`<div class="ev"><span class="t" data-t="pedit" data-id="${p.id}" style="cursor:pointer"><b>${cap(fmtD(p.d,{weekday:"short",day:"numeric",month:"short"}))}</b>${p.h?" · "+p.h:""} · ${esc(p.tp||"sin tema")} <span class="hint">${planMin(p)} min · ${(p.bl||[]).length} bloques</span></span><button class="ghost" data-t="plist" data-v="${p.d}">Lista</button>${tdelBtn("pdel",p.id)}</div>`;
  return (TPD?planForm():`<div class="card"><div class="row2" style="margin:0"><h2 style="margin:0">Entrenos</h2><button class="pri" data-t="pnew">+ Preparar entreno</button></div><div class="hint">Diseña la sesión con bloques de tu biblioteca, mira el tiempo total y compártela con tu cuerpo técnico.</div></div>`)+
@@ -1524,6 +1610,7 @@ function planForm(){const p=TPD,tot=planMin(p),L=S.team.ex.slice().sort((a,b)=>a
  <div class="g2"><div><label>Fecha</label><input type="date" data-c="pd" data-k="d" value="${p.d}"></div><div><label>Hora</label><input type="time" data-c="pd" data-k="h" value="${p.h||""}"></div></div>
  <label>Tema</label><input type="text" data-c="pd" data-k="tp" value="${esc(p.tp||"")}" placeholder="Ej.: Salida de balón">
  <label>Objetivo de la sesión</label><input type="text" data-c="pd" data-k="obj" value="${esc(p.obj||"")}" placeholder="Qué quieres que mejoren hoy">
+ ${bajasCard(p)}
  <h3>Bloques <small class="hint">${(p.bl||[]).length}</small></h3>
  ${(p.bl||[]).map((b,i)=>{const e=b.ex&&exById(b.ex);return`<div class="bk"><div class="bh"><span class="bn">${i+1}</span><input type="text" class="bnm" data-c="pb" data-id="${b.id}" data-k="n" value="${esc(b.n||"")}" placeholder="Bloque"><input type="text" class="bmn" inputmode="numeric" data-c="pb" data-id="${b.id}" data-k="min" value="${b.min||""}" aria-label="Minutos"><small>min</small></div>
  <input type="text" class="bnt" data-c="pb" data-id="${b.id}" data-k="nt" value="${esc(b.nt||"")}" placeholder="${e?esc(e.obj||"Notas del bloque"):"Notas del bloque"}"><div class="bt"><button class="ghost" data-t="bup" data-id="${b.id}" ${i?"":"disabled"} aria-label="Subir">↑</button><button class="ghost" data-t="bdn" data-id="${b.id}" ${i<p.bl.length-1?"":"disabled"} aria-label="Bajar">↓</button>${e?`<button class="ghost" data-t="eopenfrom" data-id="${e.id}">Ver ficha</button>`:""}<button class="ghost" data-t="bdel" data-id="${b.id}">Quitar</button></div></div>`}).join("")||`<div class="empty">Sin bloques. Añade ejercicios de tu biblioteca o carga la estructura base.</div>`}
@@ -1531,7 +1618,7 @@ function planForm(){const p=TPD,tot=planMin(p),L=S.team.ex.slice().sort((a,b)=>a
  <div class="foot" style="justify-content:flex-start"><button class="ghost" data-t="bfree">+ Bloque libre</button><button class="ghost" data-t="bbase">Estructura base 90'</button></div>
  <label style="margin-top:10px">Notas</label><textarea rows="2" data-c="pd" data-k="nt" placeholder="Convocatoria, material a preparar, mensajes…">${esc(p.nt||"")}</textarea>
  <div class="foot"><button class="ghost" data-t="pcancel">Cancelar</button><button class="ghost" data-t="pshare">Copiar resumen</button><button class="pri" data-t="psave">Guardar entreno</button></div></div>`}
-function planText(p){const bl=p.bl||[];return `ENTRENO ${cap(fmtD(p.d,{weekday:"long",day:"numeric",month:"long"}))}${p.h?" · "+p.h:""}\n${p.tp?"Tema: "+p.tp+"\n":""}${p.obj?"Objetivo: "+p.obj+"\n":""}Duración: ${planMin(p)} min\n\n`+bl.map((b,i)=>{const e=b.ex&&exById(b.ex);return `${i+1}. ${b.n||"Bloque"} (${b.min||0}')${b.nt?" — "+b.nt:""}${e&&e.d?"\n   "+e.d:""}`}).join("\n")+(p.nt?"\n\nNotas: "+p.nt:"")}
+function planText(p){const bl=p.bl||[];return `ENTRENO ${cap(fmtD(p.d,{weekday:"long",day:"numeric",month:"long"}))}${p.h?" · "+p.h:""}\n${p.tp?"Tema: "+p.tp+"\n":""}${p.obj?"Objetivo: "+p.obj+"\n":""}Duración: ${planMin(p)} min\n\n`+bl.map((b,i)=>{const e=b.ex&&exById(b.ex);return `${i+1}. ${b.n||"Bloque"} (${b.min||0}')${b.nt?" — "+b.nt:""}${e&&e.d?"\n   "+e.d:""}`}).join("\n")+((p.bj||[]).length?"\n\nBajas: "+p.bj.map(id=>(plById(id)||{n:"?"}).n).join(", "):"")+((p.tm||[]).length?"\n\nEQUIPOS\n"+p.tm.map((ids,i)=>TMC[i%TMC.length][0]+": "+ids.map(id=>(plById(id)||{n:"?"}).n).join(", ")).join("\n")+((p.tg||[]).length?"\nPorteros: "+p.tg.map(id=>(plById(id)||{n:"?"}).n).join(", "):""):"")+(p.nt?"\n\nNotas: "+p.nt:"")}
 TA.pnew=()=>{newPlan();render()};
 TA.pedit=b=>{const p=S.team.plan.find(x=>x.id===b.dataset.id);if(p){TPD=JSON.parse(JSON.stringify(p));window.scrollTo(0,0);render()}};
 TA.pcancel=()=>{TPD=null;render()};
@@ -1633,8 +1720,357 @@ TA.bpng=async()=>{try{const s=$("bsvg"),vb=s.viewBox.baseVal,W=720,H=Math.round(
   download(f.name,blob,"image/png")}catch(e){if(!(e&&e.name==="AbortError"))toast("No se pudo crear la imagen")}};
 document.addEventListener("change",e=>{if(e.target&&e.target.id==="bnm"&&TBD)TBD.n=e.target.value});
 
+/* ================= v10: FIGURAS (esquemas de ejercicios) ================= */
+const FL={tr:30,th:24,sh:23,ft:8,ua:17,fa:15};
+const GY=96;
+const rad=a=>a*Math.PI/180;
+const dirv=a=>[Math.sin(rad(a)),Math.cos(rad(a))];            /* 0=abajo, 90=delante, 180=arriba, -90=atrás */
+const padd=(o,l,a)=>{const d=dirv(a);return[o[0]+d[0]*l,o[1]+d[1]*l]};
+function ik(a,b,l1,l2,sg){let dx=b[0]-a[0],dy=b[1]-a[1],d=Math.hypot(dx,dy);const mx=l1+l2-.01;if(d>mx){dx*=mx/d;dy*=mx/d;d=mx}if(d<.5)d=.5;
+ const base=Math.atan2(dy,dx),c=Math.max(-1,Math.min(1,(l1*l1+d*d-l2*l2)/(2*l1*d))),A=Math.acos(c)*sg;
+ return[a[0]+l1*Math.cos(base+A),a[1]+l1*Math.sin(base+A)]}
+/* pose: {hip,t,f:[pie1,pie2?],h:[mano],ks:signo rodilla,es:signo codo,ua,fa,deco} */
+function figCalc(p){const hip=p.hip,sho=padd(hip,FL.tr,p.t),head=padd(sho,10,p.t),o={hip,sho,head,leg:[],arm:null,deco:p.deco||[]};
+ (p.f||[]).forEach((f,i)=>{const k=ik(hip,f,FL.th,FL.sh,p.ks==null?-1:p.ks),d=[f[0]-k[0],f[1]-k[1]],L=Math.hypot(d[0],d[1])||1,an=[k[0]+d[0]/L*Math.min(FL.sh,L),k[1]+d[1]/L*Math.min(FL.sh,L)];
+  o.leg.push({kn:k,an,to:p.toe&&p.toe[i]?p.toe[i]:[an[0]+FL.ft,an[1]+1.5]})});
+ if(p.h){const e=ik(sho,p.h,FL.ua,FL.fa,p.es==null?1:p.es),d=[p.h[0]-e[0],p.h[1]-e[1]],L=Math.hypot(d[0],d[1])||1;o.arm={el:e,ha:[e[0]+d[0]/L*Math.min(FL.fa,L),e[1]+d[1]/L*Math.min(FL.fa,L)]}}
+ else if(p.ua!=null){const e=padd(sho,FL.ua,p.ua),h=padd(e,FL.fa,p.fa);o.arm={el:e,ha:h}}
+ return o}
+function figSvgBody(o,col){const L=(a,b,w,op)=>`<line x1="${a[0].toFixed(1)}" y1="${a[1].toFixed(1)}" x2="${b[0].toFixed(1)}" y2="${b[1].toFixed(1)}" stroke="${col}" stroke-width="${w}" stroke-linecap="round" ${op?`opacity="${op}"`:""}/>`;let s="";
+ const lg=o.leg.slice().reverse();lg.forEach((g,i)=>{const far=lg.length>1&&i===0;s+=L(o.hip,g.kn,5.2,far?.55:1)+L(g.kn,g.an,4.6,far?.55:1)+L(g.an,g.to,3.6,far?.55:1)});
+ s+=L(o.hip,o.sho,7.5);
+ if(o.arm)s+=L(o.sho,o.arm.el,4.4)+L(o.arm.el,o.arm.ha,3.8)+`<circle cx="${o.arm.ha[0].toFixed(1)}" cy="${o.arm.ha[1].toFixed(1)}" r="2.3" fill="${col}"/>`;
+ s+=`<circle cx="${o.head[0].toFixed(1)}" cy="${o.head[1].toFixed(1)}" r="5.6" fill="${col}"/>`;return s}
+function figDeco(o,ph){let s="";const M="var(--mu)",B="var(--bd)";
+ o.deco.forEach(d=>{
+  if(d.k==="bench")s+=`<rect x="${d.x1}" y="${d.y}" width="${d.x2-d.x1}" height="5" rx="2" fill="${B}" stroke="${M}" stroke-width=".6"/><line x1="${d.x1+6}" y1="${d.y+5}" x2="${d.x1+6}" y2="${GY}" stroke="${M}" stroke-width="2.2"/><line x1="${d.x2-6}" y1="${d.y+5}" x2="${d.x2-6}" y2="${GY}" stroke="${M}" stroke-width="2.2"/>`;
+  else if(d.k==="plate"){const a=o.arm?o.arm.ha:null;if(a)s+=`<circle cx="${a[0].toFixed(1)}" cy="${a[1].toFixed(1)}" r="${d.r||8}" fill="none" stroke="${M}" stroke-width="2.6"/><circle cx="${a[0].toFixed(1)}" cy="${a[1].toFixed(1)}" r="1.5" fill="${M}"/>`}
+  else if(d.k==="db"){const a=o.arm?o.arm.ha:null;if(a)s+=`<rect x="${(a[0]-5.5).toFixed(1)}" y="${(a[1]-2.4).toFixed(1)}" width="11" height="4.8" rx="2" fill="${M}"/>`}
+  else if(d.k==="bar")s+=`<line x1="${d.x1}" y1="${d.y}" x2="${d.x2}" y2="${d.y}" stroke="${M}" stroke-width="3" stroke-linecap="round"/><line x1="${d.x1}" y1="${d.y}" x2="${d.x1}" y2="${d.y-6}" stroke="${M}" stroke-width="2.4"/><line x1="${d.x2}" y1="${d.y}" x2="${d.x2}" y2="${d.y-6}" stroke="${M}" stroke-width="2.4"/>`;
+  else if(d.k==="cable"){const a=o.arm?o.arm.ha:[d.x,d.y];s+=`<line x1="${d.x}" y1="${d.y}" x2="${a[0].toFixed(1)}" y2="${a[1].toFixed(1)}" stroke="${M}" stroke-width="1.2" stroke-dasharray="3 2"/><circle cx="${d.x}" cy="${d.y}" r="2.6" fill="${M}"/>`}
+  else if(d.k==="box")s+=`<rect x="${d.x}" y="${d.y}" width="${d.w}" height="${d.h}" rx="2" fill="${B}" stroke="${M}" stroke-width=".6"/>`;
+  else if(d.k==="arrow"){const dx=d.x2-d.x1,dy=d.y2-d.y1,L=Math.hypot(dx,dy)||1,ux=dx/L,uy=dy/L,hx=d.x2-ux*5,hy=d.y2-uy*5;s+=`<line x1="${d.x1}" y1="${d.y1}" x2="${hx.toFixed(1)}" y2="${hy.toFixed(1)}" stroke="var(--warn)" stroke-width="1.8" stroke-linecap="round"/><path d="M${d.x2} ${d.y2} L${(hx-uy*3).toFixed(1)} ${(hy+ux*3).toFixed(1)} L${(hx+uy*3).toFixed(1)} ${(hy-ux*3).toFixed(1)}Z" fill="var(--warn)"/>`}
+ });return s}
+function figPair(ex){const ps=[ex.A,ex.B||ex.A].map(figCalc);let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;
+ const ext=(x,y)=>{x0=Math.min(x0,x);x1=Math.max(x1,x);y0=Math.min(y0,y);y1=Math.max(y1,y)};
+ ps.forEach(o=>{[o.hip,o.sho,o.head].forEach(q=>ext(q[0],q[1]));o.leg.forEach(g=>{ext(g.kn[0],g.kn[1]);ext(g.to[0],g.to[1])});if(o.arm){ext(o.arm.el[0],o.arm.el[1]);ext(o.arm.ha[0],o.arm.ha[1]);ext(o.arm.ha[0]-9,o.arm.ha[1]-9);ext(o.arm.ha[0]+9,o.arm.ha[1]+9)}
+  o.deco.forEach(d=>{if(d.x1!=null){ext(d.x1,d.y1!=null?d.y1:d.y);ext(d.x2,d.y2!=null?d.y2:d.y)}if(d.x!=null)ext(d.x,d.y);if(d.w)ext(d.x+d.w,d.y+d.h)})});
+ ext(x0,GY+2);const pad=9,W=Math.max(x1-x0+2*pad,80),H=y1-y0+2*pad,vx=(x0+x1)/2-W/2,vy=y0-pad;
+ const mk=(o,lab)=>`<svg viewBox="${vx.toFixed(0)} ${vy.toFixed(0)} ${W.toFixed(0)} ${H.toFixed(0)}" role="img" aria-label="${esc(ex.n)} · ${lab}"><line x1="${(vx+3).toFixed(0)}" y1="${GY+1.5}" x2="${(vx+W-3).toFixed(0)}" y2="${GY+1.5}" stroke="var(--bd)" stroke-width="1.4" stroke-linecap="round"/>${figDeco(o)}${figSvgBody(o,"var(--ac)")}</svg>`;
+ return `<div class="fig2"><figure>${mk(ps[0],"inicio")}<figcaption>Inicio</figcaption></figure>${ex.B?`<figure>${mk(ps[1],"final")}<figcaption>${esc(ex.bl||"Final")}</figcaption></figure>`:""}</div>`}
+
+/* ---------- campos de fútbol (vista cenital) para esquemas de tareas ---------- */
+function pitchSvg(t){const C=(x,y,c)=>`<path d="M${x} ${y-4}l4 7h-8z" fill="${c||"var(--warn)"}"/>`,P=(x,y,c)=>`<circle cx="${x}" cy="${y}" r="3.6" fill="${c||"var(--ac)"}"/>`,
+ A=(x1,y1,x2,y2,d)=>{const dx=x2-x1,dy=y2-y1,L=Math.hypot(dx,dy)||1,ux=dx/L,uy=dy/L,hx=x2-ux*5,hy=y2-uy*5;return`<line x1="${x1}" y1="${y1}" x2="${hx.toFixed(1)}" y2="${hy.toFixed(1)}" stroke="var(--tx)" stroke-width="1.4" ${d?'stroke-dasharray="3 2.5"':""} stroke-linecap="round"/><path d="M${x2} ${y2}L${(hx-uy*2.6).toFixed(1)} ${(hy+ux*2.6).toFixed(1)}L${(hx+uy*2.6).toFixed(1)} ${(hy-ux*2.6).toFixed(1)}Z" fill="var(--tx)"/>`};
+ const T=(x,y,s)=>`<text x="${x}" y="${y}" font-size="6.5" fill="var(--mu)" text-anchor="middle">${s}</text>`;let b="";
+ if(t==="acel")b=C(14,56)+C(60,56)+C(106,56)+P(14,42)+A(18,42,104,42)+A(104,70,16,70,1)+T(14,82,"0")+T(60,82,"10 m")+T(106,82,"20 m")+T(60,12,"Sprint 20 m al 90 % · vuelta andando");
+ else if(t==="agil")b=C(60,72)+C(28,48)+C(92,48)+C(60,26)+P(60,80)+A(57,70,31,50)+A(33,48,87,48)+A(91,52,63,70)+T(60,12,"Circuito en T · 5 m entre conos")+T(60,90,"");
+ else if(t==="rondo")b=`<rect x="26" y="22" width="68" height="52" rx="3" fill="none" stroke="var(--bd)" stroke-width="1.5"/>`+P(26,22)+P(94,22)+P(26,74)+P(94,74)+P(60,22)+`<circle cx="52" cy="46" r="3.6" fill="var(--hi)"/><circle cx="70" cy="52" r="3.6" fill="var(--hi)"/>`+A(31,24,55,22,1)+A(91,28,92,68,1)+A(89,74,64,74,1)+T(60,12,"Rondo 5×2 · 2 min con 1 min de pausa");
+ else if(t==="sprint")b=C(14,56)+C(106,56)+P(14,42)+A(18,42,102,42)+A(102,70,18,70,1)+T(60,12,"Repetidos: 6 × 30 m · vuelta andando");
+ else if(t==="mov")b=`<ellipse cx="60" cy="52" rx="42" ry="22" fill="none" stroke="var(--bd)" stroke-width="1.4"/>`+P(30,52)+A(34,52,86,52,1)+T(60,12,"Trote suave y movilidad dinámica");
+ return`<svg viewBox="0 0 120 92" role="img" aria-label="Esquema de la tarea"><rect x="2" y="2" width="116" height="88" rx="7" fill="var(--ac2)" stroke="var(--bd)"/>${b}</svg>`}
+
+/* ================= v10: CATÁLOGO DE GIMNASIO ================= */
+const MUS=[["pe","Pecho"],["ho","Hombro"],["tr","Tríceps"],["es","Espalda"],["bi","Bíceps"],["cu","Cuádriceps"],["is","Isquios"],["gl","Glúteo"],["ge","Gemelo"],["co","Core"]];
+const musN=k=>(MUS.find(m=>m[0]===k)||["",k])[1];
+const LEGS=["cu","is","gl","ge"];
+const STD=(x,y)=>({hip:[x||60,y||46],t:180,f:[[x||60,93]]});
+const GX=[
+ {id:"banca",n:"Press de banca con barra",g:"pe",s:["ho","tr"],c:1,eq:"Barra y banco",z:["hom"],
+  cues:["Omóplatos juntos y pegados al banco; pies firmes en el suelo.","Baja la barra controlada (2–3 s) hasta rozar el pecho, codos a unos 45° del cuerpo.","Empuja en vertical sin despegar los glúteos del banco."],err:"Rebotar la barra en el pecho o abrir demasiado los codos (carga el hombro).",vq:"press banca técnica correcta",
+  A:{hip:[40,66],t:90,f:[[12,93]],h:[70,35],es:-1,deco:[{k:"bench",x1:24,x2:94,y:71},{k:"plate",r:8}]},
+  B:{hip:[40,66],t:90,f:[[12,93]],h:[60,56],es:-1,deco:[{k:"bench",x1:24,x2:94,y:71},{k:"plate",r:8}]},bl:"Barra al pecho"},
+ {id:"flex",n:"Flexiones",g:"pe",s:["ho","tr","co"],c:1,eq:"Sin material",z:["hom"],tm:0,
+  cues:["Cuerpo en línea recta de cabeza a talones; abdomen firme.","Manos algo más anchas que los hombros; codos a unos 45°.","Baja hasta casi rozar el suelo con el pecho y sube sin arquear la espalda."],err:"Dejar caer la cadera o llevar la cabeza adelante.",vq:"flexiones técnica correcta",
+  A:{hip:[47.9,73.2],t:111,f:[[4,90]],toe:[[3,96]],h:[76,94],es:1},B:{hip:[50.4,83.9],t:97.5,f:[[4,90]],toe:[[3,96]],h:[80,94],es:1},bl:"Pecho casi al suelo"},
+ {id:"pinc",n:"Press inclinado con mancuernas",g:"pe",s:["ho","tr"],c:1,eq:"Mancuernas y banco inclinado",z:["hom"],cues:["Banco a 30°: más pecho alto y menos hombro.","Mancuernas a la altura del pecho, antebrazos verticales.","Sube hacia arriba y ligeramente adentro, sin chocar las mancuernas."],err:"Banco demasiado vertical (se convierte en press de hombro).",vq:"press inclinado mancuernas técnica"},
+ {id:"aper",n:"Aperturas en polea o máquina",g:"pe",s:[],c:0,eq:"Polea o máquina",z:["hom"],cues:["Codos ligeramente flexionados y fijos.","Abre hasta notar estiramiento en el pecho, sin pasar la línea del hombro.","Cierra como si abrazaras un árbol."],err:"Convertirlo en un press (doblar y estirar los codos).",vq:"aperturas pecho polea técnica"},
+ {id:"mili",n:"Press de hombro con mancuernas (de pie)",g:"ho",s:["tr"],c:1,eq:"Mancuernas",z:["hom","esp"],
+  cues:["Glúteos y abdomen apretados; costillas abajo.","Mancuernas a la altura de los hombros, codos algo por delante.","Empuja hacia arriba y ligeramente atrás, hasta estirar los brazos junto a las orejas."],err:"Arquear la zona lumbar para empujar.",vq:"press militar mancuernas de pie técnica",
+  A:{...STD(),ua:20,fa:180,deco:[{k:"db"}]},B:{...STD(),ua:172,fa:178,deco:[{k:"db"}]},bl:"Brazos arriba"},
+ {id:"later",n:"Elevaciones laterales",g:"ho",s:[],c:0,eq:"Mancuernas",z:["hom"],
+  cues:["Ligero giro del tronco hacia delante y codos algo flexionados.","Sube como si vertieras una jarra, hasta la altura del hombro.","Baja en 2–3 s, sin balanceo."],err:"Subir los hombros hacia las orejas o usar impulso.",vq:"elevaciones laterales técnica",nt:"Dibujo de perfil: en el ejercicio real los brazos suben hacia los lados.",
+  A:{...STD(),ua:0,fa:8,deco:[{k:"db"}]},B:{...STD(),ua:90,fa:94,deco:[{k:"db"}]},bl:"Brazos a la altura del hombro"},
+ {id:"face",n:"Face pull en polea",g:"ho",s:["es"],c:0,eq:"Polea con cuerda",z:["hom"],cues:["Polea a la altura de la cara, agarre con las palmas hacia dentro.","Tira hacia la frente abriendo los codos.","Aprieta la parte de atrás del hombro 1 s."],err:"Tirar solo con los brazos sin mover los omóplatos.",vq:"face pull técnica"},
+ {id:"push",n:"Extensión de tríceps en polea",g:"tr",s:[],c:0,eq:"Polea",z:["hom"],
+  cues:["Codos pegados a las costillas y fijos.","Estira del todo abajo y aprieta 1 s.","Sube controlado hasta ángulo de 90°."],err:"Mover los codos hacia delante y atrás.",vq:"extensión tríceps polea técnica",
+  A:{hip:[56,46],t:172,f:[[56,93]],ua:0,fa:100,deco:[{k:"cable",x:78,y:-6}]},B:{hip:[56,46],t:172,f:[[56,93]],ua:0,fa:6,deco:[{k:"cable",x:78,y:-6}]},bl:"Brazo estirado"},
+ {id:"tsob",n:"Extensión de tríceps sobre la cabeza",g:"tr",s:[],c:0,eq:"Mancuerna o polea",z:["hom"],cues:["Codos apuntando al techo y cerca de las orejas.","Baja la mancuerna detrás de la cabeza.","Estira sin separar los codos."],err:"Abrir los codos.",vq:"extensión triceps sobre cabeza técnica"},
+ {id:"remo",n:"Remo con barra inclinado",g:"es",s:["bi"],c:1,eq:"Barra",z:["esp"],
+  cues:["Cadera atrás, espalda neutra y torso casi paralelo al suelo (45°–60°).","Tira de la barra hacia el ombligo llevando los codos hacia atrás.","Aprieta los omóplatos y baja controlado."],err:"Balancear el torso para subir la barra.",vq:"remo con barra técnica",
+  A:{hip:[40,52],t:115,f:[[50,93]],h:[67,69],es:1,deco:[{k:"plate",r:7}]},B:{hip:[40,52],t:115,f:[[50,93]],h:[56,56],es:1,deco:[{k:"plate",r:7}]},bl:"Barra al abdomen"},
+ {id:"domi",n:"Dominadas (o dominadas asistidas)",g:"es",s:["bi"],c:1,eq:"Barra de dominadas",z:["hom"],ng:1,
+  cues:["Empieza colgado con los hombros activos (no encogidos).","Lleva el pecho hacia la barra y los codos hacia las costillas.","Baja sin soltarte: 2–3 s hasta estirar del todo."],err:"Subir con balanceo o quedarse a medio recorrido.",vq:"dominadas técnica correcta",
+  A:{hip:[63,74],t:180,f:[[52,116]],ks:1,h:[63,10],es:-1,deco:[{k:"bar",x1:36,x2:90,y:10}]},B:{hip:[63,52],t:180,f:[[52,94]],ks:1,h:[63,10],es:-1,deco:[{k:"bar",x1:36,x2:90,y:10}]},bl:"Barbilla sobre la barra"},
+ {id:"jalon",n:"Jalón al pecho",g:"es",s:["bi"],c:1,eq:"Polea alta",z:[],cues:["Agarre algo más ancho que los hombros, pecho alto.","Tira hacia la parte alta del pecho llevando los codos abajo.","Controla la subida sin que el peso te levante."],err:"Tirar con el cuerpo hacia atrás.",vq:"jalón al pecho técnica"},
+ {id:"remom",n:"Remo a una mano con mancuerna",g:"es",s:["bi"],c:1,eq:"Mancuerna y banco",z:["esp"],cues:["Una mano y una rodilla en el banco; espalda plana.","Tira hacia la cadera, no hacia el hombro.","Pausa 1 s arriba y baja estirando del todo."],err:"Girar el tronco al subir.",vq:"remo con mancuerna una mano técnica"},
+ {id:"curl",n:"Curl de bíceps con mancuernas",g:"bi",s:[],c:0,eq:"Mancuernas",z:[],
+  cues:["Codos pegados al cuerpo y quietos.","Sube sin balancear, girando la muñeca hacia fuera.","Baja en 2–3 s hasta estirar."],err:"Impulsarse con la espalda.",vq:"curl bíceps mancuernas técnica",
+  A:{...STD(),ua:0,fa:4,deco:[{k:"db"}]},B:{...STD(),ua:0,fa:158,deco:[{k:"db"}]},bl:"Mancuerna al hombro"},
+ {id:"mart",n:"Curl martillo",g:"bi",s:[],c:0,eq:"Mancuernas",z:[],cues:["Palmas mirándose entre sí durante todo el recorrido.","Codos fijos junto al cuerpo.","Controla la bajada."],err:"Balancear el tronco.",vq:"curl martillo técnica"},
+ {id:"sent",n:"Sentadilla goblet (mancuerna al pecho)",g:"cu",s:["gl","co"],c:1,eq:"Mancuerna o kettlebell",z:["rod","cuad","glu"],
+  cues:["Pies algo más anchos que los hombros, puntas ligeramente abiertas.","Baja con el pecho alto y las rodillas siguiendo la línea de los pies.","Baja hasta donde mantengas la espalda neutra y sube empujando el suelo."],err:"Rodillas hacia dentro o talones despegados.",vq:"sentadilla goblet técnica",
+  A:{hip:[60,46],t:180,f:[[60,93]],h:[70,27],es:1,deco:[{k:"db"}]},B:{hip:[40,71],t:150,f:[[60,93]],h:[63,50],es:1,deco:[{k:"db"}]},bl:"Sentadilla profunda"},
+ {id:"zanc",n:"Zancada hacia atrás",g:"cu",s:["gl"],c:1,eq:"Sin material o mancuernas",z:["rod","cuad","glu"],
+  cues:["Da un paso largo atrás y baja la rodilla trasera hacia el suelo.","Rodilla delantera sobre el pie, tronco erguido.","Empuja con el talón de delante para volver."],err:"Paso demasiado corto (la rodilla pasa mucho del pie).",vq:"zancada hacia atrás técnica",
+  A:{hip:[60,46],t:180,f:[[62,93],[58,93]]},B:{hip:[52,67],t:176,f:[[68,93],[18,88]],toe:[null,[24,93]]},bl:"Rodilla trasera abajo"},
+ {id:"bulg",n:"Sentadilla búlgara",g:"cu",s:["gl"],c:1,eq:"Banco y mancuernas",z:["rod","cuad","glu"],cues:["Pie trasero apoyado en el banco, pie delantero a un paso largo.","Baja en vertical con el tronco ligeramente inclinado.","Empuja con el talón delantero."],err:"Apoyar el peso en la pierna de atrás.",vq:"sentadilla búlgara técnica"},
+ {id:"prensa",n:"Prensa de piernas",g:"cu",s:["gl"],c:1,eq:"Máquina",z:["rod","cuad"],cues:["Espalda baja pegada al respaldo.","Baja hasta unos 90° de rodilla sin que se despegue la cadera.","Empuja sin bloquear las rodillas del todo."],err:"Dejar que la cadera se levante al bajar.",vq:"prensa de piernas técnica"},
+ {id:"rdl",n:"Peso muerto rumano",g:"is",s:["gl","es"],c:1,eq:"Barra o mancuernas",z:["isq","esp","glu"],
+  cues:["Rodillas casi estiradas (ligero flexión) y espalda neutra.","Lleva la cadera hacia atrás como para cerrar un cajón con el glúteo.","Baja hasta notar tensión en isquios (por debajo de la rodilla) y sube empujando la cadera adelante."],err:"Redondear la espalda o flexionar mucho las rodillas.",vq:"peso muerto rumano técnica",
+  A:{hip:[58,46],t:180,f:[[60,93]],h:[62,45],es:1,deco:[{k:"plate",r:7}]},B:{hip:[42,50],t:108,f:[[60,93]],h:[72,70],es:1,deco:[{k:"plate",r:7}]},bl:"Barra a media espinilla"},
+ {id:"nord",n:"Curl nórdico (isquios, prevención)",g:"is",s:[],c:1,eq:"Compañero o anclaje de pies",z:["isq"],prev:1,tm:0,
+  cues:["Rodillas en una colchoneta, tobillos sujetos.","Mantén el cuerpo recto de rodillas a cabeza y cae lo más lento posible.","Frena con las manos al final y vuelve ayudándote con los brazos."],err:"Doblar la cadera en vez de mantener el cuerpo recto.",vq:"nordic hamstring curl técnica",
+  A:{hip:[50,68],t:180,f:[[27,92]],toe:[[19,93]],ua:0,fa:0},B:{hip:[70.8,80],t:120,f:[[27,92]],toe:[[19,93]],h:[100,94],es:1},bl:"Caída controlada"},
+ {id:"cfem",n:"Curl femoral tumbado o en máquina",g:"is",s:[],c:0,eq:"Máquina",z:["isq"],cues:["Cadera pegada al soporte.","Flexiona hasta el máximo sin levantar la cadera.","Baja en 3 s."],err:"Levantar la cadera para ayudarse.",vq:"curl femoral máquina técnica"},
+ {id:"hip",n:"Hip thrust (empuje de cadera)",g:"gl",s:["is"],c:1,eq:"Banco y barra o mancuerna",z:["glu","esp"],
+  cues:["Omóplatos apoyados en el banco, pies a la anchura de la cadera.","Sube la cadera hasta que muslo y tronco estén alineados; barbilla algo recogida.","Aprieta glúteos 1 s arriba, sin arquear la lumbar."],err:"Extender la espalda baja en vez de la cadera.",vq:"hip thrust técnica",
+  A:{hip:[52,86],t:-125,f:[[74,93]],h:[52,79],es:1,deco:[{k:"bench",x1:6,x2:34,y:69},{k:"plate",r:7}]},B:{hip:[57,69],t:-90,f:[[76,93]],h:[57,62],es:1,deco:[{k:"bench",x1:6,x2:34,y:69},{k:"plate",r:7}]},bl:"Cadera arriba"},
+ {id:"puen",n:"Puente de glúteo a una pierna",g:"gl",s:["is"],c:0,eq:"Sin material",z:["glu"],cues:["Una pierna estirada en el aire, la otra con el pie plano.","Sube la cadera sin girarla.","Pausa 1 s arriba."],err:"Girar la pelvis.",vq:"puente glúteo una pierna técnica"},
+ {id:"tal",n:"Elevación de talones",g:"ge",s:[],c:0,eq:"Escalón o suelo",z:["gem"],
+  cues:["Sube lo máximo posible apoyando sobre la base del dedo gordo.","Pausa 1 s arriba.","Baja lento hasta estirar del todo."],err:"Rebotar sin recorrido.",vq:"elevación de talones técnica",
+  A:{hip:[60,46],t:180,f:[[60,93]],ua:0,fa:4},B:{hip:[60,38],t:180,f:[[60,85]],toe:[[68,93.5]],ua:0,fa:4},bl:"Puntillas"},
+ {id:"plan",n:"Plancha frontal",g:"co",s:[],c:0,eq:"Sin material",z:["esp"],tm:1,
+  cues:["Codos bajo los hombros y cuerpo en línea recta.","Glúteos y abdomen apretados; mira al suelo.","Respira con calma sin dejar caer la cadera."],err:"Cadera caída o demasiado alta.",vq:"plancha abdominal técnica",
+  A:{hip:[50.4,82.7],t:99,f:[[4,90]],toe:[[3,96]],ua:0,fa:90}},
+ {id:"pall",n:"Pallof press",g:"co",s:["ho"],c:0,eq:"Polea o banda elástica",z:["esp"],tm:0,cues:["De lado a la polea, pies firmes y pelvis quieta.","Empuja las manos al frente sin dejar que el cable te gire.","Mantén 2 s con el brazo estirado."],err:"Dejar que el tronco rote.",vq:"pallof press técnica"},
+ {id:"dead",n:"Dead bug",g:"co",s:[],c:0,eq:"Sin material",z:[],tm:0,cues:["Espalda baja pegada al suelo.","Baja brazo y pierna contrarios sin que se arquee la lumbar.","Respira hacia fuera al estirar."],err:"Arquear la espalda baja.",vq:"dead bug ejercicio técnica"},
+ {id:"cop",n:"Plancha lateral con aducción (Copenhagen)",g:"co",s:["gl"],c:0,eq:"Banco",z:["add"],prev:1,tm:1,cues:["De lado, pierna de arriba apoyada en el banco.","Cadera alta y cuerpo en línea.","Aguanta 15–20 s; progresa sumando segundos."],err:"Dejar caer la cadera.",vq:"copenhagen plank técnica aductores"}
+];
+const gxById=id=>GX.find(e=>e.id===id);
+
+/* ================= v10: LIGA (SD Alsasua) + BAJAS Y POSESIONES ================= */
+/* Fuente: BeSoccer (Regional Preferente Navarra 2026-27, grupo 1), consultada el 3-nov-2026. Los horarios no figuran: se pueden completar a mano. */
+const FIXN="SD Alsasua";
+const FIX=[[1,"2026-09-13","L","Soto-Ibarbaso",1,0],[2,"2026-09-20","V","CD Iruña",3,2],[3,"2026-09-27","V","CD Zirauki",1,1],[4,"2026-10-04","L","CD San Andrés",2,2],[5,"2026-10-17","V","CD Ardoi B",3,2],[6,"2026-10-24","L","CF Beti Casedano",2,0],[7,"2026-10-31","V","Rotxapea CD",0,1],
+ [8,"2026-11-07","L","CD Etxarri"],[9,"2026-11-14","V","Mutilvera B"],[10,"2026-11-21","L","CD Gares B"],[11,"2026-11-28","V","Subiza B"],[12,"2026-12-12","L","Burladés B"],[13,"2026-12-18","V","CD Amigó"],[14,"2027-01-09","L","Infanzones"],[15,"2027-01-16","V","CD Valle de Egüés B"],
+ [16,"2027-01-23","V","Soto-Ibarbaso"],[17,"2027-01-30","L","CD Iruña"],[18,"2027-02-13","L","CD Zirauki"],[19,"2027-02-19","V","CD San Andrés"],[20,"2027-02-27","L","CD Ardoi B"],[21,"2027-03-05","V","CF Beti Casedano"],[22,"2027-03-13","L","Rotxapea CD"],[23,"2027-03-20","V","CD Etxarri"],
+ [24,"2027-04-03","L","Mutilvera B"],[25,"2027-04-10","V","CD Gares B"],[26,"2027-04-17","L","Subiza B"],[27,"2027-04-24","V","Burladés B"],[28,"2027-05-01","L","CD Amigó"],[29,"2027-05-07","V","Infanzones"],[30,"2027-05-15","L","CD Valle de Egüés B"]];
+const fxRes=f=>{const o=(S.ui.fxr||{})[f[0]];return o&&o.length===2&&o[0]!==""&&o[1]!==""&&o[0]!=null&&o[1]!=null?o:(f[4]!=null?[f[4],f[5]]:null)};
+const fxTime=f=>((S.ui.fxt||{})[f[0]])||"";
+/* Siembra el calendario de la liga en «Mis partidos» (ids fijos: no se duplica entre dispositivos) */
+function fxSeed(force){if(S.ui.fx&&!force)return 0;let n=0;const T=today();
+ FIX.forEach(f=>{const id="fx"+f[0];if(f[1]>=T&&!S.next.some(x=>x.id===id)){S.next.push({id,d:f[1],t:fxTime(f),riv:f[3],loc:f[2],comp:"Preferente G1 · J"+f[0]});n++}});
+ S.ui.fx=1;return n}
+function fxTable(){let pj=0,w=0,d=0,l=0,gf=0,gc=0;FIX.forEach(f=>{const r=fxRes(f);if(!r)return;pj++;gf+=+r[0];gc+=+r[1];if(r[0]>r[1])w++;else if(r[0]<r[1])l++;else d++});return{pj,w,d,l,gf,gc,pts:w*3+d}}
+function renderLiga(){const T=today(),tb=fxTable(),nx=FIX.find(f=>f[1]>=T&&!fxRes(f));
+ const row=f=>{const r=fxRes(f),past=f[1]<T,home=f[2]==="L",res=r?(r[0]>r[1]?"W":r[0]<r[1]?"L":"D"):"";
+  const sc=r?`<b>${r[0]}–${r[1]}</b>`:"";
+  const edit=past&&f[4]==null?`<span class="sc"><input type="text" inputmode="numeric" maxlength="2" data-c="fxr" data-m="${f[0]}" data-k="0" value="${(S.ui.fxr||{})[f[0]]?(S.ui.fxr[f[0]][0]??""):""}" aria-label="Goles Alsasua"><i>–</i><input type="text" inputmode="numeric" maxlength="2" data-c="fxr" data-m="${f[0]}" data-k="1" value="${(S.ui.fxr||{})[f[0]]?(S.ui.fxr[f[0]][1]??""):""}" aria-label="Goles rival"></span>`:"";
+  return `<div class="lgr ${nx&&nx[0]===f[0]?"nx":""} ${past?"past":""}"><span class="j">J${f[0]}</span><span class="d">${cap(fmtD(f[1],{weekday:"short",day:"numeric",month:"short"}))}${fxTime(f)?" · "+esc(fxTime(f)):""}</span><span class="t">${home?"":"@ "}${esc(f[3])}</span>${edit?edit:r?`<span class="rs ${res}">${sc}</span>`:`<span class="hint" style="margin:0">${home?"Local":"Fuera"}</span>`}</div>`};
+ return `<div class="card"><h2>${FIXN} <small>Preferente · Grupo 1</small></h2>
+ <div class="tiles">${tile("Partidos",tb.pj,tb.w+"V "+tb.d+"E "+tb.l+"D")}${tile("Puntos",tb.pts,"de "+tb.pj*3)}${tile("Goles",tb.gf+"–"+tb.gc,"dif. "+(tb.gf-tb.gc>0?"+":"")+(tb.gf-tb.gc))}</div>
+ ${nx?`<div class="hint" style="margin-top:8px">Próximo: <b>${cap(fmtD(nx[1],{weekday:"long",day:"numeric",month:"long"}))}</b> · ${nx[2]==="L"?"en casa vs ":"fuera, en "}${esc(nx[3])}</div>`:""}
+ <div class="foot" style="justify-content:flex-start;margin-top:8px"><button class="ghost" data-t="fxsync">Añadir partidos que falten al calendario</button><a class="ghost abtn" href="https://www.futnavarra.es" target="_blank" rel="noopener">FutNavarra ↗</a></div>
+ <div class="hint">Calendario tomado de BeSoccer (3 nov 2026), sin horarios. Escribe el resultado de los partidos ya jugados y se guarda. Dime «actualiza la liga» y lo reviso.</div></div>
+ <div class="card"><h2>Jornadas</h2>${FIX.map(row).join("")}</div>`}
+TA.fxsync=()=>{const n=fxSeed(1);save();toast(n?n+" partidos añadidos":"El calendario ya está al día");render()};
+TC.fxr=t=>{const m=+t.dataset.m,k=+t.dataset.k;S.ui.fxr=Object.assign({},S.ui.fxr||{});const cur=(S.ui.fxr[m]||["",""]).slice();cur[k]=t.value.trim()===""?"":Math.max(0,parseInt(t.value,10)||0);S.ui.fxr[m]=cur;save();render()};
+
+/* ---------- Bajas y equipos para posesiones (dentro del entreno) ---------- */
+const TMC=[["Naranja","#e8862b"],["Azul","#3b82f6"],["Verde","#2fa36b"],["Blanco","#9aa39e"]];
+function bajasCard(p){const bj=new Set(p.bj||[]),pl=plSorted(),av=pl.filter(x=>!bj.has(x.id));
+ const rows=GROUPS.map(g=>{const L=pl.filter(x=>posGroup(x.p)===g);if(!L.length)return"";
+  return `<div class="bjg"><small>${g}</small><div class="bjc">${L.map(x=>`<button class="bj ${bj.has(x.id)?"off":""} ${x.inj?"inj":""}" data-t="bjt" data-id="${x.id}" aria-pressed="${bj.has(x.id)}"><b>${esc(x.n)}</b><i>${x.p}</i></button>`).join("")}</div></div>`}).join("");
+ const nT=p.tn||2,tm=p.tm||[];
+ const tmH=tm.length?`<div class="tms">${tm.map((ids,i)=>{const c=TMC[i%TMC.length],L=ids.map(plById).filter(Boolean),cnt=g=>L.filter(x=>posGroup(x.p)===g).length;
+  return `<div class="tmx" style="--tc:${c[1]}"><h4>Equipo ${c[0]} <small>${L.length}</small></h4><div class="hint" style="margin:0 0 4px">Def ${cnt("Defensas")} · Med ${cnt("Medios")} · Del ${cnt("Delanteros")}</div>${L.map(x=>`<div class="tmp"><span>${esc(x.n)}</span><i>${x.p}</i></div>`).join("")}</div>`}).join("")}</div>${p.tg&&p.tg.length?`<div class="hint">Porteros (a su portería o libres): ${p.tg.map(id=>esc((plById(id)||{n:"?"}).n)).join(", ")}</div>`:""}${(p.bj||[]).length?`<div class="hint">Bajas hoy: ${(p.bj||[]).map(id=>esc((plById(id)||{n:"?"}).n)).join(", ")}</div>`:""}`:"";
+ return `<h3>Quién viene <small class="hint">${av.length} de ${pl.length} disponibles</small></h3>
+ <div class="hint" style="margin:-4px 0 8px">Toca a los que faltan. Los lesionados de la ficha ya salen marcados.</div>${rows}
+ <div class="foot" style="justify-content:flex-start;margin-top:6px"><button class="ghost" data-t="bjall">Todos vienen</button><button class="ghost" data-t="bjasis">Pasar a asistencia</button></div>
+ <h3>Equipos para posesiones</h3>
+ <div class="g2"><div><label>Nº de equipos</label><select data-c="tn"><option value="2" ${nT===2?"selected":""}>2 equipos</option><option value="3" ${nT===3?"selected":""}>3 equipos</option><option value="4" ${nT===4?"selected":""}>4 equipos</option></select></div>
+ <div><label>Porteros</label><select data-c="tgk"><option value="1" ${p.tgk!==0?"selected":""}>Aparte (a su portería)</option><option value="0" ${p.tgk===0?"selected":""}>Juegan de campo</option></select></div></div>
+ <div class="foot" style="justify-content:flex-start;margin-top:8px"><button class="pri" data-t="tmake">${tm.length?"Mezclar otra vez":"Hacer equipos"}</button>${tm.length?`<button class="ghost" data-t="tclr">Quitar</button>`:""}</div>${tmH}`}
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+/* Reparte por líneas (defensas, medios, delanteros) en serpentina: cada equipo queda con la misma estructura y los totales difieren como mucho en 1 */
+function makeTeams(avail,n,gkApart){const T=Array.from({length:n},()=>[]),gk=[];let ptr=Math.floor(Math.random()*n);
+ const field=gkApart?avail.filter(x=>posGroup(x.p)!=="Porteros"):avail;if(gkApart)avail.filter(x=>posGroup(x.p)==="Porteros").forEach(x=>gk.push(x.id));
+ ["Porteros","Defensas","Medios","Delanteros"].forEach(g=>{const L=shuf(field.filter(x=>posGroup(x.p)===g));
+  /* dentro de cada línea, mezcla los puestos concretos para no juntar a los dos centrales */
+  L.sort((a,b)=>(POSI[a.p]||0)-(POSI[b.p]||0)+(Math.random()-.5)*.001);
+  L.forEach(x=>{T[ptr].push(x.id);ptr=(ptr+1)%n})});
+ /* equilibra los totales moviendo del equipo con más al que menos */
+ let guard=20;while(guard--){const s=T.map((t,i)=>[t.length,i]).sort((a,b)=>a[0]-b[0]);if(s[s.length-1][0]-s[0][0]<=1)break;T[s[0][1]].push(T[s[s.length-1][1]].pop())}
+ return{T,gk}}
+TA.bjt=b=>{const p=TPD,id=b.dataset.id;p.bj=p.bj||[];const i=p.bj.indexOf(id);if(i>=0)p.bj.splice(i,1);else p.bj.push(id);p.tm=[];render()};
+TA.bjall=()=>{TPD.bj=[];TPD.tm=[];render()};
+TA.tmake=()=>{const p=TPD,bj=new Set(p.bj||[]),av=S.team.pl.filter(x=>!bj.has(x.id));if(av.length<2){toast("Necesito al menos 2 jugadores disponibles");return}
+ const n=Math.min(p.tn||2,Math.max(2,av.length)),r=makeTeams(av,n,p.tgk!==0);p.tm=r.T;p.tg=r.gk;render()};
+TA.tclr=()=>{TPD.tm=[];TPD.tg=[];render()};
+TA.bjasis=()=>{const p=TPD;if(!p.d){toast("Pon la fecha del entreno");return}if(p.d>today()){toast("La lista se pasa el día del entreno");return}
+ let a=S.team.att.find(x=>x.id==="a"+p.d);if(!a){a={id:"a"+p.d,d:p.d,m:{}};S.team.att.push(a)}
+ const bj=new Set(p.bj||[]);S.team.pl.forEach(x=>{if(bj.has(x.id)){if(!a.m[x.id])a.m[x.id]=x.inj?"l":"f"}else if(!a.m[x.id])a.m[x.id]="p"});save();toast("Asistencia del día actualizada")};
+TC.tn=t=>{TPD.tn=+t.value;TPD.tm=[];render()};TC.tgk=t=>{TPD.tgk=+t.value;TPD.tm=[];render()};
+
+/* ================= v10: CONTEXTO, CARGA RECOMENDADA, PLAN DE HOY Y GIMNASIO ================= */
+const nextMatchIn=()=>{const T=today(),d=S.next.filter(x=>x.d>=T).map(x=>x.d).sort()[0];return d?ddiff(T,d):null};
+function ctxNow(){const s=loadStats(),T=s.T;return{s,T,rc:recommend(s),nm:nextMatchIn(),dm:s.lastM?ddiff(s.lastM,T):null}}
+const molZones=()=>{const o=new Set();(S.mol[today()]||[]).forEach(x=>{if(x.n>=4)o.add(x.z)});return o};
+const gymLog=()=>S.sess.filter(x=>x.k==="gym"&&x.ms).sort((a,b)=>a.d.localeCompare(b.d));
+const lastMus=m=>{const l=gymLog().filter(x=>x.ms[m]);return l.length?l[l.length-1].d:null};
+const setsWeek=m=>gymLog().filter(x=>x.d>=shift(today(),-6)).reduce((a,x)=>a+(x.ms[m]||0),0);
+
+/* ---------- Carga recomendada de hoy (inicio) ---------- */
+function loadAdvice(){const {s,T,rc,nm,dm}=ctxNow(),days=[];for(let i=6;i>=0;i--){const d=shift(T,-i);days.push({d,ua:ld(d),min:S.sess.filter(x=>x.d===d).reduce((a,x)=>a+x.m,0)})}
+ const sum6=sumL(shift(T,-6),6),hoy=ld(T),ch=s.chronic,mx=Math.max(...days.map(x=>x.ua),1);
+ const bars=`<div class="lbars">${days.map(x=>`<div class="lb ${x.d===T?"t":""}"><i style="height:${Math.max(3,Math.round(x.ua/mx*100))}%"></i><span>${"LMXJVSD"[dow(x.d)]}</span><b>${x.min?x.min+"′":""}</b></div>`).join("")}</div>`;
+ let h=`<h2>Carga recomendada para hoy <small>${nm===0?"hoy hay partido":nm===1?"mañana hay partido":dm===0?"has jugado hoy":dm===1?"ayer jugaste":""}</small></h2>`;
+ const m7=days.reduce((a,x)=>a+x.min,0),u7=days.reduce((a,x)=>a+x.ua,0);
+ if(ch>0&&ch*7>0){let hi=Math.max(0,1.3*ch-sum6-hoy),lo=Math.max(0,0.8*ch-sum6-hoy);
+  let cap2=1,note="";
+  if(rc.lv==="hi"){cap2=.25;note="Tu estado pide descargar."}else if(rc.lv==="warn"){cap2=.65;note="Hoy conviene ir con cuidado."}
+  if(dm!==null&&dm<=1){cap2=Math.min(cap2,.35);note="Tras el partido, solo recuperación."}
+  else if(nm===1){cap2=Math.min(cap2,.3);note="Víspera de partido: activar sin cansar."}
+  else if(nm===0){cap2=0;note="Hoy compites: no sumes carga extra."}
+  hi=hi*cap2;lo=Math.min(lo,hi);
+  const m=(u,r)=>Math.round(u/r/5)*5;
+  h+=`<div class="adv"><div><span class="hint" style="margin:0">Margen de hoy</span><b class="big">${hi<10?"Descanso":Math.round(lo/10)*10+"–"+Math.round(hi/10)*10+" UA"}</b></div>`+(hi>=10?`<div class="hint" style="margin:0;text-align:right">≈ ${Math.max(10,m(lo,6))}–${Math.max(15,m(hi,5))} min<br>a esfuerzo 5–6 de 10</div>`:`<div class="hint" style="margin:0;text-align:right">Descanso o movilidad suave</div>`)+`</div>`;
+  h+=`<div class="gbar"><i class="b1" style="left:0;width:${Math.min(100,(sum6+hoy)/(1.3*ch)*100)}%"></i></div><div class="hint">Llevas ${Math.round(sum6+hoy)} UA en 7 días (con hoy). Tu base es ${Math.round(ch)} UA/semana: la zona estable (ACWR 0,8–1,3) va de ${Math.round(.8*ch)} a ${Math.round(1.3*ch)} UA.${note?" <b>"+note+"</b>":""}</div>`}
+ else h+=`<div class="empty">Aún no tengo base para calcular tu margen (hacen falta unas 3 semanas de sesiones registradas). Mientras, evita saltos bruscos de carga respecto a la semana anterior.</div>`;
+ h+=`<h3>Últimos 7 días <small class="hint">${m7} min · ${Math.round(u7)} UA</small></h3>${bars}`;
+ h+=`<details><summary>Cómo se calcula</summary><div class="hint">UA = minutos × esfuerzo (session-RPE, Foster). El margen sale de mantener tu ratio carga aguda/crónica por debajo de 1,3 (Gabbett 2016), restando lo que ya llevas esta semana. Lo reduzco si tu estado del día o la cercanía de un partido lo piden: esos recortes son <b>criterio propio, no validado</b>. Los minutos son una conversión orientativa.</div></details>`;
+ return h}
+
+/* ---------- Plan de hoy (Salud > Hoy): ejercicios con esquema ---------- */
+const FXI={
+ walk:{n:"Caminata o bici suave",d:"20 min · conversación fácil",min:20,k:"mov",w:"Mejora la recuperación sin añadir carga."},
+ mov:{n:"Movilidad dinámica",d:"8 min · cadera, tobillo, isquios, aductores",min:8,k:"mov",w:"Mantiene rango de movimiento y prepara el cuerpo."},
+ acel:{n:"Aceleraciones de 20 m",d:"3–4 × 20 m al 90 % · 60–90 s de pausa",min:10,k:"acel",w:"Mantiene la activación neuromuscular con muy poco volumen."},
+ agil:{n:"Circuito en T",d:"4 series · 30 s de pausa",min:10,k:"agil",w:"Cambios de dirección: específicos del fútbol."},
+ sprint:{n:"Sprints repetidos",d:"6 × 30 m · vuelta andando",min:12,k:"sprint",w:"Tu carga reciente deja margen: es buen día para velocidad."},
+ nord:{n:"Curl nórdico",d:"2 × 3–5 lentas (sube un poco cada semana)",min:8,gx:"nord",w:"Reduce las lesiones de isquios (Van Dyk 2019). Mejor con las piernas frescas."},
+ cop:{n:"Copenhagen",d:"2 × 15–20 s por lado",min:6,gx:"cop",w:"Reduce los problemas de ingle (Harøy 2019)."},
+ puente:{n:"Puente de glúteo (sin carga)",d:"2 × 12–15 · pausa 1 s arriba",min:5,gx:"hip",w:"Activa glúteo con carga mínima."},
+ plan:{n:"Plancha frontal",d:"3 × 30 s",min:5,gx:"plan",w:"Estabilidad de tronco con baja fatiga."},
+ tal:{n:"Elevación de talones",d:"2 × 15 lentas",min:5,gx:"tal",w:"Gemelo y tendón de Aquiles: base para sprint y salto."}};
+function dayPlan(){const c=ctxNow(),{s,rc,nm,dm}=c,it=[];let head="",sub="";
+ const pv=prevWeek(c.T),pg=S.ui.pg||2;
+ if(rc.lv==="hi"){head="Hoy, recuperar";sub=rc.why[0]||"";it.push("walk","mov")}
+ else if(dm===0){head="Día de partido: recuperar";sub="Comer bien, hidratarte y dormir son hoy el mejor entrenamiento.";it.push("walk","mov")}
+ else if(nm===0){head="Hoy juegas";sub="Calentamiento completo y nada de carga extra antes del partido.";it.push("mov","acel")}
+ else if(dm!==null&&dm<=2){head="Recuperación activa";sub="Han pasado "+dm+(dm===1?" día":" días")+" del partido: evita sprints máximos y trabajo excéntrico fuerte.";it.push("walk","mov","puente","plan")}
+ else if(nm===1){head="Víspera: activar sin cansar";sub="Poco volumen, buena calidad.";it.push("mov","acel","plan")}
+ else{head=rc.lv==="warn"?"Entrena, pero con cuidado":"Buen día para trabajar";sub=rc.t;it.push("mov");
+  if(pv<pg){it.push("nord");it.push("cop")}
+  if(s.acwr!==null&&s.acwr<.9&&rc.lv==="ok"&&(nm===null||nm>=3))it.push("sprint","agil");else if(rc.lv==="ok")it.push("agil");
+  if(it.length<4)it.push("tal")}
+ const tot=it.reduce((a,k)=>a+FXI[k].min,0);
+ const cards=it.slice(0,5).map(k=>{const f=FXI[k],g=f.gx?gxById(f.gx):null,fig=g&&g.A?figPair(g):`<div class="fig1">${pitchSvg(f.k||"mov")}</div>`;
+  return `<div class="pit"><div class="ph"><b>${f.n}</b><span>${f.d}</span></div>${fig}<div class="hint" style="margin:6px 0 0">${f.w}</div>${g?`<a class="vid" href="https://www.youtube.com/results?search_query=${encodeURIComponent(g.vq)}" target="_blank" rel="noopener">▶ Ver vídeo</a>`:""}</div>`}).join("");
+ return `<h2>Plan de hoy <small>≈ ${tot} min</small></h2><div class="hl">${esc(head)}</div><div class="hint" style="margin:0 0 10px">${esc(sub)}</div>${cards}
+ <div class="gcta"><div><b>¿Gimnasio?</b><span class="hint" style="margin:0;display:block">${esc(gymRec().lbl)}</span></div><button class="pri" data-t="go" data-v="fut" data-id="gym">Montar entreno</button></div>
+ <details><summary>Base de estas recomendaciones</summary><div class="hint">Las reglas de qué hacer cada día según el partido y tu carga son <b>criterio propio, sin validar</b>, construidas sobre: recuperación tras el partido de hasta 72 h (Nédélec 2012), ACWR (Gabbett 2016), curl nórdico (Van Dyk 2019), Copenhagen (Harøy 2019) y programa FIFA 11+ (Soligard 2008). No sustituye a un preparador físico ni a un fisio.</div></details>`}
+
+/* ---------- Gimnasio ---------- */
+const GPRE=[["push","Pecho · hombro · tríceps",["pe","ho","tr"],"up"],["pull","Espalda · bíceps",["es","bi"],"up"],["legs","Piernas",["cu","is","gl","ge"],"low"],["full","Cuerpo completo",["pe","es","cu","is","co"],"low"],["core","Core y prevención",["co","is","gl"],"mix"]];
+const GOBJ={mt:{n:"Mantener (en temporada)",c:[2,"5–6",3,120],i:[2,"8–10",3,75],r:6},fz:{n:"Fuerza",c:[4,"4–6",2,150],i:[3,"8–10",2,90],r:7},hp:{n:"Músculo",c:[3,"8–10",2,120],i:[3,"10–12",1,75],r:7}};
+const daysSinceMus=m=>{const d=lastMus(m);return d?ddiff(d,today()):99};
+function gymRec(){const c=ctxNow(),{nm,dm,rc}=c,zb=molZones(),out=[];
+ GPRE.forEach(p=>{const [k,lbl,ms,t]=p;let st="ok",why=[];const rest=Math.min(...ms.map(daysSinceMus));
+  if(rc.lv==="hi"){st="no";why.push("Tu estado pide descargar")}
+  if(t==="low"||k==="full"){
+   if(nm!==null&&nm<=2){st="no";why.push("Partido en "+nm+(nm===1?" día":" días")+": llega con piernas frescas")}
+   if(dm!==null&&dm<=2){st="no";why.push("Partido hace "+dm+(dm===1?" día":" días")+": las piernas aún se recuperan")}
+   if(["rod","cuad","isq","glu","gem","add"].some(z=>zb.has(z))){st="no";why.push("Molestia en piernas")}}
+  if((k==="push"||k==="full")&&zb.has("hom")){st="no";why.push("Molestia en hombro")}
+  if((k==="pull")&&zb.has("esp")){st="no";why.push("Molestia lumbar")}
+  if(st==="ok"&&rest<2){st="no";why.push("Trabajado hace "+(rest===0?"menos de 24 h":rest+" día")+": deja 48 h")}
+  if(st==="ok"&&rc.lv==="warn")why.push("Con cuidado: bajo volumen");
+  out.push({k,lbl,ms,st,why,rest,sc:rest})});
+ const ok=out.filter(x=>x.st==="ok").sort((a,b)=>b.sc-a.sc);
+ /* en semana de partido priorizamos tren superior; piernas solo con ventana segura */
+ let best=ok[0];if(ok.length>1&&nm!==null&&nm<=4){const up=ok.find(x=>x.k==="push"||x.k==="pull");if(up&&best.k==="legs")best=up}
+ if(best)best.st="rec";
+ const r=best||out.find(x=>x.k==="core")||out[0];
+ return{list:out,best:best||null,lbl:best?"Hoy te recomiendo: "+best.lbl+(best.why.length?" ("+best.why[0].toLowerCase()+")":""):"Hoy mejor descanso o movilidad: "+(out[0].why[0]||"sin ventana buena").toLowerCase()}}
+let GS={m:null,t:60,o:"mt",pre:"",plan:null,done:{},t0:0,rpe:6};
+try{const j=JSON.parse(localStorage.getItem("aitx:gym")||"null");if(j&&j.plan&&j.d===today())GS=Object.assign(GS,j)}catch(e){}
+const gySave=()=>{try{localStorage.setItem("aitx:gym",JSON.stringify(Object.assign({d:today()},GS)))}catch(e){}};
+function buildGym(ms,mins,ok){const c=ctxNow(),zb=molZones(),lv=c.rc.lv,O=GOBJ[ok],used=new Set(),plan=[],lastEx=new Set(gymLog().slice(-2).flatMap(x=>x.gx||[]));
+ const pool=GX.filter(e=>!e.z.some(z=>zb.has(z)));
+ const pick=(m,comp)=>{const L=pool.filter(e=>e.g===m&&!!e.c===!!comp&&!used.has(e.id));return L.find(e=>!lastEx.has(e.id))||L[0]||null};
+ const add=e=>{if(!e||used.has(e.id))return null;used.add(e.id);plan.push({id:e.id});return e};
+ const coreDay=GS.pre==="core";
+ if(coreDay){["plan","nord","pall","cop","puen","dead"].forEach(id=>{const e=gxById(id);if(e&&!e.z.some(z=>zb.has(z)))add(e)})}
+ const big=coreDay?[]:ms.filter(m=>!["tr","bi","co","ge"].includes(m));
+ big.forEach(m=>{if(plan.some(p=>{const e=gxById(p.id);return e.c&&(e.g===m)}))return;add(pick(m,1))});
+ /* músculos pequeños: un ejercicio de aislamiento (los compuestos ya los trabajan en parte) */
+ const small=coreDay?[]:ms.filter(m=>["tr","bi","ge"].includes(m));small.forEach(m=>add(pick(m,0)||pick(m,1)));
+ /* prevención: en días de pierna o cuerpo completo */
+ if(!coreDay&&(ms.includes("is")||ms.includes("cu"))){const n=gxById("nord");if(n&&!n.z.some(z=>zb.has(z)))add(n)}
+ /* core */
+ if(!coreDay&&(ms.includes("co")||ms.includes("cu")))add(pick("co",0));
+ /* rellenar con más ejercicios si cabe */
+ const sets=e=>{const cfg=e.c?O.c:O.i;let n=cfg[0];if(e.tm)n=2;if(lv==="hi")n=Math.max(1,Math.round(n*.5));else if(lv==="warn")n=Math.max(1,n-1);return n};
+ const sec=e=>{const cfg=e.c?O.c:O.i,avg=e.tm?35:(parseInt(cfg[1])+ (parseInt((cfg[1].split("–")[1]||cfg[1]))||0))/2*3.2+12,rest=e.tm?45:cfg[3];return sets(e)*(avg+rest)};
+ const tot=()=>plan.reduce((a,p)=>a+sec(gxById(p.id)),0)/60;
+ const budget=mins-9;
+ let guard=12;while(guard--&&!coreDay&&tot()<budget-4){const m=ms.filter(x=>x!=="co")[plan.length%Math.max(1,ms.filter(x=>x!=="co").length)];const e=pick(m,0)||pick(m,1);if(!e)break;if(tot()+sec(e)/60>budget+2)break;add(e)}
+ while(tot()>budget+3&&plan.length>2){const i=plan.map((p,j)=>[gxById(p.id),j]).filter(x=>!x[0].c&&!x[0].prev).map(x=>x[1]).pop();if(i===undefined)break;used.delete(plan[i].id);plan.splice(i,1)}
+ plan.sort((a,b)=>{const x=gxById(a.id),y=gxById(b.id);const r=e=>(e.prev?2:e.g==="co"?3:e.c?0:1);return r(x)-r(y)});
+ return{ms:ms.slice(),o:ok,lv,ex:plan.map(p=>{const e=gxById(p.id),cfg=e.c?O.c:O.i;let rep=e.tm?"30–40 s":e.id==="nord"?"3–5 lentas":cfg[1],r=cfg[2]+(lv==="hi"?2:lv==="warn"?1:0);return{id:e.id,s:sets(e),rep,rir:Math.min(r,5),rest:e.tm?45:e.id==="nord"?90:cfg[3]}}),
+  min:Math.round(tot()+9)}}
+function gymWhy(ms){const c=ctxNow(),w=[],{nm,dm,rc}=c;
+ if(dm!==null&&dm<=7)w.push("Último partido hace "+dm+(dm===1?" día":" días")+".");if(nm!==null&&nm<=7)w.push("Próximo partido en "+nm+(nm===1?" día":" días")+".");
+ if(c.s.acwr!==null)w.push("Tu carga reciente está en ACWR "+num(c.s.acwr,2)+" ("+zone(c.s.acwr)+").");
+ w.push("Estado de hoy: "+rc.t+".");
+ const sw=ms.filter(m=>setsWeek(m)).map(m=>musN(m)+" "+setsWeek(m)+" series");if(sw.length)w.push("Esta semana ya llevas: "+sw.join(", ")+".");
+ const mz=[...molZones()];if(mz.length)w.push("He evitado ejercicios que cargan: "+mz.map(zn).join(", ")+".");return w}
+const gRest=s=>s>=120?Math.round(s/60*2)/2+" min":s+" s";
+function renderGym(){const el=$("gymv");if(!el)return;const R=gymRec();
+ if(!GS.m)GS.m=R.best?R.best.ms.slice():["co"];
+ const pres=R.list.map(p=>`<button class="gp ${p.st} ${GS.pre===p.k?"on":""}" data-t="gpre" data-v="${p.k}"><b>${p.lbl}</b><span>${p.st==="rec"?"Recomendado":p.st==="no"?"Mejor no hoy":"Posible"}</span>${p.st==="no"&&p.why.length?`<em>${esc(p.why[0])}</em>`:""}</button>`).join("");
+ let h=`<div class="card"><h2>Gimnasio <small>complemento al fútbol</small></h2><div class="hl">${esc(R.lbl)}</div>
+ <div class="hint" style="margin:0 0 8px">Elige tú: puedes ignorar la recomendación. Te avisaré si lo que eliges choca con partido o molestias.</div><div class="gps">${pres}</div></div>
+ <div class="card"><h3 style="margin-top:0">Músculos</h3><div class="chips" style="flex-wrap:wrap;overflow:visible">${MUS.map(m=>`<button class="chip ${GS.m.includes(m[0])?"on":""}" data-t="gmus" data-v="${m[0]}">${m[1]}</button>`).join("")}</div>
+ <div class="g2"><div><label>Tiempo disponible</label><select data-c="gt">${[30,45,60,75,90].map(x=>`<option value="${x}" ${GS.t===x?"selected":""}>${x} min</option>`).join("")}</select></div><div><label>Objetivo</label><select data-c="go">${Object.keys(GOBJ).map(k=>`<option value="${k}" ${GS.o===k?"selected":""}>${GOBJ[k].n}</option>`).join("")}</select></div></div>
+ <div class="foot" style="justify-content:flex-start;margin-top:10px"><button class="pri" data-t="gmake">${GS.plan?"Volver a montar":"Montar entreno"}</button></div></div>`;
+ if(GS.plan)h+=gymPlanHtml();
+ h+=`<div class="card"><details><summary>ℹ️ Base de estas recomendaciones</summary><div class="hint">
+ <b>Fuentes reales:</b> series y repeticiones según objetivo, guía del ACSM (2009); el volumen semanal por músculo, meta-análisis de Schoenfeld y cols. (2017); en temporada, 1–2 sesiones semanales mantienen la fuerza en futbolistas (Rønnestad 2011); el entrenamiento de fuerza reduce las lesiones deportivas (Lauersen 2014); curl nórdico para isquios (Van Dyk 2019) y Copenhagen para la ingle (Harøy 2019); calentamiento tipo RAMP (Jeffreys 2007); recuperación tras partido hasta 72 h (Nédélec 2012).<br>
+ <b>Criterio propio, sin validar:</b> qué grupo toca cada día, evitar piernas 2 días antes y 2 después de un partido, los recortes de series según tu estado, y la elección de ejercicios. Es una guía, no un plan clínico: si sientes dolor agudo, para.</div></details></div>`;
+ el.innerHTML=h}
+function gymPlanHtml(){const P=GS.plan,O=GOBJ[P.o];let n=0,ser=0;P.ex.forEach(x=>ser+=x.s);
+ let h=`<div class="card gplan"><h2>${esc(GS.title||"Tu entreno")} <small>${P.min} min · ${P.ex.length} ejercicios · ${ser} series</small></h2>
+ <div class="hint">${gymWhy(P.ms).map(esc).join(" ")}</div>
+ <div class="hint" style="margin-top:6px"><b>RIR</b> = repeticiones que te dejas «en el banco»: con RIR 2 paras cuando podrías hacer 2 más con buena técnica.</div></div>
+ <div class="card"><h3 style="margin-top:0">1 · Calentamiento <small class="hint">6 min</small></h3><ol class="wu"><li><b>Elevar</b> · 3 min de bici, remo o trote suave.</li><li><b>Activar</b> · ${P.ms.some(m=>LEGS.includes(m))?"Puente de glúteo 2×12 y plancha 2×20 s.":"Rotaciones de hombro con banda 2×12 y plancha 2×20 s."}</li><li><b>Movilizar</b> · 5 movimientos dinámicos de la zona que vas a trabajar.</li><li><b>Preparar</b> · primer ejercicio con 2 series de aproximación: 50 % y 70 % de la carga de trabajo.</li></ol></div>`;
+ P.ex.forEach((x,i)=>{const e=gxById(x.id);if(!e)return;
+  h+=`<div class="card gx"><div class="gh"><span class="bn">${i+1}</span><div><b>${esc(e.n)}</b><div class="hint" style="margin:0">${[e.g,...e.s].map(musN).join(" · ")} · ${esc(e.eq)}</div></div></div>
+  ${e.A?figPair(e):`<div class="nofig">Sin esquema: mira el vídeo para ver el movimiento.</div>`}
+  ${e.nt?`<div class="hint">${esc(e.nt)}</div>`:""}
+  <div class="rx"><span><b>${x.s}</b> series</span><span><b>${x.rep}</b>${/s$/.test(x.rep)||/lentas/.test(x.rep)?"":" reps"}</span>${e.tm?"":`<span>RIR <b>${x.rir}</b></span>`}<span>descanso <b>${gRest(x.rest)}</b></span></div>
+  <div class="sets">${Array.from({length:x.s},(_,j)=>`<button class="st ${GS.done[x.id+"-"+j]?"ok":""}" data-t="gset" data-id="${x.id}" data-j="${j}" data-r="${x.rest}" aria-pressed="${!!GS.done[x.id+"-"+j]}">${j+1}</button>`).join("")}<span class="hint" style="margin:0 0 0 6px">Toca al terminar cada serie</span></div>
+  <ul class="cu">${e.cues.map(c=>`<li>${esc(c)}</li>`).join("")}</ul><div class="hint">⚠ Error típico: ${esc(e.err)}</div>
+  <div class="foot" style="justify-content:flex-start"><a class="vid" href="https://www.youtube.com/results?search_query=${encodeURIComponent(e.vq)}" target="_blank" rel="noopener">▶ Ver vídeo</a><button class="ghost" data-t="gswap" data-id="${x.id}">Cambiar ejercicio</button></div></div>`});
+ h+=`<div class="card"><h3 style="margin-top:0">Vuelta a la calma <small class="hint">3 min</small></h3><div class="hint">Respiración tranquila 1 min y estiramiento suave de lo trabajado (20–30 s por zona).</div>
+ <h3>Terminar</h3><label>Esfuerzo de la sesión (1–10)</label><select data-c="grpe">${[1,2,3,4,5,6,7,8,9,10].map(v=>`<option value="${v}" ${GS.rpe===v?"selected":""}>${v} · ${RPEL[v]}</option>`).join("")}</select>
+ <div class="foot"><button class="ghost" data-t="gclr">Descartar</button><button class="pri" data-t="gfin">Registrar sesión</button></div><div class="hint">Se guarda como «Gimnasio» en tu carga y se tiene en cuenta en tus próximas recomendaciones.</div></div>`;
+ return h}
+TA.gpre=b=>{const p=GPRE.find(x=>x[0]===b.dataset.v);GS.pre=p[0];GS.m=p[2].slice();const r=gymRec().list.find(x=>x.k===p[0]);if(r&&r.st==="no")toast("Ojo: "+(r.why[0]||"hoy no es buen día")+". Puedes seguir si quieres.");GS.title=p[1];gySave();render()};
+TA.gmus=b=>{const m=b.dataset.v,i=GS.m.indexOf(m);if(i>=0)GS.m.splice(i,1);else GS.m.push(m);GS.pre="";GS.title="";render()};
+TA.gmake=()=>{if(!GS.m.length){toast("Elige al menos un músculo");return}GS.plan=buildGym(GS.m,GS.t,GS.o);GS.done={};GS.t0=Date.now();if(!GS.title)GS.title=GS.m.map(musN).join(" · ");gySave();render();setTimeout(()=>{const e=document.querySelector(".gplan");if(e)e.scrollIntoView({behavior:"smooth",block:"start"})},50)};
+TC.gt=t=>{GS.t=+t.value};TC.go=t=>{GS.o=t.value};TC.grpe=t=>{GS.rpe=+t.value;gySave()};
+TA.gclr=()=>{GS.plan=null;GS.done={};gySave();render()};
+TA.gswap=b=>{const id=b.dataset.id,e=gxById(id),P=GS.plan,zb=molZones(),have=new Set(P.ex.map(x=>x.id));
+ const cand=GX.filter(x=>x.g===e.g&&!!x.c===!!e.c&&!have.has(x.id)&&!x.z.some(z=>zb.has(z)));if(!cand.length){toast("No tengo otra opción para este músculo");return}
+ const n=cand[0],O=GOBJ[P.o],i=P.ex.findIndex(x=>x.id===id),old=P.ex[i];P.ex[i]=Object.assign({},old,{id:n.id,rep:n.tm?"30–40 s":old.rep});Object.keys(GS.done).forEach(k=>{if(k.startsWith(id+"-"))delete GS.done[k]});gySave();render()};
+TA.gfin=()=>{const P=GS.plan;if(!P)return;const ms={};P.ex.forEach(x=>{const e=gxById(x.id);if(!e)return;const done=Array.from({length:x.s},(_,j)=>j).filter(j=>GS.done[x.id+"-"+j]).length||x.s;ms[e.g]=(ms[e.g]||0)+done;e.s.forEach(m=>{ms[m]=(ms[m]||0)+Math.round(done/2)})});
+ const el=GS.t0?Math.round((Date.now()-GS.t0)/60000):0,m=Math.max(10,Math.min(180,(el>=15&&el<=180)?el:P.min));
+ S.sess.push({id:uid(),d:today(),t:new Date().toTimeString().slice(0,5),k:"gym",m,r:GS.rpe||6,n:"Gimnasio · "+(GS.title||""),ms,gx:P.ex.map(x=>x.id)});
+ GS.plan=null;GS.done={};GS.pre="";GS.m=null;gySave();save();toast("Sesión guardada · "+Math.round(m*(GS.rpe||6))+" UA");render()};
+/* temporizador de descanso */
+let GT={end:0,iv:0};
+function gtShow(){let el=document.getElementById("gtimer");if(!el){el=document.createElement("button");el.id="gtimer";el.type="button";el.addEventListener("click",gtStop);document.body.appendChild(el)}
+ const left=Math.max(0,Math.round((GT.end-Date.now())/1000));el.textContent="Descanso "+Math.floor(left/60)+":"+String(left%60).padStart(2,"0")+" · toca para quitar";el.hidden=false;
+ if(left<=0){gtStop();try{navigator.vibrate&&navigator.vibrate([200,100,200])}catch(e){}toast("Descanso terminado: siguiente serie")}}
+function gtStop(){clearInterval(GT.iv);GT.iv=0;const el=document.getElementById("gtimer");if(el)el.hidden=true}
+function gtStart(sec){gtStop();GT.end=Date.now()+sec*1000;gtShow();GT.iv=setInterval(gtShow,500)}
+TA.gset=b=>{const k=b.dataset.id+"-"+b.dataset.j;if(GS.done[k]){delete GS.done[k];b.classList.remove("ok");b.setAttribute("aria-pressed","false")}else{GS.done[k]=1;b.classList.add("ok");b.setAttribute("aria-pressed","true");gtStart(+b.dataset.r||60)}gySave()};
+
 /* ---------- Arranque ---------- */
-const VER="9.0 (3 nov 2026)";
+const VER="10.0 (3 nov 2026)";
 (function init(){const T=today();["sd","md","id0","pvd","kd"].forEach(i=>$(i).value=T);
  $("st").value="";
  $("mz").innerHTML=$("iz").innerHTML=ZONAS.map(z=>`<option value="${z[0]}">${z[1]}</option>`).join("");
@@ -1642,7 +2078,7 @@ const VER="9.0 (3 nov 2026)";
  $("kn").innerHTML=PRESET.map(p=>`<option>${p}</option>`).join("");
  $("mnp").style.gridTemplateColumns="repeat(11,1fr)";
  if(!S.ui.v4){S.ui.v4=1;S.ui.main="panel";save()}
- S.ui.main="panel";teamSeed();exSeed();
+ S.ui.main="panel";teamSeed();exSeed();fxSeed();save();
  render();
  syUi();pnUi();icUi();sync();
  $("ver").textContent=" Versión "+VER+".";
