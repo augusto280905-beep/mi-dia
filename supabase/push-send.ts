@@ -89,7 +89,10 @@ function extractHealth(b: any): Record<string, Record<string, number>> {
   const today = new Date().toISOString().slice(0, 10);
   if (b && typeof b === "object") {
     const d = typeof b.date === "string" ? b.date : today;
-    put(d, "sleep_h", num(b.sleep_h)); put(d, "rhr", num(b.rhr)); put(d, "hrv", num(b.hrv));
+    // Un Atajo puede dar la duración en horas, minutos o segundos: >1440 = segundos, >24 = minutos
+    const sh = num(b.sleep_h);
+    put(d, "sleep_h", sh === null ? null : sh > 1440 ? sh / 3600 : sh > 24 ? sh / 60 : sh);
+    put(d, "rhr", num(b.rhr)); put(d, "hrv", num(b.hrv));
     const ms = b?.data?.metrics;
     if (Array.isArray(ms)) {
       for (const m of ms) {
