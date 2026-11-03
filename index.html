@@ -271,7 +271,7 @@ a{color:var(--ac)}
   <div class="card"><h2>Objetivos</h2><div id="tobj"></div></div>
   <div class="card"><h2>Semanas</h2><div id="tweeks"></div></div>
   <div class="card"><h2>Mis datos</h2><div class="foot" style="margin-top:0"><button class="ghost" data-a="exp">Copia (.json)</button><button class="ghost" data-a="csv">Sesiones (.csv)</button><button class="ghost" data-a="imp">Importar copia</button></div>
-   <div class="hint">Los datos se guardan solo en este dispositivo. Haz una copia de vez en cuando.</div></div>
+   <div class="hint">Los datos se guardan solo en este dispositivo. Haz una copia de vez en cuando.<span id="ver"></span></div></div>
  </div>
 </section>
 </main>
@@ -880,6 +880,7 @@ function renderPanel(){const s=loadStats(),T=s.T,hr=new Date().getHours(),fit=fi
  <p class="hint">Orientación general; no sustituye a un médico o fisioterapeuta.</p>`}
 
 /* ---------- Arranque ---------- */
+const VER="5.1 (3 nov 2026)";
 (function init(){const T=today();["sd","md","id0","pvd","kd"].forEach(i=>$(i).value=T);
  $("st").value="";
  $("mz").innerHTML=$("iz").innerHTML=ZONAS.map(z=>`<option value="${z[0]}">${z[1]}</option>`).join("");
@@ -889,7 +890,10 @@ function renderPanel(){const s=loadStats(),T=s.T,hr=new Date().getHours(),fit=fi
  if(!S.ui.v4){S.ui.v4=1;S.ui.main="panel";save()}
  if(!["panel","notas","cal","fut"].includes(S.ui.main))S.ui.main="panel";
  render();
- if("serviceWorker"in navigator&&location.protocol.startsWith("http"))addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+ $("ver").textContent=" Versión "+VER+".";
+ if("serviceWorker"in navigator&&location.protocol.startsWith("http")){const had=!!navigator.serviceWorker.controller;let rl=false;
+  navigator.serviceWorker.addEventListener("controllerchange",()=>{if(rl||!had)return;rl=true;location.reload()});
+  addEventListener("load",()=>navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(r=>{r.update();document.addEventListener("visibilitychange",()=>{if(!document.hidden)r.update()})}).catch(()=>{}))}
 })();
 </script>
 </body></html>
