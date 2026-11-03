@@ -97,9 +97,9 @@ function boot(){const store={};const dom=new JSDOM(html,{runScripts:"dangerously
 
  console.log("Salud: menú y separación");
  fvw("hub");
- t("menú con Fútbol / Gimnasio / Cuerpo / Informe",["Fútbol","Gimnasio","Cuerpo","Informe y guías"].every(s=>$("fhub").textContent.includes(s)));
+ t("menú con Fútbol / Gimnasio / Cuerpo / Informe",["Mi semana","Entreno extra","Cuerpo","Registro","Guías"].every(s=>$("fhub").textContent.includes(s)));
  t("ya no existe «Registrar» como pestaña",!/Registrar<\/button>/.test($("fnav").innerHTML));
- t("hay botón claro para registrar el entreno de hoy",!!d.querySelector('#fhub [data-t="postopen"]')||!!d.querySelector("#fhub .post"));
+ t("la semana muestra mis entrenos y partidos",d.querySelectorAll("#fhub .wk .wd").length===8);
  fvw("ses");
  t("Mis sesiones separa fútbol y gimnasio",/Fútbol/.test($("fses").textContent)&&/Gimnasio/.test($("fses").textContent));
  fvw("gym");t("Gimnasio carga",$("gymv").textContent.length>50);

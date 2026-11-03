@@ -49,6 +49,12 @@ Tarjeta «Calendario externo» en el Panel. La dirección secreta iCal (`https:/
 - Informe del día (`dayReport`, `inf:` push a las 21:30, pref `rep`): el aviso es genérico; el informe se calcula al abrir la app.
 - Pruebas: `tests/v11.test.js`.
 
+## v12: identidad nueva y tres áreas
+- Pestañas: **Hoy**, **Organiza** (`cal`/`notas`: tareas, calendario, uni), **Deporte** (`fut`), **Entrenador** (`eq`). `render()` pone `body[data-area]` (home/org/dep/eq) y cada área tiene su color (azul / lima / coral, variables `--c-org/--c-dep/--c-eq`; `--ac` cambia con el área). Hero e inicio oscuros con anillos (Disponibilidad, Sueño, Carga 7 d vs techo ACWR 1,3). Tipografía Barlow Condensed + Inter.
+- Inicio (p12a): `homeHero` (anillos), `homeTimeline` (hoy y mañana con color por área), `homeAreas` (3 tarjetas con acciones), cuestionario, y «Más datos» desplegable con todo el panel anterior.
+- Deporte: el menú es «Mi semana» (`weekStrip`: entrenos del calendario `S.sched` y partidos; `!` = entreno por contar, abre `postCard` de ese día; `S.ui.pkd` = descartados), tarjeta «Entreno extra» (margen `loadMargin()`), Cuerpo (sueño, lesiones), Registro, Guías. Sin «Físico»/peso ni «Plan de hoy» en el menú (las vistas `hoy`/`fis` siguen en el código, sin enlace).
+- Entreno extra: `loadWhy(plan)` explica cada carga con su fuente (Rønnestad 2011, ACSM 2009, Schoenfeld 2017/2016, Zourdos 2016, Gabbett 2016) o «criterio propio».
+
 ## Pendiente
 1. Desplegar y probar push en el Supabase real (SQL + función) y en el iPhone.
 2. Tras cada cambio: `npm test`, subir VER y caché del SW, commit y push.

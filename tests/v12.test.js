@@ -1,0 +1,53 @@
+const {JSDOM,VirtualConsole}=require("jsdom");const fs=require("fs");
+const html=fs.readFileSync(process.argv[2],"utf8");
+let ok=0,bad=0;const t=(n,c,i)=>{if(c){ok++;console.log("  ✓",n)}else{bad++;console.log("  ✗",n,i===undefined?"":"→ "+i)}};
+const errs=[];const vc=new VirtualConsole();vc.on("jsdomError",e=>errs.push(e.message));
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const srv={health:[],calls:[]};
+function mockFetch(url,o){o=o||{};const u=new URL(url),p=u.pathname;srv.calls.push((o.method||"GET")+" "+p);
+ const R=(s,j)=>Promise.resolve({ok:s>=200&&s<300,status:s,json:()=>Promise.resolve(j),text:()=>Promise.resolve(JSON.stringify(j))});
+ if(p==="/rest/v1/health_in")return R(200,srv.health);
+ if(p==="/functions/v1/push-send/health/register")return R(200,{ok:true});
+ if(p==="/rest/v1/app_state")return(o.method||"GET")==="GET"?R(200,[]):R(201,[{rev:1}]);
+ return R(404,{})}
+function boot(){const store={};const dom=new JSDOM(html,{runScripts:"dangerously",url:"https://x.github.io/mi-dia/",virtualConsole:vc,pretendToBeVisual:true,beforeParse(w){
+ Object.defineProperty(w,"localStorage",{value:{getItem:k=>k in store?store[k]:null,setItem:(k,v)=>{store[k]=String(v)},removeItem:k=>{delete store[k]}}});
+ w.scrollTo=()=>{};w.fetch=mockFetch;
+ w.SVGElement.prototype.createSVGPoint=function(){return{x:0,y:0,matrixTransform(){return{x:this.x,y:this.y}}}};
+ w.SVGElement.prototype.getScreenCTM=function(){return{inverse(){return{}}}};
+ w.SVGElement.prototype.setPointerCapture=()=>{};}});return dom}
+(async()=>{
+ const dom=boot(),w=dom.window,d=w.document;const ev=s=>w.eval(s),$=id=>d.getElementById(id);
+ const click=el=>{if(!el)throw new Error("sin elemento");el.dispatchEvent(new w.MouseEvent("click",{bubbles:true,cancelable:true}))};
+ const T=ev("today()"),sh=n=>ev(`shift("${T}",${n})`);
+ await sleep(3700);
+ console.log("Inicio nuevo");
+ ev(`S.well["${T}"]={sh:7,sl:3,fa:3,st:2,so:3};save();render()`);
+ t("el inicio tiene anillos y tres áreas",d.querySelectorAll("#hhero .rg").length===3&&d.querySelectorAll("#hareas .area").length===3);
+ t("los anillos reflejan tus datos (sueño 7 de 8)",/7 h de 8/.test($("hhero").textContent));
+ t("cada área tiene su color de pestaña",d.body.dataset.area==="home");
+ ["cal","fut","eq"].forEach((m,i)=>{ev(`S.ui.main="${m}";render()`);t("área "+m+" → "+["org","dep","eq"][i],d.body.dataset.area===["org","dep","eq"][i])});
+ t("las pestañas son Hoy, Organiza, Deporte, Entrenador",[...d.querySelectorAll("#mtabs button")].map(b=>b.textContent.trim()).join()==="Hoy,Organiza,Deporte,Entrenador");
+ console.log("Deporte por calendario");
+ ev(`S.sess=[];S.ui.pk="";S.ui.pkd={};S.sched={on:true,from:"2020-01-01",dows:[0,1,2,3,4,5,6],t:"10:00",e:"11:00",skip:[]};save();S.ui.main="fut";S.ui.fv="hub";render()`);
+ t("«Mi semana» marca con ! los entrenos pasados sin contar",d.querySelectorAll("#fhub .wd.pend").length>=3);
+ const pd=d.querySelector("#fhub .wd.pend[data-d]");
+ click(pd);
+ t("tocar el ! abre el registro de ese día",ev("PF&&PF.dt")===pd.dataset.d&&pd.dataset.d<T);
+ ev("PF.r=6");click(d.querySelector('[data-t="pfsave"]'));
+ t("guarda la sesión en la fecha de ese día",ev(`S.sess.some(x=>x.d==="${pd.dataset.d}"&&x.r===6)`));
+ ev("render()");t("y ese día pasa a ✓",!!d.querySelector("#fhub .wd.ok"));
+ t("no hay tarjetas de Físico ni Plan de hoy en el menú",!/Físico|Plan de hoy/.test($("fhub").textContent));
+ t("el menú ofrece Entreno extra",/Entreno extra/.test($("fhub").textContent)&&!!d.querySelector("#fhub .xcta"));
+ console.log("Entreno extra explicado");
+ ev(`S.sess=[];for(let i=1;i<=28;i++){const x=shift(today(),-i);if(i%3===0)S.sess.push({id:"a"+i,d:x,t:"",k:"ent",m:70,r:6})};S.next=[];S.mol={};save();S.ui.fv="gym";GS.plan=null;GS.m=["pe","ho","tr"];GS.pre="";render()`);
+ t("el gimnasio muestra tu margen de carga arriba",/Tu margen de hoy/.test($("gymv").textContent));
+ click(d.querySelector('[data-t="gmake"]'));
+ const why=$("gymv").querySelector(".whyc");
+ t("el plan explica por qué estas cargas",!!why&&/¿Por qué estas cargas\?/.test(why.textContent));
+ t("cada razón cita su base o dice que es criterio propio",[...why.querySelectorAll(".why")].every(x=>/Base:/.test(x.textContent))&&/Rønnestad|ACSM|Zourdos|Schoenfeld|Gabbett/.test(why.textContent)&&/Criterio propio/.test(why.textContent));
+ t("compara el entreno con el margen (UA)",/Cabe en tu carga semanal/.test(why.textContent)&&/UA/.test(why.textContent));
+ console.log("Sueño");
+ ev(`S.ui.fv="sue";render()`);t("sin datos del reloj invita a conectarlo",/Que entre solo/.test($("fsue").textContent));
+ t("sin errores de JS",errs.length===0,errs.slice(0,3).join(" | "));
+ console.log("\nRESULTADO: "+ok+" correctas, "+bad+" fallos");process.exit(bad?1:0)})();

@@ -77,7 +77,7 @@ function boot(store,ss){const dom=new JSDOM(html,{runScripts:"dangerously",url:"
  ev(`S.next=[{id:"m1",d:"${T()}",t:"",riv:"X",loc:"L"}];save();render()`);
  t("día de partido: no sumes carga extra",/Descanso/.test($("hload").textContent)&&/hoy hay partido/.test($("hload").textContent));
  ev('S.next=[];save()');
- t("Hoy: orden: siguiente, estado, carga, tareas, energía",(()=>{const o=["hnext","phero","hload","porg","penergy"].map(i=>[...d.querySelectorAll("[id]")].indexOf($(i)));return o.every((x,i)=>i===0||x>o[i-1])})());
+ t("Hoy: orden: lo de hoy, estado, carga, tareas, energía",(()=>{const o=["htl","phero","hload","porg","penergy"].map(i=>[...d.querySelectorAll("[id]")].indexOf($(i)));return o.every((x,i)=>i===0||x>o[i-1])})());
  t("Hoy: la foto sustituye al logo antiguo",!!d.querySelector(".brand img"));
  console.log("Agenda y áreas");
  tab("cal");t("Agenda: calendario y tareas comparten pestaña",d.querySelector('#mtabs [data-v="cal"]').classList.contains("on")&&d.querySelectorAll(".agseg").length===2);
