@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="es"><head><meta charset="utf-8"><title>Pulso</title>
+<html lang="es"><head><meta charset="utf-8"><title>Aitxorapp</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0f6b4b">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Pulso">
+<meta name="apple-mobile-web-app-title" content="Aitxorapp">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="pulso-180.png">
 <link rel="icon" href="pulso-192.png">
@@ -137,7 +137,7 @@ a{color:var(--ac)}
 <div id="toast" role="status"></div>
 <main>
 
-<div class="brand"><svg viewBox="0 0 64 64" role="img" aria-label="Pulso"><defs><linearGradient id="lgx" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b4f39"/><stop offset="1" stop-color="#17b27a"/></linearGradient></defs><rect width="64" height="64" fill="url(#lgx)"/><circle cx="32" cy="32" r="21" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="2"/><polyline points="9,34 21,34 26,22 33,46 39,28 43,34 53,34" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="53" cy="34" r="4" fill="#c6f432"/></svg><div><b>Pulso</b><span>Rendimiento y organización</span></div></div>
+<div class="brand"><svg viewBox="0 0 64 64" role="img" aria-label="Aitxorapp"><defs><linearGradient id="lgx" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b4f39"/><stop offset="1" stop-color="#17b27a"/></linearGradient></defs><rect width="64" height="64" fill="url(#lgx)"/><circle cx="32" cy="32" r="21" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="2"/><polyline points="9,34 21,34 26,22 33,46 39,28 43,34 53,34" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="53" cy="34" r="4" fill="#c6f432"/></svg><div><b>Aitxorapp</b><span>Rendimiento y organización</span></div></div>
 
 <section data-main="panel">
  <header><h1 id="phi">Hola</h1><div class="sub" id="psub"></div></header>
@@ -555,7 +555,7 @@ function download(name,text,type){const u=URL.createObjectURL(new Blob([text],{t
 const csvc=v=>{v=v==null?"":String(v);return /[",\n;]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v};
 function exportCsv(){const h=["fecha","hora","tipo","minutos","esfuerzo","UA","rival","campo","competicion","gf","gc","goles","asistencias","tiros","amarillas","rojas","posicion","titular","nota","comentario"];
  const rows=[...S.sess].sort((a,b)=>a.d.localeCompare(b.d)).map(x=>[x.d,x.t||"",TIPOS[x.k]||x.k,x.m,x.r,x.m*x.r,x.riv,x.loc,x.comp,x.gf,x.gc,x.g,x.a,x.sh,x.yc,x.rc,x.pos,x.k==="par"?(x.st?"si":"no"):"",x.p||"",x.n].map(csvc).join(","));
- download("pulso-futbol.csv","﻿"+[h.join(",")].concat(rows).join("\n"),"text/csv");}
+ download("aitxorapp-futbol.csv","﻿"+[h.join(",")].concat(rows).join("\n"),"text/csv");}
 
 document.addEventListener("click",e=>{
  const b=e.target.closest("[data-a]");if(!b)return;const a=b.dataset.a,id=b.dataset.id,v=b.dataset.v;
@@ -608,7 +608,7 @@ document.addEventListener("click",e=>{
  case"nextAdd":{const d=$("nd").value;if(!d){toast("Pon la fecha del partido");return}S.next.push({id:uid(),d,t:$("nt").value,riv:$("nriv").value.trim(),loc:$("nloc").value,comp:$("ncomp").value.trim()});["nd","nt","nriv","ncomp"].forEach(i=>$(i).value="");$("nloc").value="";toast("Partido añadido");break}
  case"nextDel":S.next=S.next.filter(x=>x.id!==id);break;
  case"nextReg":{const x=S.next.find(n=>n.id===id);if(x){prefill({d:x.d<=today()?x.d:today(),t:x.t,k:"par",m:90,riv:x.riv,comp:x.comp,loc:x.loc,nid:x.id})}return}
- case"exp":download("pulso-copia.json",JSON.stringify(S),"application/json");return;
+ case"exp":download("aitxorapp-copia.json",JSON.stringify(S),"application/json");return;
  case"csv":exportCsv();return;
  case"imp":$("impf").click();return;
  default:return}
@@ -880,7 +880,7 @@ function renderPanel(){const s=loadStats(),T=s.T,hr=new Date().getHours(),fit=fi
  <p class="hint">Orientación general; no sustituye a un médico o fisioterapeuta.</p>`}
 
 /* ---------- Arranque ---------- */
-const VER="5.1 (3 nov 2026)";
+const VER="5.2 (3 nov 2026)";
 (function init(){const T=today();["sd","md","id0","pvd","kd"].forEach(i=>$(i).value=T);
  $("st").value="";
  $("mz").innerHTML=$("iz").innerHTML=ZONAS.map(z=>`<option value="${z[0]}">${z[1]}</option>`).join("");
