@@ -11,7 +11,7 @@ t("martes 90 min y jueves 120 por defecto",ev("tdur(1)")===90&&ev("tdur(3)")===1
 ev(`S.team.sch={dows:[1,3],t:"18:45",durs:{3:100}};`);t("la duración se puede cambiar por día",ev("tdur(3)")===100&&ev("tdur(1)")===90);
 ev(`S.team.sch=null`);
 ev(`S.ui.main="cal";CAL=today().slice(0,7);SEL=today();render()`);
-t("calendario con filtros y cuadrícula nueva",d.querySelectorAll("#cgrid .cfil button").length===4&&d.querySelectorAll("#cgrid .cd2").length>=28);
+ev('S.ui.cv="m";render()');t("calendario con filtros y cuadrícula nueva",d.querySelectorAll("#cgrid .cfil button").length===4&&d.querySelectorAll("#cgrid .cd2").length>=28);
 click(d.querySelector('#cgrid .cfil button[data-v="eq"]'));t("filtrar por área funciona",ev("CALF")==="eq");click(d.querySelector('#cgrid .cfil button[data-v="all"]'));
 const T=ev("today()");
 ev(`S.sess=[];S.ui.pkd={};S.ui.pk="";S.sched={on:true,from:"2020-01-01",dows:[0,1,2,3,4,5,6],t:"00:00",e:"00:30",skip:[]};save();render()`);

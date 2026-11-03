@@ -143,7 +143,7 @@ setv("kv","abc");click(A("markAdd"));t("valor no numérico rechazado",/numérico
 
 
 console.log("\n8b. Calendario");
-click(A("main",'[data-v="cal"]'));
+ev('S.ui.cv="m"');click(A("main",'[data-v="cal"]'));
 t("calendario visible con cuadrícula del mes",!d.querySelector('[data-main="cal"]').hidden&&d.querySelectorAll("#cgrid .cd2").length>=28);
 t("hoy marcado",d.querySelectorAll("#cgrid .cd2.today").length===1&&d.querySelector("#cgrid .cd2.today").dataset.v===T);
 const tdOpen=ev(`S.notes.filter(n=>n.task&&!n.done&&n.due==="${T}")`).length;

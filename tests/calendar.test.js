@@ -76,7 +76,7 @@ const ICS=[
  /* se muestran en el calendario */
  ev(`S.ui.main="cal";CAL=today().slice(0,7);SEL="${iso(D(2))}";render()`);
  t("el día seleccionado lista el evento del calendario externo",/Calendario/.test(d.getElementById("cday").textContent)&&/Clase/.test(d.getElementById("cday").textContent),d.getElementById("cday").textContent.slice(0,200));
- t("la cuadrícula marca los días con eventos externos",d.querySelectorAll(".cd2 .dt").length>=3);
+ w.eval('S.ui.cv="m";render()');t("la cuadrícula marca los días con eventos externos",d.querySelectorAll(".cd2 .dt").length>=3);
  t("la semana próxima incluye eventos externos",/Reunión Arima/.test(d.getElementById("cnext").textContent));
  ev('S.ui.main="panel";render()');
  t("el Panel muestra lo de mañana en tu calendario",/Mañana en tu calendario/.test(d.getElementById("porg").textContent)&&/Reunión Arima/.test(d.getElementById("porg").textContent));
