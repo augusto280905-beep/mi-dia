@@ -112,7 +112,7 @@ function boot(store,ss){const dom=new JSDOM(html,{runScripts:"dangerously",url:"
  t("fusión: une marcas de la misma fecha y en conflicto gana este dispositivo",(()=>{const a=mA.att.find(x=>x.d===dates[3]);return a.m["zz_remoto"]==="f"&&a.m[id("Aitzol")]==="p"&&a.m[id("Aitor")]==="j"})(),JSON.stringify(mA.att.map(x=>[x.d,Object.keys(x.m).length])));
  t("fusión: no duplica nada",mA.plan.length===1&&mA.games.length===1&&new Set(mA.pl.map(p=>p.id)).size===mA.pl.length);
  /* los cambios de vista no marcan «cambios por enviar» */
- ev("SY.dirty=false;syLast=syDig()");tab("notas");tab("cal");tab("eq");sub("asi");t("cambiar de pestaña no cuenta como cambio de datos",ev("SY.dirty")===false);
+ ev("SY.dirty=false;syLast=syDig()");ev("go('notas')");tab("cal");tab("eq");sub("asi");t("cambiar de pestaña no cuenta como cambio de datos",ev("SY.dirty")===false);
  /* recarga: los datos persisten y arranca en Hoy sin repetir el splash en la misma sesión */
  dom.window.close();dom=boot(store,ss);w=dom.window;d=w.document;
  t("al recargar conserva el equipo, entrenos y pizarras",ev("S.team.pl.length")===24&&ev("S.team.plan.length")===1&&ev("S.team.bd.length")===1&&ev("S.team.att.length")===4);

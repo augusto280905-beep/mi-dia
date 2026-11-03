@@ -128,7 +128,7 @@ function boot(store,ss){const dom=new JSDOM(html,{runScripts:"dangerously",url:"
  ev('GS.m=["co","is","gl"];GS.pre="core"');click(d.querySelector('[data-t="gmake"]'));
  t("día de core: plancha, nórdico y Copenhagen",["plan","nord","cop"].every(i=>ev("GS.plan.ex.map(x=>x.id)").includes(i)));
  ev(`S.mol["${T()}"]=[{id:"mo9",z:"otr",s:"a",t:"dolor",n:7}];save()`);
- {const hiP=ev("buildGym(['pe','ho','tr'],60,'hp')"),bn=hiP.ex.find(x=>x.id==="banca");ev("S.mol={};save()");const okP=ev("buildGym(['pe','ho','tr'],60,'hp')"),bo=okP.ex.find(x=>x.id==="banca");
+ {ev('GS.pre=""');const hiP=ev("buildGym(['pe','ho','tr'],60,'hp')"),bn=hiP.ex.find(x=>x.id==="banca");ev("S.mol={};save()");const okP=ev("buildGym(['pe','ho','tr'],60,'hp')"),bo=okP.ex.find(x=>x.id==="banca");
  t("estado «descarga»: menos series y más RIR que un día normal",hiP.lv==="hi"&&bn.s<bo.s&&bn.rir>bo.rir,JSON.stringify([hiP.lv,bn,bo]));}
  t("el catálogo: todos los ejercicios con esquema tienen 3 pautas, error común y vídeo",ev("GX.every(e=>e.cues.length>=3&&e.err&&e.vq)")&&ev("GX.filter(e=>e.A).length")>=15);
  t("sin errores de JS",errs.length===0,errs.join("\n"));
