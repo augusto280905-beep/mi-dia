@@ -29,7 +29,9 @@ session-RPE (Foster), ACWR sin acoplar (Gabbett 2016), EWMA, CTL/ATL/TSB (Banist
 ## Notificaciones push
 La app (`pnBuild`) calcula avisos de 14 días (tareas del día, cuestionario, entreno -1 h, registrar sesión +15 min, partidos) y los sube a `reminders` (solo diferencias). El cron llama a `push-send`, que reclama los vencidos y envía Web Push. Service worker: handlers `push` y `notificationclick` en sw.js. iOS: solo con la app en pantalla de inicio, permiso con un toque.
 
+## Calendario externo (Google, solo lectura)
+Tarjeta «Calendario externo» en el Panel. La dirección secreta iCal (`https://calendar.google.com/calendar/ical/…/private-…/basic.ics`) se guarda en `S.ui.ical` (sincronizada en la fila del usuario, protegida por RLS; NO va en la copia .json ni en el repo). El navegador no puede leer Google por CORS, así que la app llama a `POST /functions/v1/push-send/ical` con la sesión del usuario; la función valida el usuario y que la URL sea de calendar.google.com, descarga el .ics y lo recorta (sin descripciones ni invitados). El cliente lo interpreta (`icsEvents`: UTC, hora local/TZID, todo el día, RRULE diaria/semanal/mensual/anual, EXDATE, RECURRENCE-ID, cancelados) y lo guarda en localStorage `aitx:ical` (ventana −35/+120 días, refresco cada 15 min). Se muestra en Calendario, Panel (hoy/mañana) y genera avisos 30 min antes (clave `x:`). Limitación: las horas con TZID se tratan como hora local del dispositivo.
+
 ## Pendiente
 1. Desplegar y probar push en el Supabase real (SQL + función) y en el iPhone.
-2. Vincular el Google Calendar de aitor.augusto@alumni.mondragon.edu (dirección secreta iCal si el administrador la permite; si no, OAuth). Su calendario es visible para Claude por el conector, pero la app necesita vía propia.
-3. Tras cada cambio: `npm test`, subir VER y caché del SW, commit y push.
+2. Tras cada cambio: `npm test`, subir VER y caché del SW, commit y push.
