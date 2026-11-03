@@ -49,7 +49,7 @@ function boot(store,ss){const dom=new JSDOM(html,{runScripts:"dangerously",url:"
  const gc=(ids,g)=>ids.filter(id=>ev(`posGroup(plById("${id}").p)`)===g).length;
  t("cada equipo tiene la misma estructura por líneas (±1)",["Defensas","Medios","Delanteros"].every(g=>Math.abs(gc(tm[0],g)-gc(tm[1],g))<=1));
  t("se ven los dos equipos en pantalla",d.querySelectorAll(".tmx").length===2);
- chg(d.querySelector('select[data-c="tn"]'),"3");click(d.querySelector('[data-t="tmake"]'));
+ click(d.querySelector('[data-t="tnset"][data-n="3"]'));click(d.querySelector('[data-t="tmake"]'));
  t("3 equipos",ev("TPD.tm.length")===3&&d.querySelectorAll(".tmx").length===3);
  chg(d.querySelector('select[data-c="tgk"]'),"0");click(d.querySelector('[data-t="tmake"]'));
  t("con porteros de campo juegan los 22",ev("TPD.tm.flat().length")===22&&ev("TPD.tg.length")===0);
@@ -61,7 +61,7 @@ function boot(store,ss){const dom=new JSDOM(html,{runScripts:"dangerously",url:"
  click(d.querySelector('[data-t="psave"]'));
  t("el entreno guardado conserva bajas y equipos",ev("S.team.plan[S.team.plan.length-1].bj.length")===2&&ev("S.team.plan[S.team.plan.length-1].tm.length")===3);
  /* lesionado marcado en ficha: nuevo entreno lo trae como baja */
- ev('S.team.pl.find(p=>p.id==="sp_izei").inj=true;save()');click(d.querySelector('[data-t="pnew"]'));
+ click(d.querySelector('[data-t="svback"]'));ev('S.team.pl.find(p=>p.id==="sp_izei").inj=true;save()');click(d.querySelector('[data-t="pnew"]'));
  t("un lesionado de la ficha entra como baja por defecto",ev('TPD.bj.includes("sp_izei")')&&/23 de 24/.test(d.body.textContent));
  click(d.querySelector('[data-t="pcancel"]'));ev('S.team.pl.find(p=>p.id==="sp_izei").inj=false;save()');
  console.log("Inicio");
