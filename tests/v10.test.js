@@ -94,7 +94,7 @@ function boot(store,ss){const dom=new JSDOM(html,{runScripts:"dangerously",url:"
  console.log("Gimnasio");
  fv("gym");
  t("Gimnasio: 5 propuestas y una recomendada",d.querySelectorAll(".gp").length===5&&d.querySelectorAll(".gp.rec").length===1);
- ev(`S.next=[{id:"m1",d:"${sh(1)}",t:"",riv:"X",loc:"L"}];save();render()`);
+ ev(`S.sched.on=false;S.next=[{id:"m1",d:"${sh(1)}",t:"",riv:"X",loc:"L"}];save();render()`);
  t("con partido mañana, piernas y cuerpo completo salen «Mejor no hoy»",ev('gymRec().list.filter(x=>x.st==="no").map(x=>x.k).sort().join()')==="full,legs");
  t("…y la recomendación es tren superior",["push","pull"].includes(ev("gymRec().best.k")),ev("gymRec().best&&gymRec().best.k"));
  ev("S.next=[];save();render()");

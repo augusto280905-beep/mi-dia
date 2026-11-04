@@ -40,6 +40,7 @@ const sid=ev(`GS.plan.ex[0].id`),n=ev(`GS.plan.ex[0].s`);ev(`TA.gexd({dataset:{i
 t("marcar un ejercicio como hecho",ev(`Array.from({length:${n}},(_,j)=>j).every(j=>GS.done["${sid}-"+j])`));
 ev(`S.ui.tst={};tstSet("leg",5)`);t("un test con piernas pesadas regula la carga",!!ev(`slPoor()`)&&/Tu test/.test(ev(`slPoor().txt`)));
 ev(`S.ui.tst={}`);
-t("dashboard sin minutos de partido y con carga semanal",!/Minutos de partido/.test(ev(`depLean()`))&&/Carga por semana/.test(ev(`depLean()`)));
+t("el test diario ya no está en el dashboard",!/Test de hoy|Salto vertical/.test(ev(`depLean()`)));
+t("dashboard sin minutos de partido y con carga semanal",!/Minutos de partido/.test(ev(`depLean()`))&&/Tu semana/.test(ev(`depLean()`))&&/Explora/.test(ev(`depLean()`)));
 }catch(e){ko++;console.log("  ✗ excepción",e.message,(e.stack||"").split("\n")[1])}
 console.log("\nRESULTADO:",ok,"correctas,",ko,"fallos");process.exit(ko?1:0)},900);
