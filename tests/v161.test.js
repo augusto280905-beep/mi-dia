@@ -26,5 +26,10 @@ t("tvRes incluye el panel de minutos",/Minutos y titularidades/.test(ev(`tvRes()
 t("Deporte muestra mi foto",/phimg/.test(ev(`healthDash()`)));
 t("Entrenador invita a añadir foto",/phadd/.test(ev(`tvRes()`)));
 ev(`S.ui.tph="data:image/jpeg;base64,AA=="`);t("con foto, la muestra",/phimg/.test(ev(`tvRes()`)));ev(`TA.tpclr()`);t("se puede quitar",!ev(`S.ui.tph`));
+t("Deporte tiene pestañas Dashboard y Entrenar",/Dashboard/.test(ev(`saludHub()`))&&/Entrenar/.test(ev(`saludHub()`)));
+ev(`S.ui.dv="ent";S.ui.main="fut";S.ui.fv="gym";GS.plan=null;render()`);
+t("Entrenar dice qué toca y deja montarlo",/Qué te toca hoy/.test(w.document.getElementById("gymv").textContent));
+ev(`S.sess=[];S.next=[{id:"z",d:shift(today(),4),riv:"X",t:"19:00"}];gymAuto()`);
+t("montar recomendado crea el plan con técnica y vídeo",!!ev(`GS.plan`)&&/Ver vídeo/.test(w.document.getElementById("gymv").innerHTML)&&/Error típico/.test(w.document.getElementById("gymv").textContent));
 }catch(e){ko++;console.log("  ✗ excepción",e.message,(e.stack||"").split("\n")[1])}
 console.log("\nRESULTADO:",ok,"correctas,",ko,"fallos");process.exit(ko?1:0)},900);
