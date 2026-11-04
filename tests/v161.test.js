@@ -23,5 +23,8 @@ t("suma minutos por jugador",m.tot===110&&m.jug===2);
 const h=ev(`tvMin()`);
 t("el panel muestra minutos y titularidades",/Minutos y titularidades/.test(h)&&/90'/.test(h));
 t("tvRes incluye el panel de minutos",/Minutos y titularidades/.test(ev(`tvRes()`)));
+t("Deporte muestra mi foto",/phero/.test(ev(`healthDash()`)));
+t("Entrenador invita a añadir foto",/phadd/.test(ev(`tvRes()`)));
+ev(`S.ui.tph="data:image/jpeg;base64,AA=="`);t("con foto, la muestra",/phero eqp/.test(ev(`tvRes()`)));ev(`TA.tpclr()`);t("se puede quitar",!ev(`S.ui.tph`));
 }catch(e){ko++;console.log("  ✗ excepción",e.message,(e.stack||"").split("\n")[1])}
 console.log("\nRESULTADO:",ok,"correctas,",ko,"fallos");process.exit(ko?1:0)},900);
