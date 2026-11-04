@@ -42,6 +42,8 @@ function device(perm){const store={};let subbed=null;const dom=new JSDOM(html,{r
  t("entreno cancelado no avisa",!K("e:"+mk(1))&&!K("r:"+mk(1)));
  t("registrar sesión: 15 min después de acabar (21:45)",K("r:"+mk(2))&&new Date(K("r:"+mk(2)).at).getHours()===21&&new Date(K("r:"+mk(2)).at).getMinutes()===45);
  t("partido: víspera 20:00 y día 2 h antes (15:00)",K("m1:m1")&&new Date(K("m1:m1").at).getHours()===20&&K("m0:m1")&&new Date(K("m0:m1").at).getHours()===15&&/Rival FC/.test(K("m0:m1").title));
+ t("aviso 23:00 si queda una tarea del día sin hacer",K("o:"+dTask)&&new Date(K("o:"+dTask).at).getHours()===23&&K("o:"+dTask).body==="Llamar al fisio"&&/olvidado/.test(K("o:"+dTask).title),JSON.stringify(K("o:"+dTask)));
+ t("sin aviso 23:00 si todo está hecho",!K("o:"+mk(5)));
  t("todo dentro de 15 días y en el futuro",B.every(x=>{const a=new Date(x.at).getTime();return a>Date.now()&&a<Date.now()+15*864e5}));
  t("claves únicas",new Set(B.map(x=>x.key)).size===B.length);
  ev(`S.well[today()]={f:3,s:3,e:3,d:3,sh:7};S.ui.np={well:false};`);

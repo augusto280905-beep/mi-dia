@@ -4595,8 +4595,16 @@ try{if(/[?&]contar=1/.test(location.search)){history.replaceState(null,"",locati
  if("serviceWorker"in navigator)navigator.serviceWorker.addEventListener("message",e=>{if(e.data&&e.data.contar)qlOpen()})}catch(e){}
 setInterval(()=>{if(!QL&&!NX.sheet)render()},60000);
 
+/* ================= v17.6: aviso a las 23:00 si quedan tareas del día sin hacer ================= */
+const _pnb22=pnBuild;pnBuild=function(now){const out=_pnb22(now);now=now||Date.now();if(pnPrefs().tk===false)return out;
+ for(let i=0;i<14;i++){const d=shift(today(),i),L=S.notes.filter(n=>n.task&&!n.ev&&!n.done&&n.due===d);if(!L.length)continue;
+  const q=d.split("-").map(Number),w=new Date(q[0],q[1]-1,q[2],23,0,0,0),t=w.getTime();if(t<=now+30000||t>=now+15*864e5)continue;
+  const nm=L.slice(0,3).map(n=>String(n.x).slice(0,40)).join(", ")+(L.length>3?" y "+(L.length-3)+" más":"");
+  out.push({key:"o:"+d,at:w.toISOString(),title:L.length===1?"Se te ha olvidado una tarea de hoy":"Te quedan "+L.length+" tareas de hoy sin hacer",body:nm})}
+ return out};
+
 /* ---------- Arranque ---------- */
-const VER="17.5 (4 nov 2026)";
+const VER="17.6 (4 nov 2026)";
 (function init(){const T=today();["sd","md","id0","pvd","kd"].forEach(i=>$(i).value=T);
  $("st").value="";
  $("mz").innerHTML=$("iz").innerHTML=ZONAS.map(z=>`<option value="${z[0]}">${z[1]}</option>`).join("");
