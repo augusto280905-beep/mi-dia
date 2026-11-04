@@ -97,7 +97,7 @@ function boot(){const store={};const dom=new JSDOM(html,{runScripts:"dangerously
 
  console.log("Salud: menú y separación");
  fvw("hub");
- t("menú: Resumen con Mi semana y Entrenos con fuerza, historial y guías",$("fhub").textContent.includes("Mi semana")&&(ev("S.ui.dv='ent';render()"),["Fuerza extra","Historial","Cuerpo y guías"].every(s=>$("fhub").textContent.includes(s)))&&(ev("S.ui.dv='res';render()"),true));
+ t("menú: Deporte con Mi semana, registrar y entrenar más",$("fhub").textContent.includes("Mi semana")&&/Registrar entreno/.test($("fhub").textContent)&&/Entrenar más|Sin margen/.test($("fhub").textContent));
  t("ya no existe «Registrar» como pestaña",!/Registrar<\/button>/.test($("fnav").innerHTML));
  t("la semana muestra mis entrenos y partidos",d.querySelectorAll("#fhub .wk .wd").length===8);
  fvw("ses");
