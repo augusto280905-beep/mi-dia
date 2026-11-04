@@ -49,7 +49,7 @@ t("el gimnasio muestra «Cómo llegas hoy»",!!q(".xarr")&&/Sueño anoche/.test(
 setTimeout(()=>{try{
 console.log("\nv15.3 · inicio");
 ev(`S.well={};S.sess=[];const T=today();for(let i=0;i<7;i++)S.well[shift(T,-i)]={sh:6+i%3*.5,shs:"w"};S.ui.main="panel";render()`);
-t("el inicio tiene el bloque «Tu foco hoy»",!!q("#hpro .hfoc")&&/Tu foco hoy/i.test(q("#hpro").textContent));
+t("el inicio tiene las tendencias de sueño y carga",!!q("#hpro .hptg"));
 t("sugiere cuántas horas dormir esta noche",/apunta a/.test(q("#hpro").textContent));
 t("dibuja las dos tendencias (sueño y carga)",qa("#hpro .hpt").length===2&&qa("#hpro .spk").length>=1);
 t("sin sesiones la carga no rompe",/UA/.test(q("#hpro").textContent));

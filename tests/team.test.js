@@ -26,7 +26,7 @@ function boot(store,ss){const dom=new JSDOM(html,{runScripts:"dangerously",url:"
  t("plantilla inicial: 24 jugadores con sus posiciones",pl.length===24&&pl.filter(p=>p.p==="P").length===3&&pl.filter(p=>p.p==="DC").length===2&&pl.find(p=>p.n==="Hegoi").p==="P"&&pl.find(p=>p.n==="Egoi").p==="ED"&&pl.find(p=>p.n==="M.Arregi").p==="DFCI"&&pl.find(p=>p.n==="Neko").p==="LI");
  t("posiciones: 3P 3LD 2DFCI 3DFCD 2LI 4MCD 1MCO 2EI 2DC 2ED",["P:3","LD:3","DFCI:2","DFCD:3","LI:2","MCD:4","MCO:1","EI:2","DC:2","ED:2"].every(x=>{const[c,n]=x.split(":");return pl.filter(p=>p.p===c).length===+n}));
  ev("render()");
- t("Hoy: muestra lo de hoy, la semana y carga recomendada (sin tarjetas de áreas) (sin asistencia)",/Mañana/.test($("htl").textContent)&&!d.querySelector(".areas, .area")&&!!$("hweek").textContent.trim()&&$("hteam").hidden&&/Carga recomendada/.test($("hload").textContent));
+ t("Hoy: muestra lo de hoy, la semana y carga recomendada (sin tarjetas de áreas) (sin asistencia)",/Mañana/.test($("htl").textContent)&&!d.querySelector(".areas, .area")&&!!$("hmatch").textContent.trim()&&$("hteam").hidden&&/Carga recomendada/.test($("hload").textContent));
  /* sin datos de asistencia */
  t("Hoy: sin sesiones explica que falta base",/base|Descanso|UA/.test($("hload").textContent));
  /* ir a Equipo */

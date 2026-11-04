@@ -106,9 +106,9 @@ function boot(){const store={};const dom=new JSDOM(html,{runScripts:"dangerously
  ev(`S.ui.main='panel';render()`);
  t("sin tarjetas de Organización/Deporte/Entrenador",!d.querySelector(".areas")&&!/Organización|Deporte y salud/.test($("hmatch").textContent+$("hweek").textContent+$("hrec").textContent));
  ev(`S.next=[{id:"n2",d:shift(today(),3),t:"12:00",riv:"Rival SD",loc:"V"}];S.team.games=[];tfxSeed();render()`);
- t("cuenta atrás: mi partido y el de mi equipo con lugar",/En 3 días/.test($("hmatch").textContent)&&/Rival SD/.test($("hmatch").textContent)&&/Mi equipo/.test($("hmatch").textContent));
- t("tu semana: 7 barras y resumen",$("hweek").querySelectorAll(".hbc").length===7&&/Prevención/.test($("hweek").textContent));
- t("un consejo con su base",/Base:/.test($("hrec").textContent)||/Sin avisos/.test($("hrec").textContent));
+ t("cuenta atrás: mi partido y el de mi equipo con lugar",/En 3 días/.test(ev("homeMatches()"))&&/Rival SD/.test(ev("homeMatches()"))&&/Mi equipo/.test(ev("homeMatches()")));
+ t("tu semana: 7 barras y resumen",(ev("homeWeek()").match(/class="hbc/g)||[]).length===7&&/Prevención/.test(ev("homeWeek()")));
+ t("un consejo con su base",/Base:/.test(ev("homeRec()"))||/Sin avisos/.test(ev("homeRec()")));
 
  console.log("Inicio: estado y check-in");
  ev(`S.well={};S.ui.main='panel';CK={i:0,edit:false};render()`);

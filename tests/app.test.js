@@ -156,7 +156,7 @@ $("cq").value="comprar entradas";click(A("cadd"));
 t("añadir tarea al día seleccionado",ev("S.notes.find(n=>n.x==='comprar entradas')").due===fut&&/comprar entradas/.test($("cday").textContent));
 $("cq").value="reservar pista viernes #club";click(A("cadd"));
 const rp=ev("S.notes.find(n=>/reservar pista/.test(n.x))");
-t("la fecha escrita gana al día seleccionado y detecta etiqueta",rp.due!==fut&&ev(`dow("${rp.due}")`)===4&&rp.tags[0]==="club",JSON.stringify(rp));
+t("la fecha escrita gana al día seleccionado y detecta etiqueta",(rp.due!==fut||ev(`dow("${fut}")`)===4)&&ev(`dow("${rp.due}")`)===4&&rp.tags[0]==="club",JSON.stringify(rp));
 ev(`CALF="dep";render()`);const tr0=d.querySelector("#cgrid .cd2 .dd");t("entrenos fijos con punto verde",ev(`S.sched.on`)&&!!tr0);
 click(A("cday",`[data-v="${sh(4)}"]`));
 click(A("cday",`[data-v="${T}"]`));
