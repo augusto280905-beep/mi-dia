@@ -124,7 +124,7 @@ goF("sal");const mid=ev("S.mol['"+T+"'][0].id");click(A("molDel",`[data-id="${T}
 $("iz").value="isq";$("is").value="d";$("ig").value="mod";$("in").value="Sobrecarga";click(A("injAdd"));
 t("lesión registrada en curso",/en curso/.test($("ilist").textContent));
 click(A("injEnd"));t("dar de alta",!/en curso/.test($("ilist").textContent));
-setv("pvk","f11");setv("pvm","20");click(A("prevAdd"));click(A("prevAdd"));
+click(d.querySelector('[data-t="pvdone"][data-k="f11"][data-o="0"]'));click(d.querySelector('[data-t="pvdone"][data-k="nhe"][data-o="1"]'));
 t("prevención 2/2 esta semana",/2\/2/.test($("pvh").textContent),$("pvh").textContent);
 click(A("pg",'[data-v="1"]'));t("subir objetivo de prevención",/3/.test($("pvbar").textContent));
 
