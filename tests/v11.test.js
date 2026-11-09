@@ -106,18 +106,18 @@ function boot(){const store={};const dom=new JSDOM(html,{runScripts:"dangerously
 
  console.log("Tras el entreno");
  ev(`S.sess=[];S.ui.pk="";S.sched={on:true,from:"${T}",dows:[0,1,2,3,4,5,6],t:"00:00",e:"00:30",skip:[]};save();S.ui.main="panel";render()`);
- t("si ya ha acabado el entreno, Hoy pregunta cómo ha ido",!!d.querySelector("#hpost .post")&&/entreno/i.test($("hpost").textContent));
- click(d.querySelector('#hpost [data-t="pfs"][data-k="r"][data-v="7"]'));
- click(d.querySelector('#hpost [data-t="pfs"][data-k="en"][data-v="4"]'));
- click(d.querySelector('#hpost [data-t="pfz"][data-v="isq"]'));
- click(d.querySelector('#hpost [data-t="pfsave"]'));
+ t("si ya ha acabado el entreno, Hoy lo avisa",/por contar/i.test($("htl").textContent));click(d.querySelector('#htl [data-t="qlopen"]'));t("se abre la hoja rápida para contarlo",!!d.querySelector("#qls .ql"));
+ click(d.querySelector('#qls [data-t="pfs"][data-k="r"][data-v="7"]'));
+ click(d.querySelector('#qls [data-t="pfs"][data-k="en"][data-v="4"]'));
+ click(d.querySelector('#qls [data-t="pfz"][data-v="isq"]'));
+ click(d.querySelector('#qls [data-t="pfsave"]'));
  const s0=ev("S.sess[S.sess.length-1]");
  t("guarda la sesión con duración, esfuerzo y energía",!!s0&&s0.r===7&&s0.en===4&&s0.m>=25&&s0.k==="ent",JSON.stringify(s0));
  t("la molestia queda anotada",ev(`(S.mol["${T}"]||[]).some(x=>x.z==="isq")`));
- t("después de guardar ya no pregunta",!d.querySelector("#hpost .post"));
- ev(`S.sess=[];S.mol={};S.ui.pk="";render()`);click(d.querySelector('#hpost [data-t="pfskip"]'));
- t("«Hoy no he entrenado» descarta la pregunta",ev("S.ui.pk")===T&&!d.querySelector("#hpost .post"));
- ev(`PF=null;TA.postopen();PF.r=0;`);click(d.querySelector('#hpost [data-t="pfsave"]')||d.querySelector('[data-t="pfsave"]'));
+ t("después de guardar la hoja se cierra",!d.querySelector("#qls .ql"));
+ ev(`S.sess=[];S.mol={};S.ui.pk="";render()`);click(d.querySelector('#htl [data-t="qlopen"]'));click(d.querySelector('#qls [data-t="pfskip"]'));
+ t("«No he entrenado» descarta la pregunta",ev("S.ui.pk")===T&&!d.querySelector("#qls .ql"));
+ ev(`PF=null;S.ui.main="fut";S.ui.fv="hub";S.ui.dv="res";TA.postopen();PF.r=0;render()`);click(d.querySelector('[data-t="pfsave"]'));
  t("sin esfuerzo no guarda",ev("S.sess.length")===0);
  ev("PF=null;S.sched.on=false;save();render()");
 

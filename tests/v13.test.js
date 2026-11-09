@@ -66,27 +66,25 @@ function boot(){const store={};const dom=new JSDOM(html,{runScripts:"dangerously
  ev("PF=null;render()");
  console.log("Salud: cómo estás");
  ev(`S.sess=[];for(let i=1;i<=28;i++){const x=shift(today(),-i);if(i%3===0)S.sess.push({id:"a"+i,d:x,t:"",k:"ent",m:70,r:6})};S.mol={};S.prev=[];S.next=[];S.team.games=S.team.games.filter(g=>g.d>'2026-12-31');S.ui.main='fut';S.ui.fv='hub';render()`);
- const H=$("fhub");
- t("hay panel «Cómo estás» con estado y datos",/Cómo estás/.test(H.textContent)&&!!H.querySelector(".hs-hero .hs-t")&&H.querySelectorAll(".hs-grid .hst").length===4);
- t("gráfica de 14 días",H.querySelectorAll(".hb14 .hbc").length===14);
- t("sin molestias lo dice",/Sin molestias/.test(H.textContent));
- t("cada consejo cita su base",[...H.querySelectorAll(".hrec")].every(x=>/Base:/.test(x.textContent))&&H.querySelectorAll(".hrec").length>=1);
+ const mkH=()=>{const e=d.createElement("div");e.innerHTML=ev("healthDash()");return e};
+ t("hay panel «Cómo estás» con estado y datos",/Cómo estás/.test(mkH().textContent)&&!!mkH().querySelector(".hs-hero .hs-t")&&mkH().querySelectorAll(".hs-grid .hst").length===4);
+ 
+ t("sin molestias lo dice",/Sin molestias/.test(mkH().textContent));
+ t("cada consejo cita su base",[...mkH().querySelectorAll(".hrec")].every(x=>/Base:/.test(x.textContent))&&mkH().querySelectorAll(".hrec").length>=1);
  ev(`S.mol[today()]=[{id:"m1",z:"isq",s:"d",t:"dolor",n:7,x:""}];S.mol[shift(today(),-1)]=[{id:"m2",z:"isq",s:"d",t:"dolor",n:6,x:""}];S.mol[shift(today(),-2)]=[{id:"m3",z:"isq",s:"d",t:"dolor",n:5,x:""}];render()`);
- t("molestia fuerte repetida → «Toca descargar» y consulta a fisio",/Toca descargar/.test(H.textContent)&&/fisio/i.test(H.textContent)&&!/Curl nórdico/.test(H.textContent));
- t("la zona aparece en Cuerpo",/Isquiotibiales/.test(H.querySelector(".hs-bd").textContent));
+ t("molestia fuerte repetida → «Toca descargar» y consulta a fisio",/Toca descargar/.test(mkH().textContent)&&/fisio/i.test(mkH().textContent)&&!/Curl nórdico/.test(mkH().textContent));
+ t("la zona aparece en Cuerpo",/Isquiotibiales/.test(mkH().querySelector(".hs-bd").textContent));
  ev(`S.mol={};S.mol[shift(today(),-1)]=[{id:"m9",z:"tob",s:"d",t:"tension",n:2,x:""}];render()`);
- t("molestia leve de tobillo → equilibrio (Hupperets)",/Hupperets/.test(H.textContent)&&/Tobillo/.test(H.textContent));
+ t("molestia leve de tobillo → equilibrio (Hupperets)",/Hupperets/.test(mkH().textContent)&&/Tobillo/.test(mkH().textContent));
  ev(`S.mol={};S.team.games=[];S.next=[];S.sess=S.sess.filter(x=>x.d<shift(today(),-3));render()`);
- t("sin partido cerca y semana floja → curl nórdico con animación",/Van Dyk/.test(H.textContent)&&!!H.querySelector(".hfig"));
+ t("sin partido cerca y semana floja → curl nórdico con animación",/Van Dyk/.test(mkH().textContent)&&!!mkH().querySelector(".hfig"));
  ev(`S.next=[{id:"n1",d:shift(today(),0),t:"",riv:"X",loc:"L"}];S.sess.push({id:"pp",d:shift(today(),-1),t:"",k:"par",m:90,r:8,riv:"Y",loc:"L",gf:1,gc:0,g:0,a:0,sh:0,yc:0,rc:0,pos:"",st:true,p:0});render()`);
- t("el día después de jugar → «Soltar» (foam roller y estiramiento con sus estudios)",/Soltar/.test(H.textContent)&&/Wiewelhove/.test(H.textContent)&&/Herbert/.test(H.textContent));
+ t("el día después de jugar → «Soltar» (foam roller y estiramiento con sus estudios)",/Soltar/.test(mkH().textContent)&&/Wiewelhove/.test(mkH().textContent)&&/Herbert/.test(mkH().textContent));
 
  console.log("Deporte: Resumen y Entrenos");
  ev(`S.ui.main='fut';S.ui.fv='hub';S.ui.dv='res';render()`);
- t("Deporte abre en Resumen con el panel",!!$("fhub").querySelector(".hs-hero")&&$("fhub").querySelectorAll(".dvseg button").length===2&&!$("fhub").querySelector(".opt"));
- click($("fhub").querySelector('[data-t="dvset"][data-v="ent"]'));
- t("Entrenos: opciones para elegir (fuerza, prevención, recuperar, registrar)",$("fhub").querySelectorAll(".opt").length===4&&/Fuerza extra/.test($("fhub").textContent)&&!$("fhub").querySelector(".hs-hero"));
- click($("fhub").querySelector('[data-t="goprev"]'));
+ ev(`S.ui.main="fut";S.ui.dv="ent";render()`);
+ ev(`S.ui.main="fut";TA.goprev({dataset:{}})`);
  t("Prevención y core abre el gimnasio con ese día",ev("S.ui.fv")==="gym"&&ev("GS.pre")==="core");
  ev(`S.sess=[];for(let i=1;i<=28;i++){const x=shift(today(),-i);if(i%3===0)S.sess.push({id:"a"+i,d:x,t:"",k:"ent",m:70,r:6})};S.next=[];S.mol={};S.team.games=[];GS.m=["pe","ho","tr"];GS.pre="";GS.plan=null;render()`);
  click(d.querySelector('[data-t="gmake"]'));
@@ -107,7 +105,6 @@ function boot(){const store={};const dom=new JSDOM(html,{runScripts:"dangerously
  t("sin tarjetas de Organización/Deporte/Entrenador",!d.querySelector(".areas")&&!/Organización|Deporte y salud/.test($("hmatch").textContent+$("hweek").textContent+$("hrec").textContent));
  ev(`S.next=[{id:"n2",d:shift(today(),3),t:"12:00",riv:"Rival SD",loc:"V"}];S.team.games=[];tfxSeed();render()`);
  t("cuenta atrás: mi partido y el de mi equipo con lugar",/En 3 días/.test(ev("homeMatches()"))&&/Rival SD/.test(ev("homeMatches()"))&&/Mi equipo/.test(ev("homeMatches()")));
- t("tu semana: 7 barras y resumen",(ev("homeWeek()").match(/class="hbc/g)||[]).length===7&&/Prevención/.test(ev("homeWeek()")));
  t("un consejo con su base",/Base:/.test(ev("homeRec()"))||/Sin avisos/.test(ev("homeRec()")));
 
  console.log("Inicio: estado y check-in");

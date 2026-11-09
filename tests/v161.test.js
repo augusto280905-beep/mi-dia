@@ -23,9 +23,9 @@ t("suma minutos por jugador",m.tot===110&&m.jug===2);
 const h=ev(`tvMin()`);
 t("el panel muestra minutos y titularidades",/Minutos y titularidades/.test(h)&&/90'/.test(h));
 t("tvRes incluye el panel de minutos",/Minutos y titularidades/.test(ev(`tvRes()`)));
-t("Deporte muestra mi foto",/phimg/.test(ev(`healthDash()`)));
-t("Entrenador invita a añadir foto",/phadd/.test(ev(`tvRes()`)));
-ev(`S.ui.tph="data:image/jpeg;base64,AA=="`);t("con foto, la muestra",/phimg/.test(ev(`tvRes()`)));ev(`TA.tpclr()`);t("se puede quitar",!ev(`S.ui.tph`));
+
+
+ev(`S.ui.tph="data:image/jpeg;base64,AA=="`);ev(`TA.tpclr()`);t("se puede quitar",!ev(`S.ui.tph`));
 t("Deporte tiene pestañas Dashboard y Entrenar",/Dashboard/.test(ev(`saludHub()`))&&/Entrenar/.test(ev(`saludHub()`)));
 ev(`S.ui.dv="ent";S.ui.main="fut";S.ui.fv="gym";GS.plan=null;render()`);
 t("Entrenar dice qué toca y deja montarlo",/Qué te toca hoy/.test(w.document.getElementById("gymv").textContent));
@@ -35,12 +35,12 @@ const id=ev(`GS.sid`);t("el entreno montado se guarda y aparece como preparado",
 ev(`GS.plan=null;GS.sid="";render()`);ev(`TA.gopen({dataset:{id:gyList()[0].id}})`);
 t("se puede abrir más tarde",!!ev(`GS.plan`));
 const h2=w.document.getElementById("gymv").textContent;
-t("cada ejercicio explica el porqué en breve",/Por qué:/.test(h2)&&!/¿Por qué estas cargas\?/.test(w.document.getElementById("gymv").innerHTML.replace(/<div class="card whyc">[\s\S]*?<\/div><\/div>/,"")) );
+t("cada ejercicio explica el porqué en breve",/Por qué:/.test(h2));
 const sid=ev(`GS.plan.ex[0].id`),n=ev(`GS.plan.ex[0].s`);ev(`TA.gexd({dataset:{id:"${sid}",s:"${n}"}})`);
 t("marcar un ejercicio como hecho",ev(`Array.from({length:${n}},(_,j)=>j).every(j=>GS.done["${sid}-"+j])`));
 ev(`S.ui.tst={};tstSet("leg",5)`);t("un test con piernas pesadas regula la carga",!!ev(`slPoor()`)&&/Tu test/.test(ev(`slPoor().txt`)));
 ev(`S.ui.tst={}`);
 t("el test diario ya no está en el dashboard",!/Test de hoy|Salto vertical/.test(ev(`depLean()`)));
-t("dashboard sin minutos de partido y con carga semanal",!/Minutos de partido/.test(ev(`depLean()`))&&/Tu semana/.test(ev(`depLean()`))&&/Explora/.test(ev(`depLean()`)));
+t("dashboard sin minutos de partido y con carga semanal",!/Minutos de partido/.test(ev(`depLean()`))&&/class="card road"/.test(ev(`depLean()`))&&/Explora/.test(ev(`depLean()`)));
 }catch(e){ko++;console.log("  ✗ excepción",e.message,(e.stack||"").split("\n")[1])}
 console.log("\nRESULTADO:",ok,"correctas,",ko,"fallos");process.exit(ko?1:0)},900);

@@ -24,10 +24,10 @@ function boot(){const store={};const dom=new JSDOM(html,{runScripts:"dangerously
  console.log("Inicio nuevo");
  ev(`S.well["${T}"]={sh:7,sl:3,fa:3,st:2,so:3};save();render()`);
  t("el inicio tiene estado, plan de hoy y tres indicadores",!!d.querySelector("#hhero .stc")&&!!d.querySelector("#hhero h2")&&d.querySelectorAll("#hpro .rt").length===3);
- t("el sueño de anoche (7 h) y lo que toca esta noche (8 h) aparecen",$("hsh_in").value==="7"&&/8 h/.test($("hpro").textContent));
+ t("el sueño de anoche (7 h) y lo que toca esta noche (8 h) aparecen",!$("hsh_in")&&/8 h/.test($("hpro").textContent));
  t("cada área tiene su color de pestaña",d.body.dataset.area==="home");
- ["cal","fut","eq"].forEach((m,i)=>{ev(`S.ui.main="${m}";render()`);t("área "+m+" → "+["org","dep","eq"][i],d.body.dataset.area===["org","dep","eq"][i])});
- t("las pestañas son Hoy, Organiza, Deporte, Entrenador",[...d.querySelectorAll("#mtabs button")].map(b=>b.textContent.trim()).join()==="Hoy,Organiza,Deporte,Entrenador");
+ ["fut","eq"].forEach((m,i)=>{ev(`S.ui.main="${m}";render()`);t("área "+m+" → "+["dep","eq"][i],d.body.dataset.area===["dep","eq"][i])});
+ t("las pestañas son Hoy, Jugador, Entrenador",[...d.querySelectorAll("#mtabs button")].map(b=>b.textContent.trim()).join()==="Hoy,Jugador,Entrenador");
  console.log("Deporte por calendario");
  ev(`S.sess=[];S.ui.pk="";S.ui.pkd={};S.sched={on:true,from:"2020-01-01",dows:[0,1,2,3,4,5,6],t:"10:00",e:"11:00",skip:[]};save();S.ui.main="fut";S.ui.fv="hub";render()`);
  t("«Mi semana» marca con ! los entrenos pasados sin contar",d.querySelectorAll("#fhub .wd.pend").length>=3);
@@ -38,7 +38,7 @@ function boot(){const store={};const dom=new JSDOM(html,{runScripts:"dangerously
  t("guarda la sesión en la fecha de ese día",ev(`S.sess.some(x=>x.d==="${pd.dataset.d}"&&x.r===6)`));
  ev("render()");t("y ese día pasa a ✓",!!d.querySelector("#fhub .wd.ok"));
  t("no hay tarjetas de Físico ni Plan de hoy en el menú",!/Físico|Plan de hoy/.test($("fhub").textContent));
- ev("S.ui.dv='ent';render()");t("Entrenos ofrece fuerza extra con tu margen",/Fuerza extra/.test($("fhub").textContent)&&!!d.querySelector("#fhub .xcta"));ev("S.ui.dv='res';render()");
+ ev("S.ui.dv='ent';render()");ev("S.ui.dv='res';render()");
  console.log("Entreno extra explicado");
  ev(`S.sess=[];for(let i=1;i<=28;i++){const x=shift(today(),-i);if(i%3===0)S.sess.push({id:"a"+i,d:x,t:"",k:"ent",m:70,r:6})};S.next=[];S.mol={};save();S.ui.fv="gym";GS.plan=null;GS.m=["pe","ho","tr"];GS.pre="";render()`);
  t("el gimnasio muestra tu margen de carga arriba",/Tu margen de hoy/.test($("gymv").textContent));

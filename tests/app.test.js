@@ -23,32 +23,7 @@ t("sin errores",errs.length===0,errs.join("\n"));
 t("arranca en el Panel",!d.querySelector('[data-main="panel"]').hidden&&d.querySelector('[data-main="notas"]').hidden);
 t("panel vacío invita a registrar",/Registra tu primera sesión/.test($("pins").textContent)&&/Aún no tengo datos/.test($("phero").textContent),$("pins").textContent);
 t("marca visible",/Aitxorapp/.test(d.querySelector(".brand").textContent)&&d.title==="Aitxorapp",d.title);
-t("cuatro áreas: Hoy, Agenda, Salud, Entrenador",d.querySelectorAll("#mtabs button").length===4&&!/Hábitos|Check-in/.test(d.querySelector("main").textContent));
-
-console.log("\n2. Notas y tareas");goN();
-const nxq=$("nxq");
-const add=s=>{$("nxq").value=s;inp($("nxq"));click(d.querySelector('[data-t="nxq"]'))};
-const NS=()=>JSON.parse(store["midia:v3"]).notes;
-$("nxq").value="llamar al dentista mañana #salud !";inp($("nxq"));t("pista de interpretación",/mañana|salud|\d/.test(txt("nxh")),txt("nxh"));
-click(d.querySelector('[data-t="nxq"]'));
-let n0=NS()[0];
-t("detecta fecha, etiqueta y fijado",n0.due===sh(1)&&n0.tags[0]==="salud"&&n0.pin&&n0.x==="llamar al dentista"&&n0.task,JSON.stringify(n0));
-add("comprar botas");t("tarea sin fecha",NS().length===2);
-add("pagar 31/02");t("fecha imposible no se interpreta",NS().find(x=>/31\/02/.test(x.x)).due==="");
-add("revisar contrato 15/03/2030");t("fecha dd/mm/aaaa",NS().find(x=>/contrato/.test(x.x)).due==="2030-03-15");
-add("reunión viernes 18:30");const reu=NS().find(x=>/reunión/.test(x.x));t("detecta día y hora",reu.due&&ev(`dow("${reu.due}")`)===4&&reu.tm==="18:30"&&reu.rm===10,JSON.stringify(reu));
-click(d.querySelector('[data-t="nxt"][data-id="'+n0.id+'"]'));
-t("completar una tarea la marca como hecha",NS().find(x=>x.id===n0.id).done===true);
-const bot=NS().find(x=>/botas/.test(x.x));
-click(d.querySelector('[data-t="nxopen"][data-id="'+bot.id+'"]'));t("abre la hoja de detalles",!!$("nx_x"));
-$("nx_x").value="comprar botas de tacos";click(d.querySelector('[data-t="nxpo"][data-v="d"]'));ev(`NX.sheet.due="${sh(2)}"`);click(d.querySelector('[data-t="nxsave"]'));
-t("edición guarda texto y fecha",NS().find(x=>x.id===bot.id).x==="comprar botas de tacos"&&NS().find(x=>x.id===bot.id).due===sh(2));
-click(d.querySelector('[data-t="nxopen"][data-id="'+bot.id+'"]'));click(d.querySelector('[data-t="nxty"][data-v="n"]'));click(d.querySelector('[data-t="nxsave"]'));
-t("tarea → nota quita la fecha",!NS().find(x=>x.id===bot.id).task&&NS().find(x=>x.id===bot.id).due==="");
-ev(`S.ui.nv="nota";render()`);click(d.querySelector('[data-t="nxopen"][data-id="'+bot.id+'"]'));click(d.querySelector('[data-t="nxdel"]'));t("borrar pide confirmar (1.º toque)",NS().some(x=>x.id===bot.id)&&/¿Borrar\?/.test($("nxs").textContent));
-click(d.querySelector('[data-t="nxdel"]'));t("borrar confirmado",!NS().some(x=>x.id===bot.id));
-$("nxq").value="<img src=x onerror=alert(1)> #x";inp($("nxq"));click(d.querySelector('[data-t="nxq"]'));t("HTML escapado (sin inyección)",!$("nx").querySelector("img"));
-t("tarjeta de hoy con el entreno",(()=>{const dw=ev(`dow("${T}")`);return [1,2,4].includes(dw)?/Entreno/.test($("nfoot").textContent):$("nfoot").textContent===""})(),$("nfoot").textContent);
+t("tres áreas: Hoy, Jugador, Entrenador",d.querySelectorAll("#mtabs button").length===3&&!/Hábitos|Check-in/.test(d.querySelector("main").textContent));
 
 console.log("\n3. Fútbol · Hoy");
 goF("hoy");
@@ -124,7 +99,7 @@ goF("sal");const mid=ev("S.mol['"+T+"'][0].id");click(A("molDel",`[data-id="${T}
 $("iz").value="isq";$("is").value="d";$("ig").value="mod";$("in").value="Sobrecarga";click(A("injAdd"));
 t("lesión registrada en curso",/en curso/.test($("ilist").textContent));
 click(A("injEnd"));t("dar de alta",!/en curso/.test($("ilist").textContent));
-click(d.querySelector('[data-t="pvdone"][data-k="f11"][data-o="0"]'));click(d.querySelector('[data-t="pvdone"][data-k="nhe"][data-o="1"]'));
+click(d.querySelector('[data-t="pvdone"][data-k="f11"][data-o="0"]'));click(d.querySelector('[data-t="pvdone"][data-k="nhe"][data-o="0"]'));
 t("prevención 2/2 esta semana",/2\/2/.test($("pvh").textContent),$("pvh").textContent);
 click(A("pg",'[data-v="1"]'));t("subir objetivo de prevención",/3/.test($("pvbar").textContent));
 
@@ -141,40 +116,6 @@ click(A("markAdd"));t("exige nombre",/nombre/.test(txt("toast")));
 setv("kc","Salto largo (cm)");setv("kv","230");click(A("markAdd"));t("medida propia",/Salto largo/.test($("mkcards").textContent));
 setv("kv","abc");click(A("markAdd"));t("valor no numérico rechazado",/numérico/.test(txt("toast")));
 
-
-console.log("\n8b. Calendario");
-ev('S.ui.cv="m"');click(A("main",'[data-v="cal"]'));
-t("calendario visible con cuadrícula del mes",!d.querySelector('[data-main="cal"]').hidden&&d.querySelectorAll("#cgrid .cd2").length>=28);
-t("hoy marcado",d.querySelectorAll("#cgrid .cd2.today").length===1&&d.querySelector("#cgrid .cd2.today").dataset.v===T);
-const tdOpen=ev(`S.notes.filter(n=>n.task&&!n.done&&n.due==="${T}")`).length;
-ev(`S.notes.push({id:"ct1",x:"Tarea de hoy cal",task:true,done:false,pin:false,due:"${T}",tags:[],c:Date.now()});render()`);
-t("la tarea con fecha pone punto en el día",!!d.querySelector(`#cgrid .cd2[data-v="${T}"] .dt`));
-t("el día de hoy muestra su tarea",/Tarea de hoy cal/.test($("cday").textContent)&&/hoy/.test($("cdt").textContent));
-const fut=sh(2);click(A("cday",`[data-v="${fut}"]`));
-t("seleccionar otro día cambia el detalle",d.querySelector("#cgrid .cd2.sel").dataset.v===fut);
-$("cq").value="comprar entradas";click(A("cadd"));
-t("añadir tarea al día seleccionado",ev("S.notes.find(n=>n.x==='comprar entradas')").due===fut&&/comprar entradas/.test($("cday").textContent));
-$("cq").value="reservar pista viernes #club";click(A("cadd"));
-const rp=ev("S.notes.find(n=>/reservar pista/.test(n.x))");
-t("la fecha escrita gana al día seleccionado y detecta etiqueta",(rp.due!==fut||ev(`dow("${fut}")`)===4)&&ev(`dow("${rp.due}")`)===4&&rp.tags[0]==="club",JSON.stringify(rp));
-ev(`CALF="dep";render()`);const tr0=d.querySelector("#cgrid .cd2 .dd");t("entrenos fijos con punto verde",ev(`S.sched.on`)&&!!tr0);
-click(A("cday",`[data-v="${sh(4)}"]`));
-click(A("cday",`[data-v="${T}"]`));
-const sch0=ev("JSON.stringify([S.sess,S.sched])");ev(`S.sess=[];S.sched={on:true,from:"2020-01-01",dows:[0,1,2,3,4,5,6],t:"00:00",e:"00:30",skip:[]};save();render()`);click(A("cday",`[data-v="${T}"]`));
-ev(`CALF="dep";render()`);t("día pasado/hoy ofrece contar el entreno",!!d.querySelector('#cday [data-t="postgo"]'));
-click(d.querySelector('#cday [data-t="postgo"]'));
-t("«Contar el entreno» abre Deporte con el formulario",ev("S.ui.main")==="fut"&&!!d.querySelector(".card.post"));
-ev(`[S.sess,S.sched]=${sch0};PF=null;save()`);
-click(A("main",'[data-v="cal"]'));
-const m0=txt("cmon");click(A("cnext"));const m1=txt("cmon");click(A("cprev"));click(A("cprev"));const m2=txt("cmon");
-t("navegar meses",m0!==m1&&m1!==m2&&m0!==m2,[m0,m1,m2].join("|"));
-click(A("ctoday"));t("«Hoy» vuelve al mes actual",txt("cmon")===m0&&d.querySelector("#cgrid .cd2.sel").dataset.v===T);
-ev(`CALF="org";render()`);t("el día de hoy lista su tarea y «próximos» no la repite",/Tarea de hoy cal/.test($("cday").textContent)&&!/Tarea de hoy cal/.test($("cnext").textContent));
-ev(`S.next.push({id:"nn1",d:"${sh(3)}",t:"12:00",riv:"Siero",loc:"V",comp:"Liga"});render()`);
-ev(`CALF="dep";render()`);t("partido futuro con punto naranja",!!d.querySelector(`#cgrid .cd2[data-v="${sh(3)}"] .dd`)||ev(`CAL`)!==ev(`today().slice(0,7)`));
-click(A("tskip",`[data-id="${T}"]`)||A("tskip"));
-click(A("cday",`[data-v="${T}"]`));
-t("sin errores en calendario",errs.length===0,errs.join("\n"));
 
 console.log("\n8c. Panel");
 // sembrar 30 días de cuestionario + sueño y partidos con bienestar

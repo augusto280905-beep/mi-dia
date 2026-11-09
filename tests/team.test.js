@@ -20,13 +20,13 @@ function boot(store,ss){const dom=new JSDOM(html,{runScripts:"dangerously",url:"
  t("arranca en Hoy y existe el arranque animado",ev("S.ui.main")==="panel"&&!!$("splash")&&d.body.classList.contains("boot"));
  await sleep(3700);
  t("el arranque animado se retira solo",!$("splash")&&!d.body.classList.contains("boot"));
- t("barra: Hoy, Organiza, Deporte, Entrenador",[...d.querySelectorAll("#mtabs button")].map(b=>b.textContent.trim()).join()==="Hoy,Organiza,Deporte,Entrenador",[...d.querySelectorAll("#mtabs button")].map(b=>b.textContent.trim()).join());
+ t("barra: Hoy, Jugador, Entrenador",[...d.querySelectorAll("#mtabs button")].map(b=>b.textContent.trim()).join()==="Hoy,Jugador,Entrenador",[...d.querySelectorAll("#mtabs button")].map(b=>b.textContent.trim()).join());
  /* plantilla */
  const pl=ev("S.team.pl");
  t("plantilla inicial: 24 jugadores con sus posiciones",pl.length===24&&pl.filter(p=>p.p==="P").length===3&&pl.filter(p=>p.p==="DC").length===2&&pl.find(p=>p.n==="Hegoi").p==="P"&&pl.find(p=>p.n==="Egoi").p==="ED"&&pl.find(p=>p.n==="M.Arregi").p==="DFCI"&&pl.find(p=>p.n==="Neko").p==="LI");
  t("posiciones: 3P 3LD 2DFCI 3DFCD 2LI 4MCD 1MCO 2EI 2DC 2ED",["P:3","LD:3","DFCI:2","DFCD:3","LI:2","MCD:4","MCO:1","EI:2","DC:2","ED:2"].every(x=>{const[c,n]=x.split(":");return pl.filter(p=>p.p===c).length===+n}));
  ev("render()");
- t("Hoy: muestra lo de hoy, la semana y carga recomendada (sin tarjetas de áreas) (sin asistencia)",/Mañana/.test($("htl").textContent)&&!d.querySelector(".areas, .area")&&!!$("hmatch").textContent.trim()&&$("hteam").hidden&&/Carga recomendada/.test($("hload").textContent));
+ t("Hoy: muestra lo de hoy, la semana y carga recomendada (sin tarjetas de áreas) (sin asistencia)",/Como jugador/.test($("htl").textContent)&&!d.querySelector(".areas, .area")&&!!$("hmatch").textContent.trim()&&$("hteam").hidden&&/Carga recomendada/.test($("hload").textContent));
  /* sin datos de asistencia */
  t("Hoy: sin sesiones explica que falta base",/base|Descanso|UA/.test($("hload").textContent));
  /* ir a Equipo */
@@ -83,7 +83,7 @@ function boot(store,ss){const dom=new JSDOM(html,{runScripts:"dangerously",url:"
  click(d.querySelector('[data-t="psave"]'));t("guardar entreno",ev("S.team.plan.length")===1&&ev("S.team.plan[0].h")==="19:30");
  const pid=ev("S.team.plan[0].id");
  /* en Hoy/Calendario/avisos */
- tab("panel");ev(`S.ui.hd="m";S.ui.hx=1;render()`);t("Hoy lista el entreno de mañana",/Equipo · Salida de balón/.test($("htl").textContent),$("htl").textContent);
+ tab("panel");ev(`render()`);t("Hoy lista el entreno de mañana del equipo",/Salida de balón/.test($("htl").textContent),$("htl").textContent);
  ev(`S.ui.main="cal";CAL=today().slice(0,7);SEL="${sh(1)}";CALF="all";render()`);t("Calendario muestra el entreno del equipo",/Entreno del equipo/.test($("cday").textContent));
  const B=JSON.parse(ev("JSON.stringify(pnBuild())")),q=B.find(x=>x.key==="q:"+pid);t("aviso 1 h antes (18:30)",q&&new Date(q.at).getHours()===18&&new Date(q.at).getMinutes()===30&&/Salida de balón/.test(q.body),JSON.stringify(q));
  /* partidos */
@@ -112,7 +112,7 @@ function boot(store,ss){const dom=new JSDOM(html,{runScripts:"dangerously",url:"
  t("fusión: une marcas de la misma fecha y en conflicto gana este dispositivo",(()=>{const a=mA.att.find(x=>x.d===dates[3]);return a.m["zz_remoto"]==="f"&&a.m[id("Aitzol")]==="p"&&a.m[id("Aitor")]==="j"})(),JSON.stringify(mA.att.map(x=>[x.d,Object.keys(x.m).length])));
  t("fusión: no duplica nada",mA.plan.length===1&&mA.games.filter(g=>!g.src).length===1&&new Set(mA.pl.map(p=>p.id)).size===mA.pl.length);
  /* los cambios de vista no marcan «cambios por enviar» */
- ev("SY.dirty=false;syLast=syDig()");ev("go('notas')");tab("cal");tab("eq");sub("asi");t("cambiar de pestaña no cuenta como cambio de datos",ev("SY.dirty")===false);
+ ev("SY.dirty=false;syLast=syDig()");ev("go('fut')");tab("panel");tab("eq");sub("asi");t("cambiar de pestaña no cuenta como cambio de datos",ev("SY.dirty")===false);
  /* recarga: los datos persisten y arranca en Hoy sin repetir el splash en la misma sesión */
  dom.window.close();dom=boot(store,ss);w=dom.window;d=w.document;
  t("al recargar conserva el equipo, entrenos y pizarras",ev("S.team.pl.length")===24&&ev("S.team.plan.length")===1&&ev("S.team.bd.length")===1&&ev("S.team.att.length")===4);

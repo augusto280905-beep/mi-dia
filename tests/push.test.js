@@ -36,14 +36,15 @@ function device(perm){const store={};let subbed=null;const dom=new JSDOM(html,{r
  ev(`S.notes.push({id:"t1",x:"Llamar al fisio",task:true,done:false,pin:false,due:"${dTask}",tags:[],c:1});S.notes.push({id:"t2",x:"Hecha",task:true,done:true,pin:false,due:"${dTask}",tags:[],c:1});
   S.next.push({id:"m1",d:"${dMatch}",t:"17:00",riv:"Rival FC",loc:"V",comp:""});S.sched.from="${T}";S.sched.dows=[0,1,2,3,4,5,6];S.sched.t="20:00";S.sched.e="21:30";S.sched.skip=["${mk(1)}"];S.sched.on=true;save()`);
  const B=JSON.parse(ev("JSON.stringify(pnBuild())"));const K=k=>B.find(x=>x.key===k);
- t("tareas del día agrupadas y sin las hechas",K("td:"+dTask)&&K("td:"+dTask).title==="Tarea para hoy"&&K("td:"+dTask).body==="Llamar al fisio",JSON.stringify(K("td:"+dTask)));
+ 
+ t("las tareas (ahora en Notion) ya no generan avisos",!B.some(x=>/^(td|k|o):/.test(x.key)),JSON.stringify(B.map(x=>x.key)));
  t("recordatorio del cuestionario diario",!!K("w:"+mk(1)));
  t("entreno: aviso 1 h antes a las 19:00",K("e:"+mk(2))&&new Date(K("e:"+mk(2)).at).getHours()===19&&new Date(K("e:"+mk(2)).at).getMinutes()===0);
  t("entreno cancelado no avisa",!K("e:"+mk(1))&&!K("r:"+mk(1)));
  t("registrar sesión: 15 min después de acabar (21:45)",K("r:"+mk(2))&&new Date(K("r:"+mk(2)).at).getHours()===21&&new Date(K("r:"+mk(2)).at).getMinutes()===45);
  t("partido: víspera 20:00 y día 2 h antes (15:00)",K("m1:m1")&&new Date(K("m1:m1").at).getHours()===20&&K("m0:m1")&&new Date(K("m0:m1").at).getHours()===15&&/Rival FC/.test(K("m0:m1").title));
- t("aviso 23:00 si queda una tarea del día sin hacer",K("o:"+dTask)&&new Date(K("o:"+dTask).at).getHours()===23&&K("o:"+dTask).body==="Llamar al fisio"&&/olvidado/.test(K("o:"+dTask).title),JSON.stringify(K("o:"+dTask)));
- t("sin aviso 23:00 si todo está hecho",!K("o:"+mk(5)));
+ 
+ 
  t("todo dentro de 15 días y en el futuro",B.every(x=>{const a=new Date(x.at).getTime();return a>Date.now()&&a<Date.now()+15*864e5}));
  t("claves únicas",new Set(B.map(x=>x.key)).size===B.length);
  ev(`S.well[today()]={f:3,s:3,e:3,d:3,sh:7};S.ui.np={well:false};`);
@@ -55,7 +56,7 @@ function device(perm){const store={};let subbed=null;const dom=new JSDOM(html,{r
  t("activar: suscripción guardada en la nube",ev("PN.on")===true&&Object.keys(srv.subs).length===1&&srv.subs["https://push.example/abc"].user_id==="u1");
  t("activar: no guarda claves secretas del servidor",!/private/.test(JSON.stringify(srv.subs)));
  await sleep(5200);
- t("avisos programados subidos",!!srv.rem["td:"+dTask]&&!!srv.rem["m1:m1"]&&Object.keys(srv.rem).length>=B.length-2,Object.keys(srv.rem).length+" vs "+B.length);
+ t("avisos programados subidos",!!srv.rem["m1:m1"]&&Object.keys(srv.rem).length>=B.length-2,Object.keys(srv.rem).length+" vs "+B.length);
  /* completar tarea → se borra el aviso; sin reenviar lo que no cambió */
  srv.calls.length=0;srv.posted=[];
  ev(`S.notes.find(n=>n.id==="t1").done=true;save()`);await sleep(7800);

@@ -80,9 +80,7 @@ function boot(store,ss){const dom=new JSDOM(html,{runScripts:"dangerously",url:"
  t("Hoy: orden: lo de hoy, estado, carga, tareas, energía",(()=>{const o=["htl","phero","hload","porg","penergy"].map(i=>[...d.querySelectorAll("[id]")].indexOf($(i)));return o.every((x,i)=>i===0||x>o[i-1])})());
  t("Hoy: la foto sustituye al logo antiguo",!!d.querySelector(".brand img"));
  console.log("Agenda y áreas");
- tab("cal");t("Agenda: calendario y tareas comparten pestaña",d.querySelector('#mtabs [data-v="cal"]').classList.contains("on")&&d.querySelectorAll(".agseg").length===2);
- click(d.querySelector('[data-main="cal"] .agseg [data-v="notas"]'));
- t("Agenda: el botón Tareas abre las tareas y mantiene la pestaña Agenda",ev("S.ui.main")==="notas"&&d.querySelector('#mtabs [data-v="cal"]').classList.contains("on"));
+ev(`S.ui.main="cal";render()`);t("Calendario: se abre desde Jugador y mantiene la pestaña Jugador",d.querySelector('#mtabs [data-v="fut"]').classList.contains("on")&&!!d.querySelector(".calback"));
  console.log("Plan de hoy (Salud)");
  ev(`S.sess=${JSON.stringify(ss2)};S.next=[{id:"m1",d:"${sh(1)}",t:"",riv:"X",loc:"L"}];save()`);tab("fut");fv("hoy");
  t("víspera de partido: activación corta con esquemas",/Víspera/.test($("fplan").textContent)&&d.querySelectorAll("#fplan svg").length>=2);

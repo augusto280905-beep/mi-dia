@@ -40,9 +40,7 @@ const c=ev("coachCard()");
 t("explica el porqué con base",/Por qué esto hoy/.test(c)&&/Base:/.test(c)&&/Walsh/.test(c));
 t("muestra la semana con 7 días",(c.match(/class="cwd/g)||[]).length===7);
 ev(`S.ui.main="panel";render()`);
-t("el inicio abre con captura rápida y «Para ti hoy»",!!q("#hq input")&&!!q("#hhero .pth")&&/Para ti hoy/.test(q("#hhero").textContent));
-ev(`S.notes=[];$("hq_in").value="llamar a Marta mañana 18:00";TA.hqadd()`);
-t("apuntar rápido crea una tarea con hora y aviso",ev(`S.notes.length===1&&S.notes[0].tm==="18:00"&&S.notes[0].rm===10`));
+t("Hoy abre con el plan del día y «Como jugador»",!!q("#hhero h2")&&/Como jugador/.test(q("#htl").textContent)&&!q("#hq input"));
 t("el chequeo ya no está en la pantalla principal (solo dentro de Más datos)",!!q("details.more #pwell")&&!q("#hhero #pwell"));
 }catch(e){ko++;console.log("  ✗ excepción",e.message,(e.stack||"").split("\n")[1])}
 console.log(`\nRESULTADO: ${ok} correctas, ${ko} fallos`);process.exit(ko?1:0)},1500);
