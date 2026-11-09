@@ -134,20 +134,24 @@ async function aiBoard(req: Request) {
   if (!u?.user) return json({ error: "Sesión no válida. Vuelve a entrar." }, 401);
   const key = Deno.env.get("ANTHROPIC_API_KEY");
   if (!key) return json({ error: "IA sin configurar" }, 501);
-  const { texto, fichas } = await req.json().catch(() => ({ texto: "", fichas: [] }));
+  const { texto, fichas, sistema, medio_campo } = await req.json().catch(() => ({ texto: "", fichas: [] }));
   if (typeof texto !== "string" || !texto.trim() || texto.length > 1500 || !Array.isArray(fichas) || fichas.length > 40) return json({ error: "Petición no válida" }, 400);
-  const sys = "Eres ayudante de un entrenador de fútbol 11. Campo de 68 (ancho, x) por 105 (largo, y); se ataca hacia y=0 (portería rival arriba, y=0) y la derecha es x mayor. " +
-    "Recibes fichas con id, tipo, posición, x, y y una frase con la jugada. Devuelve SOLO JSON: {\"frames\":[{\"moves\":{\"<id>\":[x,y]},\"arrows\":[{\"x1\":0,\"y1\":0,\"x2\":0,\"y2\":0,\"k\":\"p|r\"}]}]}. " +
-    "Cada frame es un paso; moves solo incluye fichas que cambian (también el balón); k=p pase, k=r carrera. Máximo 8 frames. Sin texto extra.";
+  const sys = `Eres el ayudante táctico de un entrenador de fútbol 11 de categorías juveniles. Conoces a fondo el fútbol: sistemas (4-3-3, 4-4-2, 4-2-3-1, 3-5-2, 4-1-4-1), fases del juego (salida de balón, progresión, finalización, transición ofensiva/defensiva, presión tras pérdida, bloque alto/medio/bajo), balón parado (córner, falta lateral, falta frontal, saque de banda, saque de puerta), conceptos (tercer hombre, pared, desdoble, diagonal, apoyos, basculación, amplitud y profundidad, superioridad, cambio de orientación, mediapunta entre líneas, overlap/underlap, pivote, línea de pase).
+El entrenador te describe una jugada en lenguaje natural (a veces dictada por voz, con errores) y tú la conviertes en fotogramas para una pizarra animada.
+CAMPO: 68 de ancho (x: 0 izquierda, 68 derecha) y 105 de largo (y). Se ataca hacia y=0 (la portería rival está arriba en y=0, centro x=34, el área grande llega hasta y=16,5 y x entre 14 y 54, el punto de penalti es (34,11), el área pequeña hasta y=5,5 entre x 24,5 y 43,5; el medio campo es y=52,5; la propia portería está en y=105). La derecha del atacante es x mayor. Si la pizarra es de medio campo (medio_campo=true) solo se ve hasta y≈58.
+ENTRADA: JSON con "fichas" (id, tipo propio|rival|balon|cono, pos = etiqueta de posición o número, jugador, dorsal, x, y), "sistema", "medio_campo", "frase". Los nombres pueden estar mal transcritos: identifica al jugador por nombre parecido, dorsal o posición ("el 9", "el pivote", "el lateral derecho", "el extremo izquierdo"). Dorsales/posiciones típicas si no hay dato: 1 portero, 2 lateral derecho, 3 lateral izquierdo, 4-5 centrales, 6 pivote, 8 interior, 10 mediapunta, 7 extremo derecho, 11 extremo izquierdo, 9 delantero.
+SALIDA: SOLO un JSON válido, sin texto fuera, con esta forma:
+{"nombre":"título corto de la jugada","frames":[{"moves":{"<id ficha>":[x,y]},"arrows":[{"x1":0,"y1":0,"x2":0,"y2":0,"k":"p"}],"nota":"qué pasa en este paso"}]}
+Reglas: cada frame es un instante posterior al anterior; "moves" lleva SOLO las fichas que cambian respecto al frame previo, siempre incluyendo el balón cuando se pasa o conduce (el balón acaba donde llega el pase, junto al receptor). "arrows" son las flechas que se ven en ese frame: k="p" pase/tiro/balón, k="r" carrera sin balón. Un pase termina en el receptor (no encima). Usa posiciones realistas (distancias de pase 8-35 m, carreras razonables, respetar el fuera de juego salvo que se pida lo contrario), mueve a los rivales cuando la jugada lo implique (marcajes, presión, basculación), y aprovecha el sistema y las posiciones reales de las fichas. Entre 2 y 8 frames; una acción principal por frame, y movimientos simultáneos (pase + desmarque) en el mismo frame. Si falta información, haz la interpretación más razonable de fútbol y no preguntes. Si la frase no describe ninguna jugada, devuelve {"error":"explicación breve en español"}.`;
   const r = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
     headers: { "x-api-key": key, "anthropic-version": "2023-06-01", "content-type": "application/json" },
-    body: JSON.stringify({ model: "claude-sonnet-5-5", max_tokens: 2000, system: sys, messages: [{ role: "user", content: JSON.stringify({ fichas, frase: texto }) }] }),
+    body: JSON.stringify({ model: Deno.env.get("ANTHROPIC_MODEL") ?? "claude-sonnet-5-5", max_tokens: 4000, system: sys, messages: [{ role: "user", content: JSON.stringify({ sistema: sistema ?? "", medio_campo: !!medio_campo, fichas, frase: texto }) }] }),
   });
   if (!r.ok) return json({ error: "La IA respondió " + r.status }, 502);
   const d = await r.json();
   const raw = (d.content?.[0]?.text ?? "").replace(/^```json|```$/g, "").trim();
-  try { const o = JSON.parse(raw); if (!Array.isArray(o.frames)) throw 0; return json({ frames: o.frames.slice(0, 8) }); }
+  try { const o = JSON.parse(raw.slice(raw.indexOf("{"), raw.lastIndexOf("}") + 1)); if (o.error) return json({ error: String(o.error) }, 422); if (!Array.isArray(o.frames)) throw 0; return json({ nombre: o.nombre ?? "", frames: o.frames.slice(0, 8) }); }
   catch { return json({ error: "Respuesta de la IA no válida" }, 502); }
 }
 

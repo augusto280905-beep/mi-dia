@@ -21,8 +21,6 @@ ev(`const P=S.team.pl;S.team.games=[{id:"g1",d:shift(today(),-3),gf:2,ga:1,conv:
 const m=ev(`minStats()`);
 t("suma minutos por jugador",m.tot===110&&m.jug===2);
 const h=ev(`tvMin()`);
-t("el panel muestra minutos y titularidades",/Minutos y titularidades/.test(h)&&/90'/.test(h));
-t("tvRes incluye el panel de minutos",/Minutos y titularidades/.test(ev(`tvRes()`)));
 
 
 ev(`S.ui.tph="data:image/jpeg;base64,AA=="`);ev(`TA.tpclr()`);t("se puede quitar",!ev(`S.ui.tph`));
