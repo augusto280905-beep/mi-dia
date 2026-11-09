@@ -126,9 +126,35 @@ async function health(req: Request) {
   return json({ ok: true, days: n });
 }
 
+// ---------- IA opcional: convierte una frase en fotogramas de pizarra ----------
+// Necesita el secreto ANTHROPIC_API_KEY en Supabase (Edge Functions > Secrets). Sin él responde 501 y la app usa el modo básico.
+async function aiBoard(req: Request) {
+  const token = (req.headers.get("Authorization") ?? "").replace(/^Bearer\s+/i, "");
+  const { data: u } = await db.auth.getUser(token);
+  if (!u?.user) return json({ error: "Sesión no válida. Vuelve a entrar." }, 401);
+  const key = Deno.env.get("ANTHROPIC_API_KEY");
+  if (!key) return json({ error: "IA sin configurar" }, 501);
+  const { texto, fichas } = await req.json().catch(() => ({ texto: "", fichas: [] }));
+  if (typeof texto !== "string" || !texto.trim() || texto.length > 1500 || !Array.isArray(fichas) || fichas.length > 40) return json({ error: "Petición no válida" }, 400);
+  const sys = "Eres ayudante de un entrenador de fútbol 11. Campo de 68 (ancho, x) por 105 (largo, y); se ataca hacia y=0 (portería rival arriba, y=0) y la derecha es x mayor. " +
+    "Recibes fichas con id, tipo, posición, x, y y una frase con la jugada. Devuelve SOLO JSON: {\"frames\":[{\"moves\":{\"<id>\":[x,y]},\"arrows\":[{\"x1\":0,\"y1\":0,\"x2\":0,\"y2\":0,\"k\":\"p|r\"}]}]}. " +
+    "Cada frame es un paso; moves solo incluye fichas que cambian (también el balón); k=p pase, k=r carrera. Máximo 8 frames. Sin texto extra.";
+  const r = await fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: { "x-api-key": key, "anthropic-version": "2023-06-01", "content-type": "application/json" },
+    body: JSON.stringify({ model: "claude-sonnet-5-5", max_tokens: 2000, system: sys, messages: [{ role: "user", content: JSON.stringify({ fichas, frase: texto }) }] }),
+  });
+  if (!r.ok) return json({ error: "La IA respondió " + r.status }, 502);
+  const d = await r.json();
+  const raw = (d.content?.[0]?.text ?? "").replace(/^```json|```$/g, "").trim();
+  try { const o = JSON.parse(raw); if (!Array.isArray(o.frames)) throw 0; return json({ frames: o.frames.slice(0, 8) }); }
+  catch { return json({ error: "Respuesta de la IA no válida" }, 502); }
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: cors });
   try {
+    if (req.method === "POST" && new URL(req.url).pathname.endsWith("/ai")) return await aiBoard(req);
     if (req.method === "POST" && new URL(req.url).pathname.endsWith("/ical")) return await ical(req);
     if (req.method === "POST" && new URL(req.url).pathname.endsWith("/health/register")) return await healthRegister(req);
     if (req.method === "POST" && new URL(req.url).pathname.endsWith("/health")) return await health(req);

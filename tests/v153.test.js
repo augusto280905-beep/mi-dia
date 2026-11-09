@@ -17,7 +17,7 @@ t("slLoad cuenta noches del reloj",L.watch>=10&&L.nights>=10);
 t("calcula deuda de sueño de 7 noches",L.def>0&&L.a7>5&&L.a7<8);
 t("minutos de entreno de 7 días",L.min7>=270);
 const h=ev("sleepLoadCard()");
-t("la tarjeta tiene 14 columnas y chips de horas",(h.match(/class="slc/g)||[]).length===14&&/class="sc /.test(h));
+t("la tarjeta tiene 14 columnas y chips de horas",(h.match(/class="slc/g)||[]).length===14&&/class="scc /.test(h));
 t("incluye conclusiones con base",/slsay/.test(h)&&/Base:/.test(h));
 t("cita a Walsh 2021",/Walsh/.test(h));
 ev(`S.ui.main="fut";S.ui.dv="res";S.ui.fv="hub";render()`);
