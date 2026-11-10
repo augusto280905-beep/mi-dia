@@ -717,7 +717,7 @@ a.ghost.mini{text-decoration:none;display:inline-block}
 /* Inicio v16 */
 .hq{display:grid;grid-template-columns:1fr auto;gap:8px;margin:0 0 12px}.hq input{min-height:46px;border-radius:14px}
 .hhd{margin:0 0 12px;display:grid;gap:10px}.hh1{display:flex;justify-content:space-between;align-items:center;gap:8px}.hh1 small{display:block;color:var(--mu);font-size:.76rem}.hh1 b{font-family:var(--fh);font-size:1.5rem;line-height:1.1}
-.stc{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--sc);color:var(--tx);background:color-mix(in srgb,var(--sc) 14%,var(--card));border-radius:99px;padding:6px 11px;font-weight:700;font-size:.8rem;min-height:0}.stc i{width:9px;height:9px;border-radius:50%;background:var(--sc)}.stc em{font-style:normal;color:var(--mu)}
+.stp{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--sc);color:var(--tx);background:color-mix(in srgb,var(--sc) 14%,var(--card));border-radius:99px;padding:6px 11px;font-weight:700;font-size:.8rem;min-height:0}.stp i{width:9px;height:9px;border-radius:50%;background:var(--sc)}.stp em{font-style:normal;color:var(--mu)}
 .pth{background:linear-gradient(160deg,color-mix(in srgb,var(--ck) 18%,var(--card)),var(--card) 60%);border:1px solid var(--bd);border-left:5px solid var(--ck);border-radius:22px;padding:14px;box-shadow:var(--sh)}
 .pth h2{margin:6px 0;font-size:1.8rem;line-height:1.05}.pw{margin:4px 0;font-size:.84rem;line-height:1.38;display:grid;grid-template-columns:22px 1fr;gap:6px}
 .hlg .hlr{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:10px 0}.hlp{display:grid;text-align:center}.hlp b{font-family:var(--fh);font-size:1.7rem;line-height:1}.hlp span{font-size:.7rem;color:var(--mu)}
@@ -4226,7 +4226,7 @@ function homeTop(){const T=today(),P=coachDay(T),C=CO[P.k],W=coachWhy(P).slice(0
  const col=M.lv==="hi"?"var(--hi)":M.lv==="warn"?"var(--warn)":"var(--ok)";
  const nx=P.md.nxt;
  const chips=[P.min?`<span class="cch"><b>${P.min}</b> min</span>`:"",P.rpe?`<span class="cch">esfuerzo <b>${P.rpe}</b>/10</span>`:"",P.club&&P.tr?`<span class="cch"><b>${esc(P.tr.t)}</b> con el equipo</span>`:"",nx&&P.md.nm!==null?`<span class="cch">${P.md.nm===0?"Partido hoy":P.md.nm===1?"Partido mañana":"Partido en "+P.md.nm+" d"}</span>`:""].join("");
- return `<section class="hhd"><div class="hh1"><div><small>${esc(cap(fmtD(T,{weekday:"long",day:"numeric",month:"long"})))}</small><b>${g}, Aitor</b></div><button class="stc" style="--sc:${col}" data-t="go" data-v="fut" data-id="hub" aria-label="Tu estado: ${esc(M.lab)}"><i></i>${esc(M.lab)}${M.sc!=null?` <em>${M.sc}</em>`:""}</button></div>
+ return `<section class="hhd"><div class="hh1"><div><small>${esc(cap(fmtD(T,{weekday:"long",day:"numeric",month:"long"})))}</small><b>${g}, Aitor</b></div><button class="stp" style="--sc:${col}" data-t="go" data-v="fut" data-id="hub" aria-label="Tu estado: ${esc(M.lab)}"><i></i>${esc(M.lab)}${M.sc!=null?` <em>${M.sc}</em>`:""}</button></div>
  <div class="pth" style="--ck:${C[2]}"><span class="co-k">${C[1]} Para ti hoy</span><h2>${esc(title)}</h2><div class="cchs">${chips}</div>
  ${W.map(r=>`<p class="pw"><span>${r.ic}</span>${esc(r.t.replace(/\.$/,""))}. ${esc(r.x)}</p>`).join("")}
  <div class="foot" style="justify-content:flex-start;margin:8px 0 0"><button class="pri" data-t="hcoach">Ver mi plan y por qué</button></div></div></section>`}
@@ -4316,7 +4316,7 @@ function ringsRow(){const x=leanStats();
 function leanHero(){const T=today(),P=coachDay(T),C=CO[P.k],M=hmod(),col=M.lv==="hi"?"var(--hi)":M.lv==="warn"?"var(--warn)":"var(--ok)",hr=new Date().getHours(),g=hr<6?"Buenas noches":hr<14?"Buenos días":hr<21?"Buenas tardes":"Buenas noches";
  const title={partido:"Hoy juegas",rec:"Hoy, recuperar",comp:"Compensatorio suave",act:"Activación de víspera",lig:"Sesión suave",fuerza:P.lite?"Fuerza ligera":"Fuerza de mantenimiento",prev:"Prevención y core",libre:"Algo ligero si quieres",club:"Entreno con el equipo",desc:"Descanso"}[P.k]||C[0];
  const ch=[P.min?`${P.min} min`:"",P.rpe?`esfuerzo ${P.rpe}/10`:"",P.club&&P.tr?P.tr.t:""].filter(Boolean).join(" · ");
- return bgc(PLAYPIC,"28%",`<div class="bg1"><small>${esc(cap(fmtD(T,{weekday:"long",day:"numeric",month:"long"})))}</small><button class="stc" style="--sc:${col}" data-t="go" data-v="fut" data-id="hub" aria-label="Tu estado: ${esc(M.lab)}"><i></i>${esc(M.lab)}</button></div>
+ return bgc(PLAYPIC,"28%",`<div class="bg1"><small>${esc(cap(fmtD(T,{weekday:"long",day:"numeric",month:"long"})))}</small><button class="stp" style="--sc:${col}" data-t="go" data-v="fut" data-id="hub" aria-label="Tu estado: ${esc(M.lab)}"><i></i>${esc(M.lab)}</button></div>
  <div class="bg2"><b>${g}, Aitor</b><h2>${esc(title)}</h2>${ch?`<span>${esc(ch)}</span>`:""}</div>
  <button class="bgb" data-t="go" data-v="fut" data-id="hub">Ver por qué y mi plan ›</button>`,"hero")}
 function leanMatch(){const T=today(),nx=FIX.find(f=>f[1]>=T&&!fxRes(f));if(!nx)return "";const dd=ddiff(T,nx[1]),tb=fxTable();
@@ -4767,7 +4767,7 @@ const _pf25=planForm;planForm=function(){let h=_pf25.apply(this,arguments);
  return h};
 
 /* ---------- Arranque ---------- */
-const VER="18.3 (10 nov 2026)";
+const VER="18.4 (10 nov 2026)";
 (function init(){const T=today();["sd","md","id0","pvd","kd"].forEach(i=>$(i).value=T);
  $("st").value="";
  $("mz").innerHTML=$("iz").innerHTML=ZONAS.map(z=>`<option value="${z[0]}">${z[1]}</option>`).join("");
