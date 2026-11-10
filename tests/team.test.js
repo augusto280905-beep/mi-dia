@@ -76,7 +76,7 @@ function boot(store,ss){const dom=new JSDOM(html,{runScripts:"dangerously",url:"
  sub("ent");click(d.querySelector('[data-t="pnew"]'));
  chg(d.querySelector('[data-c="pd"][data-k="tp"]'),"Salida de balón");chg(d.querySelector('[data-c="pd"][data-k="d"]'),sh(1));chg(d.querySelector('[data-c="pd"][data-k="h"]'),"19:30");
  click(d.querySelector('[data-t="bbase"]'));t("estructura base suma 90 min",/90 min/.test($("tview").textContent)&&ev("TPD.bl.length")===4);
- $("bsel").value="se_r41";click(d.querySelector('[data-t="badd"]'));t("añadir ejercicio de la biblioteca (12 min) → 102 min",ev("TPD.bl.length")===5&&/102 min/.test($("tview").textContent));
+ click(d.querySelector('[data-t="pkadd"][data-id="se_r41"]'));t("añadir ejercicio de la biblioteca (12 min) → 102 min",ev("TPD.bl.length")===5&&/102 min/.test($("tview").textContent));
  click(d.querySelector('[data-t="bup"][data-id="'+ev("TPD.bl[4].id")+'"]'));t("subir bloque",ev("TPD.bl[3].ex")==="se_r41");
  const bm=d.querySelector('[data-c="pb"][data-k="min"]');chg(bm,"20");t("cambiar minutos recalcula el total",ev("planMin(TPD)")===107,ev("planMin(TPD)"));
  const txt=ev("planText(TPD)");t("resumen para compartir con bloques y minutos",/Salida de balón/.test(txt)&&/Rondo 4 contra 1/.test(txt)&&/107 min/.test(txt)&&/1\. Calentamiento \(20'\)/.test(txt),txt.slice(0,200));
