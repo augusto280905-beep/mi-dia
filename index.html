@@ -3148,7 +3148,7 @@ const TFX=[
  [5,"2026-10-17","11:15","Berriozar A","V","Municipal de Berriozar"],
  [6,"2026-10-24","12:00","San Ignacio B","L","Dantzaleku"],
  [7,"2026-11-08","16:45","Asdefor A","L","Dantzaleku"],
- [8,"2026-11-14","","Salesianos B","V","Sarriguren (Salesianos)"],
+ [8,"2026-11-15","","Salesianos B","V","Sarriguren (Salesianos)"],
  [10,"2026-11-28","","Inter de Pamplona","V","Colegio Amigó 1"],
  [11,"2026-12-12","","Beti Onak","L",""],
  [12,"2026-12-19","","Gazte Berriak Ansoain","V","Ansoáin"],
@@ -3170,7 +3170,7 @@ function tfxSeed(){const T=S.team;let n=0;T.del=T.del||{};
  TFX.forEach(([j,d,h,riv,loc,v])=>{const id="tf"+j;if(T.del[id])return;const venue=v||(loc==="L"?TFX_HOME:"");
   const g=T.games.find(x=>x.id===id);
   if(!g){T.games.push({id,d,h,riv,loc,gf:"",ga:"",conv:[],st:{},nt:"",xi:[],sys:"4-3-3",j,v:venue,src:"fn"});n++}
-  else{if(g.j==null)g.j=j;if(!g.v&&venue)g.v=venue}});
+  else{if(g.j==null)g.j=j;if(id==="tf8"&&g.src==="fn"&&g.d==="2026-11-14"){g.d="2026-11-15";n++}if(!g.v&&venue)g.v=venue}});
  return n}
 
 /* ---------- Partidos: calendario de la liga + historial ---------- */
@@ -4829,7 +4829,7 @@ const _cvView26=cvView;cvView=function(g){const p=S.ui.tph;
 const _tph26=TC.tphoto;TC.tphoto=function(el){_tph26(el);setTimeout(()=>{CVSRC=""},0)};
 
 /* ---------- Arranque ---------- */
-const VER="18.7 (14 nov 2026)";
+const VER="18.8 (14 nov 2026)";
 (function init(){const T=today();["sd","md","id0","pvd","kd"].forEach(i=>$(i).value=T);
  $("st").value="";
  $("mz").innerHTML=$("iz").innerHTML=ZONAS.map(z=>`<option value="${z[0]}">${z[1]}</option>`).join("");

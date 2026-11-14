@@ -23,7 +23,7 @@ function boot(){const store={};const dom=new JSDOM(html,{runScripts:"dangerously
  await sleep(3700);
  console.log("Inicio nuevo");
  ev(`S.well["${T}"]={sh:7,sl:3,fa:3,st:2,so:3};save();render()`);
- t("el inicio tiene estado, plan de hoy y tres indicadores",!!d.querySelector("#hhero .stc")&&!!d.querySelector("#hhero h2")&&d.querySelectorAll("#hpro .rt").length===3);
+ t("el inicio tiene estado, plan de hoy y tres indicadores",!!d.querySelector("#hhero .stp")&&!!d.querySelector("#hhero h2")&&d.querySelectorAll("#hpro .rt").length===3);
  t("el sueño de anoche (7 h) y lo que toca esta noche (8 h) aparecen",!$("hsh_in")&&/8 h/.test($("hpro").textContent));
  t("cada área tiene su color de pestaña",d.body.dataset.area==="home");
  ["fut","eq"].forEach((m,i)=>{ev(`S.ui.main="${m}";render()`);t("área "+m+" → "+["dep","eq"][i],d.body.dataset.area===["dep","eq"][i])});
