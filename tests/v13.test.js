@@ -44,7 +44,7 @@ function boot(){const store={};const dom=new JSDOM(html,{runScripts:"dangerously
  click(d.querySelector('[data-t="cvgo"]'));await sleep(60);
  t("pantalla de la convocatoria con imagen",!!$("cvimg")&&/Compartir imagen/.test($("tview").textContent)&&/data:image\/png/.test($("cvimg").getAttribute("src")||""));
  const tx=ev("cvTexto(S.team.games.find(x=>x.id==='tf7'))");
- t("texto para WhatsApp: rival, jornada, hora, campo, citación y convocados",/Asdefor A/.test(tx)&&/Jornada 7/.test(tx)&&/17:00/.test(tx)&&/Dantzaleku/.test(tx)&&/Citación/.test(tx)&&/Porteros/.test(tx)&&/Convocados \(\d+\)/.test(tx),tx);
+ t("texto para WhatsApp: rival, jornada, hora, campo, citación y convocados",/Asdefor A/.test(tx)&&/Jornada 7/.test(tx)&&/17:00/.test(tx)&&/Dantzaleku/.test(tx)&&/En el campo/.test(tx)&&/Porteros/.test(tx)&&/Convocados \(\d+\)/.test(tx),tx);
  t("el texto no incluye el once ni datos de salud",!/lesion/i.test(tx));
  click(d.querySelector('[data-t="cvback"]'));t("volver a editar",!$("cvimg"));
  console.log("Registrar sesión");
