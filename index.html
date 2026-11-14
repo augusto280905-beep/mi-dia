@@ -1910,10 +1910,10 @@ const POSI=Object.fromEntries(POS.map((p,i)=>[p[0],i]));
 const GROUPS=["Porteros","Defensas","Medios","Delanteros"];
 const posGroup=c=>(POS.find(p=>p[0]===c)||[0,0,"Medios"])[2];
 const SEED=[["Hegoi","P"],["Sebas","P"],["Rafa","P"],["Aser","LD"],["Andu","LD"],["Castillo","LD"],["Arturo","DFCI"],["M.Arregi","DFCI"],["Izeivi","DFCD"],["Aaron","DFCD"],["Aitzol","DFCD"],
- ["Neko","LI"],["Emmanuel","LI"],["Yousef","MCD"],["Imad","MCD"],["Oier","MCD"],["Julen","MCD"],["Markel","MCO"],["Urko","EI"],["Izei","EI"],["Aitor","DC"],["Justin","DC"],["Mehdi","ED"],["Egoi","ED"]];
+ ["Eneko","LI"],["Emmanuel","LI"],["Yousef","MCD"],["Imad","MCD"],["Oier","MCD"],["Julen","MCD"],["Markel","MCO"],["Urko","EI"],["Izei","EI"],["Aitor","DC"],["Justin","DC"],["Mehdi","ED"],["Egoi","ED"]];
 /* Plantilla inicial: ids fijos para que dos dispositivos no dupliquen jugadores */
-function teamSeed(){const T=S.team;if(T.seed)return;T.seed=1;
- SEED.forEach(([n,p])=>{const id="sp_"+n.toLowerCase().replace(/[^a-z0-9]/g,"");if(!T.pl.some(x=>x.id===id)&&!T.del[id])T.pl.push({id,n,p,d:"",x:"",inj:false})});save()}
+function teamSeed(){const T=S.team;T.pl.forEach(x=>{if(x.id==="sp_neko"&&x.n==="Neko")x.n="Eneko"});if(T.seed)return;T.seed=1;
+  SEED.forEach(([n,p])=>{const id=n==="Eneko"?"sp_neko":"sp_"+n.toLowerCase().replace(/[^a-z0-9]/g,"");if(!T.pl.some(x=>x.id===id)&&!T.del[id])T.pl.push({id,n,p,d:"",x:"",inj:false})});save()}
 const tdel=id=>{S.team.del[id]=Date.now()};
 const plById=id=>S.team.pl.find(p=>p.id===id);
 const plSorted=()=>S.team.pl.slice().sort((a,b)=>(posGroup(a.p)===posGroup(b.p)?0:GROUPS.indexOf(posGroup(a.p))-GROUPS.indexOf(posGroup(b.p)))||((POSI[a.p]||0)-(POSI[b.p]||0))||a.n.localeCompare(b.n,"es"));
@@ -4827,7 +4827,7 @@ const _cvView26=cvView;cvView=function(g){const p=S.ui.tph;
 const _tph26=TC.tphoto;TC.tphoto=function(el){_tph26(el);setTimeout(()=>{CVSRC=""},0)};
 
 /* ---------- Arranque ---------- */
-const VER="18.5 (14 nov 2026)";
+const VER="18.6 (14 nov 2026)";
 (function init(){const T=today();["sd","md","id0","pvd","kd"].forEach(i=>$(i).value=T);
  $("st").value="";
  $("mz").innerHTML=$("iz").innerHTML=ZONAS.map(z=>`<option value="${z[0]}">${z[1]}</option>`).join("");
